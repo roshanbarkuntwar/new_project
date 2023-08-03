@@ -1,0 +1,38 @@
+<ion-view view-title="graphTab" cache-view="false">
+
+    <div class="bar bar-header  App-header">
+        <div class="row">
+            <div class="col">
+                <button class="button button-icon icon icon-left ion-ios-arrow-left back-btn" ng-click="backNavigate()"></button>
+                <div class="h1 title" style="width: 40%;">Graph</div>
+            </div>
+            <div class="col col-50">
+                <select class="button graph-type-selection" ng-model="selectedValues" style="" ng-change="changeGraph(selectedValues)">
+                    <option value="{{option.graphType}}" ng-repeat="option in graphLIst" >{{option.graphType}}
+                    </option>
+                </select>
+            </div>
+        </div>
+    </div>
+    <ion-content class="has-header Game-Sent-Notifiaction-container">
+      <h2 class="report-type-heading"> {{reportingType}}</h2>
+
+        <div class="Game-Sent-Notifiaction graph-container" ng-if="flagForPageChange == 1">
+            <canvas id="bar" class="chart chart-bar" chart-data="data" chart-labels="labels" auto-legend on-double-tap="chartClick($event)" chart-colors="colors" chart-series="series" chart="chart">
+            </canvas>
+
+        </div>
+        <div class="Game-Sent-Notifiaction graph-container" ng-if="flagForPageChange == 2">
+            <canvas id="pie" class="chart chart-pie" chart-data="aggregateData" on-double-tap="chartClick($event)" chart-labels="labels" chart-options="options" chart-colors="colors">
+            </canvas>
+
+        </div>
+        <div class="Game-Sent-Notifiaction graph-container" ng-if="flagForPageChange == 3">
+            <canvas id="line" class="chart chart-line" on-double-tap="chartClick($event)" chart-data="data" chart-colors="colors" chart-labels="labels" chart-series="series" chart-options="optionForLine" chart-dataset-override="datasetOverride">
+           </canvas>
+        </div>
+
+    </ion-content>
+
+
+</ion-view>

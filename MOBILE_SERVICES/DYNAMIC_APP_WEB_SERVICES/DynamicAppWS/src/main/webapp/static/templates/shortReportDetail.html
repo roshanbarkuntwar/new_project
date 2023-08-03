@@ -1,0 +1,23 @@
+<ion-view cache-view="false" view-title="Select Type">
+
+    <ion-header-bar class="bar bar-header  App-header">
+        <button class="button button-icon icon icon-left ion-ios-arrow-left back-btn" ng-click="backNavigate()"></button>
+        <div class="h1 title">Report</div>
+
+    </ion-header-bar>
+    <ion-content class="has-header" ng-init="slideToggle1 = true" on-swipe-right="backNavigate()">
+
+        <div class=" list card short-report-details-wrapper" ng-repeat="item in shortReportDetail" ng-init="item.status = false">
+            <div class="short-report-details-heading" ng-click="item.status =! item.status ; openShortReport(item.seqNo,item.slno,item.status)">
+                <i class="icon ion-plus-round short-report-tab-icon"></i>
+                <h2>{{item.desc}}</h2>
+            </div>
+            <div class="slide-toggle short-report-details-tab" ng-show="item.status">
+                <p><b>{{item.shortReprt}}</b>
+                </p>
+                <ion-spinner icon="bubbles" class="spinner-positive short-report-details-tab-preloder" ng-show="shortReportProcess"></ion-spinner>
+            </div>
+
+        </div>
+    </ion-content>
+</ion-view>

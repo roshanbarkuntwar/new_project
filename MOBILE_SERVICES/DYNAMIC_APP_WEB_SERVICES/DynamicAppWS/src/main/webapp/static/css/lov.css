@@ -1,0 +1,56 @@
+.lov-container-main .project-table tr{
+    background-color: #E0F7FA !important;
+ 
+}
+
+
+.lov-container-main .alpha-sorting .item-divider {
+    padding-top: 0px;
+    padding-bottom: 0px;
+    min-height: 0px;
+     background: none !important; 
+    color: #fff;
+    font-weight: 500;
+}
+.lov-container-main .project-table tr td {
+border:1px solid rgba(0, 188, 212, 0.67) !important;
+}
+.lov-container-main .Project-subheader .item-input-wrapper {
+    border-radius: 0px;
+    background:#fff;
+}
+.lov-container-main .lov-close {
+    background: #FE3F80;
+    border-radius: 0px;
+    color: #fff;
+}
+.lov-container-main .Project-subheader {
+        box-shadow: 2px 2px 10px #ddd;
+    background: #fff;
+        height: 50px;
+}
+.lov-container-main .Project-subheader .ion-close-round:before {
+    font-size: 19px !important;
+    line-height: 26px !important;
+    color: #ffffff;
+}
+.lov-container-main .item-multiSelectLOV {
+    border-color: rgba(0, 188, 212, 0.42);
+    background-color: #E0F7FA;
+    color: #444;
+    position: relative;
+    z-index: 2;
+    display: block;
+    margin: -1px;
+    padding: 12px !important;
+    border-width: 1px;
+    border-style: solid;
+    font-size: 16px;
+}
+.lov-container-main .multiselect-lov-container{
+    margin-top: 15px;
+}
+
+.lov-container-main .btn-check-icon:before{
+    font-size: 55px !important;
+}

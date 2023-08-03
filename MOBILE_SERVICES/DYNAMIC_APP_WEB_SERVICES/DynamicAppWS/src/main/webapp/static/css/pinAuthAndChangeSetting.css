@@ -1,0 +1,7 @@
+.pin-auth-container .ChangeSetting-page label,.change-setting-container .ChangeSetting-page label {
+    margin: 4%;
+        border-bottom: 2px solid rgba(0, 188, 212, 0.57);
+}
+.change-setting-container .ChangeSetting-page label span {
+    color: #fe3f80;
+}

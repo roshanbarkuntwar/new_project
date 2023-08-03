@@ -1,0 +1,40 @@
+<ion-view cache-view="false">
+
+    <ion-header-bar class="bar bar-header  App-header">
+        <button class="button button-icon icon icon-left ion-ios-arrow-left back-btn" ng-click="closeEntryDetails()"></button>
+        <div class="h1 title" ng-if="firstScreen=='ED'">{{heading}}</div>
+       <div class="h1 title" ng-if="firstScreen!=='ED'">Entry Details</div>
+    </ion-header-bar>
+    <ion-content on-swipe-right="entryDetailsModal.hide()">
+        <div class="ProfileDetails-Container">
+            <div class="profile-image">
+                <div ng-repeat="data in entryDetails" ng-if="data.img !==null" >
+                <div class="row">
+                    <div class="col"><b style="color: white;">{{data.column_desc}}</b></div>
+                </div>
+                <div class="row" >
+                    <img ng-src="data:image/JPEG;base64,{{data.img}}" style="float:left;" />
+                </div>
+                </div>
+                <div class="profile-details"></div>
+                <div class="clr"></div>
+            </div>
+            <div class="profile-image-bottom"></div>
+            <div class="row">
+                <!--&& item.column_type!=='IMG' && item.column_type!=='VIDEO'"-->
+                <table >
+                    <tr ng-repeat="item in entryDetails" ng-if="item.column_desc !='User Code' && item.column_desc !='SEQ_ID' && item.column_type!=='IMG' && item.column_type!=='VIDEO'">
+                        <th>{{item.column_desc}}</th>
+                        <th>-</th>
+                        <td>{{item.value}}</td>
+                    </tr>
+                </table>
+            </div>
+            <div class="row">
+                <button ng-if="flagForUpdateButton=='U#'" type="button" ng-click="openUpdateEntry(entryDetails)" class="button button-balanced button-block Save-btn btn-update-entry">
+                    Update Entry
+                </button>
+            </div>
+        </div>
+    </ion-content>
+</ion-view>

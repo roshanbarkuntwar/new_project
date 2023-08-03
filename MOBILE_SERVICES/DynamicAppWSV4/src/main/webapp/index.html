@@ -1,0 +1,196 @@
+<!--<!DOCTYPE html>
+<html>
+<head>
+    <title>Hello WebSocket</title>
+    <script src="sockjs-0.3.4.js"></script>
+    <script src="stomp.js"></script>
+<script src="http://cdn.sockjs.org/sockjs-0.3.min.js"></script>
+<script src="/stockticker/resources/stomp.js"></script>
+<script src="https://code.jquery.com/jquery-1.11.0.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/stomp.js/2.3.3/stomp.min.js"></script>
+<script src='https://www.google.com/recaptcha/api.js?hl=en'></script>
+ 
+    <script type="text/javascript">
+        var stompClient = null;
+
+        function setConnected(connected) {
+            document.getElementById('connect').disabled = connected;
+            document.getElementById('disconnect').disabled = !connected;
+            document.getElementById('conversationDiv').style.visibility = connected ? 'visible' : 'hidden';
+            document.getElementById('response').innerHTML = '';
+        }
+
+        function connect() {
+            var socket = new SockJS('/hello');
+           
+            stompClient = Stomp.over(socket);
+           
+            
+                stompClient.connect('', '', function(frame) {
+                 alert("misal");
+                setConnected(true);
+                console.log('Connected: ' + frame);
+                stompClient.subscribe('/topic/greetings', function(greeting){
+                    showGreeting(JSON.parse(greeting.body).content);
+                });
+            });
+        }
+
+        function disconnect() {
+            if (stompClient != null) {
+                stompClient.disconnect();
+            }
+            setConnected(false);
+            console.log("Disconnected");
+        }
+
+        function sendName() {
+            var name = document.getElementById('name').value;
+            stompClient.send("/app/hello", {}, JSON.stringify({ 'name': name }));
+        }
+
+        function showGreeting(message) {
+            var response = document.getElementById('response');
+            var p = document.createElement('p');
+            p.style.wordWrap = 'break-word';
+            p.appendChild(document.createTextNode(message));
+            response.appendChild(p);
+        }
+    </script>
+</head>
+<body onload="disconnect()">
+    
+    <h3>Login:</h3>
+  
+ <p style="color:red;">${errorString}</p>
+ 
+  <form name="loginForm"  method="POST" action="/DynamicAppWSV4/webService/CP/doLogin">
+      <table border="0">
+          <tr>
+              <td>User Name</td>
+              <td><input type="text" name="userName" value="tom"/></td>
+          </tr>
+          <tr>
+              <td>Password</td>
+              <td><input type="password" name="password" value="tom001" /></td>
+          </tr>
+      </table>
+      
+       reCAPTCHA 
+      <div class="g-recaptcha"
+          data-sitekey="6LfD7BAUAAAAAEVXsnHtMx_jkmVDdWOfsKxKGBB6"></div>
+ 
+      <input type="submit" value="Submit" />
+ <a href="/DynamicAppWSV4/webService/CP/doLogin.html">click</a>  
+  </form>
+  <p style="color:blue;">User Name: tom, Password: tom001</p>
+  <input type="text" id="message" value=${message} />
+       Message is: ${message} 
+    
+<noscript><h2 style="color: #ff0000">Seems your browser doesn't support Javascript! Websocket relies on Javascript being enabled. Please enable
+    Javascript and reload this page!</h2></noscript>
+<div>
+    <div>
+        <button id="connect" onclick="connect();">Connect</button>
+        <button id="disconnect" disabled="disabled" onclick="disconnect();">Disconnect</button>
+    </div>
+    <div id="conversationDiv">
+        <label>What is your name?</label><input type="text" id="name" />
+        <button id="sendName" onclick="sendName();">Send</button>
+        <p id="response"></p>
+    </div>
+</div>
+</body>
+</html>-->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width">
+
+        <!--<meta http-equiv="Content-Security-Policy" 
+        content="default-src *; script-src 'self' 'unsafe-inline' 'unsafe-eval' *; style-src 'self' 'unsafe-inline' *">-->
+
+        <title></title>
+        <link href="/DynamicAppWSV4/static/lib/ionic/css/ionic.css" rel="stylesheet">
+        <!--        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.4/angular.js"></script>-->
+        <script src="/DynamicAppWSV4/static/js_pre/angular.js"></script>
+        <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-route.js"></script>
+        <script src="/DynamicAppWSV4/static/js/app.js"></script>
+        <!--<script src="/DynamicAppWSV4/static/js/service/user_service.js"></script>-->
+        <script src="/DynamicAppWSV4/static/js/controller/user_controller.js"></script>
+        <!--ionic/angularjs js--> 
+        <script src="/DynamicAppWSV4/static/lib/ionic/js/ionic.bundle.js"></script>
+        <!-- cordova script (this will be a 404 during development) -->
+        <script src="/DynamicAppWSV4/static/js_pre/ng-cordova.min.js"></script>
+        <!--<script src="cordova.js"></script>-->
+        <!-- your app's js -->
+        <!--<script src="js/app.js"></script>-->
+        <script src="/DynamicAppWSV4/static/js/controller/controllers.js"></script>
+        <script src="/DynamicAppWSV4/static/js/controller/addUpdateEntryController.js"></script>
+        <script src="/DynamicAppWSV4/static/js/controller/addUpdateOrderController.js"></script>
+        <script src="/DynamicAppWSV4/static/js/controller/addPopulatedEntryCtrl.js"></script>
+        <script src="/DynamicAppWSV4/static/js/controller/addPopulatedLocationEntryCtrl.js"></script>
+        <script src="/DynamicAppWSV4/static/js/controller/globalObjectServices.js"></script>
+        <link href="/DynamicAppWSV4/static/css/ng-nlFramework.css" rel="stylesheet">
+        <link href="/DynamicAppWSV4/static/css/style.css" rel="stylesheet">
+        <link href="/DynamicAppWSV4/static/css/style-new.css" rel="stylesheet">
+        <!-- DatePicker -->
+        <script src="/DynamicAppWSV4/static/lib/ion-datetime-picker/release/ion-datetime-picker.min.js"></script>
+        <link href="/DynamicAppWSV4/static/lib/ion-datetime-picker/release/ion-datetime-picker.min.css" rel="stylesheet">
+        <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+        <!--            <script src="lib/highcharts/highcharts.js"></script>
+                    <script src="lib/highcharts/highcharts-3d.js"></script>-->
+
+        <script src="/DynamicAppWSV4/static/js_pre/angular-translate.js"></script>
+        <script src="/DynamicAppWSV4/static/js/controller/calendarController.js"></script>
+        <script src="/DynamicAppWSV4/static/js_pre/ng-img-crop.js"></script>
+        <script src="/DynamicAppWSV4/static/js_pre/Chart.min.js"></script>
+        <script src="/DynamicAppWSV4/static/js_pre/angular-chart.min.js"></script>
+        <!--for Offline app--> 
+        <script src="/DynamicAppWSV4/static/lib/pouchdb/dist/pouchdb.min.js"></script>
+        <script src="/DynamicAppWSV4/static/js/controller/pouchDB.service.js"></script>
+        <script src="/DynamicAppWSV4/static/js/controller/addUpdateEntryServices.js"></script>
+        <script src="/DynamicAppWSV4/static/js/controller/services.js"></script>
+        <script src="/DynamicAppWSV4/static/js/controller/reportAnalysisServices.js"></script>
+        <link rel="stylesheet" href="/DynamicAppWSV4/static/css/calendar.css" />
+        <link href="/DynamicAppWSV4/static/css/media-query.css" rel="stylesheet">
+        <script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?key=AIzaSyD67OrUk2G-zQ9PGPiM_S8tWXXp4bmZu84"></script>
+
+
+        <script src="/DynamicAppWSV4/static/js_pre/hammer.min.js"></script>
+        <script src="/DynamicAppWSV4/static/js_pre/ng-nlFramework.js"></script>
+    </head>
+
+    <body ng-app="starter" ng-controller="AppMainCtrl">
+    <ion-nav-view></ion-nav-view>
+    <!--<p><a href="#/">Main</a></p>-->
+
+    <!--<a href="#banana">Banana</a>-->
+    <!--        <a ng-click="goto()" style="color: white">Banana</a>
+            <a href="#tomato" style="color: white">Tomato</a>-->
+
+
+    <!--<div ng-view></div>-->
+    <canvas id="tempCanvas"></canvas>
+
+</body>
+
+</html>

@@ -1,0 +1,26 @@
+<ion-view cache-view="false" class="textareaPopupStyle">
+
+    <ion-header-bar class="bar bar-header  App-header">
+        <button class="button button-icon icon icon-left ion-ios-arrow-left back-btn" ng-click="textAreaPopOverModal.hide();"></button>
+        <div class="h1 title">Remark </div>
+        <!--<button ng-click="saveTextArea(textAreaValue,nameOfColumn);" style="color: #FFF" class="button button-icon icon icon-right">OK</button>-->
+    </ion-header-bar>
+    <ion-content on-swipe-right="textAreaPopOverModal.hide();">
+        <form role="form" name="achivForm">
+            <div class="list listStyle">
+                <span class="input-label"></span>
+                <label class="item item-input">
+
+                    <textarea ng-model="textAreaValue"   class="textareaStyle" rows="8" cols="50" style="height:auto !important;"  required ></textarea></label>
+
+                </br>
+
+                <button ng-click="saveTextArea(textAreaValue, nameOfColumn);" style="float: right;margin-right: 14px;padding: 2px 8px 1px;line-height: 18px;
+                        min-height: 25px;" class="button button-small button-calm Save-btn">
+                    Ok
+                </button>
+            </div>
+        </form>
+
+    </ion-content>
+</ion-view>

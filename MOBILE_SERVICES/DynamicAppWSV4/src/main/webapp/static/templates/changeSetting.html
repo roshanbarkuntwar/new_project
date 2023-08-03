@@ -1,0 +1,71 @@
+<!--changeSetting.html-->
+
+<ion-view>
+    <ion-header-bar class="bar bar-header  App-header">
+        <button class="button button-icon icon icon-left ion-ios-arrow-left back-btn" ng-click="backNavigate()"></button>
+        <div class="h1 title">Change Setting</div>
+    </ion-header-bar>
+    <ion-content class="has-header">
+        <form name="frm">
+            <div class="list ChangeSetting-page">
+                <label class="item item-input item-floating-label">
+                    <span class="input-label">Server Url<span style="color:red">*</span></span>
+                    <input type="text" ng-model="setting.serverUrl" placeholder="Server Url*"  list="serverList" style="width:90%;" required>
+                    <datalist id="serverList">
+                        <option data-ng-repeat="data in setting.serverList track by $index" value="{{ data}} ">
+                    </datalist>
+                </label>
+
+                <label class="item item-input item-floating-label">
+                    <span class="input-label">Entity Code<span style="color:red">*</span></span>
+                    <input required type="text" ng-model="setting.dbEntity" placeholder="Entity Code*"  list="entityList" style="width:90%; " ng-change="setting.setDbUser(setting.dbEntity)">
+                    <datalist id="entityList">
+                        <option data-ng-repeat="data in setting.dbEntityList track by $index" value="{{ data}} ">
+                    </datalist>
+                </label>
+
+                <label class="item item-input item-floating-label">
+                    <span class="input-label">Database User</span>
+                    <input type="text" ng-model="setting.databaseUser" placeholder="Database User"  list="databaseList" style="width:90%; " >
+                    <datalist id="databaseList">
+                        <option data-ng-repeat="data in setting.databaseList track by $index" value="{{ data}} ">
+                    </datalist>
+                </label>
+
+                <label class="item item-input item-floating-label">
+                    <span class="input-label">Database Password<span style="color:red">*</span></span>
+                    <input type="{{inputType}}" name="" placeholder="Database Password*" ng-model="setting.dbPassword" required>
+                </label>
+                <button type="button" style="margin-left:85%;margin-top:-19%;z-index:2" ng-model="passwordIcon" ng-click="(passwordIcon.clicked = !passwordIcon.clicked);hideShowPassword()" ng-class="passwordIcon.clicked ? 'button button-icon icon icon icon-left ion-eye' : 'button button-icon icon icon-left ion-eye-disabled'"></button>
+
+
+                <label class="item item-input item-floating-label">
+                    <span class="input-label">Database Port No</span>
+                    <input type="text" ng-model="setting.portNo" placeholder="Database Port No"  list="portNoList" style="width:90%; ">
+                    <datalist id="portNoList">
+                        <option data-ng-repeat="data in setting.portNoList track by $index" value="{{ data}} ">
+                    </datalist>
+                </label>
+
+                <label class="item item-input item-floating-label">
+                    <span class="input-label">Database URL</span>
+                    <input type="text" ng-model="setting.dbUrl" placeholder="Database URL"  list="dbUrlList" style="width:90%; ">
+                    <datalist id="dbUrlList">
+                        <option data-ng-repeat="data in setting.dbUrlList track by $index" value="{{ data}} ">
+                    </datalist>
+                </label>
+
+            </div>
+            <div class="row animated fadeInUp">
+                <div class="col ">
+                    <button class="button button-assertive button-full button-small cancel-btn " ng-click="backNavigate(-2)" type="button">Cancel</button>
+                </div>
+                <div class="col ">
+                    <button class="button button-balanced button-small button-full Save-btn " ng-click="setValue(setting)" ng-disabled="frm.$invalid">Save</button>
+                </div>
+            </div>
+
+        </form>
+    </ion-content>
+
+</ion-view>

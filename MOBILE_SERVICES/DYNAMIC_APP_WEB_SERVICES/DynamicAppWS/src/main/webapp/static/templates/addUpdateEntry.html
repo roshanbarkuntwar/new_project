@@ -1,0 +1,516 @@
+<ion-view class="add-update-entry-container">
+    <ion-header-bar class="bar bar-header  App-header">
+        <button class="button button-icon icon icon-left ion-ios-arrow-left back-btn" ng-click="cancelAddUpdateEntry()"></button>
+        <div class="h1 title">{{::table_desc}}</div>
+        <button ng-if="flagForEntryListButton == 'V#'" class="button button-icon icon icon-right ion-ios-paper-outline" ng-click="entryList()"></button>
+        <!--<button class="button button-icon icon icon-right ion-ios-compose-outline"></button>-->
+    </ion-header-bar>
+    <!-- <ion-content class="has-header" on-swipe-right="backNavigate()"> -->
+    <ion-content class="has-header">
+        <form name="frm" ng-submit="addNewEntry(fields)">
+            <p>
+            <ion-spinner icon="ios" class="dash-spin " ng-hide="fields"> </ion-spinner>
+            </p>
+            <div class="list-view">
+                <div class="list">
+                    <div ng-repeat="item in fields">
+                        <div class="form-heading" ng-if="item.flagForNewcolumn_catg_value == 2 && item.column_catg != ''">
+                            <h3>
+                                {{::item.column_catg}}
+                            </h3>
+
+                        </div>
+                        <div class="form-heading1" ng-if="item.flagForNewcolumn_catg_value == 2 && item.column_catg == ''">
+                            <h3>
+
+                            </h3>
+
+                        </div>
+
+
+                        <div ng-if="item.editor_flag == 'D'">
+
+
+                            <button type="button" style="margin-bottom: -45px; float:right; right:14px" class=" button button-small button-calm icon-left ion-information-circled"
+                                    ng-click="showGridDetails(item)">Details</button>
+                            <!-- <a ng-click="openTBModal(item.column_name)" class="button icon-left ion-information-circled button-clear button-positive button-block btn-common-color"
+                                style="float: right; margin-bottom: -45px;">Details</a> -->
+                            <!-- <i class="icon  ion-information-circled" style="float: right; margin-bottom: -45px;" ng-click="setLOVValues('','',item.column_desc,item.column_name,'',item.dependent_column_name)"></i> -->
+
+                        </div>
+
+                        <div ng-switch="item.item_help_property">
+                            <div ng-switch-when="I" ng-hide="item.entry_by_user == 'F'">
+                                <b class="input-label add-new-entry-label">{{::item.column_desc}}</b>
+                                <!--"data:image/jpeg;base64,{{::item.value}}"-->
+                                <fieldset class="add-update-img" ng-click="takeImage(item.column_name)" ng-disabled="item.excel_upload == 1 || item.entry_by_user == 'R'">
+                                    <!--<img id="myImage" ng-src="" class="img-resonsive" required alt="">-->
+                                    <img ng-show='item.value' id="{{::item.column_name}}" ng-src="data:image/jpeg;base64,{{item.value}}" class="img-resonsive"
+                                         required alt="">
+                                    <img ng-show='!item.value' ng-class="::{imgRequired: item.nullable == 'F'}" ng-src="img/default_cam.gif" class="img-resonsive"
+                                         required alt="">
+                                </fieldset>
+                                <div class="UpdateProfile-inner">
+                                    <div class="row">
+                                        <div class="col">
+                                            <a ng-click="takeImage(item.column_name)" ng-disabled="item.excel_upload == 1 || item.entry_by_user == 'R'" class="button icon-left ion-camera button-clear button-positive button-block  btn-common-color">Capture Image</a>
+                                        </div>
+                                        <!-- <div class="col">
+                                            <a class="button icon-left ion-images button-clear button-positive button-block" ng-click="getImage()">Upload Image</a>
+                                        </div> -->
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div ng-switch-when="S" ng-hide="item.entry_by_user == 'F'">
+                                <b class="input-label add-new-entry-label">{{::item.column_desc}}</b>
+                                <!--"data:image/jpeg;base64,{{::item.value}}"-->
+                                <fieldset class="add-update-img" ng-click="opensignature_padModal(item.column_name)" ng-disabled="item.excel_upload == 1 || item.entry_by_user == 'R'">
+                                    <!--<img id="myImage" ng-src="" class="img-resonsive" required alt="">-->
+                                    <img ng-show='item.value' id="{{::item.column_name}}" ng-src=" data:image/png;base64,{{item.value}}" class="img-resonsive"
+                                         required alt="">
+                                    <img ng-show='!item.value' ng-class="::{imgRequired: item.nullable == 'F'}" ng-src="img/sign.jpg" class="img-resonsive" required
+                                         alt="">
+                                </fieldset>
+                                <div class="UpdateProfile-inner">
+                                    <div class="row">
+                                        <div class="col">
+                                            <a ng-click="opensignature_padModal(item.column_name)" ng-disabled="item.excel_upload == 1 || item.entry_by_user == 'R'" class="button icon-left ion-edit button-clear button-positive button-block btn-common-color">Capture Signature</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+
+                            <div ng-switch-when="L" ng-hide="item.entry_by_user == 'F'">
+                                <span class="input-label add-new-entry-label">
+                                    <b>{{::item.column_desc}}
+                                        <i class="icon  ion-close-round" style="float: right;color:brown" ng-click="setLOVValues('', '', item.column_desc, item.column_name, '', item.dependent_column_name)"></i>
+                                    </b><button type="button" style="margin-top: 4px; float:right" class=" button button-small button-calm icon-left ion-information-circled"
+                                                ng-click="showSql(item.sqlData)"></button>
+                                </span>
+                                <label class="item item-input">
+                                    <div style="width: 100%;" ng-click="openLov(item.column_desc, item.column_name, item.dependent_row, item.dependent_row_logic, item.item_help_property)">
+                                        <input type="text" ng-model="item.value" id="{{::item.column_name}}" placeholder="{{::item.tool_tip}}" ng-readonly="true"
+                                               ng-required="item.nullable=='F'" disable="true" ng-disabled="item.entry_by_user == 'R'"
+                                               ng-change="dependent_nullable_logic(item.value, item.column_name, item.dependent_column_name)">
+                                    </div>
+
+                                </label>
+                            </div>
+                            <div ng-switch-when="M" ng-hide="item.entry_by_user == 'F'">
+                                <span class="input-label add-new-entry-label">
+                                    <b>{{::item.column_desc}}</b>
+                                    <span style="float: right;color:brown" ng-click="item.itemSelected = ''; item.value = ''; item.codeofValue = ''">
+                                        <i class="icon  ion-close-round"></i>
+                                    </span><button type="button" style="margin-top: 4px; float:right" class=" button button-small button-calm icon-left ion-information-circled"
+                                                   ng-click="showSql(item.sqlData)"></button>
+                                </span>
+                                <label class="item item-input">
+                                    <input type="text" id="{{::item.column_name}}" ng-model="item.value" placeholder="{{::item.tool_tip}}" disable="true" ng-click="item.value = ''; item.codeofValue = ''; openLov(item.column_desc, item.column_name, item.dependent_row, item.dependent_row_logic, item.item_help_property)"
+                                           ng-readonly="true" ng-required="item.nullable=='F'" ng-change="dependent_nullable_logic(item.value, item.column_name, item.dependent_column_name)">
+                                </label>
+                                <p ng-if="item.itemSelected">{{item.itemSelected}} item are selected</p>
+                            </div>
+
+                            <!--<div ng-switch-when="lovWhere" ng-hide="item.entry_by_user=='F'">
+                                <span class="input-label add-new-entry-label">{{::item.column_desc}}</span>
+                                <label class="item item-input">
+                                    <input type="text" ng-model="item.value" disable="true" 
+                                    ng-click="openLovWhere(item.dependent_row_logic,item.column_desc,item.column_name)" 
+                                    ng-readonly="true" 
+                                    ng-required="item.nullable=='F'">
+                                </label>
+                            </div>-->
+                            <!--<div ng-switch-when="R" ng-hide="item.entry_by_user=='F'">
+                                <h5>Radio field</h5>
+                                <hr/>
+                        
+                                <div ng-repeat="choice in item.choices">
+                                    <input type="radio" id="{{::item.column_name}}" name="single-{{:: field.id }}" id="single-{{:: choice.id }}" data-ng-model="choice.selected"
+                                        data-ng-value="true" ng-change='updateRadioChoices(field, choice)' ng-required="item.nullable=='F'"
+                                    />
+                                    <label for="single-{{:: choice.id }}">{{:: choice.name }}</label>
+                                </div>
+                            </div>-->
+
+                            <!--ng-hide="item.entry_by_user=='F'"-->
+
+
+
+                            <div ng-switch-when="TS" ng-hide="item.entry_by_user == 'F'">
+                                <!-- <div class="row" style="padding: 0px;">
+                                    <div class="col col-80" style="padding: 0px;">
+                                        <span class="input-label add-new-entry-label">
+                                            <b>{{::item.column_desc}}</b>
+                                        </span>
+                                    </div>
+                                    <div class="col col-20" style="padding: 0px;padding-right: 16px;">
+                                        <i class="icon  ion-android-search" style="float: right;color:brown; font-size: 28px; margin-top: 3px;" ng-click="searchByText(item.column_name,item.value,item.dependent_column_name,item.query_dependent_row)"></i>
+                                    </div>
+                                </div> -->
+                                <div class="row" style="padding: 0px;">
+                                    <div class="col col-60" style="padding: 0px;">
+                                        <span class="input-label add-new-entry-label">
+                                            <b>{{::item.column_desc}}</b>
+                                        </span>
+                                    </div>
+                                    <div class="col col-40" style="padding: 0px;padding-right: 16px;">
+                                        <button type="button" style="    margin-top: 4px; float:right" class=" button button-small button-calm icon-left ion-android-search"
+                                                ng-click="searchByText(item.column_name, item.value, item.dependent_column_name, item.query_dependent_row)">Search</button>
+                                        <button type="button" style="margin-top: 4px; float:right" class=" button button-small button-calm icon-left ion-information-circled"
+                                                ng-click="showSql(item.sqlData)"></button>
+                                        <!-- <i class="icon  ion-android-search" style="float: right;color:brown; font-size: 28px; margin-top: 3px;" ng-click="searchByText(item.column_name,item.value,item.dependent_column_name,item.query_dependent_row)"></i> -->
+                                    </div>
+                                </div>
+                                <label class="item item-input">
+                                    <input type="text" limit-to="{{::item.column_size}}" name="{{::item.column_name}}{{$index}}" placeholder="{{::item.tool_tip}}"
+                                           ng-model="item.value" id="{{::item.column_name}}" ng-readonly="item.entry_by_user == 'R'"
+                                           ng-required="item.nullable=='F'" ng-maxlength="item.column_size" ng-change="dependent_lov(item.column_name, item.value); dependent_nullable_logic(item.value, item.column_name, item.dependent_column_name, 'search')">
+                                </label>
+                                <p ng-show="frm.{{::item.column_name}}{{$index}}.$invalid && !frm.{{item.column_name}}{{$index}}.$pristine" class="help-block">
+                                    <span ng-show="frm.{{item.column_name}}{{$index}}.$error.required">
+                                        Please Enter {{item.column_desc}}
+                                    </span>
+                                    <span ng-show="frm.{{item.column_name}}{{$index}}.$error.maxlength">
+                                        {{::item.column_desc}} max {{::item.column_size}} Character
+                                    </span>
+                                    <span ng-show="frm.{{item.column_name}}{{$index}}.$error.minlength">
+                                        {{::item.column_desc}} min 3 Character
+                                    </span>
+                                </p>
+                            </div>
+
+
+
+
+
+
+
+                            <div ng-switch-when="T" ng-hide="item.entry_by_user == 'F'">
+                                <span class="input-label add-new-entry-label">
+                                    <b>{{::item.column_desc}}</b><button type="button" style="margin-top: 4px; float:right" class=" button button-small button-calm icon-left ion-information-circled"
+                                                                         ng-click="showSql(item.sqlData)"></button>
+                                </span>
+                                <label class="item item-input">
+                                    <input type="text" limit-to="{{::item.column_size}}" name="{{::item.column_name}}{{::$index}}" placeholder="{{::item.tool_tip}}"
+                                           ng-model="item.value" id="{{::item.column_name}}" ng-readonly="item.entry_by_user == 'R'"
+                                           ng-required="item.nullable=='F'" ng-maxlength="item.column_size" ng-change="dependent_nullable_logic(item.value, item.column_name, item.dependent_column_name)">
+                                </label>
+                                <p ng-show="frm.{{::item.column_name}}{{$index}}.$invalid && !frm.{{::item.column_name}}{{::$index}}.$pristine" class="help-block">
+                                    <span ng-show="frm.{{::item.column_name}}{{$index}}.$error.required">
+                                        Please Enter {{::item.column_desc}}
+                                    </span>
+                                    <span ng-show="frm.{{::item.column_name}}{{$index}}.$error.maxlength">
+                                        {{::item.column_desc}} max {{::item.column_size}} Character
+                                    </span>
+                                    <span ng-show="frm.{{::item.column_name}}{{$index}}.$error.minlength">
+                                        {{::item.column_desc}} min 3 Character
+                                    </span>
+                                </p>
+                            </div>
+
+                            <div ng-switch-when="B" ng-hide="item.entry_by_user == 'F'">
+                                <span class="input-label add-new-entry-label">
+                                    <b>{{::item.column_desc}}</b><button type="button" style="margin-top: 4px; float:right" class=" button button-small button-calm icon-left ion-information-circled"
+                                                                         ng-click="showSql(item.sqlData)"></button>
+                                </span>
+                                <label class="item item-input">
+                                    <input type="text" ng-model="item.value" id="{{::item.column_name}}" placeholder="{{::item.tool_tip}}" ng-click="scanBarcode(item.column_name)"
+                                           ng-readonly="true" ng-required="item.nullable=='F'" disable="true" ng-disabled="item.excel_upload == 1"
+                                           ng-change="dependent_lov(item.column_name, item.value); dependent_nullable_logic(item.value, item.column_name, item.dependent_column_name)">
+                                </label>
+                            </div>
+
+
+                            <div ng-switch-when="V" ng-hide="item.entry_by_user == 'F'">
+                                <span class="input-label add-new-entry-label">
+                                    <b>{{::item.column_desc}}</b>
+                                </span>
+                                <fieldset class="add-update-img" ng-click="recordVideo(item.column_name, item.column_size)" ng-disabled="item.excel_upload == 1 || item.entry_by_user == 'R'">
+                                    <video ng-show='item.value' id="{{::item.column_name}}" ng-src="{{::recordedVideoData}}" controls></video>
+                                    <img ng-show='!item.value' id="{{::item.column_name}}" ng-src="img/video.jpg" class="img-resonsive" alt="">
+                                </fieldset>
+                                <div class="UpdateProfile-inner">
+                                    <div class="row">
+                                        <div class="col">
+                                            <a ng-click="recordVideo(item.column_name, item.column_size)" ng-disabled="item.excel_upload == 1 || item.entry_by_user == 'R'"
+                                               class="button icon-left ion-videocamera button-clear button-positive button-block btn-common-color">
+                                                Capture Video</a>
+                                        </div>
+                                        <!-- <div class="col">
+                                            <a class="button icon-left ion-images button-clear button-positive button-block" ng-click="getImage()">Upload Image</a>
+                                        </div> -->
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div ng-switch-when="A" ng-hide="item.entry_by_user == 'F'">
+                                <span class="input-label add-new-entry-label">
+                                    <b>{{::item.column_desc}}</b> &nbsp;
+                                    <i class="icon ion-edit" ng-click="textAreaPopOver($event, item.column_name, item.value, item.column_desc)"></i>
+                                </span>
+                                <label class="item item-input">
+                                    <textarea class="remark-textarea" limit-to="{{::item.column_size}}" ng-model="item.value" id="{{::item.column_name}}" ng-readonly="item.entry_by_user == 'R'"
+                                              name="{{::item.column_name}}{{::$index}}" ng-required="item.nullable=='F'" ng-maxlength="item.column_size"
+                                              placeholder="{{::item.tool_tip}}">
+
+                                    </textarea>
+
+                                    <!--<input type="text" name="{{::item.column_name}}{{::$index}}" ng-model="item.value" ng-readonly="item.entry_by_user== 'R'" ng-required="item.nullable=='F'" ng-maxlength="item.column_size">-->
+                                </label>
+                                <p ng-show="frm.{{::item.column_name}}{{::$index}}.$invalid && !frm.{{::item.column_name}}{{::$index}}.$pristine" class="help-block">
+                                    <span ng-show="frm.{{::item.column_name}}{{::$index}}.$error.required">
+                                        Please Enter {{::item.column_desc}}
+                                    </span>
+                                    <span ng-show="frm.{{::item.column_name}}{{::$index}}.$error.maxlength">
+                                        {{::item.column_desc}} max {{::item.column_size}} Character
+                                    </span>
+                                    <span ng-show="frm.{{::item.column_name}}{{::$index}}.$error.minlength">
+                                        {{::item.column_desc}} min 3 Character
+                                    </span>
+                                </p>
+                            </div>
+                            <div ng-switch-when="C" ng-hide="item.entry_by_user == 'F'">
+                                <span class="input-label add-new-entry-label">
+                                    <b>{{::item.column_desc}}</b>
+                                </span>
+                                <div class="item item-icon-left" id="{{::item.column_name}}" ion-datetime-picker date ng-model="item.value" ng-disabled="item.entry_by_user == 'R'"
+                                     ng-required="item.nullable=='F'" name="{{::item.column_name}}{{::$index}}" only-valid="{'between': {'initial': item.from_value, 'final': item.to_value}, 'inclusive': true}"
+                                     ng-readonly="item.entry_by_user == 'R'">
+                                    <!--<i class="icon ion-ios-calendar positive">-->
+                                    <i ng-class="::{'icon  ion-ios-calendar positive': !item.nullable == 'F' || item.value, 'icon ion-ios-calendar assertive': item.nullable == 'F' && !item.value}">
+                                        &nbsp;&nbsp;
+                                        <p>{{item.value| date: "dd-MM-yyyy"}}</p>
+                                        <p ng-show="frm.{{::item.column_name}}{{::$index}}.$error.required">{{::item.tool_tip}}
+                                        <p>
+                                    </i>
+                                </div>
+                                <!-- <span ng-show="frm.{{::item.column_name}}{{::$index}}.$error.required">
+                    Please Enter {{::item.column_desc}}
+                    </span> -->
+                            </div>
+                            <div ng-switch-when="DT" ng-hide="item.entry_by_user == 'F'">
+                                <span class="input-label add-new-entry-label">
+                                    <b>{{::item.column_desc}}</b>
+                                </span>
+                                <div class="item item-icon-left" id="{{::item.column_name}}" ng-change="autoCalculationOfDuration(item.column_name)" ion-datetime-picker
+                                     date time ng-model="item.value" ng-disabled="item.entry_by_user == 'R'" ng-required="item.nullable=='F' "
+                                     name="{{::item.column_name}}{{::$index}} " only-valid="{'between': {'initial': item.from_value, 'final': item.to_value}, 'inclusive': true}">
+                                    <!--<i class="icon ion-ios-calendar positive ">-->
+                                    <i ng-class="::{'icon ion-ios-calendar positive': !item.nullable == 'F' || item.value, 'icon ion-ios-calendar assertive': item.nullable == 'F' && !item.value}">
+                                        &nbsp;&nbsp;
+                                        <p>{{item.value| date: "dd-MM-yyyy HH:mm:ss "}}</p>
+                                        <p ng-show="frm.{{::item.column_name}}{{::$index}}.$error.required ">{{::item.tool_tip}}
+                                        <p>
+                                    </i>
+                                </div>
+                                <!-- <span ng-show="frm.{{::item.column_name}}{{::$index}}.$error.required ">
+                    Please Enter {{::item.column_desc}}
+                    </span> -->
+                            </div>
+                            <div ng-switch-when="N" ng-hide="item.entry_by_user == 'F'">
+                                <span class="input-label add-new-entry-label ">
+                                    <b>{{::item.column_desc}}</b><button type="button" style="margin-top: 4px; float:right" class=" button button-small button-calm icon-left ion-information-circled"
+                                                                         ng-click="showSql(item.sqlData)"></button>
+                                </span>
+                                <label class="item item-input ">
+                                    <input type="tel" valid-number limit-to="{{::item.column_size}}" decimaldigit="item.decimal_digit" name="{{::item.column_name}}{{::$index}} "
+                                           placeholder="{{::item.tool_tip}} " ng-model="item.value" id="{{::item.column_name}}"
+                                           ng-required="item.nullable=='F' " ng-maxlength="item.column_size" ng-change="autoCalculation(item.column_name)"
+                                           ng-readonly="item.entry_by_user == 'R'" ng-min="item.from_value " ng-max="item.to_value">
+                                </label>
+
+                                <!-- onchange="checkFromToValue(item.value, item.from_value, item.to_value) " 
+                                    ng-maxlength="item.to_value "
+                                        ng-minlength="item.from_value " -->
+                                <p ng-show="frm.{{::item.column_name}}{{::$index}}.$invalid &&
+                                            !frm.{{::item.column_name}}{{::$index}}.$pristine " class="help-block ">
+                                    <span ng-show="frm.{{::item.column_name}}{{::$index}}.$error.required ">
+                                        Please Enter {{::item.column_desc}}
+                                    </span>
+                                    <span ng-show="frm.{{::item.column_name}}{{::$index}}.$error.maxlength ">
+                                        {{::item.column_desc}} max {{::item.column_size}} digit
+                                    </span>
+                                    <span ng-show="frm.{{::item.column_name}}{{::$index}}.$error.minlength ">
+                                        {{::item.column_desc}} min {{::item.column_size}} digit
+                                    </span>
+                                    <span ng-show="frm.{{::item.column_name}}{{::$index}}.$error.ngMax ">
+                                        {{::item.column_desc}} should not be above {{::item.to_value}}
+                                    </span>
+                                    <span ng-show="frm.{{::item.column_name}}{{::$index}}.$error.ngMin ">
+                                        {{::item.column_desc}} should be above {{::item.from_value}}
+                                    </span>
+                                </p>
+                            </div>
+                            <div ng-switch-when="E" ng-hide="item.entry_by_user == 'F'">
+                                <span class="input-label add-new-entry-label">{{::item.column_desc}}</span>
+                                <label class="item item-input">
+                                    <input type="email" validate-email limit-to="{{::item.column_size}}" name="{{::item.column_name}}{{::$index}}" placeholder="{{::item.tool_tip}}"
+                                           ng-model="item.value" id="{{::item.column_name}}" ng-required="item.nullable=='F'" ng-readonly="item.entry_by_user == 'R'"
+                                           ng-maxlength="item.to_value" ng-minlength="item.from_value" ng-change="dependent_nullable_logic(item.value, item.column_name, item.dependent_column_name)">
+                                </label>
+                                <p ng-show="frm.{{::item.column_name}}{{::$index}}.$invalid && !frm.{{::item.column_name}}{{::$index}}.$pristine" class="help-block">
+                                    <span ng-show="frm.{{::item.column_name}}{{::$index}}.$error.required">
+                                        Please Enter {{::item.column_desc}}
+                                    </span>
+                                    <span ng-show="frm.{{::item.column_name}}{{::$index}}.$invalid">
+                                        Provide valid email ID
+                                    </span>
+                                    <span ng-show="frm.{{::item.column_name}}{{::$index}}.$error.maxlength">
+                                        {{::item.column_desc}} max {{::item.column_size}} character
+                                    </span>
+                                    <span ng-show="frm.{{::item.column_name}}{{::$index}}.$error.minlength">
+                                        {{::item.column_desc}} min {{::item.column_size}} character
+                                    </span>
+                                </p>
+                            </div>
+                            <div ng-switch-when="H" ng-hide="item.entry_by_user == 'F'">
+                                <div class="add-new-entry-label ">
+                                    <label>
+                                        <b>{{::item.column_desc}}</b>
+                                    </label>
+                                </div>
+                                <div class="col Dispenser-Entry-container">
+                                    <select ng-model="item.value" ng-disabled="item.entry_by_user == 'R'" id="{{::item.column_name}}" ng-change="dependent_lov(item.column_name, item.value); dependent_nullable_logic(item.value, item.column_name, item.dependent_column_name)"
+                                            class="Dispenser-Entry-container-dropdown" ng-required="item.nullable=='F' " style="width:100%;"
+                                            ng-disabled="item.entry_by_user == 'R'">
+                                        <!-- <option selected disabled>{{::}}</option> -->
+                                        <option ng-repeat="option in item.dropdownVal track by $index" value="{{::option.code}}">{{::option.name}}</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div ng-switch-when="D" ng-hide="item.entry_by_user == 'F'">
+                                <div class="add-new-entry-label ">
+                                    <label>
+                                        <b>{{::item.column_desc}}</b>
+                                    </label>
+                                </div>
+                                <div class="col Dispenser-Entry-container">
+                                    <select ng-model="item.value" ng-disabled="item.entry_by_user == 'R'" id="{{::item.column_name}}" class="Dispenser-Entry-container-dropdown"
+                                            ng-required="item.nullable=='F' " style="width:100%; " ng-change="dependent_nullable_logic(item.value, item.column_name, item.dependent_column_name)">
+                                        <option ng-repeat="option in item.dropdownVal track by $index" value="{{::option}} ">{{::option}}</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div ng-switch-when="MD" ng-hide="item.entry_by_user == 'F'">
+                                <div class="add-new-entry-label ">
+                                    <label>
+                                        <b>{{::item.column_desc}}</b>
+                                    </label>
+                                </div>
+                                <div class="col Dispenser-Entry-container">
+                                    <select multiple ng-model="item.value" ng-disabled="item.entry_by_user == 'R'" id="{{::item.column_name}}" ng-change="dependent_lov(item.column_name, item.value); dependent_nullable_logic(item.value, item.column_name, item.dependent_column_name)"
+                                            class="Dispenser-Entry-container-dropdown" ng-required="item.nullable=='F' " style="width:100%;"
+                                            ng-disabled="item.entry_by_user == 'R'">
+                                        <!-- <option selected disabled>{{::}}</option> -->
+                                        <option ng-repeat="option in item.dropdownVal track by $index" value="{{::option.code}}">{{::option.name}}</option>
+                                    </select>
+                                </div>
+                                <!--<div>
+                                    <pre>
+                                    {{::item.value}}
+                                </pre>
+                                </div>-->
+                            </div>
+                            <!--<div ng-switch-when="M " ng-hide="item.entry_by_user=='F' ">
+                                <div class="col col-25 ">
+                                    <label>{{::item.column_desc}}</label>
+                                </div>
+                                <div class="col ">
+                                    <select multiple ng-model="item.value " ng-required="item.nullable=='F' " style="width:100%; ">
+                                        <option ng-repeat="option in item.lov " value="{{::option.name}} ">{{::option.name}}</option>
+                                    </select>
+                                </div>
+                            </div>-->
+                            <!--<div ng-switch-when="DD" ng-hide="item.entry_by_user=='F' ">
+                                <div class="col col-25 ">
+                                    <label><b>{{::item.column_desc}}</b></label>
+                                </div>
+                                <div class="item " style="padding: 6px; ">
+                                    <input type="text " ng-model="item.value " id="{{::item.column_name}}" ng-required="item.nullable=='F' " list="list " style="width:90%; "
+                                        ng-change="dependent_nullable_logic(item.value,item.column_name)">
+                                </div>
+                                <datalist id="list ">
+                                    <option data-ng-repeat="data in item.column_default_value" value="{{:: data }} ">
+                                </datalist>
+                            </div>-->
+                            <div ng-switch-when="AS" ng-hide="item.entry_by_user == 'F'">
+                                <span class="input-label add-new-entry-label">
+                                    <b>{{::item.column_desc}}</b><button type="button" style="margin-top: 4px; float:right" class=" button button-small button-calm icon-left ion-information-circled"
+                                                                         ng-click="showSql(item.sqlData)"></button>
+                                </span>
+                                <label class="item item-input">
+                                    <input type="text" limit-to="{{::item.column_size}}" ng-model="item.value" id="{{::item.column_name}}" name="{{::item.column_name}}{{::$index}}"
+                                           ng-required="item.nullable=='F' " placeholder="{{::item.tool_tip}}" ng-readonly="item.entry_by_user == 'R'"
+                                           list="list" ng-change="dependent_nullable_logic(item.value, item.column_name, item.dependent_column_name)">
+                                </label>
+                                <datalist id="list">
+                                    <option data-ng-repeat="data in item.dropdownVal track by $index" value="{{ data}} ">
+                                </datalist>
+                            </div>
+                            <div ng-switch-when="BT" ng-hide="item.entry_by_user == 'F'">
+                                <div class="row">
+                                    <div class="col col-10 ">
+                                    </div>
+                                    <div class="col ">
+                                        <button ng-show="item.status == ''" type="button" class=" button button-block button-energized button-small" ng-disabled=" item.entry_by_user == 'R'"
+                                                id="{{::item.column_name}}" ng-click="saveLocation(fields)">
+                                            {{::item.column_desc}}
+                                        </button>
+                                    </div>
+                                    <div class="col col-10 ">
+                                    </div>
+                                </div>
+                            </div>
+                            <div ng-switch-when="MT">
+                                <input type="hidden" ng-model="item.value">
+                            </div>
+
+                            <div ng-switch-when="R">
+                                <span class="input-label add-new-entry-label">
+                                    <b>{{::item.column_desc}}</b> : {{item.value}}
+                                </span>
+                                <div style="text-align:center;">
+                                    <a ng-repeat="r in ratingArr" class="padding" style="text-decoration:none;font-size: 30px;">
+                                        <i class="icon {{::r.icon}} balanced" ng-click="setRating(r.value, item.column_name)"></i>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row animated fadeInUp" ng-if="fields">
+                <div class="col ">
+                    <button class="button button-assertive button-block cancel-btn " ng-click="cancelAddUpdateEntry()" type="button">Cancel</button>
+                </div>
+
+                <div class="col" ng-if="orderFormNext == 'next'">
+                    <button class="button button-balanced button-block Save-btn " type="submit" value="UploadNext " name="uploadNext" id="uploadNext"
+                            ng-disabled="frm.$invalid">Next</button>
+                </div>
+                <div class="col" ng-if="orderFormNext == 'image'">
+                    <button class="button button-balanced button-block Save-btn " type="submit" value="Upload " name="upload " id="upload " ng-disabled="frm.$invalid">Show Image</button>
+                </div>
+                <div class="col" ng-if="orderFormNext != 'next' && orderFormNext != 'Update' && orderFormNext != 'image'">
+                    <button class="button button-balanced button-block Save-btn " type="submit" value="Upload " name="upload " id="upload " ng-disabled="frm.$invalid">Save</button>
+                </div>
+                <div class="col" ng-if="orderFormNext == 'Update'">
+                    <button class="button button-balanced button-block Save-btn " type="submit" value="Upload " name="upload " id="upload " ng-disabled="frm.$invalid">Update</button>
+                </div>
+                <div class="col">
+                    <button class="button button-balanced button-block Save-btn " type="button" value="Upload " name="upload " id="upload " ng-disabled="frm.$invalid" ng-click="addNewEntry(fields, 'T');">View Sql</button>
+                </div>
+            </div>
+
+        </form>
+
+        <!--
+        <div class="row ">
+            <button class="button button-block button-dark " style="min-height: 30px;line-height: 33px; " ng-click="todayEntry() ">Todays Entry</button>
+        </div>-->
+    </ion-content>
+
+</ion-view>

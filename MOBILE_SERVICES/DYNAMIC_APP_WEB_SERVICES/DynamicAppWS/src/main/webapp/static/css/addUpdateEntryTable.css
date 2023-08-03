@@ -1,0 +1,25 @@
+.addUpdateEntryTableForm .control-divs .col-40 {
+   
+    background: #E0F7FA;
+}
+.addUpdateEntryTableForm .control-divs .row {
+   
+       padding: 0;
+    border-bottom: 1px solid rgba(4, 47, 63, 0.18);
+    border-top: 1px solid rgba(4, 47, 63, 0.07)
+}
+.addUpdateEntryTableForm .control-divs input{
+    border:none !important;
+}
+.addUpdateEntryTableForm .control-divs .list-view .item-input {
+    padding: 4px 0 1px 0 !important;
+}
+.addUpdateEntryTableForm .control-divs select.ng-invalid {
+    border: none !important;
+    height: 25px;
+}
+.addUpdateEntryTableForm .control-divs .Dispenser-Entry-container-dropdown {
+   
+        border:none !important;
+    
+}

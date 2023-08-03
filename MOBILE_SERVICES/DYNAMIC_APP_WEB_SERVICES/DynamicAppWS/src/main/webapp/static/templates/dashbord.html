@@ -1,0 +1,289 @@
+<ion-view cache-view="false" view-title="Dashbord" class="dashboard-body">
+
+    <div id="nlActionButton" class="switch">
+        <div class="action-button depth z1 option two" ng-click="reloadDashbord()">
+            <i class="icon ion-loop"></i>
+        </div>
+        <!--<div class="action-button depth z1 option two" ng-click="startLocTracAndHideActivity()">
+            <i class="icon ion-location"></i>
+        </div>
+        <div class="action-button depth z1 option one" ng-click="openOtherApp()">
+            <i class="icon ion-android-open"></i>
+        </div>-->
+        <div id="nlPlus" class="action-button depth z1 plus">
+            <span>
+                +
+            </span>
+        </div>
+    </div>
+
+    <div id="nlDrawer" class="nlDrawer-side">
+        <div class="topbar drawer large profile-top-sec" style="background: url(img/road1.jpg)rgb(48, 51, 80) !important;
+    background-size: 100% 100% !important;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.82);">
+
+            <div class="username">
+                <strong>Lighthouse</strong>
+                <br>Info Systems Pvt. Ltd 
+                <!--<br><strong>NETVISION</strong>-->
+            </div>
+            <!--<div class="gravatar"><img class="depth z1 netvision-logo" src="./img/netvision_logo_white.png" ></div>-->
+            <div class="gravatar">
+                <img class="depth z1" src="./img/logo-new.png"> </div>
+        </div>
+
+
+
+
+        <div class="list side-list">
+
+            <div class="item item-icon-left app-type" ng-show="entityCodes">
+                <div class="icon-wrap">
+                    <i class="icon ion-android-phone-portrait"></i>
+                </div>
+                <div class="app-type-div" ng-click="popover.show($event)">
+                    <div class="menu-divs">Entity Code : {{entity_code}}
+                        <!-- <select ng-model="entity_code" ng-change="setEntityCode(entity_code);" class="drop-menu">
+                            <option ng-repeat="option in entityCodes" value="{{option.code}}">{{option.value}}</option>
+                        </select> -->
+                    </div>
+                </div>
+            </div>
+
+            <a class="item item-icon-left app-type" href="#" ng-show="sideMenu.appTypes_flag">
+                <div class="icon-wrap">
+                    <i class="icon ion-android-phone-portrait"></i>
+                </div>
+                <div class="app-type-div">
+                    <div class="menu-divs">App Type
+                        <select ng-model="appType" ng-change="setAppType(appType);" class="drop-menu">
+                            <option ng-repeat="option in appTypes" value="{{option.apptype}}">{{option.apptype}}</option>
+                        </select>
+                    </div>
+                </div>
+            </a>
+
+            <a class="item item-icon-left refresh-app-data" ng-click="openSetting()" ng-show="sideMenu.offline_flag_app_run">
+                <div class="icon-wrap">
+                    <i class="icon ion-refresh"></i>
+                </div>
+                <div class="ref-app-div">
+                    <div class="menu-divs">Refresh App Data</div>
+                </div>
+            </a>
+
+            <a class="item item-icon-left exit-app" ng-click="exitApp()">
+                <div class="icon-wrap">
+                    <i class="icon ion-android-exit"></i>
+                </div>
+                <div class="exit-app-div">
+                    <div class="menu-divs">Exit App</div>
+                </div>
+            </a>
+        </div>
+
+        <div class="bottom">
+            <a class="item app-verson">
+                <!-- <i class="icon ion-android-phone-portrait"> </i> -->
+                Verson : {{appVerson}}
+            </a>
+            <a class="item item-icon-left" ng-click="logout()">
+                <i class="icon ion-log-out"></i>Log Out
+            </a>
+        </div>
+    </div>
+
+    <div id="nlBurger" ng-click="toggleDrower()">
+        <div id="burger-top"></div>
+        <div id="burger-center"></div>
+        <div id="burger-bottom"></div>
+    </div>
+    <div id="nlSwipe"></div>
+    <div id="nlDimm"></div>
+    <ion-header-bar class="bar bar-header  App-header">
+        <div class="h1 title">Dashboard</div>
+        <!--<div class="h1 title">UNILEVER</div>-->
+
+        <button ng-click="openNotificaton()" class="button button-icon icon icon-left ion-android-notifications-none">
+            <span ng-click="openNotificaton()" ng-if="isNotificationUnread=='yes'" class="badge  badge-assertive notif-indicator-badge">
+            </span>
+        </button>
+    </ion-header-bar>
+    <ion-content class="has-header">
+
+        <div class="list card logged-user-details dash-user-details">
+            <div class="item">
+                <!--<div class="row">-->
+                <!--<div class="col col-20">
+                        <img src="img/unilever_logoo.png">
+                    </div>-->
+                <!--<div class="col col-80">-->
+                <p ng-bind-html="welcomeMsg" style="text-align:left"> </p>
+                <!--</div>-->
+            </div>
+        </div>
+        <p>
+            <ion-spinner icon="ios" class="dash-spin " ng-hide="dashboradData || dashboradData==''"> </ion-spinner>
+        </p>
+
+
+        <div class="row " style="flex-wrap: wrap; ">
+            <div class="col col-50" ng-repeat="item in dashboradData " ng-hide="item.status=='F' ">
+                <!--                <img ng-src="data:image/jpeg;base64,{{item.image}} ">-->
+                <div class="grid-wrapper animated wow zoomIn animated" data-wow-delay=".3s" style="background: url(img/dashboard-cube.png) #ffffff;background-size:100% 100%">
+                    <div ng-click="pageDetails(item.firstScreen,item.table_name,item.seqNo,item.portlet_Id,item.table_desc,item.data_UPLOAD, item.updation_process, item.screen_orientation_view, item.access_contrl, item.default_populate_data, item.dependent_next_entry_seq, item.replicate_fields,item.unique_message,item.update_key,item.replicate_rec,item.mandatory_to_start_portal,item.duplicate_row_value_allow,item.display_clause) ">
+                        <div class="item-grid-wrap">
+                            <div class="row">
+                                <div class="col">
+                                    <div class="img-wrap">
+                                        <img ng-src="data:image/jpeg;base64,{{item.image}} ">
+                                    </div>
+                                    <!--                        <a class="badge badge-assertive " ng-if="item.reportCount !='0' ">{{item.reportCount}}</a>-->
+                                    <span class="badge badge-assertive custom-badge" ng-if="item.reportCount !='0' ">{{item.reportCount}}</span>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col">
+                                    <h5 style="color:#042f3f">{{ item.table_desc }}</h5>
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="row">
+                            <div class="col">
+                                <div style="height:13px"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="upload-btn-container" ng-if="item.noOfEntry !='0'">
+                        <div class="upload-btn-wrapper">
+                            <button class="button button-clear dashboard-upload-btn button-balanced " ng-click="entryList(item.table_name,item.seqNo,item.portlet_Id,item.table_desc,item.data_UPLOAD, item.updation_process, item.screen_orientation_view, item.default_populate_data,item.firstScreen) ">
+                                <i class="icon ion-ios-upload-outline "></i>
+                            </button>
+                            <a style="margin-top: 15px;" class="badge badge-assertive offline-badge custom-badge">{{item.noOfEntry}}</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!--Code to generate Dashbord in Tabs Mode-->
+        <!--<div ng-show=" view_mode=='T' " ng-if="flagForOneTab!=1 ">
+            <div class=" list card add-entry-container " ng-repeat="item in dashboradData " ng-hide="item.status=='F' ">
+                <div class="row" ng-if="item.noOfEntry =='0' " ng-click="pageDetails(item.firstScreen,item.table_name,item.seqNo,item.portlet_Id,item.table_desc,item.data_UPLOAD, item.updation_process, item.screen_orientation_view, item.access_contrl, item.default_populate_data, item.dependent_next_entry_seq, item.replicate_fields,item.unique_message,item.update_key,item.replicate_rec) ">
+                    <div class="mainDiv">
+                        <p style="float:left;font-size: 10px; color:#59be84 ;padding-right: 2px;padding-top:0px;margin-top:0px;">{{item.seqNo}}</p>
+                        <img ng-src="data:image/jpeg;base64,{{item.image}} ">
+                        <a class="badge badge-assertive " ng-if="item.reportCount !='0' ">{{item.reportCount}}</a>
+                        <h2>{{ item.table_desc }}</h2>
+                    </div>
+                </div>
+                <div class="row" ng-if="item.noOfEntry !='0' ">
+                    <div class="mainDiv" ng-click="pageDetails(item.firstScreen,item.table_name,item.seqNo,item.portlet_Id,item.table_desc,item.data_UPLOAD, item.updation_process, item.screen_orientation_view, item.access_contrl, item.default_populate_data, item.dependent_next_entry_seq, item.replicate_fields,item.unique_message) ">
+                        <p style="float:left;font-size: 10px; color:#59be84 ;padding-right: 2px;padding-top:0px;margin-top:0px;">{{item.seqNo}}</p>
+                        <img ng-src="data:image/jpeg;base64,{{item.image}} ">
+                        <a class="badge badge-assertive " ng-if="item.reportCount !='0' ">{{item.reportCount}}</a>
+                        <h2>{{ item.table_desc }}</h2>
+                    </div>
+                    <div class="upload-btn-container " ng-if="item.noOfEntry !='0' ">
+                        <button class="button button-clear dashboard-upload-btn button-balanced " ng-click="entryList(item.table_name,item.seqNo,item.portlet_Id,item.table_desc,item.data_UPLOAD, item.updation_process, item.screen_orientation_view, item.default_populate_data,item.firstScreen) ">
+                            <i class="icon ion-ios-upload-outline "></i>
+                        </button>
+                        <a class="badge badge-assertive ">{{item.noOfEntry}}</a>
+                    </div>
+                </div>
+            </div>
+        </div>-->
+
+        <!--Code to generate Dashbord in Grid Mode-->
+        <!--<div class="row " style="flex-wrap: wrap; " ng-show="view_mode=='G' ">
+            <div class="col col-33 " ng-repeat="item in dashboradData " ng-hide="item.status=='F' " ng-click="pageDetails(item.firstScreen,item.table_name,item.seqNo,item.portlet_Id,item.table_desc,item.data_UPLOAD, item.updation_process, item.screen_orientation_view,
+                item.access_contrl, item.default_populate_data, item.dependent_next_entry_seq, item.replicate_fields,item.unique_message) ">
+                <img ng-src="data:image/jpeg;base64,{{item.image}} ">
+                <a class="badge badge-assertive " ng-if="item.reportCount !='0' ">{{item.reportCount}}</a>
+                <h6>{{ item.table_desc }}</h6>
+            </div>
+        </div>-->
+        <!--End Code to generate Dashbord in Grid Mode-->
+
+
+        <!--One Dashboard Tab navigate to details Logic-->
+        <div ng-if="flagForOneTab==1 ">
+            <div class="report-analysis-container-main ">
+                <div class="report-analysis-inner-sec " ng-repeat="item in graphTab " ng-if="flagForShortReportTab!=1 ">
+                    <div class="row ">
+                        <div class="col col-100 ">
+                            <div class="report-analysis-icon " ng-click="openReportAnalysis(item.seq_no,item.tab) ">
+                                <span class="report-analysis-icon-inner ">
+                                    <img ng-src="data:image/jpeg;base64,{{item.dp}} ">
+                                    <b ng-init="item.status=t rue ">{{item.first_screen_1_value}}</b>
+                                </span>
+                            </div>
+                            <div class="report-analysis-heading ">
+                                <h2 ng-click="openReportAnalysis(item.seq_no,item.tab) ">{{item.tab}}</h2>
+                                <div class="last-login-details " ng-init="item.status=t rue ">
+                                    <h2 ng-show="!shortReportProcess " ng-click="refreshSummaryValue(item.seq_no,item.tab) ">
+                                        <i class="icon ion-loop "></i> {{item.lastupdate}}</h2>
+                                    <p>
+                                        <ion-spinner icon="bubbles " class="spinner-balanced " ng-show="shortReportProcess "></ion-spinner>
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="report-analysis-inner-sec " ng-repeat="item in typeList " ng-click="openShortReportDetail(item.seq_no,item.tab) "
+                    ng-if="flagForShortReportTab==1 ">
+                    <div class="row ">
+                        <div class="report-analysis-icon ">
+                            <span class="report-analysis-icon-inner ">
+                                <img ng-src="data:image/jpeg;base64,{{item.dp}} ">
+                            </span>
+                        </div>
+                        <div class="report-analysis-heading ">
+                            <h2>{{item.tab}}</h2>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--End One Dashboard Tab navigate to details Logic-->
+
+
+
+
+
+        <div class="row " ng-if="dashboradData==''" style="color: #B9A247; font-size:17px; text-align:center; ">
+            <div class="col">
+                Data is not available for selected app type
+            </div>
+        </div>
+
+
+
+
+    </ion-content>
+
+    <ion-footer-bar class="bar bar-footer App-footer " ng-click="openBrowser() ">
+        <p style="color:white; margin-left:20% ">Lighthouse Info Systems pvt. Ltd</p>
+    </ion-footer-bar>
+    <!--</div>
+    </div>-->
+</ion-view>
+
+
+<script id="static/templates/popover.html" type="text/ng-template">
+    <ion-popover-view style="height: 250px">
+      <ion-content>
+        <div class="list">
+              
+          <a class="item popover-item"  ng-repeat="option in entityCodes"  ng-click="setEntityCode(option.code);popover.hide()">
+                {{option.value}}
+          </a>
+        
+        </div>
+      </ion-content>
+    </ion-popover-view>
+  </script>
+
+<!---->

@@ -1,0 +1,131 @@
+<ion-view cache-view="false" view-title="Setting">
+
+
+    <ion-header-bar class="bar bar-header  App-header">
+        <!-- <button ng-click="graphDetailsModal.hide()" class="button button-icon icon icon-left ion-ios-arrow-left back-btn">
+            
+        </button>
+        <div class="h1 title">Graph Details</div> -->
+        <!--<button class="button button-icon icon icon-right ion-ios-compose-outline" ng-disabled="true"></button>-->
+
+        <div class="bar bar-header  App-header">
+            <div class="row" style="padding:0px !important;">
+                <div class="col">
+                    <button class="button button-icon icon icon-left ion-ios-arrow-left back-btn" ng-click="backNavigate()"></button>
+                    <div class="h1 title" style="width: 40%;"></div>
+                </div>
+                <div class="col col-10" style="max-width: 40%;" ng-if="flagforVerticleTable != 1 && flagForTypeChange != 5">
+                    <button ng-model="tableView" ng-click="(tableView.clicked = !tableView.clicked);changeTableview(tableView.clicked)" ng-class="tableView.clicked ? 'button button-icon icon icon-right ion-arrow-right-b' : 'button button-icon icon icon-right ion-arrow-down-b'">    
+                    </button>
+                </div>
+                <div class="col col-50" ng-if="showTableFlag != 1">
+                    <select class="button graph-type-selection" ng-model="selectedValues" ng-change="openPageByType(selectedValues)">
+                        <option value="{{option.reportType}}" ng-repeat="option in ReportList" >{{option.reportType}}
+                        </option>
+                    </select>
+                </div>
+            </div>
+        </div>
+    </ion-header-bar>
+
+
+    <ion-content class="has-header" overflow-scroll="true">
+        <!-- <div class="Career-details" style="margin-top:2%; margin-left:2%; margin-right:2%; text-align:left" ng-if="flagForTypeChange==4">
+            <table class="table" style="border: 1px solid black;">
+                <thead ng-repeat="data in graphGabelDetail">
+                    <tr>
+                        <th class="borders" ng-repeat="data1 in data.series">{{data1}}</th>
+
+
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="data2 in detailLabelData track by $index">
+                        <td ng-repeat="data3 in data2 track by $index" class="borders">{{data3}}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div> -->
+
+        <div class="row Career-details1" style="white-space: nowrap;" ng-if="flagForTableView == 0 && flagForTypeChange == 4 && flagforVerticleTable != 1">
+            <div style="float:left;">
+                <table>
+                    <tr ng-repeat="item in tableheader" ng-if="$index < noOfColumns">
+                        <td style="color:white;background:#59be84">{{item}}</td>
+                    </tr>
+                </table>
+            </div>
+            <div style="overflow-x:scroll;float:right;">
+                <table>
+                    <tr ng-repeat="data2 in horizontalTableData track by $index" ng-if="$index < noOfColumns">
+                        <td ng-if="hashIndex[$parent.$index] !== 'NA'" ng-repeat="data3 in data2 track by $index" class="borders" ng-click="tableDesc($parent.$index, hashIndex[($parent.$parent.$index)], $event)"><a>{{data3}}</a></td>
+                        <td ng-if="hashIndex[$parent.$index] === 'NA'" ng-repeat="data3 in data2 track by $index" class="borders">{{data3}}</td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+        &nbsp;&nbsp;
+        <div class="Career-details" style="margin-top:2%; margin-left:2%; margin-right:2%; text-align:left" ng-if="flagForTableView == 1 && flagForTypeChange == 4 && flagforVerticleTable != 1">
+            <div class="responsive-table">
+                <table class="table" style="border: 1px solid black;">
+                    <thead ng-repeat="data in graphGabelDetail">
+                        <tr>
+                            <th class="borders" ng-repeat="data1 in data.series" ng-click="sortOrderby($index, data1)" ng-if="$index < noOfColumns">{{data1}}
+                                <span class=" icon ion-arrow-up-c " ng-show="currentFilter == data1 && reverse"> </span>
+                                <span class=" icon ion-arrow-down-c" ng-show="currentFilter == data1 && !reverse"> </span>
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr ng-repeat="data2 in detailLabelData track by $index">
+                            <td ng-repeat="data3 in data2 track by $index" class="borders" ng-if="$index < noOfColumns">
+                                <a ng-if="hashIndex[$index] != 'NA'" ng-click="tableDesc($parent.$parent.$parent.$index, hashIndex[$index], $event)">{{data3}}</a>
+                                <p ng-if="hashIndex[$index] == 'NA'">{{data3}}</p>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <div class="Career-details" style="margin-top:2%; margin-left:2%; margin-right:2%; text-align:left" ng-if="flagForTypeChange == 4 && flagforVerticleTable == 1">
+            <table class="Eventable">
+                <tr ng-repeat="x in tableValue">
+                    <td><b>{{ x.series}}</b></td>
+                    <td>{{ x.value}}</td>
+                </tr>
+            </table>
+        </div>
+
+
+        <div class="Career-details" style="margin-top:2%; margin-left:2%; margin-right:2%; text-align:left" ng-if="flagForTypeChange == 5">
+
+
+            <h2 class="report-type-heading"> {{reportingType}}</h2>
+
+            <div class="col col-50">
+                <select class="button graph-type-selection" ng-model="selectedChart" ng-change="changeGraph(selectedChart)">
+                    <option value="{{option.graphType}}" ng-repeat="option in graphTypeList" >{{option.graphType}}
+                    </option>
+                </select>
+            </div>
+
+            <div class="Game-Sent-Notifiaction graph-container" ng-if="flagForPageChange == 1">
+                <canvas id="bar" class="chart chart-bar" chart-data="data" chart-labels="labels" auto-legend on-double-tap="chartClick($event)" chart-colors="colors" chart-series="series" chart="chart">
+                </canvas>
+
+            </div>
+            <div class="Game-Sent-Notifiaction graph-container" ng-if="flagForPageChange == 2">
+                <canvas id="pie" class="chart chart-pie" chart-data="aggregateData" on-double-tap="chartClick($event)" chart-labels="labels" chart-options="options" chart-colors="colors">
+                </canvas>
+
+            </div>
+            <div class="Game-Sent-Notifiaction graph-container" ng-if="flagForPageChange == 3">
+                <canvas id="line" class="chart chart-line" on-double-tap="chartClick($event)" chart-data="data" chart-colors="colors" chart-labels="labels" chart-series="series" chart-options="optionForLine" chart-dataset-override="datasetOverride">
+                </canvas>
+            </div>
+        </div>
+
+
+    </ion-content>
+</ion-view>

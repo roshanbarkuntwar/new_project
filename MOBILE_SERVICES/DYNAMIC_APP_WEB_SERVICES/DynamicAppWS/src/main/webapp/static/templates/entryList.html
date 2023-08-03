@@ -1,0 +1,160 @@
+<ion-view cache-view="false" view-title="Entry List">
+
+    <ion-header-bar class="bar bar-header  App-header">
+        <button class="button button-icon icon icon-left ion-ios-arrow-left back-btn" ng-click="backNavigate()"></button>
+        <div class="h1 title">Entry List</div>
+        <button class="button button-icon icon icon-right ion-funnel button-small icon-top-right" ng-show="firstScreen=='M'" ng-click="filterFlag==true?filterFlag=false : filterFlag=true;searchFlag=false"
+            style="margin-left: 65%"></button>
+        <button class="button button-icon icon icon-right ion-ios-search-strong icon-top-right" ng-show="firstScreen=='M'" ng-click="searchFlag==true?searchFlag=false : searchFlag=true;filterFlag=false"></button>
+        <!--ion-funnel-->
+    </ion-header-bar>
+
+    <div class="bar bar-subheader Project-subheader" ng-show="searchFlag">
+        <div class="row">
+            <div class="col">
+                <div class="list">
+                    <div class="item item-input-inset">
+                        <label class="item-input-wrapper">
+                            <input type="text" placeholder="Search..." ng-model="searchEntity.search">
+                        </label>
+                        <button class="button button-small" ng-click="searchEntry(searchEntity.search)">
+                            <i class="icon ion-search"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <div class="col col-10">
+                <a class="button button-icon icon ion-close-round lov-close" ng-click="loadEntry();searchEntity.search='';searchFlag=false"></a>
+            </div>
+        </div>
+    </div>
+    <div class="bar bar-subheader Project-subheader" ng-show="filterFlag">
+        <div class="row">
+            <div class="col">
+                <div class="list">
+                    <div class="item item-input-inset">
+                        <div class="row">
+                            <div class="col col-45">
+                                <div class="item item-icon-left" ion-datetime-picker date ng-model="filter.from_date">
+                                    <i class="icon ion-ios-calendar positive">
+                                        &nbsp;&nbsp;<p>{{filter.from_date| date: "dd-MM-yyyy"}}</p>
+                                    <p ng-show="!filter.from_date">From Date<p></i>
+                                </div>
+                            </div>
+                            <div class="col col-45">
+                                <div class="item item-icon-left" ion-datetime-picker date ng-model="filter.to_date">
+                                    <i class="icon ion-ios-calendar positive">
+                                        &nbsp;&nbsp;<p>{{filter.to_date| date: "dd-MM-yyyy"}}</p>
+                                    <p ng-show="!filter.to_date">To Date<p></i>
+                                </div>
+                            </div>
+                            <div class="col col-10">
+                                <button class="button button-small" ng-click="filterEntry(filter.from_date,filter.to_date)">
+                            <i class="icon ion-search"></i>
+                        </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col col-10">
+                <a class="button button-icon icon ion-close-round lov-close" ng-click="loadEntry();filter.to_date='';filter.from_date='';filterFlag=false;"></a>
+            </div>
+        </div>
+    </div>
+    <!-- on-swipe-right="backNavigate()" -->
+    <ion-content class="promo_code_container" ng-class="searchFlag || filterFlag ? 'has-subheader' : 'has-header'" >
+        <p>
+            <ion-spinner icon="ios" class="dash-spin " ng-hide="listOfEntries"> </ion-spinner>
+        </p>
+
+        <div class="entry-list-wrapper" ng-repeat="items in listOfEntries">
+            <div class=" list card add-entry-container">
+                <div class="row" ng-repeat="item in items" ng-click="getEntryDetails(items)" ng-if="item.displayFlag =='TRUE'">
+                    <!--<img ng-if="item.column_type=='IMG' && item.img !=''" ng-src="data:image/jpeg;base64,{{item.img}}">-->
+                    <!--<h5 ng-if="item.column_desc !='SEQ_ID' && item.column_desc !='Upload File' && item.column_desc !='Upload Reading'">-->
+
+                    <div class="col col-40">
+                        <h5>
+                            <b>{{item.column_desc}}</b> 
+                        </h5>
+                    </div>
+                    <div class="col col-60">
+                        <h5>:
+                            <span>
+                        {{ item.value }}
+                        </span>
+                        </h5>
+                    </div>
+
+                    <!--<h5 ng-if="item.displayFlag =='TRUE'">
+                        <b>{{item.column_desc}}</b> :
+                        <span>
+                        {{ item.value}}
+                        </span>
+                    </h5>-->
+                </div>
+                <!--
+                <div class="row">
+                <div class="col">
+-->
+                <div class="item tabs tabs-secondary tabs-icon-left entry-list-tab" style="height: 37px;">
+
+                    <button ng-if="flagForApproveButton=='A#'" class="button icon  button-stable">
+                        <i class="icon ion-checkmark-round"></i>
+                        Approve
+                    </button>
+
+                    <button ng-if="flagForUploadButton=='UP#'" class="button icon button-clear" ng-click="uploadEntry(items,index);" style="">
+                         <i class="icon ion-ios-upload" ></i>
+                        Upload
+                    </button>
+
+                    <button ng-if="flagForUploadAllButton=='UPA#'" class="button icon button-clear " ng-click="uploadAllEntry();" style="">
+                         <i class="icon ion-ios-upload" style="color:#387ef5" ></i>
+                        Upload All
+                    </button>
+
+                    <button class="button icon  button-clear" ng-if="flagForUpdateButton=='U#'" style="" ng-click="openUpdateEntry(items,index)">
+                        <i class=" icon ion-ios-compose "></i>
+                        Update
+                    </button>
+
+                    <button class="button icon button-clear " style="" ng-if="flagForDeleteButton=='D#'" ng-click="deleteEntry(items,index); ">
+                <i class="icon ion-android-close "></i> Delete
+            </button>
+
+                    <!--<button class="button icon ion-android-more-vertical button-clear " style="float: left !important;
+                        margin-top: -5px; margin-left: auto; " ng-click="openPopover($event,items,$index) " ng-disabled="flagForUpdateButton==''
+                        && flagForApproveButton=='' && flagForDeleteButton=='' "></button>-->
+                </div>
+                <!--
+                </div>
+                </div>    
+-->
+            </div>
+        </div>
+
+        <!--Code change on 20160923 due to web service changed to dynamic-->
+        <!--<div>
+            <div class="list refered-user-list ">
+                <div ng-repeat="item in listOfEntries " ng-click="getEntryDetails(item.seqId,item.fileId); ">
+                    <a href=" " class="item item-thumbnail-left entry-List-main ">
+
+                        <img ng-src="data:image/JPEG;base64,{{item.dp}} " class="entry-List-thumb ">
+                        <h2>{{ item.dateTime }}</h2>
+                        <h4>Project Code: {{ item.projectCode }}</h4>
+                    </a>
+                     <a href=" " class="item item-thumbnail-left entry-List-main ">
+
+                        <img ng-src="img/profile.png " class="entry-List-thumb ">
+                        <h2>{{ item.transId }}Sneha</h2>
+                        <h4>Transaction Id: {{ item.dateTime }} ggfdgfg</h4>
+                    </a> 
+
+                </div>
+            </div>
+        </div>-->
+    </ion-content>
+
+</ion-view>

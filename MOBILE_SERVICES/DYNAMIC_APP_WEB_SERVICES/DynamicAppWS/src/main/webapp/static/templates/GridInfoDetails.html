@@ -1,0 +1,47 @@
+<ion-view>
+    <ion-header-bar class="bar bar-header  App-header">
+        <button class="button button-icon icon icon-left ion-ios-arrow-left back-btn" ng-click="gridDetailsModal.hide()"></button>
+        <div class="h1 title">{{table_desc}}</div>
+        <!-- <button ng-if="flagForEntryListButton=='V#'" class="button button-icon icon icon-right ion-ios-paper-outline" ng-click="entryList()"></button> -->
+        <!--<button class="button button-icon icon icon-right ion-ios-compose-outline"></button>-->
+    </ion-header-bar>
+    <!-- <ion-content class="has-header" on-swipe-right="backNavigate()"> -->
+    <ion-content class="has-header">
+
+        <p>
+            <ion-spinner icon="ios" class="dash-spin " ng-hide="fields"> </ion-spinner>
+        </p>
+        <div class="list-view">
+            <div class="list">
+                <div>
+                    <span class="input-label add-new-entry-label">
+                        <b>{{gridDetails.column_desc}}</b>
+                    </span>
+                    <div class="row responsive-table Career-details" >
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <!--<th></th>-->
+                                    <th class="borders" ng-repeat="data in gridDetails.dropdownVal.headers">{{data}}</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr ng-repeat="row in gridDetails.dropdownVal.rows track by $index">
+                                    <!--<td class="borders">
+                                                    <ion-radio ng-model="$parent.item.value" ng-value="$index"></ion-radio>
+                                                </td>-->
+                                    <td ng-repeat="data in row track by $index" class="borders">{{data}}
+                                    </td>
+                                    <!--<td class="borders">
+                                                    <ion-radio ng-model="row.index" ng-value="'$index'"></ion-radio>
+                                                </td>-->
+                                </tr>
+                            </tbody>
+                        </table>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </ion-content>
