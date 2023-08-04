@@ -1,0 +1,116 @@
+.table-kpi
+{
+    margin: 10px 0px;
+   caption
+   {
+      padding:4px;
+   
+       font-weight: 500;
+   }
+    td {
+  
+    border-width: 1px;
+}
+th
+{
+  text-align: left !important;
+  border-width: 1px;
+}
+
+}
+.table-kpi.blue
+{
+   caption
+   {
+    background: #6fabf1;
+    color: #222325 !important;
+   }
+    thead {
+        background: #b9d6f7 !important;
+    th
+    {
+        color: #222325 !important;
+    }
+}
+ tbody tr {
+    background: #e4eef9 !important;
+}
+}
+.table-kpi.yellow
+{
+   caption
+   {
+    background: #e0902b;
+    color: #1b1a18 !important;
+   }
+    thead {
+        background: #f7d5aa !important;
+    th
+    {
+        color: #33302b !important;
+    }
+}
+ tbody tr {
+    background: #fbedde !important;
+}
+}
+.table-kpi.green
+{
+   caption
+   {
+    background: #4CAF50;
+    color: #191f19 !important;
+   }
+    thead {
+        background: #bbeabd !important;
+    th
+    {
+        color: #282d28 !important;
+    }
+}
+ tbody tr {
+    background: #e2f1e3 !important;
+}
+}
+.table-kpi.grey
+{
+   caption
+   {
+    background: #a4a8a9;
+    color: #242525 !important;
+   }
+    thead {
+        background: #bdc2c3 !important;
+    th
+    {
+        color: #232425 !important;
+    }
+}
+ tbody tr {
+    background: #e4e9ea !important;
+}
+}
+.table-kpi.dark
+{
+   caption
+   {
+    background: #282d2f;
+    color: #666666 !important;
+
+   }
+    thead {
+        background: #282d2f !important;
+    th
+    {
+        color: #666666 !important;
+    }
+}
+ tbody tr {
+    background: #1e2023  !important;
+}
+}
+.code-btn{
+    font-size: 25px;
+    vertical-align: middle;
+    cursor: pointer;
+}

@@ -1,0 +1,32 @@
+<div style="margin-top: 10px;">
+  <div class="collapse-list-container" >
+    <ion-item class="collapse-list" (click)="toggle()">
+      {{frame.apps_page_frame_name}} <span style="margin-left: 10px;" (click)="toggle()" *ngIf="globalObjects.toggleDevloperMode">[{{frame.apps_page_frame_seqid}}]<ion-icon class="code-btn"  color="primary" name="information-circle-outline" *ngIf="developerModeData" (click)="showDeveloperData()"></ion-icon></span>
+      <!-- <ion-icon  ios="ios-add-circle" md="add-circle-outline" slot="end" (click)="toggle()"></ion-icon> -->
+      <ion-icon  name="{{buttonName}}" slot="end" ></ion-icon>
+      
+    </ion-item>
+    <div class="collapse-list-body" *ngIf="show">
+      <div class="collapse-list-body__item"  *ngFor="let rows of frame.tableRows;let rowindex=index">
+      <ion-row  *ngFor="let itemGroup of rows">
+        <ion-col *ngFor="let input_item of itemGroup.Level5;" [hidden]="input_item.item_visible_flag=='F'">
+          <app-items [item]="input_item" [wscp]="wscp" (emitPass)="itemClicked($event,rowindex)"></app-items>
+        </ion-col>
+      </ion-row>
+    </div>
+    </div>
+  </div>
+  </div>
+  <!-- class="collapse-list-container"
+    class="collapse-list"
+  class="collapse-list-body"
+  class="filter-collapse-text" -->
+  
+  
+  <!-- this.frame.tableRows  -->
+  
+  <div class="center" *ngIf="loading">
+    <div class="text-center">
+      <img src="../../../../assets/dot.gif" width="20%">
+    </div>
+  </div>

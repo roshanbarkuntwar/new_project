@@ -1,0 +1,1948 @@
+@import '../app/mixins';
+@import '../app/variables';
+
+.theme-grey {
+    $primary: linear-gradient(to bottom, #e2e2e2, #e2e2e2, #c5c5c5);
+    $primary-light: #b9b9b9;
+    $secondary: #4e4e4e;
+    $primary-dark: #077172;
+    $primary-light-1: #edeff1;
+    $primary-light-2: #d2d2d2;
+    $primary-light-5: #dbf8f8;
+    $primary-light-6: #f5faff;
+    $dark: #224254;
+    $text-dark: #272727;
+    $form-label: #7f7f7f;
+    $text-light-1: #373737;
+    $primary-bg-light: rgba(73, 144, 226, 0.19);
+    $grey: #a4a6a8;
+    $grey-4: #d6dde5;
+    $grey-5: #eff1f3;
+    $dark-grey: #6a7077;
+    $dark-grey-1: #35383c;
+    $dark-grey-2: #505f6e;
+    $primary-btn-shadow: 0px 3px 6px 2px rgba(0, 175, 173, 0.39);
+    $global-box-shadow: -2px 3px 11px 2px rgba(152, 162, 174, 0.44);
+    $light-grey: #dddddd;
+    $label-text: #595d61;
+    $grey-shadow: 0px 3px 10px rgba(152, 162, 174, 0.68);
+    $company-logo-shadow: 1px 2px 10px rgba(8, 31, 56, 0.39);
+    $light-blue: rgb(180, 209, 243);
+    $global-shadow2: 0px 5px 11px rgba(221, 221, 221, 0.66), 1px 1px 11px rgba(221, 221, 221, 0.66);
+    $light-primary-shadow: 2px 7px 10px rgba(62, 143, 143, 0.33);
+    $dark-blue-shadow: 1px 8px 10px rgba(103, 183, 182, 0.48);
+    $light-blue-bg: rgba(0, 175, 173, 0.19);
+    $secondary-text: #423f3f;
+    /* Global CSS Start*/
+    text{
+        fill: #000 !important;
+    }
+    .globe-btn1{
+        background: $secondary;
+    }
+    p {
+        color: $text-dark;
+    }
+    .text-primary{
+        color: $secondary !important;
+    }
+    ion-toolbar.ion-color-primary {
+        --ion-color-primary: linear-gradient(to bottom, #e2e2e2, #e2e2e2, #c5c5c5);
+        --ion-color-base:  linear-gradient(to top, #7f7f7f, #373737) !important;
+    }
+    
+  
+
+    ion-toolbar {
+        ion-icon.ion-color-light {
+            --ion-color-base: #4e4e4e !important;
+
+        }
+    }
+
+    /*Image Capture Section*/
+    .img-capture-sec {
+
+        background: linear-gradient(180deg, #3F51B5 50%, #1d2a75 10%);
+
+        button:active::after {
+            border: 1px dashed $primary;
+
+        }
+    }
+
+    /*Image Capture Section*/
+
+    /*Conditional Ion Input*/
+    .form-label {
+        color: $form-label !important;
+    }
+
+    .input-btn:active {
+        color: $primary !important;
+    }
+
+    ion-button:hover{
+        --ion-color-primary: #4c8dff !important;
+    }
+    .ion-input-item,
+    .ion-input-select-item {
+        .input-btn {
+            color: #757b82;
+        }
+
+        ion-label {
+            color: $form-label;
+
+        }
+
+        ion-input {
+            color: $text-light-1;
+        }
+
+        input,
+        textarea,
+        ion-select {
+            color: #2b2d2f;
+            font-weight: 400;
+
+        }
+    }
+
+    .ion-input-select-item,
+    .ion-input-textarea-item {
+        .input-btn {
+            color: #757b82;
+        }
+
+        ion-label {
+            color: $form-label;
+
+        }
+
+        ion-input {
+            color: $text-light-1;
+        }
+
+        input,
+        textarea,
+        ion-select,
+        ion-textarea {
+            color: #2b2d2f;
+            font-weight: 400;
+
+        }
+    }
+
+    /*Conditional Ion Input*/
+
+    /* Css for New Fixed-Input format  */
+    .filter-date-sec {
+
+        border-top: 2px solid $primary;
+
+        ion-icon.heading-icon {
+
+            background: $secondary;
+            color: #fff;
+
+        }
+    }
+
+    .fix-input {
+
+        border-bottom: 1px solid #bcbcbc !important;
+        color: #272727;
+        background: #fff;
+
+    }
+
+    .fix-label {
+        background: rgba(187, 192, 199, 0.3215686274509804);
+        color: #82888e !important;
+
+    }
+
+    .fix-textarea {
+        background: #fff;
+        border-bottom: 1px solid #bcbcbc !important;
+    }
+
+    .fix-lov-btn {
+
+        color: #757b82;
+        border-bottom: 1px solid #bcbcbc !important;
+    }
+
+    /* Css for New Fixed-Input format  */
+
+    /* Css for Border-bottom Input format  */
+    .border-bottom-input {
+
+        border-bottom: 1px solid #bcbcbc;
+
+
+    }
+
+    .border-bottom-lov-btn {
+
+        color: #757b82;
+        border-bottom: 1px solid #bcbcbc !important;
+    }
+
+    /* Css for Border-bottom Input format  */
+
+    .floating-lov-btn {
+
+        color: #a2a9b1;
+    }
+
+    .input-text,
+    .input-textarea,
+    .input-number,
+    .browser-date-input {
+        color: $text-light-1;
+    }
+
+    .input-text input:focus,
+    .input-textarea textarea:focus,
+    .select-container ion-select:focus,
+    .browser-date-input:focus {
+        border-bottom: 1px solid $primary;
+
+    }
+
+    .border-bottom-input input:focus,
+    .border-bottom-input textarea:focus,
+    .border-bottom-input ion-select:focus {
+        border-bottom: 2px solid $primary;
+    }
+
+    .global-btn {
+        color: $text-dark;
+        text-transform: inherit;
+        width: 75%;
+    }
+
+    .browser-date-input {
+        border: 1px solid #bcbcbc;
+    }
+
+    .lov-btn {
+        background: #ffffff;
+        color: $grey;
+        border: 1px solid #bcbcbc;
+
+        &:active {
+            color: $primary;
+        }
+    }
+
+    label,
+    ion-label {
+        color: $label-text;
+    }
+
+    .border-bottom-input {
+        color: $text-light-1;
+        font-weight: 600;
+    }
+
+    .floating-ion-item-100,
+    .floating-ion-item {
+        ion-label {
+            color: $text-dark;
+        }
+
+        ion-input {
+            color: $text-light-1;
+            font-weight: 600;
+        }
+    }
+
+    table {
+        thead {
+            background: $secondary;
+
+            th {
+                background: $secondary;
+                color: #fff;
+                border: 1px solid #fff;
+            }
+        }
+
+        td {
+            border: 1px solid #d1d1d1;
+        }
+
+        tbody tr:nth-child(even) {
+            background: #ededed;
+        }
+
+        label,
+        ion-label {
+            color: #323741;
+            letter-spacing: 0;
+        }
+
+    }
+
+    .table-fix-footer {
+        tfoot {
+            background: #dbdbdb;
+
+            td {
+                color: #000000;
+                border: 1px solid #4e4e4e;
+            }
+        }
+
+        tfoot.second-total {
+            background: #bfbfbf
+        }
+    }
+
+    .pagination-container {
+        .paginator {
+            border: 1px solid $grey;
+            box-shadow: $global-shadow2;
+
+            li {
+                border-right: 1px solid $grey;
+            }
+
+            .paginator-btn {
+                background: $grey;
+                color: #fff;
+
+                &:active {
+                    background: $primary;
+                }
+            }
+        }
+    }
+
+    .frame-name{
+        color: $text-dark;
+        background: $grey-5;
+
+        &::before {
+            background: $secondary;
+        }
+    }
+
+    .item-seperator{
+        color: $text-dark;
+        background: $grey-5;
+
+        &::before {
+            background: $secondary;
+        }
+        &::after {
+            background: $secondary;
+        }
+    }
+    .app-sidebar {
+        ion-header:after {
+            background-image: none;
+        }
+
+        ion-toolbar {
+            --background: url(../assets/imgs/grey-theme/sidebar-curve-grey.jpg);
+
+            ion-title,
+            ion-icon {
+                color: $secondary;
+            }
+        }
+
+        .company-logo {
+            box-shadow: $company-logo-shadow;
+        }
+
+        ion-item {
+            ion-avatar {
+                background: #fff;
+
+            }
+
+            ion-label {
+                color: $secondary-text;
+            }
+        }
+
+        ion-footer {
+            ion-title {
+                background: $light-grey;
+            }
+        }
+    }
+
+    /* Global CSS End*/
+
+    /* Login page CSS Start*/
+    .page-login {
+        .login-outer {
+            background: url(../assets/imgs/grey-theme/GreyAppThemeLogin.jpg) !important;
+
+            .login {
+                color: #ccc;
+            }
+        }
+
+        ion-list {
+            background: transparent;
+
+            ion-item {
+                --background: transparent;
+            }
+        }
+
+        ion-icon {
+            color: $grey;
+        }
+
+        ion-input {
+            color: $text-dark;
+        }
+
+        .login-btn-wrap {
+            box-shadow: 0px 3px 6px 2px rgba(115, 115, 115, 0.39);
+            background: $secondary;
+
+            ion-button.ion-color-primary {
+                --ion-color-primary: #4e4e4e !important;
+            }
+        }
+
+        .setting-icon {
+            background: $secondary;
+            color: #fff;
+        }
+
+        .forgot-link {
+            a {
+                color: $grey;
+            }
+        }
+    }
+
+    /* Login page CSS End*/
+
+    /* Appkey collection page CSS Start*/
+    .page-appkey-collection {
+        .client-wraper {
+            border: 1px solid $secondary;
+
+            .cancle-wrap {
+                background: $secondary;
+                border: 1px solid $secondary;
+                color: #fff;
+            }
+        }
+
+        h3 {
+            background: $secondary;
+            color: #fff;
+        }
+    }
+
+    /* Appkey collection page CSS End*/
+
+    /* Appkey validation page CSS Start*/
+    .app-key-container {
+        .upper-container {
+            background: $primary;
+        }
+
+        .key-container {
+            box-shadow: 0px 1px 4px 1px $grey;
+            background: #fff;
+        }
+
+        ion-button {
+            box-shadow: 0px 3px 6px 2px rgb(199, 199, 199);
+
+        }
+
+        .appkey-logo {
+            background: #fff;
+        }
+
+        .button-native {
+            --background: none;
+        }
+
+        ion-input {
+            border-bottom: 1px solid $grey;
+            color: $text-dark;
+        }
+
+        .text-orange {
+            color: $grey;
+        }
+    }
+
+    .item-md,
+    .item-ios {
+        background: transparent;
+    }
+
+    /* Appkey validation page CSS End*/
+
+    /* Change server setting page CSS Start*/
+    .change-setting-body {
+        .change-setting-container {
+            .key-container {
+                box-shadow: $global-box-shadow;
+                background: #fff;
+
+                h4 {
+                    color: $dark-grey;
+                }
+
+                .card-container {
+                    box-shadow: $global-box-shadow;
+                    background: #fff;
+
+                    .key-card {
+                        .icon-in {
+                            background: $secondary;
+
+                            .icon-white {
+                                color: #fff;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        ion-input {
+            border-bottom: 1px solid $grey;
+            color: $text-dark;
+        }
+
+        ion-icon {
+            color: $grey;
+        }
+
+        .header-secondary {
+            color: #fff;
+        }
+    }
+
+    /* Change server setting page CSS End*/
+
+    /* Frame img slider component CSS Start*/
+    .image-slider {
+        --bullet-background: #000;
+        --bullet-background-active: #4e4e4e;
+
+        .img-caption {
+            background: $primary;
+            border: 1px solid $grey-4;
+        }
+
+        .heading {
+            color: $secondary;
+        }
+
+    }
+
+    /* Frame img slider component CSS End*/
+
+    /* News Scoll component CSS Start*/
+    .marquee-container {
+        box-shadow: $global-shadow2;
+
+        .item {
+            --border-color: transparent;
+        }
+
+        ion-icon {
+            color: $secondary;
+            background: $primary;
+        }
+    }
+
+    /* News Scoll component  CSS End*/
+
+    /* Menu List component  CSS Start*/
+    .menu-list {
+        box-shadow:  0 3px 1px -2px rgb(221 221 221 / 66%), 0 2px 0px 0 rgb(221 221 221 / 66%), 1px 1px 4px 0 rgb(221 221 221 / 66%);
+
+        ion-item {
+            --border-color: transparent;
+        }
+
+        ion-icon {
+            color: $grey;
+        }
+
+        .thumbnail-container {
+            background: $primary-light;
+        }
+
+        ion-thumbnail {
+            background: #fff;
+            border: 1px solid #fff;
+            box-shadow: 2px 7px 10px rgba(92, 92, 92, 0.33);
+        }
+
+        h2 {
+            color: $secondary-text;
+        }
+
+        .next-arrow {
+            color: #FFF;
+        }
+
+        &::before {
+
+            background: $primary;
+
+        }
+    }
+
+    /* Menu List  component  CSS End*/
+
+    /* Menu Tab component  CSS start*/
+    .tab-menu {
+        box-shadow: $global-shadow2;
+
+        &::after {
+
+            background: $primary;
+
+        }
+
+        .img-container {
+            &::before {
+                background-image: radial-gradient($primary-light 15%, rgba(16, 16, 16, 0) 16%), radial-gradient(rgba(243, 243, 245, 0) 15%, rgba(0, 0, 0, 0) 16%);
+            }
+
+            .img-circle {
+                box-shadow: 1px 8px 10px rgba(158, 158, 158, 0.48);
+
+                &::after {
+                    background-image: radial-gradient($primary-light 15%, rgba(16, 16, 16, 0) 16%), radial-gradient(rgba(243, 243, 245, 0) 15%, rgba(0, 0, 0, 0) 16%);
+                }
+            }
+        }
+
+        .name-container {
+            h6 {
+                color: $secondary-text;
+            }
+        }
+    }
+
+    /* Menu Tab component  CSS End*/
+
+    /*Count list Css Start */
+    .count-list {
+        .approval-body {
+            ion-item {
+                --background: var(--ion-item-background, var(--ion-background-color, #fff));
+                color: $text-light-1;
+                box-shadow: $global-box-shadow;
+                font-weight: 600;
+
+                &::before {
+                    background: rgba(244, 245, 248, 0.15);
+                }
+
+                .count {
+                    background: $secondary;
+
+                    p {
+                        color: #fff !important;
+                    }
+
+                    &::before {
+                        background: rgba(244, 245, 248, 0.18);
+                    }
+                }
+            }
+        }
+    }
+
+    /*Count list Css Start */
+
+    /*Collapse List /rep-card Css start*/
+    .collapse-list {
+        box-shadow: $global-box-shadow;
+        color: $text-dark;
+
+        ion-label {
+            color: $text-dark;
+        }
+
+        ion-icon {
+            color: $primary;
+        }
+
+        &::before {
+            background: $secondary !important;
+        }
+
+        ion-icon {
+            color: $secondary !important;
+        }
+
+        .message-text {
+            color: #8e8e8e;
+        }
+    }
+
+    .rep-card-list {
+
+        box-shadow: $global-shadow2 !important;
+
+        ion-icon {
+
+            background: $secondary;
+            color: #fff !important;
+
+        }
+
+    }
+
+    .collapse-list-body {
+        box-shadow: $global-box-shadow;
+
+
+    }
+
+    .collapse-list-container {
+        .img-sec {
+            background: $primary;
+
+        }
+    }
+
+    /*Collapse List /rep-card Css  End*/
+
+    /*Filters Start*/
+    .filters {
+        box-shadow: $global-shadow2;
+        border-right: 2px solid $primary;
+
+        h6 {
+            color: $text-dark;
+        }
+
+        .filter-icon-container {
+            ion-icon {
+                color: $primary;
+            }
+
+            &::before {
+                background: $light-blue-bg;
+            }
+
+            &::after {
+                background: $light-blue-bg;
+            }
+        }
+    }
+
+    /*Filters End*/
+
+    /*Tab Entry /multi-level-tab page Start*/
+    .tab-container {
+        border-bottom: 2px solid $secondary;
+
+        ion-segment-button {
+            border-bottom: 2px solid $secondary;
+        }
+
+        .segment-button-checked {
+            color: $secondary;
+            background: #dadada;
+            border-top: 3px solid $secondary !important;
+            border-right: 2px solid $secondary !important;
+            border-left: 2px solid $secondary !important;
+
+            &::after {
+
+                background: $primary-light-5;
+            }
+        }
+    }
+
+    .card-container {
+        ion-item {
+            border-right: 4px solid $secondary;
+
+            .label {
+                color: $text-dark;
+            }
+        }
+    }
+
+    .multilevel-tab-card {
+        ion-card {
+            box-shadow: none;
+            border: 1px solid #dedede;
+            border-right: none;
+        }
+
+        .label-name {
+            color: #3d4043;
+        }
+
+        .label-value {
+            color: $text-light-1;
+        }
+    }
+
+    /*Tab Entry /multi-level-tab page End*/
+
+    /*Frame-card component Start*/
+    .super-card {
+        box-shadow: $global-box-shadow;
+        background: $light-blue-bg;
+
+        .button-sec {
+            background: $grey-shadow;
+
+            .button[icon-only] {
+                color: #7c7f7f;
+            }
+        }
+
+        .sr-no {
+            background: #898989;
+            color: #fff;
+            box-shadow: 5px 2px 10px #1e1e1e, inset -2px -1px 4px #515151;
+        }
+
+        .super-card-inner {
+
+            border-bottom: 1px solid #949494;
+
+            &::before {
+                background: #848484;
+                box-shadow: 2px 7px 10px rgb(198, 198, 198);
+            }
+
+            &::after {
+                background: $primary-light;
+            }
+
+            .label {
+                color: $text-dark;
+            }
+
+            h5 {
+                color: $text-dark;
+            }
+
+            .text-yellow {
+                color: #ea8e07;
+            }
+
+            .text-blue {
+                color: $primary;
+            }
+
+            .subheading {
+                color: #b62731;
+            }
+
+            .card-title p {
+                color: $primary;
+            }
+        }
+
+        .card-fab-btn-container {
+
+
+            ion-fab-button {
+                margin-left: 0px;
+
+                --background: #fff;
+                --color: #00afad;
+
+            }
+
+            ion-fab-list {
+
+                ion-fab-button {
+
+                    box-shadow: 1px 5px 10px rgba(152, 162, 174, 0.6);
+
+
+                }
+            }
+        }
+    }
+
+    /*Frame-card component  End*/
+
+    /*File Tree css Start*/
+    .file-ul {
+        ion-icon {
+            color: $primary;
+        }
+
+        span {
+            color: $secondary-text;
+
+        }
+    }
+
+    .tree-outer {
+        border: 1px solid #e6e6e6;
+    }
+
+    .children-list {
+        border-left: 1px solid $primary;
+
+        &::before {
+            border-bottom: 1px solid $primary;
+        }
+    }
+
+    .trees-items {
+        &:hover {
+            .ico {
+                color: $primary;
+            }
+        }
+
+    }
+
+    .file-ico {
+        .ico {
+            color: $grey;
+        }
+    }
+
+    /*File Tree css End*/
+
+    /*Text-Band Style 2*/
+
+    .text-band-positive {
+
+        background: #f0faf9;
+        border: 1px solid #c2ede9;
+
+        h2 {
+            color: #0f3131;
+
+            ion-icon {
+                color: $primary;
+            }
+
+        }
+
+        h5 {
+            color: #596362;
+
+        }
+
+        .text-band2-image {
+            background: url(../assets/imgs/green-theme/increasing-kpi-green.png);
+        }
+
+
+    }
+
+    .text-band-negative {
+        background: #fcf2f3;
+        border: 1px solid #ffdbdc;
+
+        h2 {
+            color: #3a1011;
+
+            ion-icon {
+                color: #d3262a;
+            }
+
+        }
+
+        h5 {
+            color: #8e7677;
+        }
+
+        .text-band2-image {
+            background: url(../assets/imgs/decreasing-KPI.png);
+        }
+
+
+    }
+
+    /*Text-Band Style 2*/
+
+    /*Text-Band Style 3*/
+    .text-band3-positive {
+        background: url(../assets/imgs/green-theme/text-band-3-positive-graph-green.png) bottom no-repeat;
+
+        h2 {
+            color: #0f3131;
+
+            ion-icon {
+                color: $primary;
+            }
+        }
+
+        h5 {
+            color: #596362;
+        }
+    }
+
+    .text-band3-negative {
+        background: url(../assets/imgs/text-band-3-negative-graph.png) bottom no-repeat;
+
+        h2 {
+            color: #3a1011;
+
+            ion-icon {
+                color: #d3262a;
+            }
+        }
+
+        h5 {
+            color: #8e7677;
+        }
+    }
+
+    /*Text-Band Style 3*/
+
+    /*Text-Band Style 4*/
+    ion-row ion-col:nth-child(4n+1) .text-band4 {
+        background: #4990e2;
+    }
+
+    ion-row ion-col:nth-child(4n+2) .text-band4 {
+        background: #959da5;
+    }
+
+    ion-row ion-col:nth-child(4n+3) .text-band4 {
+        background: #e3982b;
+    }
+
+    ion-row ion-col:nth-child(4n+4) .text-band4 {
+        background: #4CAF50;
+    }
+
+    /*Text-Band Style 4*/
+    /*Add To Cart Start*/
+
+    .add-to-cart {
+
+        .border-bottom-lov-btn {
+
+            background: #edeff1;
+
+        }
+
+
+        .qty-description {
+
+
+            h5 {
+                color: $primary;
+
+            }
+
+        }
+
+        .total-qty {
+
+            background: $primary;
+            color: #000 !important;
+
+            &::after {
+
+                color: #000;
+            }
+        }
+
+        .add-to-cart-btn {
+
+            background: $grey;
+
+            color: #fff;
+
+        }
+
+        .min-qty-count {
+            background: $primary-light-1;
+            color: $secondary;
+            border: 1px solid $primary-light-2;
+        }
+        .rupees-icon
+  {
+      background:$secondary;
+  }
+  h5
+  {
+      color: $secondary;
+  }
+  .add-btn-section
+  {
+     
+      .input-group
+      {
+          border: 2px solid $secondary;
+         
+          ion-input
+          {
+            
+            color: $secondary;
+             
+             
+          }
+        
+          .border-bottom-lov-btn {
+            color: $secondary;
+              
+          }
+      }
+      
+  }
+  .bag-section
+      {
+          color: $secondary;
+      }
+    }
+
+    /*Add To Cart End*/
+
+    /*Cart Summary Start*/
+    .cart-summary {
+        h1 {
+
+            color: #373a3d;
+
+        }
+
+        .cart-summary-icon {
+            background: $secondary;
+
+            &::after {
+
+                background: rgba(209, 209, 209, 0.63);
+
+            }
+        }
+    }
+
+    /*Cart Summary End*/
+
+    /*Voice Search Start*/
+    .voice-search-container {
+
+
+        .voice-search-icon {
+
+
+            background: $primary;
+
+        }
+
+        .voice-search-text {
+
+            color: $secondary-text;
+        }
+    }
+
+    /*Voice Search End*/
+
+    /*Entry Table Start*/
+    .entry-table {
+        tfoot {
+            background: $primary-light-5;
+
+            th {
+                color: $primary;
+            }
+        }
+    }
+
+    /*Entry Table end*/
+
+    /*Change Password Start*/
+    .change-password-container {
+
+        border-bottom: 5px solid $primary;
+    }
+
+    /*Change Password End*/
+
+    /*Lov Button*/
+    .toolbar-text-btn {
+        border: 1px solid $secondary;
+    }
+
+    /*Lov Button*/
+    /*Sliding List Start*/
+    .sliding-list.blue {
+        border-left: 2px solid $secondary;
+
+        ion-avatar {
+
+            border: 2px solid $secondary;
+            color: $secondary;
+        }
+    }
+
+    .iconText-btn {
+        --border-color: #fff;
+        border: 1px solid #d0cbcb;
+        background: rgba(220, 220, 220, 0.3803921568627451);
+    }
+
+    /*Sliding List End*/
+    /*Chat Dashboard Start*/
+    .table-input.chat-input {
+        margin-top: 0px;
+
+        textarea {
+
+
+            border: 1px solid #b5b5b5 !important;
+            background: #e8e8e8 !important;
+            color: #252525;
+            border-right: none !important;
+
+        }
+    }
+
+    .chat-input-container {
+        .lov-btn {
+            border: 1px solid #b5b5b5 !important;
+            background: #e8e8e8 !important;
+            color: $secondary;
+
+            &:focus {
+                color: #131313;
+            }
+        }
+
+    }
+
+    .chat-input-container {
+        .speaker-btn {
+
+            background: $secondary !important;
+            color: #fff;
+            border: 1px solid $secondary;
+
+            &:focus {
+                background: #131313 !important;
+                color: #fff;
+            }
+        }
+
+    }
+
+    /*Chat Dashboard End*/
+
+
+    /*Smart Filters Start*/
+
+    .smart-filter-section {
+        ion-range {
+            --bar-background-active: #edeff1;
+            --knob-background: #4e4e4e;
+        }
+        .range-bar {
+            --bar-background: #ccc;
+        }
+
+        sup {
+            color: #181818;
+            background: #cdcdcd;
+            border: 1px solid #b2b2b2;
+
+        }
+        .active {
+            background-color: rgb(224 232 243 / 29%);
+            border: 1px dashed $secondary;
+            padding: 0 4px;
+            font-size: 12px;
+    
+            .class1 {
+                color: #ffff;
+            }
+        }
+        h5 {
+            color: #272727;
+
+        }
+
+        h6 {
+            color: $primary;
+        }
+
+        .ion-color-light {
+            --ion-color-base: #e0e0e0 !important;
+            --ion-color-contrast: #313131 !important;
+        }
+
+        .inactive {
+            --ion-color-base: #e0e0e0 !important;
+            --ion-color-contrast: #313131 !important;
+        }
+
+        .active {
+            --ion-color-base: #494949 !important;
+            --ion-color-contrast: #ffffff !important;
+        }
+
+        ion-chip {
+            --ion-color-shade: #4e4e4e !important;
+
+        }
+
+        ion-range {
+            --ion-color-base: #4e4e4e !important;
+        }
+
+        ion-checkbox {
+            --ion-color-base: #8a8a8a !important;
+        }
+
+        ion-button.ion-color-primary {
+            --ion-color-primary: #4e4e4e !important;
+
+        }
+    }
+
+    .smart-filter-section-columnlist {
+        ion-col {
+            border-right: 1px solid #e2e2e2;
+            border-bottom: 1px solid #e2e2e2;
+            color: #8a8a8a;
+
+        }
+
+        .activeColumn {
+            color: #000000 !important;
+        }
+
+        .inactiveColumn {
+            color: #8a8a8a !important;
+        }
+    }
+
+    /*Smart Filters End*/
+
+    /*Dialer Start*/
+    .phone-communication {
+
+        ion-icon {
+
+            background: $secondary;
+
+        }
+
+        .communication-value {
+            color: $secondary;
+        }
+    }
+
+    /*Dialer End*/
+    /*Email Composer Start*/
+    .email-communication {
+
+        ion-icon {
+
+            background: #009688;
+
+        }
+
+        .communication-value {
+            color: #009688;
+        }
+    }
+
+    /*Email Composer End*/
+    /*ion-chip start*/
+    .class1 {
+        color: $secondary !important;
+    }
+
+    /*ion-chip end*/
+
+    /*Offline Entry Start*/
+    .menu-list.ofline-entry-list {
+        ion-thumbnail {
+            background: $secondary;
+            box-shadow: none !important;
+        }
+
+        h1 {
+
+            color: $secondary;
+        }
+    }
+
+    .offline-entry-card-footer .upload-btn {
+        color: #252525;
+    }
+
+    /*Offline Entry End*/
+    /*Advance Filter Start*/
+    .advance-filter-main {
+        .segment-button-checked {
+            --indicator-color-checked: #ccc !important;
+            background: #e0e0e0 !important;
+
+            ion-label {
+                color: $secondary !important;
+            }
+
+        }
+
+    }
+
+    /*Advance Filter End*/
+/* Location tracling Card Start*/
+.location-tracking{
+    .card-container > li .timeline-label h2 {
+ 
+   color: $secondary !important;
+   .edit-icon{
+       color: $secondary !important;
+   }
+    }
+}
+
+/* Location tracling Card End*/
+/* Order Entry Start*/
+.order-entry-container{
+    .order-entry{
+        .order-entry-header{
+            border: 1px solid $secondary !important;
+            background: #f5f5f5 !important;
+            .card-header{
+                color: $secondary !important;
+            }
+        }
+    }
+}
+.order-entry-container .order-entry .cart-btn {
+    background:$secondary;
+    color: #fff;
+}
+.order-entry-container .order-entry .card-body .quantity-badge {
+    background: $primary;
+    border: 1px solid $secondary;
+    color:$secondary;
+   
+}
+/* Order Entry End*/
+/* Display count start*/
+.display-count-container{
+    .display-count {
+        border: 1px solid #ddd;
+        .count-name {
+            background: $primary-light !important;
+            h6{
+                color: #000 !important;
+            }
+        }
+        .count {
+span {
+    background: $primary  !important;
+    border: 2px dashed $secondary !important;
+    color: $secondary !important;  
+}
+        }
+    }
+}
+/*Display count End*/
+/* Smart Filter Start*/
+.smart-filter-section{
+    .inactive{
+        color: #4d5154  !important;
+        border: 1px solid #4d5154 ;
+        .class2{
+            color: #4d5154 ;
+        }
+    }
+    .active{
+        background: $secondary !important ;
+        color: #fff !important;
+        .class1{
+            color: #fff !important;
+        }
+    }
+    }
+    /* Smart Filter Start*/
+    /*Information card start*/
+    .information-card-container{
+        .single-card{
+            .card-header{
+                border-bottom: 2px dashed #f9f3f3 !important;
+                .individual-name{
+                        color: $secondary !important;
+                }
+                .connection {
+                    .contact-icon {
+                        color: $secondary !important;
+                    }
+                }
+            }
+            .card-body {        
+            .single-count {
+              
+                .count-value{
+                    span{
+                        color: $secondary !important;
+                    }
+                }
+            }
+        }
+        }
+    }
+    /* Information card end*/
+/* New Summary card start*/
+.summary-card-container{
+    .single-summary-card{
+        .tophead-card{
+            background: $primary-light;
+            .main-title{
+                color: #fff;
+            }
+            p{
+                color: #fff;
+            }
+        }
+        .summary-box {
+            background: #fff;
+            box-shadow: -1px 2px 10px #847979;
+            
+           
+            table tbody tr:nth-child(even) {
+                background: #ffff;
+            }
+            table{
+                tr.heading1 td{
+                    color: #9e9999;
+                }
+                .heading2{
+                    .rating-danger{
+                        color: red;
+                    }
+                    .rating-green{
+                        color: #2ccc32;
+                    }
+                    .rating-black{
+                        color: #696767
+                    }
+                }
+            }
+        }
+    }
+}
+/* New Summary card end*/
+/* Drag Drop Container start*/
+.drag-drop-container{
+    .main {
+        background: #aba6a6;
+    }
+    .group1{
+        background: #d3d3d3; 
+    }
+    .group2{
+        background: #dedede; 
+    }
+    .group3{
+        background: #f3f3f3;
+    }
+    }
+    /* Drag Drop Container End*/
+/* Simple KPI Container Start*/
+.simple-kpi-container{
+    .each-kpi {
+        background: $secondary;
+    }
+    }
+/* Simple KPI Container End*/
+/* Group Table Start*/
+.group-table-container{
+    .total {
+        background: #dcd7d7;
+    }
+    table tbody tr:nth-child(even) {
+        background: #ffffff !important;
+    }
+}
+/* Group Table  End*/
+/* HML css start*/
+.task-management-container {
+    box-shadow: $global-box-shadow;
+
+    .task-card {
+        .card-title {
+            background:$secondary;
+            .card-heading h3 {
+                color: #fff;
+            }    
+            .total-count {
+                &::after {
+    border: 1px solid #dddddd69;
+   }
+                &::before {
+    border: 1px solid #dddddd57;
+            }    
+                span {
+                    color: #fff;
+                }
+            }
+        }
+        .card-body {
+            background: $primary-light-6;
+            .border-right{
+                border-right: 1px dashed #ddd;
+            }
+            .urgent {
+                p{
+                    color:$secondary;
+                  
+                }
+               
+            }
+        }
+    }
+}
+/*HML css end*/
+/* KPI Slider  css start*/
+.kpi-slider-container {
+    border: 1px solid #ddd;
+    box-shadow: $global-shadow2;
+   
+    .kpi-Slider {
+        background: $primary;
+       border-right: 3px solid $secondary;
+       border-bottom: 3px solid $secondary;
+        box-shadow: $global-shadow2;
+        
+        span {
+            color: $dark;
+        }
+    }
+}
+ /* KPI Slider  css end*/
+
+/* Sub Select  css start*/
+.my-custom-class {
+    .alert-wrapper {
+        background:#fff ;
+        .alert-head.sc-ion-alert-md {
+            h2 {
+                color: $dark;
+            }
+        }
+        .alert-checkbox-group.sc-ion-alert-md {
+            .alert-checkbox-label.sc-ion-alert-md{
+                color: $grey-4;
+            }
+        }
+    }
+}
+/* Sub Select  css end*/ 
+/* Developer Mode  css Start*/ 
+.developer-mode-container {
+    .editorial{
+    border: 1px solid #ddd;
+    .edit {
+      color: #585353;
+      background: #ddd;
+      border: 1px dashed #a79a9a;
+  }
+  }
+    .add {
+      background: $primary;  
+      color: $secondary;
+      
+  }
+  }
+  /* Developer Mode  css end*/ 
+  /* Order Card  css Start*/ 
+  .order-card-container {
+    
+    .single-order-card {
+        .addto-card {
+            background: $primary;
+            color: $text-dark;
+            border: 1px solid $primary;
+        }
+
+        .card-header {
+            h5 {
+                background: $primary;
+                color: $text-dark;
+            }
+        }
+
+        .card-body {
+            border: 1px solid #ddd;
+            .desc {
+                ion-input {
+                
+                    border-bottom: 1px solid #ddd;
+                }
+            }
+            .count {
+                background: #ddd;
+                color: $text-dark;
+            }
+
+            .features {
+                color:$text-dark;
+            }
+
+
+            .card-footer {
+                .total-sec {
+                    color: $text-dark;
+                    box-shadow: none;
+                    background: $primary;
+                    &::before {
+                        background: #bdbaba;
+                    }
+                }
+
+                .rate {
+                    color: $primary;
+                }
+            }
+        }
+    }
+}
+/* Order Card  css end*/ 
+/* Parent Child Order Css Start*/
+.contract-container {
+    background: #fff;
+    -webkit-box-shadow: 1px 4px 6px 0px rgba(0, 0, 0, 0.17);
+    box-shadow: 1px 4px 6px 0px rgba(0, 0, 0, 0.17);
+    border-top: 3px solid $secondary;
+    
+    .add-icon-btn {
+        color: #ffffff;
+        background: $secondary;
+    }
+    .sub-header{
+        
+        span{
+            color: $secondary;
+
+        }
+    }
+    ion-input{
+        border: 1px solid #ddd;
+    }
+}
+/*Parent Child Order Css End*/
+/* sql-tran-light css start */
+.sql-tran-light{
+    ion-tab-button.tab-selected{
+        border-bottom: 2px solid $secondary;
+    } 
+    ion-tab-button.active{
+        border-bottom: 1px solid #fff;
+        background: $secondary;
+        ion-label , ion-icon{
+            color: #fff;
+  
+        }
+        ion-badge{
+       background: #fff;
+       color: $secondary;
+        }
+    }
+    .individual-card {
+        border-left: 5px solid $secondary;
+        box-shadow: 1px 2px 10px #ddd;
+        border-right: 1px solid $secondary;
+    }
+    }
+    /* sql-tran-light css End */
+    .resp-view {
+        ion-button.active{
+            border-bottom: 2px solid $secondary;
+        }
+    }
+      /*New Menu List component  CSS Start*/
+      .new-menu-list {
+        box-shadow: 0 3px 1px -2px rgb(221 221 221 / 66%), 0 2px 0px 0 rgb(221 221 221 / 66%), 1px 1px 4px 0 rgb(221 221 221 / 66%);
+
+        ion-item {
+            --border-color: transparent;
+        }
+
+        ion-icon {
+            background:  linear-gradient(to bottom, #7f7f7f, #373737) !important;
+        }
+
+        .thumbnail-container {
+            background:  linear-gradient(to bottom, #7f7f7f, #373737) !important;
+        }
+
+        ion-thumbnail {
+            background: #fff;
+            border: 1px solid #fff;
+            box-shadow: 2px 7px 10px rgba(92, 92, 92, 0.33);
+        }
+
+        h2 {
+            color: $secondary-text;
+        }
+
+        .next-arrow {
+            color: #FFF;
+        }
+
+        &::before {
+
+            background: $primary;
+
+        }
+    }
+
+    /*new  Menu List  component  CSS End*/
+      /*Aproval Tab Start*/
+      .approval-card-container {
+        border-left: 3px solid $secondary !important;    
+    }
+     /*Aproval Tab End*/
+     /* Flip KPI component  CSS Start*/
+     .flip-kpi {
+        .front {
+          &:after {
+              
+          background: linear-gradient(
+      135deg
+      , #e1e1e1 25%, transparent 25%) -50px 0, linear-gradient(
+      225deg
+      , #e1e1e1 25%, transparent 25%) -50px 0, linear-gradient(
+      315deg
+      , #e1e1e1 25%, transparent 25%), linear-gradient(
+      45deg
+      , #e1e1e1 25%, transparent 25%);
+          background-size: 100px 100px;
+          background-color:rgb(219 219 219);
+          }
+          h2 {
+  
+              color: #424242;
+    
+          }
+      }
+  }
+  .user-setting{
+
+ion-toolbar.ion-color-primary{
+    --ion-color-base: linear-gradient(to right, $primary 50%, #f2f8ff 10%, #f2f8ff 40%) !important;
+}
+.full-width {
+
+    background: linear-gradient(to right, $primary 50%, #f2f8ff 10%, #f2f8ff 40%);
+
+}
+.full-width::before{
+    border: 43px solid #4e4e4e;
+}
+ion-title{
+    color: #9e9e9e;
+}
+.user-form {
+    background: #ebebeb;
+    border-left: 13px solid #6f6f6f;
+    box-shadow: 1px 2px 10px #2c2828;
+}
+.user-form:before {
+    background-image: radial-gradient(#eff1f3 15%, rgba(0, 0, 0, 0) 16%), radial-gradient(#f3f3f5 15%, rgba(0, 0, 0, 0) 16%) !important;
+ }
+ .user-form:after {
+    background-image: radial-gradient(#4e4e4e 15%, rgba(0, 0, 0, 0) 16%), radial-gradient(#eff1f3 15%, rgba(0, 0, 0, 0) 16%) !important;
+ 
+ }
+ion-select{
+    border: 1px solid #ccc;
+    background: #fff;
+}
+
+.lov-inp{
+    background: #fff;
+    border: 1px solid #ccc;
+}
+
+}
+          /*Flip KPI component  CSS End*/
+          .open-toggle {
+            background:  $secondary;
+           
+            .arr-div {
+               
+                background: $secondary;
+               
+            }
+        }
+        .close-toggle{
+
+            .arr-div {
+
+                .arrow {
+                    border: solid black ;
+                }
+               
+            }
+        }
+
+        .groupBy_table{
+            .top-headth{
+                background: #504f4f !important;
+                color: #fff;
+                border-collapse: collapse;
+            }
+            .top-headth1{
+                background: #757373 !important;
+                color: #fff;
+            }
+            .top-headth2 {
+                background: #afafaf !important;
+                color: #ffffff;
+                border: 1px solid #ededed;
+                border-collapse: collapse;
+          }
+          .bg-white{
+          background: #fff !important;
+          }
+            }
+
+            
+        .apex-dropdown{
+            .action-chips{
+                label.active{
+              
+                  border: 1px dashed #ffffff;
+                  color: #ffffff;
+                  background: $secondary;
+                }
+                ion-icon{
+                  color: #ffffff;
+                }
+              }
+        }
+        .Upload-buton{
+            background: $secondary;
+        }
+        .treemenu{
+            .bg-light {
+                background: $primary-light-1 !important;
+            }
+        .close-icon{
+            color: $secondary;
+            border: 1px solid $secondary;
+        }
+    }
+}

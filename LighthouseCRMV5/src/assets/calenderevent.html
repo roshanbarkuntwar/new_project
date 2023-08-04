@@ -1,0 +1,148 @@
+<ng-template #monthviewDefaultDisplayEventTemplate let-view="view" let-row="row" let-col="col">
+    {{view.dates[row*7+col].label}}
+</ng-template>
+
+<ng-template #monthviewDefaultEventDetailTemplate let-showEventDetail="showEventDetail" let-selectedDate="selectedDate"
+    let-noEventsLabel="noEventsLabel">
+    <ion-list class="event-detail-container" has-bouncing="false" *ngIf="showEventDetail" overflow-scroll="false">
+
+
+            <ion-card  *ngFor="let event of selectedDate?.events" (click)="eventSelected(event)">
+                    <ion-card-header *ngIf="!event.allDay">
+                      <ion-card-title>Title : {{event.title}}</ion-card-title>
+                    </ion-card-header>
+                  
+                    <ion-card-content *ngIf="!event.allDay">
+                            Description : {{event.desc}}
+                    </ion-card-content>
+                  </ion-card>
+
+
+
+
+
+<!-- 
+
+        <ion-item *ngFor="let event of selectedDate?.events" (click)="eventSelected(event)">
+            <span *ngIf="!event.allDay" class="monthview-eventdetail-timecolumn">Title : {{event.title}}</span> <span
+                *ngIf="event.allDay" class="monthview-eventdetail-timecolumn">{{allDayLabel}}</span> <span
+                class="event-detail"> |
+                Description : {{event.desc}}
+            </span>
+        </ion-item> -->
+
+        <ion-item *ngIf="selectedDate?.events.length==0">
+            <div class="no-events-label">{{noEventsLabel}}</div>
+        </ion-item>
+
+    </ion-list>
+</ng-template>
+
+
+<ng-template #defaultWeekviewHeaderTemplate let-viewDate="viewDate">
+    {{ viewDate.dayHeader }}
+</ng-template>
+
+
+<ng-template #defaultAllDayEventTemplate let-displayEvent="displayEvent">
+    <div class="calendar-event-inner">
+        {{displayEvent.event.title}}</div>
+</ng-template>
+
+<ng-template #defaultNormalEventTemplate let-displayEvent="displayEvent">
+    <div class="calendar-event-inner">{{displayEvent.event.title}}</div>
+</ng-template>
+
+
+<ng-template #defaultWeekViewAllDayEventSectionTemplate let-day="day" let-eventTemplate="eventTemplate">
+
+    <div [ngClass]="{'calendar-event-wrap': day.events}" *ngIf="day.events"
+        [ngStyle]="{height: 25*day.events.length+'px'}">
+
+        <div *ngFor="let displayEvent of day.events" class="calendar-event" tappable
+            (click)="eventSelected(displayEvent.event)"
+            [ngStyle]="{top:25*displayEvent.position+'px', width: 100*(displayEvent.endIndex-displayEvent.startIndex)+'%',height: '25px' }">
+
+            <ng-template [ngTemplateOutlet]="eventTemplate" [ngTemplateOutletContext]="{displayEvent:displayEvent}">
+            </ng-template>
+
+        </div>
+    </div>
+
+</ng-template>
+
+
+<ng-template #defaultDayViewAllDayEventSectionTemplate let-allDayEvents="allDayEvents"
+    let-eventTemplate="eventTemplate">
+    <div *ngFor="let displayEvent of allDayEvents; let eventIndex=index" class="calendar-event" tappable
+        (click)="eventSelected(displayEvent.event)" [ngStyle]="{top:25*eventIndex+'px',width: '100%' ,height:'25px'}">
+        <ng-template [ngTemplateOutlet]="eventTemplate" [ngTemplateOutletContext]="{displayEvent:displayEvent}">
+        </ng-template>
+    </div>
+</ng-template>
+
+
+<ng-template #defaultNormalEventSectionTemplate let-tm="tm" let-hourParts="hourParts" let-eventTemplate="eventTemplate">
+    <div [ngClass]="{'calendar-event-wrap': tm.events}" *ngIf="tm.events">
+        <div *ngFor="let displayEvent of tm.events" class="calendar-event" tappable
+            (click)="eventSelected(displayEvent.event)" [ngStyle]="{top:(37*displayEvent.startOffset/hourParts)+'px',left: 100/displayEvent.overlapNumber*displayEvent.position+'%',
+                width: 100/displayEvent.overlapNumber+'%', height: 37*(displayEvent.endIndex -displayEvent.startIndex -
+                (displayEvent.endOffset + displayEvent.startOffset)/hourParts)+'px'}">
+            <ng-template [ngTemplateOutlet]="eventTemplate" [ngTemplateOutletContext]="{displayEvent:displayEvent}">
+            </ng-template>
+        </div>
+    </div>
+</ng-template>
+
+
+<div [ngSwitch]="calendarMode" class="{{calendarMode}}view-container">
+    <monthview *ngSwitchCase="'month'" [formatDay]="formatDay" [formatDayHeader]="formatDayHeader"
+        [formatMonthTitle]="formatMonthTitle" [startingDayMonth]="startingDayMonth" [showEventDetail]="showEventDetail"
+        [noEventsLabel]="noEventsLabel" [autoSelect]="autoSelect" [eventSource]="eventSource"
+        [markDisabled]="markDisabled"
+        [monthviewDisplayEventTemplate]="monthviewDisplayEventTemplate||monthviewDefaultDisplayEventTemplate"
+        [monthviewInactiveDisplayEventTemplate]="monthviewInactiveDisplayEventTemplate||monthviewDefaultDisplayEventTemplate"
+        [monthviewEventDetailTemplate]="monthviewEventDetailTemplate||monthviewDefaultEventDetailTemplate"
+        [locale]="locale" [dateFormatter]="dateFormatter" [dir]="dir" [lockSwipeToPrev]="lockSwipeToPrev"
+        [lockSwipes]="lockSwipes" [spaceBetween]="spaceBetween" (onRangeChanged)="rangeChanged($event)"
+        (onEventSelected)="eventSelected($event)" (onTimeSelected)="timeSelected($event)"
+        (onTitleChanged)="titleChanged($event)">
+    </monthview>
+
+    <weekview *ngSwitchCase="'week'" [formatWeekTitle]="formatWeekTitle"
+        [formatWeekViewDayHeader]="formatWeekViewDayHeader" [formatHourColumn]="formatHourColumn"
+        [startingDayWeek]="startingDayWeek" [allDayLabel]="allDayLabel" [hourParts]="hourParts"
+        [autoSelect]="autoSelect" [hourSegments]="hourSegments" [eventSource]="eventSource"
+        [markDisabled]="markDisabled" [weekviewHeaderTemplate]="weekviewHeaderTemplate||defaultWeekviewHeaderTemplate"
+        [weekviewAllDayEventTemplate]="weekviewAllDayEventTemplate||defaultAllDayEventTemplate"
+        [weekviewNormalEventTemplate]="weekviewNormalEventTemplate||defaultNormalEventTemplate"
+        [weekviewAllDayEventSectionTemplate]="weekviewAllDayEventSectionTemplate||defaultWeekViewAllDayEventSectionTemplate"
+        [weekviewNormalEventSectionTemplate]="weekviewNormalEventSectionTemplate||defaultNormalEventSectionTemplate"
+        [locale]="locale" [dateFormatter]="dateFormatter" [dir]="dir" [scrollToHour]="scrollToHour"
+        [preserveScrollPosition]="preserveScrollPosition" [lockSwipeToPrev]="lockSwipeToPrev" [lockSwipes]="lockSwipes"
+        [startHour]="startHour" [endHour]="endHour" [spaceBetween]="spaceBetween"
+        (onRangeChanged)="rangeChanged($event)" (onEventSelected)="eventSelected($event)"
+        (onTimeSelected)="timeSelected($event)" (onTitleChanged)="titleChanged($event)">
+    </weekview>
+
+    <dayview *ngSwitchCase="'day'" [formatDayTitle]="formatDayTitle" [formatHourColumn]="formatHourColumn"
+        [allDayLabel]="allDayLabel" [hourParts]="hourParts" [hourSegments]="hourSegments" [eventSource]="eventSource"
+        [markDisabled]="markDisabled"
+        [dayviewAllDayEventTemplate]="dayviewAllDayEventTemplate||defaultAllDayEventTemplate"
+        [dayviewNormalEventTemplate]="dayviewNormalEventTemplate||defaultNormalEventTemplate"
+        [dayviewAllDayEventSectionTemplate]="dayviewAllDayEventSectionTemplate||defaultDayViewAllDayEventSectionTemplate"
+        [dayviewNormalEventSectionTemplate]="dayviewNormalEventSectionTemplate||defaultNormalEventSectionTemplate"
+        [locale]="locale" [dateFormatter]="dateFormatter" [dir]="dir" [scrollToHour]="scrollToHour"
+        [preserveScrollPosition]="preserveScrollPosition" [lockSwipeToPrev]="lockSwipeToPrev" [lockSwipes]="lockSwipes"
+        [startHour]="startHour" [endHour]="endHour" [spaceBetween]="spaceBetween"
+        (onRangeChanged)="rangeChanged($event)" (onEventSelected)="eventSelected($event)"
+        (onTimeSelected)="timeSelected($event)" (onTitleChanged)="titleChanged($event)">
+    </dayview>
+
+</div>
+
+
+
+<!--In node_module/ionic2-calender/calendar.js file -->
+   <!--  In Line No. 304 replace that template line with this below line -->
+    <!-- templateUrl: './../../assets/calenderevent.html',  -->

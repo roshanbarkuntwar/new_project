@@ -1,0 +1,83 @@
+<!-- <ion-header>
+  <ion-toolbar>
+    <ion-back-button></ion-back-button>
+    <ion-title>home</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-button (click)="click()">click</ion-button>
+</ion-content> -->
+
+
+<ion-header>
+  <ion-toolbar color="secondary">
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title> Background App Tracker</ion-title>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+
+
+  <ion-item>
+    <ion-label color="primary" stacked>Name :</ion-label>
+    <ion-input type="text" placeholder="Enter your name" [(ngModel)]="backgroundProvider.userDetails.wma_user_name" readonly>
+    </ion-input>
+  </ion-item>
+
+  <ion-item>
+    <ion-label color="primary" stacked>Interval(in seconds) :</ion-label>
+    <ion-input type="number" placeholder="Enter Interval(in seconds)" [(ngModel)]="backgroundProvider.intervalTimeout">
+    </ion-input>
+  </ion-item>
+
+
+
+  <!-- <ion-item>
+    <h2>Current Time: {{new Date()|| date: 'dd-MM-yy HH:mm:ss'}}</h2>
+  </ion-item> -->
+
+  <ion-row>
+    <ion-col col-6>
+      <ion-button full primary (click)="start(backgroundProvider.intervalTimeout)"
+        [disabled]="backgroundProvider.isTracking">Start
+      </ion-button>
+    </ion-col>
+    <ion-col col-6>
+      <ion-button full secondary (click)="stop()" [disabled]="!backgroundProvider.isTracking">Stop </ion-button>
+    </ion-col>
+  </ion-row>
+
+
+  <h5></h5>
+  <div style="overflow-x:auto;">
+
+    <table>
+      <thead>
+        <tr>
+          <th>Sr.</th>
+          <th>Time</th>
+          <th>Latitude</th>
+          <th>Longitude</th>
+          <th>Activity</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let obj of backgroundProvider.data; let j = index">
+          <td>{{j+1}}</td>
+          <td>{{obj.date | date: 'dd-MM-yy HH:mm:ss'}}</td>
+          <td>{{obj.latitude}}</td>
+          <td>{{obj.longitude}}</td>
+          <td>{{obj.activity}}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+</ion-content>
+
+<ion-footer text-center>
+  <!-- <p style="color: red;">Bcakground app test version {{backgroundProvider.appVersion}}</p> -->
+</ion-footer>

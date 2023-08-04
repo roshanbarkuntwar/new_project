@@ -1,0 +1,129 @@
+<div *ngIf="filter">
+  <app-frame-canvas-filter [frametable]="frame" (passdataToframetable)="getdataFromcanvasFilter($event)"
+    [frame]='frame'></app-frame-canvas-filter>
+</div>
+
+
+  
+  <div *ngIf="searchFlag  && !filter ">
+    <div class="input-group primary-search-section">
+  
+      <ion-input class="input-text" [hidden]="horizontal_table=='Hide'" placeholder="Search Here..."
+        [(ngModel)]="searchText"></ion-input>
+  
+      <ion-input class="input-text" [hidden]="horizontal_table=='Show'" placeholder="Search Here..."
+        [(ngModel)]="searchText"></ion-input>
+  
+  
+      <div class="input-group-append">
+        <button class="lov-btn" ion-button icon-only small (click)="openMike()">
+          <img src="./assets/imgs/google-speaker.png">
+        </button>
+      </div>
+      <div class="input-group-append">
+        <button class="lov-btn" ion-button icon-only small>
+          <ion-icon name="scan-outline" (click)="openbarcodescanner()"></ion-icon>
+        </button>
+      </div>
+  
+      <div class="input-group-append">
+        <button class="lov-btn" ion-button icon-only small>
+  
+          <ion-icon (click)="toggle()" [hidden]="horizontal_table=='Hide'" name="chevron-forward-circle"></ion-icon>
+          <ion-icon (click)="toggle()" [hidden]="horizontal_table=='Show'" name="chevron-down-circle"></ion-icon>
+        </button>
+      </div>
+      <div class="input-group-append" *ngIf="enablefunnel">
+        <button class="lov-btn" ion-button icon-only small (click)="filterToggle()">
+          <ion-icon name="funnel"></ion-icon>
+        </button>
+      </div>
+    </div>
+  </div>
+  
+  <!-- <div *ngIf="show_filter=='show' && !canvasfilter">
+    <app-frame-filter [frame]="filterFormData" (emitFilter)="getFilterParameter($event)"></app-frame-filter>
+  </div> -->
+  
+  <div *ngIf="show_filter=='show' ">
+    <div *ngIf="toggleFilter">
+      <app-frame-canvas-filter [frame]="frame" [frametable]='frame' (passdataToframetable)="getdataFromcanvasFilter($event)" (emitFilter)="getFilterParameter($event)"></app-frame-canvas-filter>
+    </div>
+  
+  
+  </div>
+
+  <ion-row *ngIf="frame.apps_page_frame_name">
+    <ion-col class="pl-0" size="7">
+      <!-- <h1 class="frame-name position-relative">{{frame.apps_page_frame_name}}</h1> -->
+      <h1 class="frame-name position-relative">{{frame.apps_page_frame_name}}<span style="margin-left: 10px;" *ngIf="globalObjects.toggleDevloperMode">[{{frame.apps_page_frame_seqid}}]</span></h1>
+    </ion-col>
+    <ion-col class="pr-0 data-view-type text-right" size="5">
+      <!-- <ion-icon (click)="toggle()" [hidden]="horizontal_table=='Hide'" name="chevron-forward-circle"></ion-icon>
+      <ion-icon (click)="toggle()" [hidden]="horizontal_table=='Show'" name="chevron-down-circle"></ion-icon> -->
+      <!-- <ion-icon name="funnel" (click)="filterToggle()" class="filter-btn ml-3"></ion-icon> -->
+    </ion-col>
+  </ion-row>
+
+
+  <div *ngIf="horizontal_table=='Show' && !filter ">
+<div *ngFor="let rows of frame.tableRows |tableSearch :searchText;let j=index;">
+  <ion-item class="user-profile-card" lines="none">
+
+    <ion-row *ngFor="let itemGroup of rows; let i=index" class="p-0">
+      <ion-col class="p-0" *ngFor="let input_item of itemGroup.Level5;let i=index"
+        [hidden]="input_item.item_visible_flag!='T'">
+        <div *ngIf="input_item.item_type =='DISPLAY_PHOTO'">
+          <app-items class="p-0" [item]="input_item" (emitPass)="itemClicked($event,rows,j)"
+            (LHSOnChange)="itemValueChange($event,j)"></app-items>
+        </div>
+      </ion-col>
+    </ion-row>
+
+    <ion-label>
+      <ion-row *ngFor="let itemGroup of rows; let i=index" class="p-0">
+        <ion-col class="p-0" *ngFor="let input_item of itemGroup.Level5;let i=index"
+          [hidden]="input_item.item_visible_flag!='T'">
+          <div *ngIf="input_item.item_type!='DISPLAY_PHOTO'">
+            <app-items class="p-0" [item]="input_item" (emitPass)="itemClicked($event,rows,j)"
+              (LHSOnChange)="itemValueChange($event,j)"></app-items>
+          </div>
+
+        </ion-col>
+      </ion-row>
+      <!-- <h2>Mr. John Due</h2>
+      <h3>Lighthouse Info Systems Pvt. Ltd.</h3>
+      <p>Project Leader </p>
+      <p>
+        <ion-icon class="call-icon" name="call"></ion-icon>7721053528 
+        <span class="location"> <ion-icon class="mx-1 location-icon" name="pin">
+        </ion-icon>Nagpur</span></p> -->
+    </ion-label>
+  </ion-item>
+</div>
+</div>
+
+<!-- <ion-infinite-scroll class="ispinner" (ionInfinite)="doInfinite($event)">
+  <ion-infinite-scroll-content *ngIf="!loadMoreFlag" loadingSpinner="bubbles" loadingColor="red"
+    loadingText="Loading more data...">
+  </ion-infinite-scroll-content>
+</ion-infinite-scroll> -->
+
+<div *ngIf="isInfinite()">
+  <ng-container *ngIf ="l_total_remain_pages > 0">
+    <ion-infinite-scroll class="ispinner" (ionInfinite)="doInfinite($event)">
+      <ion-infinite-scroll-content  loadingSpinner="bubbles" loadingColor="red"
+        loadingText="Populating page {{l_current_page}} of {{l_totalPage}}">
+      </ion-infinite-scroll-content>
+    </ion-infinite-scroll>
+  </ng-container>
+</div>
+
+<div class="center" *ngIf="listLength==0">
+  <div class="text-center" *ngIf="noRecordMessage == ''">
+    <img src="../../../../assets/dot.gif" width="20%">
+  </div>
+  <div class="text-center" *ngIf="noRecordMessage != ''">
+    <h2>{{noRecordMessage}}</h2>
+  </div>
+</div>

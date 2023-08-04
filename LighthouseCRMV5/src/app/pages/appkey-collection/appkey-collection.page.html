@@ -1,0 +1,65 @@
+<ion-header>
+  <!-- <ion-toolbar color="primary">
+    <ion-title class="text-center">Appkey Collection</ion-title>
+    <ion-buttons slot="start" (click)="goBack()">
+      <ion-button>
+        <ion-icon name="arrow-round-back"></ion-icon>
+      </ion-button>
+      </ion-buttons>
+    <ion-buttons slot="end"  (click)="addApp()">
+      <ion-button>
+        <ion-icon slot="icon-only" name="add-circle-outline"></ion-icon>
+      </ion-button>
+      </ion-buttons>
+  </ion-toolbar> -->
+  <ion-toolbar color="primary"  class="ion-toolbar iosheight"  *ngIf="platform.is('ios')">
+    <ion-title class="text-center">Appkey Collection</ion-title>
+    <ion-buttons slot="start" (click)="goBack()">
+      <ion-button>
+        <ion-icon name="arrow-round-back"></ion-icon>
+      </ion-button>
+      </ion-buttons>
+    <ion-buttons slot="end"  (click)="addApp()">
+      <ion-button>
+        <ion-icon slot="icon-only" name="add-circle-outline"></ion-icon>
+      </ion-button>
+      </ion-buttons>
+</ion-toolbar>
+
+<ion-toolbar color="primary"  class="ion-toolbar" *ngIf="!platform.is('ios')">
+  <ion-title class="text-center">Appkey Collection</ion-title>
+  <ion-buttons slot="start" (click)="goBack()">
+    <ion-button>
+      <ion-icon name="arrow-round-back"></ion-icon>
+    </ion-button>
+    </ion-buttons>
+  <ion-buttons slot="end"  (click)="addApp()">
+    <ion-button>
+      <ion-icon slot="icon-only" name="add-circle-outline"></ion-icon>
+    </ion-button>
+    </ion-buttons>
+</ion-toolbar>
+</ion-header>
+
+<ion-content class="page-appkey-collection">
+  <ion-grid>
+    <ion-row>
+      <ion-col size="6" *ngFor="let app of appData,let i = index">
+        <div class="client-wraper">
+          <!-- <div (click)="removeApp(i)" class="cancle-wrap">
+            <ion-icon class="cancle-btn" name="close"></ion-icon>
+          </div> -->
+          <div (click)="selectAppkey(app)">
+            <img *ngIf="app.resData.icon_img" [src]="'data:image/jpeg;base64,'+app.resData.icon_img">
+            <img *ngIf="!app.resData.icon_img" src="assets/imgs/report_icon.png">
+            <h2 *ngIf="app.app_name"> {{app.app_name}}</h2>
+            <h2 *ngIf="!app.app_name"> -- </h2>
+            <h3>{{app.appkey}}</h3>
+          </div>
+        </div>
+      </ion-col>
+  
+    </ion-row>
+  </ion-grid>
+
+</ion-content>

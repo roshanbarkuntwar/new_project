@@ -1,0 +1,298 @@
+<!-- ion-input-item-border position="stacked" -->
+<!-- ion-input-item-fixed  position="fixed"-->
+<!-- null position="floating"-->
+<!-- null position="stacked"-->
+<!--   -->
+
+
+<div
+    *ngIf="textinput.item_sub_type != 'T_TABLE' && textinput.item_sub_type != 'PASSWORD' && frame_type != 'ACCORIDION' && textinput.item_sub_type != 'TEXT_BOX' && textinput.item_sub_type != 'T_BROWSER'">
+    <ion-item class="{{(textinput.css_class == null) ? 'ion-input-item ion-input-item-border' : textinput.css_class}}"
+        [ngStyle]="{'cursor': ishover(textinput) ? 'pointer' : 'context-menu' }">
+        <ion-label position="{{(textinput.position == null) ? 'stacked' : textinput.position}}"
+            [hidden]="frame_type=='TABLE' || frame_type == 'ENTRY_TABLE' || frame_type == 'FRAME_COLLAPSE'">
+            {{textinput.prompt_name}}</ion-label>
+        <ion-input [ngStyle]="getParsedJson(textinput.display_setting_str)" type="text" id="{{textinput.item_name}}"
+            [(ngModel)]="textinput.value" [maxlength]="textinput.item_size" #textInputname="ngModel"
+            [readonly]="textinput.item_enable_flag && (!(textinput.item_enable_flag.indexOf(current_page_parameter.MODE)>-1)||(textinput.item_enable_flag=='F'))"
+            [required]="(current_page_parameter.MODE && (textinput.data_required_flag && 
+      (textinput.data_required_flag.indexOf(current_page_parameter.MODE)>-1)) )
+      ||textinput.data_required_flag=='T' 
+      ||(textinput.prompt_name && textinput.prompt_name[textinput.prompt_name.length -1]) =='*'"
+            (ionFocus)="autoPopulate($event)" [pattern]="textinput.input_pattern"
+            (ionChange)="textinput.isValid=textInputname.valid; textinput.touched=true;onChange()"
+            (ionBlur)="textinput.isValid=textInputname.valid;textinput.touched=true;onBlur('ionChange')"
+            (ngInit)="textinput.isValid=textInputname.valid" title="{{textinput.tool_tip}}"
+            (dblclick)="doubleClickFun($event)">
+        </ion-input>
+
+        <div class="input-buttons-container"
+            *ngIf="textinput.value && (!(textinput.item_enable_flag && (!(textinput.item_enable_flag.indexOf(current_page_parameter.MODE)>-1)||(textinput.item_enable_flag=='F')))) ">
+
+            <button class="input-btn float-right" ion-button icon-only small
+                (click)="textinput.value='';textinput.codeOfValues=''">
+                <ion-icon name="close"></ion-icon>
+            </button>
+        </div>
+    </ion-item>
+    <!-- <div class="recent-search-container" >
+            <ul>
+                <li *ngFor="let item1 of autoPopulateText">
+                    {{item}}
+                </li>
+            </ul>
+    </div> -->
+    <div class="error" *ngIf="textInputname.hasError('required') && textinput.touched">Please Enter
+        {{textinput.prompt_name}}
+    </div>
+    <div class="error" *ngIf="textInputname.hasError('pattern') && textinput.touched">
+        {{textinput.tool_tip}}
+    </div>
+    <div class="error" *ngIf="textInputname.hasError('maxlength')">{{textinput.prompt_name}} max
+        {{textinput.item_size}}
+        Character</div>
+
+</div>
+
+<div class="table-input-container" *ngIf="textinput.item_sub_type == 'T_TABLE' || frame_type == 'ACCORIDION'"
+    [ngStyle]="{'cursor': ishover(textinput) ? 'pointer' : 'context-menu' }">
+    <ion-input class="table-input" type="text" id="{{textinput.item_name}}" [(ngModel)]="textinput.value"
+        [maxlength]="textinput.item_size" #textInputname="ngModel"
+        [ngStyle]="getParsedJson(textinput.display_setting_str)"
+        [readonly]="textinput.item_enable_flag && (!(textinput.item_enable_flag.indexOf(current_page_parameter.MODE)>-1)||(textinput.item_enable_flag=='F'))"
+        [required]="(current_page_parameter.MODE && (textinput.data_required_flag && 
+      (textinput.data_required_flag.indexOf(current_page_parameter.MODE)>-1)) )
+      ||textinput.data_required_flag=='T' 
+      ||(textinput.prompt_name && textinput.prompt_name[textinput.prompt_name.length -1]) =='*'"
+        (ionChange)="textinput.isValid=textInputname.valid; textinput.touched=true;onChange()"
+        (ionBlur)="textinput.isValid=textInputname.valid;textinput.touched=true;onBlur('ionChange')"
+         title="{{textinput.tool_tip}}"
+        (dblclick)="doubleClickFun($event)"></ion-input>
+        <!-- (ngInit)="textinput.isValid=textInputname.valid" -->
+    <div class="input-buttons-container"
+        *ngIf="textinput.value && (!(textinput.item_enable_flag && (!(textinput.item_enable_flag.indexOf(current_page_parameter.MODE)>-1)||(textinput.item_enable_flag=='F')))) ">
+    </div>
+</div>
+
+<div *ngIf="textinput.item_sub_type == 'PASSWORD'">
+    <ion-item class="{{textinput.css_class}}" [ngStyle]="{'cursor': ishover(textinput) ? 'pointer' : 'context-menu' }">
+        <ion-label position="{{textinput.position}}" [hidden]="frame_type=='TABLE' || frame_type == 'ENTRY_TABLE' ">
+            {{textinput.prompt_name}}</ion-label>
+        <ion-input [ngStyle]="getParsedJson(textinput.display_setting_str)" type="{{inputType}}"
+            id="{{textinput.item_name}}" [(ngModel)]="textinput.value" [maxlength]="textinput.item_size"
+            #textInputname="ngModel"
+            [readonly]="textinput.item_enable_flag && (!(textinput.item_enable_flag.indexOf(current_page_parameter.MODE)>-1)||(textinput.item_enable_flag=='F'))"
+            [required]="(current_page_parameter.MODE && (textinput.data_required_flag && 
+      (textinput.data_required_flag.indexOf(current_page_parameter.MODE)>-1)) )
+      ||textinput.data_required_flag=='T' 
+      ||(textinput.prompt_name && textinput.prompt_name[textinput.prompt_name.length -1]) =='*'"
+            (ionFocus)="autoPopulate($event)" [pattern]="textinput.input_pattern"
+            (ionChange)="textinput.isValid=textInputname.valid; textinput.touched=true;onChange()"
+            (ionBlur)="textinput.isValid=textInputname.valid;textinput.touched=true;onBlur('ionChange')"
+            (ngInit)="textinput.isValid=textInputname.valid" title="{{textinput.tool_tip}}">
+        </ion-input>
+        <div class="input-buttons-container"
+            *ngIf="textinput.value && (!(textinput.item_enable_flag && (!(textinput.item_enable_flag.indexOf(current_page_parameter.MODE)>-1)||(textinput.item_enable_flag=='F')))) ">
+
+            <button class="input-btn float-right" ion-button icon-only small (click)="hideShowPassword()">
+                <ion-icon name="{{iconName}}"></ion-icon>
+                <!-- <ion-icon name="close"></ion-icon> -->
+            </button>
+        </div>
+    </ion-item>
+    <!-- <div class="recent-search-container" >
+            <ul>
+                <li *ngFor="let item1 of autoPopulateText">
+                    {{item}}
+                </li>
+            </ul>
+    </div> -->
+
+    <div class="error">{{textinput.blurError}}</div>
+
+    <div class="error" *ngIf="textInputname.hasError('required') && textinput.touched">Please Enter
+        {{textinput.prompt_name}}
+    </div>
+    <div class="error" *ngIf="textInputname.hasError('pattern') && textinput.touched">
+        {{textinput.tool_tip}}
+    </div>
+    <div class="error" *ngIf="textInputname.hasError('maxlength')">{{textinput.prompt_name}} max
+        {{textinput.item_size}}
+        Character</div>
+
+</div>
+
+
+<div class="table-input-container" *ngIf="textinput.item_sub_type == 'TEXT_BOX'"
+    [ngStyle]="{'cursor': ishover(textinput) ? 'pointer' : 'context-menu' }">
+    <!-- <ion-textarea style="border: solid 1px #d3d0d0;" auto-grow="true" class="table-input" type="text" id="{{textinput.item_name}}" [(ngModel)]="textinput.value"
+        [maxlength]="textinput.item_size" #textInputname="ngModel"
+        [readonly]="textinput.item_enable_flag && (!(textinput.item_enable_flag.indexOf(current_page_parameter.MODE)>-1)||(textinput.item_enable_flag=='F'))"
+        [required]="(current_page_parameter.MODE && (textinput.data_required_flag && 
+      (textinput.data_required_flag.indexOf(current_page_parameter.MODE)>-1)) )
+      ||textinput.data_required_flag=='T' 
+      ||textinput.prompt_name[textinput.prompt_name.length -1] =='*'" 
+        (ionChange)="textinput.isValid=textInputname.valid; textinput.touched=true"
+        (ionBlur)="textinput.isValid=textInputname.valid;textinput.touched=true;onBlur('ionChange')"
+        (ngInit)="textinput.isValid=textInputname.valid"></ion-textarea> -->
+    <div contenteditable="true" [ngStyle]="getParsedJson(textinput.display_setting_str)" class="mail-body" tabindex="1" id="mailbody" role="textbox" [textContent]="itemval">
+        <!-- <div class="mail-table"></div> -->
+    </div>
+    <div class="input-buttons-container"
+        *ngIf="textinput.value && (!(textinput.item_enable_flag && (!(textinput.item_enable_flag.indexOf(current_page_parameter.MODE)>-1)||(textinput.item_enable_flag=='F')))) ">
+    </div>
+</div>
+<!-- <label>{{textinput.prompt_name}}
+
+    <div class="input-group non-lov-input-group">
+        <ion-input type="text" placeholder="{{textinput.tool_tip}}" id="{{textinput.item_name}}"
+            [(ngModel)]="textinput.value" [maxlength]="textinput.item_size" class="input-text lov-input"
+            #textInputname="ngModel"
+            [readonly]="textinput.item_enable_flag && (!(textinput.item_enable_flag.indexOf(current_page_parameter.MODE)>-1)||(textinput.item_enable_flag=='F'))"
+            [required]="(current_page_parameter.MODE && (textinput.data_required_flag && 
+            (textinput.data_required_flag.indexOf(current_page_parameter.MODE)>-1)) )
+            ||textinput.data_required_flag=='T' 
+            ||textinput.prompt_name[textinput.prompt_name.length -1] =='*'"
+            (ionChange)="onBlur('ionChange');textinput.isValid=textInputname.valid; textinput.touched=true"
+            (ionBlur)="textinput.isValid=textInputname.valid;textinput.touched=true"
+            (ngInit)="textinput.isValid=textInputname.valid">
+        </ion-input>
+        <div *ngIf="textinput.value && (!(textinput.item_enable_flag && (!(textinput.item_enable_flag.indexOf(current_page_parameter.MODE)>-1)||(textinput.item_enable_flag=='F')))) "
+            class="input-group-append">
+            <button class="lov-btn border-left-0 border-right-0" ion-button icon-only small
+                (click)="textinput.value='';textinput.codeOfValues=''">
+                <ion-icon name="close"></ion-icon>
+            </button>
+        </div>
+    </div> -->
+
+
+
+<div *ngIf="textinput.item_sub_type == 'T_BROWSER'" class="new-input-item-type">
+
+
+
+    <ion-row *ngIf="textinput.position != 'floating'">
+        <ion-col size="3" class="text-left">
+            <span>{{textinput.prompt_name}}</span>
+        </ion-col>
+        <!-- <ion-label position="{{(textinput.position == null) ? 'stacked' : textinput.position}}">
+                    {{textinput.prompt_name}}</ion-label> -->
+        <ion-col size="9">
+            <div class="input-group input-group-sm">
+                <ion-input class="form-control form-control-sm" type="text"
+                    [ngStyle]="getParsedJson(textinput.display_setting_str)" id="{{textinput.item_name}}"
+                    [(ngModel)]="textinput.value" [maxlength]="textinput.item_size" #textInputname="ngModel"
+                    [readonly]="textinput.item_enable_flag && (!(textinput.item_enable_flag.indexOf(current_page_parameter.MODE)>-1)||(textinput.item_enable_flag=='F'))"
+                    [required]="(current_page_parameter.MODE && (textinput.data_required_flag && 
+      (textinput.data_required_flag.indexOf(current_page_parameter.MODE)>-1)) )
+      ||textinput.data_required_flag=='T' 
+      ||(textinput.prompt_name && textinput.prompt_name[textinput.prompt_name.length -1]) =='*'"
+                    (ionFocus)="autoPopulate($event)" [pattern]="textinput.input_pattern"
+                    (ionChange)="textinput.isValid=textInputname.valid; textinput.touched=true;onChange()"
+                    (ionBlur)="textinput.isValid=textInputname.valid;textinput.touched=true;onBlur('ionChange')"
+                    (ngInit)="textinput.isValid=textInputname.valid" title="{{textinput.tool_tip}}"
+                    (dblclick)="doubleClickFun($event)"></ion-input>
+
+                <!-- <div class="input-buttons-container"
+            *ngIf="textinput.value && (!(textinput.item_enable_flag && (!(textinput.item_enable_flag.indexOf(current_page_parameter.MODE)>-1)||(textinput.item_enable_flag=='F')))) ">
+
+        </div> -->
+                <!-- <button class="input-btn float-right" ion-button icon-only small
+            (click)="textinput.value='';textinput.codeOfValues=''">
+            <ion-icon name="close"></ion-icon>
+        </button> -->
+                <!-- <button class="btn btn-secondary" type="button" ion-button
+                    (click)="textinput.value='';textinput.codeOfValues=''"
+                    *ngIf="textinput.value && (!(textinput.item_enable_flag && (!(textinput.item_enable_flag.indexOf(current_page_parameter.MODE)>-1)||(textinput.item_enable_flag=='F')))) ">
+                    <i class="fa fa-close" aria-hidden="true"></i>
+                </button> -->
+                <!-- <button class="btn btn-secondary" type="button">
+            <i class="fa fa-chevron-right" aria-hidden="true"></i>
+        </button> -->
+            </div>
+
+
+                <div class="error" *ngIf="textInputname.hasError('required') && textinput.touched">Please Enter
+                    {{textinput.prompt_name}}
+                </div>
+                <div class="error" *ngIf="textInputname.hasError('pattern') && textinput.touched">
+                    {{textinput.tool_tip}}
+                </div>
+                <div class="error" *ngIf="textInputname.hasError('maxlength')">{{textinput.prompt_name}} max
+                    {{textinput.item_size}}
+                    Character</div>
+        </ion-col>
+    </ion-row>
+
+
+    <ion-row *ngIf="textinput.position == 'floating'">
+        
+
+        <ion-col size="12">
+            <div class="form-floating">
+                <!-- <ion-input class="form-control form-control-sm" type="text"
+                    [ngStyle]="getParsedJson(textinput.display_setting_str)" type="text" id="{{textinput.item_name}}"
+                    [(ngModel)]="textinput.value" [maxlength]="textinput.item_size" #textInputname="ngModel"
+                    [readonly]="textinput.item_enable_flag && (!(textinput.item_enable_flag.indexOf(current_page_parameter.MODE)>-1)||(textinput.item_enable_flag=='F'))"
+                    [required]="(current_page_parameter.MODE && (textinput.data_required_flag && 
+(textinput.data_required_flag.indexOf(current_page_parameter.MODE)>-1)) )
+||textinput.data_required_flag=='T' 
+||(textinput.prompt_name && textinput.prompt_name[textinput.prompt_name.length -1]) =='*'"
+                    (ionFocus)="autoPopulate($event)" [pattern]="textinput.input_pattern"
+                    (ionChange)="textinput.isValid=textInputname.valid; textinput.touched=true"
+                    (ionBlur)="textinput.isValid=textInputname.valid;textinput.touched=true;onBlur('ionChange')"
+                    (ngInit)="textinput.isValid=textInputname.valid" title="{{textinput.tool_tip}}"
+                    (dblclick)="doubleClickFun($event)"></ion-input> -->
+                    <input type="text" class="form-control form-control-sm" id="floatingInput" 
+                    [ngStyle]="getParsedJson(textinput.display_setting_str)" type="text" id="{{textinput.item_name}}"
+                    [(ngModel)]="textinput.value" [maxlength]="textinput.item_size" #textInputname="ngModel"
+                    [readonly]="textinput.item_enable_flag && (!(textinput.item_enable_flag.indexOf(current_page_parameter.MODE)>-1)||(textinput.item_enable_flag=='F'))"
+                    [required]="(current_page_parameter.MODE && (textinput.data_required_flag && 
+                    (textinput.data_required_flag.indexOf(current_page_parameter.MODE)>-1)) )
+                    ||textinput.data_required_flag=='T' 
+                    ||(textinput.prompt_name && textinput.prompt_name[textinput.prompt_name.length -1]) =='*'"
+                    (focus)="autoPopulate($event)" [pattern]="textinput.input_pattern"
+                    (change)="textinput.isValid=textInputname.valid; textinput.touched=true;onChange()"
+                    (blur)="textinput.isValid=textInputname.valid;textinput.touched=true;onBlur('ionChange')"
+                    (ngInit)="textinput.isValid=textInputname.valid" title="{{textinput.tool_tip}}"
+                    (dblclick)="doubleClickFun($event)">
+                    <label for="floatingInput">{{textinput.prompt_name}}</label>
+                    <!-- <div class="input-buttons-container"
+*ngIf="textinput.value && (!(textinput.item_enable_flag && (!(textinput.item_enable_flag.indexOf(current_page_parameter.MODE)>-1)||(textinput.item_enable_flag=='F')))) ">
+
+</div> -->
+<!-- <button class="btn btn-secondary" type="button" ion-button
+    (click)="textinput.value='';textinput.codeOfValues=''"
+    *ngIf="textinput.value && (!(textinput.item_enable_flag && (!(textinput.item_enable_flag.indexOf(current_page_parameter.MODE)>-1)||(textinput.item_enable_flag=='F')))) ">
+    <i class="fa fa-close" aria-hidden="true"></i>
+</button> -->
+
+                <!-- <button class="input-btn float-right" ion-button icon-only small
+(click)="textinput.value='';textinput.codeOfValues=''">
+<ion-icon name="close"></ion-icon>
+</button> -->
+                <!-- <button class="btn btn-secondary" type="button">
+<i class="fa fa-chevron-right" aria-hidden="true"></i>
+</button> -->
+            </div>
+
+            <!-- <div class="error" *ngIf="textInputname.hasError('required') && textinput.touched">Please Enter
+                {{textinput.prompt_name}}
+            </div>
+            <div class="error" *ngIf="textInputname.hasError('maxlength')">{{textinput.prompt_name}} max
+                {{textinput.item_size}}
+                Character</div> -->
+        </ion-col>
+    </ion-row>
+    <!-- </ion-item> -->
+    <!-- <div class="recent-search-container" >
+                <ul>
+                    <li *ngFor="let item1 of autoPopulateText">
+                        {{item}}
+                    </li>
+                </ul>
+        </div> -->
+
+
+</div>

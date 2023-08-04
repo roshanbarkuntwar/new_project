@@ -1,0 +1,16 @@
+#notificationalert {
+    .popover-content{
+        width: 500px;
+    }
+}
+ion-content{
+    --padding-start: 10px;
+    --padding-end: 10px;
+}
+.alert{
+    border-left: 5px solid;
+    padding: 10px;
+}
+.text-right{
+    text-align: right;
+}

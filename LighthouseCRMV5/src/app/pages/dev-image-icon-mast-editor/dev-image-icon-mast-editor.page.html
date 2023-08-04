@@ -1,0 +1,93 @@
+<ion-header>
+  <ion-toolbar color="primary">
+
+    <ion-button slot="start" (click)="closePage()" fill="clear" icon-only start>
+      <ion-icon name="arrow-back" color="light"></ion-icon>
+    </ion-button>
+    <ion-title class="title">Image Icon Editor</ion-title>
+
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div id="update">
+    <ion-item *ngIf="flag">
+      <ion-title class="title">App Icon Name : {{data}}</ion-title>
+    </ion-item>
+    <ion-item *ngIf="!flag">
+      <ion-label>App Icon Theme :</ion-label>
+      <ion-input type="text" [(ngModel)]="data" name="App Icon Name"></ion-input>
+    </ion-item>
+    <div id="theme-blue">
+      <tr>
+        <td>
+          <ion-label style="color: azure;">App Icon Theme : theme-blue</ion-label><br>
+          <ion-input style="color: azure;" id="file" type="file" accept="image/*" (change)="onChangeBlue($event)">Choose
+            Image</ion-input>
+        </td>
+        <td>
+          <img [src]="themeBlue" width="80" height="80">
+        </td>
+      </tr>
+    </div>
+
+    <div id="theme-maroon">
+      <tr>
+        <td>
+          <ion-label style="color: azure;">App Icon Theme : theme-maroon</ion-label><br>
+          <ion-input style="color: azure;" type="file" accept="image/*" (change)="onChangeMaroon($event)">Choose Image
+          </ion-input>
+        </td>
+        <td>
+          <img [src]="themeMaroon" width="80" height="80">
+        </td>
+      </tr>
+    </div>
+
+    <div id="theme-green">
+      <tr>
+        <td>
+          <ion-label style="color: azure;">App Icon Theme : theme-green</ion-label><br>
+          <ion-input style="color: azure;" type="file" accept="image/*" (change)="onChangeGreen($event)">Choose Image
+          </ion-input>
+        </td>
+        <td>
+          <img [src]="themeGreen" width="80" height="80">
+        </td>
+      </tr>
+    </div>
+
+    <div id="theme-grey">
+      <tr>
+        <td>
+          <ion-label style="color: azure;">App Icon Theme : theme-grey</ion-label><br>
+          <ion-input style="color: azure;" type="file" accept="image/*" (change)="onChangeGrey($event)">Choose Image
+          </ion-input>
+        </td>
+        <td>
+          <img [src]="themeGray" width="80" height="80">
+        </td>
+      </tr>
+    </div>
+
+    <div id="theme-dark">
+      <tr>
+        <td>
+          <ion-label style="color: azure;">App Icon Theme : theme-dark</ion-label><br>
+          <ion-input style="color: azure;" type="file" accept="image/*" (change)="onChangeDark($event)">Choose Image
+          </ion-input>
+        </td>
+        <td>
+          <img [src]="themeDark" width="80" height="80">
+        </td>
+      </tr>
+    </div>
+    <div>
+ 
+        <ion-button *ngIf="flag" expand="full" (click)="update()">update</ion-button>
+
+        <ion-button *ngIf="!flag" expand="full" (click)="save()">save</ion-button>
+      
+    </div>
+  </div>
+</ion-content>

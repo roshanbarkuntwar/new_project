@@ -1,0 +1,132 @@
+:host{
+  ion-tab-button{
+      max-width: 100%;
+  }
+  --ion-color-contrast: #ab6b6b !important;
+}
+.sql-tran-light{
+  --ion-color-contrast: #ab6b6b !important;
+  padding: 5px;
+  ion-tab-bar{
+      padding: 5px 5px 0 5px;
+      border-bottom: 1px solid #ccc;
+  }
+
+  ion-tab-button{
+      
+      border-top: 1px solid #ddd;
+      border-left: 1px solid #ddd;
+      border-right: 1px solid #ddd;
+      border-bottom: 1px solid #ddd;
+      ion-badge{
+          width: 22px;
+          height: 22px;
+          font-size: 15px;
+      }
+  }
+/*     ion-tab-button.active{
+      border-bottom: 1px solid #fff;
+      background: #4990e2;
+      ion-label , ion-icon{
+          color: #fff;
+
+      }
+      ion-badge{
+     background: #fff;
+     color: #000;
+      }
+  } */
+.search-div{
+  margin-top: 50px;
+}
+.individual-card {
+  padding: 5px;
+  border-radius: 15px 0 0;
+}
+}
+.super-tabs-toolbar{
+  --ion-color-base: #fff;
+  --super-tabs-toolbar-background: #fff;
+  --st-indicator-color : #4990e2;
+}
+.super-tab-button{
+  --st-base-color-active: #4990e2;
+  --st-label-color-active:#4990e2;
+  --ion-color-contrast: #4990e2 !important;
+  --st-label-font-size:16px;
+}
+.super-tab-button.active{
+  ion-badge{
+      background:#4990e2;
+  }
+}
+
+.page-single-select-lov
+{
+  ion-item
+  {
+      --min-height:30px;
+      --background: transparent;
+      --border-color: transparent;
+      ion-checkbox
+      {
+          margin-top:5px;
+          margin-bottom:5px;
+      }
+      ion-label
+      {
+          font-size: 0.8rem;
+      }
+  }
+}
+
+ion-toolbar{
+  height: 55px;
+  --min-height: 55px;
+}
+
+.iosheight{
+  height: 75px;
+  --min-height:75px !important;
+  ion-buttons{
+    margin-top: 15px !important;
+  }
+  ion-title{
+    margin-top: 7px !important;
+  }
+  .right-title{
+    bottom: 17px !important;
+  }
+}
+
+@media only screen and (min-width:375px) and (max-width:500px){
+  .iosheight{
+    height: 100px;
+    --min-height:100px !important;
+    ion-button{
+      margin-top: 15px !important;
+    }
+    ion-title{
+      margin-top: 7px !important;
+    }
+    .right-title{
+      bottom: 45px !important;
+    }
+    }
+}
+@media only screen and (min-width:310px) and (max-width:375px){
+  .iosheight{
+    height: 75px !important;
+    --min-height:75px !important;
+    ion-buttons{
+      margin-top: 15px !important;
+    }
+    ion-title{
+      margin-top: 7px !important;
+    }
+    .right-title{
+      bottom: 17px !important;
+    }
+  
+    }
+}

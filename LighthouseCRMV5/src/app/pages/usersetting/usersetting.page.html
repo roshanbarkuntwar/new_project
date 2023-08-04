@@ -1,0 +1,125 @@
+<div class="user-setting">
+  <ion-header>
+    <ion-toolbar color="primary" class="ion-toolbar">
+      <!-- <ion-button slot="start" (click)="closePage()" fill="clear" icon-only start>
+      <ion-icon name="arrow-back" color="light"></ion-icon>
+    </ion-button> -->
+      <ion-title *ngIf="userValueList.length>0">
+        Login Details
+
+      </ion-title>
+
+    </ion-toolbar>
+
+
+  </ion-header>
+  <ion-content>
+    <div class="full-width">
+      <div class="user-form">
+          <div class="row">
+              <div class="col-md-6 img-area" style="background: #fff;
+              border-radius: 10px 0 0 10px;">
+      <img [src]="displayGif" >
+      <!-- <img src="assets/imgs/word-cloud.png" alt="" style="border-radius: 10px 0 0px 18px;"> -->
+      <!-- <img [src]="displayGif" alt=" style="border-radius: 10px 0 0px 18px;">  -->
+
+     <!--  <div class="bottom-span" style="text-align: center;
+      background: #fff;">
+<p>Powered By <span><img src="../../../assets/video//Login Screen 2(3rd draft).gif" alt="" style="width: 35px; height: auto;"></span></p>
+      </div> -->
+              </div>
+              <div class="col-md-6" style="z-index:99999;">
+        <div class="user-menu">
+          <ng-container *ngFor="let data of userValueList; let i=index">
+            <div class="sidebar-menu">
+              <!--  <ion-avatar slot="start">
+            <img src="./../assets/imgs/sidebarIcons/locationTracking.png">
+          </ion-avatar> -->
+              <div *ngIf="data.item_type == 'DD' && data.item_visible_flag == 'T'">
+                <ion-item class="border-0">
+                  <ion-label position="fixed">{{data.prompt_name}}</ion-label>
+                  <!-- {{value ="data.result.length < 2? data.result[0].value : ''"}} -->
+                  <ion-select [(ngModel)]="data.item_name1" interface="popover"
+                    [required]="data.data_required_flag=='T' || data.prompt_name[data.prompt_name.length -1] =='*'"
+                    (ionChange)="dropdwnValChng($event,data.item_name,'','front');data.isValid=selectinputName.valid"
+                    (ionBlur)="data.isValid=selectinputName.valid" (ngInit)="data.isValid=selectinputName.valid"
+                    #selectinputName='ngModel'>
+                    <ion-select-option *ngFor="let d of data.result" [value]="d.CODE">{{d.VALUE}}
+                    </ion-select-option>
+                  </ion-select>
+                </ion-item>
+              </div>
+
+              <div *ngIf="data.item_type == 'L'  && data.item_visible_flag == 'T'" (click)="openDynamicModal(data)">
+                <ion-item class="border-0">
+
+                  <ion-label class="party-select" position="fixed">
+                    {{data.prompt_name}}
+                  </ion-label>
+                  <span class="lov-inp">
+                    <a *ngIf=" sidelovarray && !userValueList[i].valueforlov">{{sidelovarray[i]}}</a>
+                    {{this.userValueList[i].valueforlov}}
+                    <ion-icon name="caret-down" class="arrowIcon right-arrow-icon" slot="end"></ion-icon>
+                  </span>
+                </ion-item>
+              </div>
+              <div *ngIf="data.item_type == 'D' && data.item_visible_flag == 'T'">
+                  <ion-item *ngIf="platformValue == 'browser'" class="c1" style="overflow: visible !important;">
+                    <ion-label position="fixed">{{data.prompt_name}}
+                    </ion-label>
+                    <input angular-mydatepicker class="new-date-input c1" [options]="myDatePickerOptions"
+                      [(ngModel)]="data.item_name2" #dp="angular-mydatepicker"  (ngModelChange)="onChange(data);" (click)="toggleCalendar()" class="lov-inp"/>
+
+                  </ion-item>
+                  <ion-item *ngIf="platformValue != 'browser'" class="c1" style="overflow: visible !important;">
+                    <ion-label position="fixed">{{data.prompt_name}}
+                    </ion-label>
+
+                    <ion-datetime displayFormat="DD-MMM-YYYY" [(ngModel)]="data.item_name1" [min]="from_value"
+                      [max]="2050" style="width: 100%;" (ionChange)="onChange(data)" #dateinputName='ngModel' class="lov-inp" >
+                    </ion-datetime>
+
+                  </ion-item>
+              </div>
+              <!-- <div *ngIf="data.item_type == 'TEXT' && data.item_visible_flag == 'T'">
+                
+                <ion-item  class="c1" style="overflow: visible !important;">
+                  <ion-label position="fixed">{{data.prompt_name}}
+                  </ion-label>
+
+                  <ion-input [(ngModel)]="data.item_name1" (ionblur)="onChange(data)" >
+                  </ion-input>
+
+                </ion-item>
+            </div> -->
+
+            </div>
+          </ng-container>
+          <div class="center" *ngIf="!userValueList">
+            <div class="text-center">
+              <img src="assets/dot.gif" width="20%">
+            </div>
+          </div>
+        </div>
+        <div *ngIf="userValueList.length>0">
+          <ion-grid>
+            <ion-row>
+              <ion-col class="text-center">
+                <ion-button shape="round" (click)="closePage()" [disabled]="disableButton"  class="text-center" color="primary">
+                  OK
+                </ion-button>
+              </ion-col>
+              <!--   <ion-col class="text-center">
+          <ion-button shape="round" (click)="closePage()" class="text-center">
+            Skip
+          </ion-button>
+        </ion-col> -->
+            </ion-row>
+          </ion-grid>
+        </div>
+</div>
+</div>
+      </div>
+    </div>
+  </ion-content>
+</div>

@@ -1,0 +1,76 @@
+<ion-header>
+  <ion-toolbar color="primary">
+
+    <ion-button slot="start" (click)="popDismiss()" fill="clear" icon-only start>
+      <ion-icon name="close" color="light"></ion-icon>
+    </ion-button>
+    <ion-title>Dev Click Event</ion-title>
+
+    <ion-buttons fill="outline" class="toolbar-text-btn" slot="end" (click)="setClickEvent()">
+      Ok
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-row>
+    <ion-col size="12">
+
+
+      <table>
+        <thead>
+          <th>
+
+          </th>
+          <th>
+            Click Event Str Name
+          </th>
+          <th>
+            Click Event Str Input
+          </th>
+          <th>
+            Click Event Str Code
+          </th>
+          <th>
+
+          </th>
+        </thead>
+        <tbody *ngFor="let data of itemData; let rowIndex = index">
+          <tr>
+            <td>
+              <ion-checkbox color="primary" [(ngModel)] = "data.flag" (ngInit)="data.flag"></ion-checkbox>
+            </td>
+            <td>
+              {{data.click_event_str_name}}
+            </td>
+            <td>
+              <ion-input type="text" placeholder="Enter Input" [(ngModel)] = "data.str" (ngInit)="data.str" (click)="getFrames(rowIndex)"></ion-input>
+            </td>
+            <td>
+              {{data.click_event_str_code}}
+            </td>
+            <td>
+          <tr>
+            <ion-icon name="md-arrow-dropup" (click)="upArrowClick(rowIndex)"></ion-icon>
+          </tr>
+          <tr>
+            <ion-icon name="md-caret-down" (click)="downArrowClick(rowIndex)"></ion-icon>
+          </tr>
+          </td>
+          </tr>
+        </tbody>
+      </table>
+
+    </ion-col>
+
+    
+    <ion-col size="2">
+      <ion-button (click)="generateStr()">Refresh</ion-button>
+      </ion-col>
+
+      <ion-col size="10">
+          <ion-input type="text" placeholder="Enter Input" [(ngModel)]="clickStr"></ion-input>
+        </ion-col>
+
+  </ion-row>
+</ion-content>

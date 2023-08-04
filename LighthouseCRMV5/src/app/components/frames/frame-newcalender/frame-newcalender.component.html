@@ -1,0 +1,96 @@
+
+ 
+<!-- <div class="content"> -->
+ 
+
+  <!-- <div class="fix-top"> -->
+    <ion-row id='enab'>
+      <ion-col col-12>
+      <h1 class="frame-name position-relative" >{{frame.apps_page_frame_name}}<span style="margin-left: 10px;" *ngIf="globalObjects.toggleDevloperMode">[{{frame.apps_page_frame_seqid}}]</span></h1>
+    </ion-col>
+  </ion-row>
+      <div *ngIf="EnableButtons" class="gap">
+        <!-- <ion-button (click)="pickmodeCalender('multi')" id="multi" *ngIf="eventflag" >multidate</ion-button> -->
+        <ion-row>
+          <ion-col size="4">
+            <ion-button color="primary" (click)="pickmodeCalender('range')" expand="full"  id="range" *ngIf="eventflag">range</ion-button>
+          </ion-col>
+          <ion-col size="4">
+            <ion-button  color="primary" (click)="pickmodeCalender('single')" expand="full"  id="single" *ngIf="eventflag">single</ion-button>
+          </ion-col>
+          <ion-col size="4">
+            <ion-button   color="primary" *ngIf="eventflag" expand="full" (click)="eventflag=!eventflag;cardFlag=!cardFlag;returntoShow()">View Events</ion-button>
+          </ion-col>
+        </ion-row>
+       
+        
+       
+        <!-- <ion-button  *ngIf="multibutton" (click)="addMultidateEvent()">add </ion-button> -->
+        <ng-container *ngIf="addEventBT">
+  
+          <ion-button  color="primary" expand="full"   *ngIf="!eventflag" (click)="eventflag=!eventflag;cardFlag=!cardFlag;addEventCard('single')">Add Events</ion-button>
+        </ng-container>
+      </div>
+     
+      <!-- calenders for show event -->
+      <div  *ngIf="!eventflag" >
+        <div class="calender-div" *ngIf="loadCal" >
+          <ion-calendar #calendar [(ngModel)]="currentEvents"  [options]="optionsMulti" (ngModelChange)="changeEvent('viewEvent',$event)"
+            [format]="'YYYY-MM-DD'">
+          </ion-calendar>
+        </div>
+        <div class="calender-div" *ngIf="!loadCal">
+          <ion-calendar #calendar [(ngModel)]="currentEvents" [options]="optionsMulti" (ngModelChange)="changeEvent('viewEvent',$event)"
+            [format]="'YYYY-MM-DD'">
+          </ion-calendar>
+        </div>
+      </div>
+  
+      <!-- calenders for edit -->
+      <div *ngIf="eventflag"> 
+        <div class="calender-div" *ngIf="optionsRange.pickMode=='single'">
+          <ion-calendar #calendar [(ngModel)]="dateRange"   [options]="optionsRange" [type]="type" (change)="changeEvent($event)"
+            [format]="'YYYY-MM-DD'">
+          </ion-calendar>
+        </div>
+        <div class="calender-div" *ngIf="optionsRange.pickMode=='multi'">
+          <ion-calendar #calendar [(ngModel)]="dateRange"   [options]="optionsRange" [type]="type" (change)="changeEvent($event)"
+            [format]="'YYYY-MM-DD'">
+          </ion-calendar>
+        </div> 
+        <div class="calender-div" *ngIf="optionsRange.pickMode=='range'">
+          <ion-calendar #calendar [(ngModel)]="dateRange"   [options]="optionsRange" [type]="type" (change)="changeEvent($event)"
+            [format]="'YYYY-MM-DD'">
+          </ion-calendar>
+        </div>
+      <!-- </div> -->
+  
+    </div>
+  
+  
+    <!-- <div class="scroll-div"> -->
+      <div *ngIf="!cardFlag">
+        <!-- card frame for edit -->
+        <app-frame-card  [frame]="cardAddframe" [wsdp]="wsdp" [wsdpcl]="wsdpcl" (emitPass1)="itemClickednew($event)">
+        </app-frame-card>
+          <!-- footer buttons for save entry -->
+        <ng-container *ngFor = "let itmGrp of footerItem">
+          <ng-container *ngFor = "let input_item of itmGrp.Level5">
+            <app-items class="p-0" [item]="input_item" [wscp]="wscp" (emitPass)="itemClicked($event,rows,i,j)"
+                              (LHSOnChange)="itemValueChange($event,j)">
+            </app-items>
+          </ng-container>
+        </ng-container>
+      </div>
+  
+  
+  
+  
+      <div *ngIf="cardFlag ">
+        <!-- card frame for show event only -->
+        <app-frame-card [hidden]="flag" [frame]="frame" [wsdp]="wsdp" [wsdpcl]="wsdpcl" (emitPass1)="itemClickednew($event)">
+        </app-frame-card>
+      </div>
+    <!-- </div> -->
+  
+  <!-- </div> -->

@@ -1,0 +1,32 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-button slot="start" (click)="closePage()" fill="clear" icon-only start>
+        <ion-icon name="arrow-back" color="light"></ion-icon>
+      </ion-button>
+    <ion-title class="title">Beta Versions</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div class="divheading">
+    <h6 class="heading">Early access to upcoming versions of the app for TESTING purpose.</h6>
+  </div>
+  <div class="instruction">
+    <h6 class="subheading">* Follow below steps to install beta version:-</h6>
+    Step1: Download apk file.<br>
+    Step2: Uninstall your current app.<br>
+    Step3: Install downloaded apk file.<br>
+  </div>
+  <ion-list class="menu-list" *ngFor="let row of fileList; let i=index">
+    <ion-item class="ion-no-padding" (click)="downloadApk(row.fileName, row.filePath)">
+
+      <h2>{{i+1}}) {{row.fileName}}</h2>
+      <div class="text-center" style="margin-left: 10px" slot="end">
+        <ion-icon name="download" slot="end" color="secondary"></ion-icon><br>
+        <span class="fileDate">{{fileDate[i]}}</span>
+      </div>
+    </ion-item>
+  </ion-list>
+
+
+</ion-content>

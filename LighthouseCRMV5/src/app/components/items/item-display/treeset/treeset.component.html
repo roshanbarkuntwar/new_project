@@ -1,0 +1,24 @@
+<div class="tree">
+  <ul class="file-ul">
+    <li *ngFor="let item of model" [ngClass]="{'children-list':isChild}">
+      <div class="trees-items" (click)="toggleItem(item)">
+        <div class="file-ico">
+          <ion-icon name="add-circle-outline"   color="secondary" *ngIf="isFile"></ion-icon>
+          <ion-icon name="remove-circle-outline" *ngIf="item.folders&&(item.toggle === 'off'||item.toggle === 'init')">
+          </ion-icon>
+          <ion-icon name="add-circle-outline" *ngIf="!isFile&&item.folders&&(item.toggle === 'off'||item.toggle === 'init')">
+          </ion-icon>
+          <ion-icon name="caret-down" *ngIf="item.folders&&item.toggle === 'on'"></ion-icon>
+          <ion-icon name="folder-open" *ngIf="item.folders&&item.toggle === 'on'"></ion-icon>
+        </div>
+        <span *ngIf="!isFile" >{{item.folderName}}</span>
+        <span *ngIf="isFile" (click)="DownloadandOpenPdf(item.fileName,i)" >{{item.fileName}}</span>
+      </div>
+      <div class="item-children" [@collapse]="item.toggle">
+        <app-treeset *ngIf="!isFile && item.folders" [model]="item.folders" isChild="true"  ></app-treeset>
+        <app-treeset *ngIf="!isFile && item.files" [model]="item.files" [isFile]="true" isChild="true">
+        </app-treeset>
+      </div>
+    </li>
+  </ul>
+</div>

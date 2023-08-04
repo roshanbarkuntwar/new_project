@@ -1,0 +1,145 @@
+<div class="highlight-container">
+  <ion-row>
+    <ion-col size="12">
+      <h5>Highlight</h5>
+    </ion-col>
+  </ion-row>
+  <ion-row>
+    <ion-col size="3">
+      <div class="highlight-div">
+        <ion-label>Sequence</ion-label>
+        <input class="input-txt">
+      </div>
+    </ion-col>
+    <ion-col size="5">
+      <div class="highlight-div">
+        <ion-label>Name</ion-label>
+        <input class="input-txt">
+      </div>
+    </ion-col>
+    <ion-col size="3">
+      <div class="highlight-div">
+        <ion-label>Highlight Type</ion-label>
+        <ion-select placeholder="Select One">
+          <ion-select-option>Option 1</ion-select-option>
+          <ion-select-option>Option 2</ion-select-option>
+        </ion-select>
+      </div>
+    </ion-col>
+    <ion-col size="1" class="p-0">
+      <div class="highlight-div">
+        <ion-label>Enabled</ion-label>
+        <ion-toggle color="primary"></ion-toggle>
+      </div>
+    </ion-col>
+  </ion-row>
+  <ion-row class="p-0">
+    <ion-col size="12" class="p-0">
+      <span>Highlight Style</span>
+    </ion-col>
+  </ion-row>
+  <ion-row>
+    <ion-col size="5">
+      <div class="highlight-div">
+        <ion-label>Background Color</ion-label>
+        <div class="input-group">
+          <!-- <ion-input class="input-txt2" [(ngModel)]="selectedBackCol"></ion-input> -->
+          <!-- <span class="sub-input" [(colorPicker)]="backColor" [cpOKButton]="true" [cpOKButtonText]="'Select'"
+            [cpCancelButton]="true" [cpSaveClickOutside]="'false'" [cpDisableInput]="false"
+            [cpAlphaChannel]="'disabled'" [cpOutputFormat]="'hex'" (colorPickerSelect)="backColorSelected($event)"
+            [cpAddColorButton]="true">
+            <ion-icon name="create"></ion-icon>
+          </span> -->
+          <span class="sub-input" [style.background]="selectedBackCol"></span>
+        </div>
+
+      </div>
+      <div class="color-pallete">
+        <span *ngFor="let l of lightColors" class="color {{l.class}}" (click)="changeBackColor(l.value)"></span>
+        <!--  <span class="color c2"></span>
+        <span class="color c3"></span>
+        <span class="color c4"></span>
+        <span class="color c5"></span>
+        <span class="color c6"></span>
+        <span class="color c7"></span>
+        <span class="color c8"></span> -->
+      </div>
+    </ion-col>
+    <ion-col size="5">
+      <div class="highlight-div">
+        <ion-label>Text Color</ion-label>
+        <div class="input-group">
+          <input class="input-txt2">
+          <span class="sub-input">
+            <ion-icon name="create"></ion-icon>
+          </span>
+          <span class="sub-input" [style.background]="colorList[0].value"></span>
+        </div>
+        <div class="color-pallete">
+
+          <span *ngFor="let d of darkColor" class="color {{d.class}}" (click)="changeTextColor(d.value)"></span>
+          <!--  <span class="color c9"></span>
+        <span class="color c10"></span>
+        <span class="color c11"></span>
+        <span class="color c12"></span>
+        <span class="color c13"></span>
+        <span class="color c14"></span>
+        <span class="color c15"></span>
+        <span class="color c16"></span> -->
+        </div>
+        </div>
+    </ion-col>
+    <ion-col size="2">
+      <div class="highlight-div">
+        <ion-label>Preview</ion-label>
+        <div class="prev" [style.background]="backColor">
+          <span [style.color]="fontColor">Aa</span>
+        </div>
+      </div>
+    </ion-col>
+  </ion-row>
+  <ion-row class="p-0">
+    <ion-col size="12" class="p-0">
+      <span>Highlight Condition</span>
+    </ion-col>
+  </ion-row>
+  <ion-row>
+    <ion-col size="3">
+      <div class="highlight-div">
+        <ion-label>Column</ion-label>
+        <ion-select [(ngModel)]="coloumns">
+          <ion-select-option *ngFor="let d of apexThead" [value]="d">{{d.prompt_name}}
+          </ion-select-option>
+        </ion-select>
+      </div>
+    </ion-col>
+    <ion-col size="3">
+      <div class="highlight-div">
+        <ion-label>Operator</ion-label>
+        <ion-select [(ngModel)]="operator">
+          <ion-select-option *ngFor="let d of operators" [value]="d">{{d}}
+          </ion-select-option>
+        </ion-select>
+      </div>
+    </ion-col>
+    <ion-col size="6">
+      <div class="highlight-div">
+        <ion-label>Expression</ion-label>
+        <div class="input-group">
+          <input class="input-txt2" [(ngModel)]="expression" style="width: calc(100% - 40px);">
+          <span class="sub-input">
+            <ion-icon name="chevron-down-outline"></ion-icon>
+          </span>
+
+        </div>
+
+      </div>
+    </ion-col>
+  </ion-row>
+  <ion-row>
+    <ion-col size="12" class="text-right">
+      <ion-button fill="outline" size="small" (click)="closePop()">Cancel </ion-button>
+      <ion-button color="primary" size="small" (click)="createCondition()">Apply </ion-button>
+    </ion-col>
+  </ion-row>
+</div>

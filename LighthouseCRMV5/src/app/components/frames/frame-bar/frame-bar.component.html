@@ -1,0 +1,14 @@
+
+
+
+<ion-row *ngIf="frame.apps_page_frame_name">
+  <ion-col class="pl-0" >
+    <h1 class="frame-name ">{{frame.apps_page_frame_name}}<span style="margin-left: 10px;" *ngIf="globalObjects.toggleDevloperMode">[{{frame.apps_page_frame_seqid}}]</span></h1>
+  </ion-col>
+</ion-row>
+<div [id]="barchart_values" class="frame-bar" *ngIf="barGraphFlag"></div>
+<div *ngIf="!barGraphFlag">
+  <div [id]="barchart_values" class="frame-bar-4" *ngIf="barGraphValue==4"></div>
+  <div [id]="barchart_values" class="frame-bar-6" *ngIf="barGraphValue==6"></div>
+  <div [id]="barchart_values" class="frame-bar-12" *ngIf="barGraphValue==12"></div>
+</div>

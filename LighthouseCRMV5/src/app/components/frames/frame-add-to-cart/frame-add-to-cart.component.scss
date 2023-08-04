@@ -1,0 +1,253 @@
+/*Add to cart & cart summary start */
+.add-to-cart {
+    .item-native {
+        border: 0;
+    }
+    h2
+    {
+        font-size: 13px;
+        font-weight: 500;
+        color: #232323; 
+    }
+    ion-thumbnail {
+        width: 70px;
+        height: 55px;
+    }
+
+    ion-label{
+        max-width: 100% !important;
+        min-width: 100% !important;
+        width: 100% !important;
+        white-space: break-spaces;
+    }
+
+    .border-bottom-input input:focus {
+        border-bottom: 0px solid transparent !important;
+    }
+
+    ion-item {
+        --highlight-color-focused: none;
+    }
+
+    ion-card {
+        box-shadow: 0 3px 1px -2px rgba(0, 0, 0, .2), 0 2px 2px 0 rgba(0, 0, 0, .14), 0 1px 5px 0 rgba(0, 0, 0, .12), 0px 0px 10px #e4e4e4;
+        overflow: visible;
+    }
+  
+    .qty-description {
+
+        --min-height: 25px;
+
+        h5 {
+
+            font-weight: 500;
+            font-size: 1rem;
+        }
+
+        .min-qty-count {
+
+            display: inline-block;
+            padding: 0px 5px;
+            border-radius: 15px;
+            min-width: 30px;
+            font-size: 0.8rem;
+            text-align: center;
+            height: 10;
+            margin-left: 5px;
+            font-weight: bold;
+
+        }
+    }
+
+    .ion-thumbnail {
+        width: 70px;
+        height: 60px;
+    }
+
+    .total-qty {
+        right: 0px;
+        bottom: 10px;
+
+        min-width: 120px;
+        border-radius: 20px 0px 0px 20px;
+        height: 28px;
+        line-height: 28px;
+        color: #fff;
+        font-size: 1rem;
+        padding-right: 5px;
+        padding-left: 65px;
+        text-align: right;
+
+        &::after {
+            content: "Total Amt";
+            position: absolute;
+            left: 6px;
+            font-size: 0.8rem;
+
+        }
+    }
+
+    .add-to-cart-btn {
+        right: -10px;
+        top: -7px;
+
+        border-radius: 50%;
+        width: 25px;
+        height: 25px;
+        color: #fff;
+        text-align: center;
+        line-height: 27px;
+        font-size: 1rem;
+    }
+
+    .cart-summary {
+        h1 {
+            margin-top: 4px;
+            font-size: 22px;
+
+            margin-bottom: 0px;
+        }
+
+        .total-label {
+            width: 67px;
+            margin-bottom: 5px;
+        }
+
+        .cart-summary-icon {
+
+            width: 30px;
+            height: 30px;
+            color: #fff;
+            border-radius: 50%;
+            font-size: 1.2rem;
+            text-align: center;
+            line-height: 33px;
+            margin: auto;
+            z-index: 1;
+            top: -11px;
+            left: calc(50% - 15px);
+
+            &::after {
+                content: "";
+                position: absolute;
+
+                width: 38px;
+                height: 38px;
+                border-radius: 50%;
+                left: -4px;
+                top: -4px;
+                z-index: -1;
+            }
+        }
+    }
+    
+    .min-qty-count {
+
+        display: inline-block;
+        padding: 0px 5px;
+        border-radius: 15px;
+        min-width: 30px;
+        font-size: 0.8rem;
+        text-align: center;
+        height: 10;
+        margin-left: 5px;
+        font-weight: bold;
+
+    }
+    .rupees-icon
+    {
+       
+       
+        width: 18px;
+        height:18px;
+        padding: 4px;
+        padding-top: 4px;
+        padding-right: 4px;
+        padding-bottom: 4px;
+        padding-left: 4px;
+        border-radius: 50%;
+        vertical-align: bottom;
+    }
+    h5 {
+        font-size: 17px;
+       
+    }
+    .min-qty-label,.min-qty-value
+    {
+        font-size:12px !important;
+        color: #808080;
+    }
+    .add-btn-section
+    {
+        ion-button
+        {
+            width:93px;
+           
+        }
+        .input-group
+        {
+           
+            border-radius: 4px;
+            ion-input
+            {
+                --padding-top: 0;
+               --padding-bottom: 0px;
+               width: 45px;
+              
+               
+               
+            }
+            ion-input.has-focus {
+                border-bottom: 0px solid transparent !important;
+            }
+            .unit-text:focus
+            {
+                   outline:none;
+            }
+            .border-bottom-lov-btn {
+
+                height: 24px;
+                width: 100%;
+                background: transparent;
+                border: none !important;
+                font-size: 15px;
+               
+                padding: 3px 4px;
+            }
+        }
+    }
+    .bag-section
+    {
+       
+       font-size: 25px;
+       margin-right: 10px;
+       .bag-section-count
+       {
+        width: 20px;
+        height: 20px;
+        border-radius: 50%;
+        right: -9px;
+        top: -8px;
+        background: #d80b0b;
+        line-height: 18px;
+        font-size: 10px;
+        color: #fff;
+        text-align: center;
+        font-weight: 600;
+       }
+    }
+    .cart-search
+    {
+     width:calc(100% - 50px);
+     display: inline-flex;
+     margin-left: 10px;
+    }
+    .back-btn
+    {
+        --padding-start: 5px;
+        height: 24px;
+    
+    }
+}
+
+/*Add to cart & cart summary start */

@@ -1,0 +1,47 @@
+<ion-toolbar color="primary">
+    <ion-buttons slot="start" (click)="closeLov()">
+        <ion-icon slot="icon-only" name="arrow-back"></ion-icon>
+    </ion-buttons>
+    <ion-title>
+        Party List
+    </ion-title>
+
+    <ion-buttons fill="outline" class="toolbar-text-btn" slot="end">
+        Ok
+    </ion-buttons>
+
+
+</ion-toolbar>
+<ion-content>
+    <div class="table-responsive">
+        <table>
+            <thead>
+                <tr>
+                    <th>
+                        Party Code
+                    </th>
+                    <th>
+                        Party Name
+                    </th>
+                    <th>
+                        City
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let party of partyList" (click)="selectParty(party)">
+                    <td>
+                        {{party.partyCode}}
+                    </td>
+                    <td>
+                        {{party.partyName}}
+                    </td>
+                    <td>
+                        {{party.city}}
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+</ion-content>

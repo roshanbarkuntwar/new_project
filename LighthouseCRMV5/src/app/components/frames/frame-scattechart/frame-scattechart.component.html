@@ -1,0 +1,12 @@
+<ion-row *ngIf="frame.apps_page_frame_name">
+  <ion-col class="pl-0">
+    <h1 class="frame-name ">{{frame.apps_page_frame_name}}<span style="margin-left: 10px;"
+        *ngIf="globalObjects.toggleDevloperMode">[{{frame.apps_page_frame_seqid}}]</span></h1>
+  </ion-col>
+</ion-row>
+<div [id]="chart_div" class="frame-scatterchart" style="width: 100%; height: 50%;" *ngIf="scatteChartFlag"></div>
+<div *ngIf="!scatteChartFlag">
+  <div [id]="chart_div" class="frame-scatterchart-4" *ngIf="scatteChartValue==4"></div>
+  <div [id]="chart_div" class="frame-scatterchart-6" *ngIf="scatteChartValue==6"></div>
+  <div [id]="chart_div" class="frame-scatterchart-12" *ngIf="scatteChartValue==12"></div>
+</div>

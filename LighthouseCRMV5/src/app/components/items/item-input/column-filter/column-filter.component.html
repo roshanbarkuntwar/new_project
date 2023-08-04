@@ -1,0 +1,98 @@
+<div class="smart-filter-section smart-filter-section-columnlist" *ngIf ="!itemData">
+  <div class="smart-filter-section__header">
+    <h5 class="m-0 d-inline-block">{{colFilter.prompt_name}}<sup>{{range}} of {{Vlength}}</sup></h5>
+    
+    <ion-button class="float-right view-all-btn" color="primary" fill="clear" size="small"  (click)="clearall(dataSet)">Clear</ion-button>
+  </div>
+  <ion-row>
+      <ion-col size="4" *ngFor="let object of map | keyvalue;let i=index" [hidden]="i>=range"  (click)="onColumnClick($event,object,i)">
+          {{object.key}}
+       </ion-col>
+      </ion-row>
+       <div>
+        <ion-button class="float-right view-all-btn" color="primary" fill="clear" size="small" [hidden] ="range >= Vlength" (click)="increaseRange()">View more item</ion-button>
+      </div>
+
+
+</div>
+
+
+
+<div class="smart-filter-section smart-filter-section-columnlist" *ngIf ="itemData">
+  <div class="smart-filter-section__header">
+    <h5 class="m-0 d-inline-block">{{colFilter.prompt_name}}<sup>{{range}} of {{Vlength}}</sup></h5>
+    
+    <ion-button class="float-right view-all-btn" color="primary" fill="clear" size="small"  (click)="clearall(dataSet)">Clear</ion-button>
+  </div>
+  <ion-row>
+      <ion-col size="4" *ngFor="let object of itemDataArr;let i=index" [hidden]="i>=range"  (click)="onSelect($event,object,i)">
+          {{object.value}}
+       </ion-col>
+      </ion-row>
+       <div>
+        <ion-button class="float-right view-all-btn" color="primary" fill="clear" size="small" [hidden] ="range >= Vlength" (click)="increaseRange()">View more item</ion-button>
+      </div>
+
+
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ <!-- <ion-col class="h-100" size="4" (click)="onColumnClick($event)">
+
+      Row Material
+
+    </ion-col>
+    <ion-col class="h-100" size="4" (click)="onColumnClick($event)">
+
+      Finished Good
+
+    </ion-col>
+    <ion-col class="h-100" size="4" (click)="onColumnClick($event)">
+
+      Trading Good
+
+    </ion-col>
+    <ion-col class="h-100" size="4" (click)="onColumnClick($event)">
+
+      Waste Material
+
+    </ion-col>
+    <ion-col class="h-100" size="4" (click)="onColumnClick($event)">
+
+      Other Good
+
+    </ion-col>
+    <ion-col class="h-100" size="4" (click)="onColumnClick($event)">
+
+      Finished Good
+
+    </ion-col>
+    <ion-col class="h-100" size="4" (click)="onColumnClick($event)">
+
+      Row Material
+
+    </ion-col>
+    <ion-col class="h-100" size="4" (click)="onColumnClick($event)">
+
+      Finished Good
+
+    </ion-col> -->

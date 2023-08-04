@@ -1,0 +1,38 @@
+.name-value-text
+{
+    --min-height:25px;
+    --padding-start: 0px;
+    border-bottom: 1px solid #e5e1e1 ;
+   .label-name,.label-value
+   {
+    white-space: normal;
+    text-overflow: unset;
+    display: flex;
+    align-items: center;
+   }
+    .label-name
+    {
+        background: #fafafa;
+    margin: 0px !important;
+    height: 100%;
+    padding-left: 10px;
+    color: #6f6969;
+    margin-right: 8px !important;
+    display: flex;
+    align-items: center;
+    }
+}
+
+.block-text ion-label{
+    text-overflow: unset !important;
+    white-space: break-spaces !important;
+}
+.item.sc-ion-label-md-h, .item .sc-ion-label-md-h {
+    font-size: 13px;
+}
+
+.timeline-p{
+    font-size: 14px;
+    font-weight: 500;
+}
+

@@ -1,0 +1,136 @@
+<ion-header>
+  <ion-toolbar color="primary">
+
+    <ion-button slot="start" (click)="closePage()" fill="clear" icon-only start>
+      <ion-icon name="arrow-back" color="light"></ion-icon>
+    </ion-button>
+    <ion-title class="title">Frame Editor</ion-title>
+
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+<ion-row>
+  <ion-col size="6">
+      <p class="m-0 label-white" >
+          <span style="font-weight: bold"> Object Code :</span> {{data.object_code}}</p>
+  </ion-col>
+
+  <ion-col size="6">
+      <p class="m-0 label-white" >
+          <span style="font-weight: bold"> Apps Page Frame Seq Id :</span> {{data.apps_page_frame_seqid}}</p>
+  </ion-col>
+</ion-row>
+
+<ion-row>
+
+    <ion-col size="12">
+        <ion-item>
+          <ion-label position="floating">Apps Page Frame Name :</ion-label>
+          <ion-input type="text" [(ngModel)]="data.apps_page_frame_name"></ion-input>
+        </ion-item>
+      </ion-col>
+
+  <ion-col size="4">
+      <ion-item >
+          <ion-label position="floating">Apps Page No :</ion-label>
+          <ion-input type="text" [(ngModel)]="data.apps_page_no"></ion-input>
+        </ion-item>
+  </ion-col>
+
+  <ion-col size="4">
+      <ion-item >
+          <ion-label position="floating">Apps Frame Seq No :</ion-label>
+          <ion-input type="text" [(ngModel)]="data.apps_frame_seqno"></ion-input>
+        </ion-item>
+  </ion-col>
+
+  <ion-col size="4">
+      <ion-item >
+          <ion-label position="floating">Apps Frame Type :</ion-label>
+          <ion-input type="text" [(ngModel)]="data.apps_frame_type"></ion-input>
+        </ion-item>
+  </ion-col>
+      <ion-col size="4">
+          <ion-item >
+              <ion-label position="floating">No Of Records:</ion-label>
+              <ion-input type="text" [(ngModel)]="data.no_of_records"></ion-input>
+            </ion-item>
+      </ion-col>
+  
+      <ion-col size="8">
+          <ion-item >
+              <ion-label position="floating">On Frame Load Str :</ion-label>
+              <ion-input type="text" [(ngModel)]="data.on_frame_load_str"></ion-input>
+            </ion-item>
+      </ion-col>
+  
+      <ion-col size="4">
+          <ion-item >
+              <ion-label position="floating">Frame Filter Flag :</ion-label>
+              <ion-input type="text" [(ngModel)]="data.frame_filter_flag"></ion-input>
+            </ion-item>
+      </ion-col>
+
+
+      <ion-col size="4">
+          <ion-item >
+              <ion-label position="floating">Template Frame Seq Id :</ion-label>
+              <ion-input type="text" [(ngModel)]="data.template_frame_seqid"></ion-input>
+            </ion-item>
+      </ion-col>
+  
+      <ion-col size="4">
+          <ion-item >
+              <ion-label position="floating">Css Class Frame :</ion-label>
+              <ion-input type="text" [(ngModel)]="data.css_class_frame"></ion-input>
+            </ion-item>
+      </ion-col>
+  
+      <ion-col size="4">
+          <ion-item >
+              <ion-label position="floating">Display No Of Records :</ion-label>
+              <ion-input type="text" [(ngModel)]="data.display_no_of_records"></ion-input>
+            </ion-item>
+      </ion-col>
+
+
+      <ion-col size="6">
+          <ion-item >
+              <ion-label position="floating">Design Control Type :</ion-label>
+              <ion-input type="text" [(ngModel)]="data.design_control_type"></ion-input>
+            </ion-item>
+      </ion-col>
+  
+      <ion-col size="4">
+          <ion-item >
+              <ion-label position="floating">Design Control Type Ls :</ion-label>
+              <ion-input type="text" [(ngModel)]="data.design_control_type_ls"></ion-input>
+            </ion-item>
+      </ion-col>
+
+      <ion-col size="12">
+        <!-- <span (click)="beautify_pl_sql_text(data.pl_sql_text)"><img  src="assets/imgs/plsqlbeautifer.PNG" ></span> -->
+        <ion-button size="small" (click)="beautify_pl_sql_text(data.pl_sql_text)">beautifier</ion-button>
+        <ion-button size="small" (click)="minifier_pl_sql_text(data.pl_sql_text)">minifier</ion-button>
+        <ion-item>
+          <ion-label position="floating">Pl Sql Text :</ion-label> 
+          <ion-textarea autoGrow="true" type="text" [(ngModel)]="data.pl_sql_text"></ion-textarea>
+        </ion-item>
+      </ion-col>
+
+
+      <ion-col size="12">
+      
+        <ion-button size="small" (click)="beautify_sql_text(data.sql_text)">beautifier</ion-button>
+        <ion-button size="small" (click)="minifier_sql_text(data.sql_text)">minifier</ion-button>
+          <ion-item>
+            <ion-label position="floating">Sql Text  :</ion-label>
+            <ion-textarea autoGrow="true" type="text" [(ngModel)]="data.sql_text"></ion-textarea>
+          </ion-item>
+        </ion-col>
+
+</ion-row>
+
+</ion-content>

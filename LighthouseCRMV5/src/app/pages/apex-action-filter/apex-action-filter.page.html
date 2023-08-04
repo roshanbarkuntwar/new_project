@@ -1,0 +1,546 @@
+<div class="apex-action-filter">
+  <ion-toolbar color="primary">
+    <ion-segment>
+      <ion-segment-button *ngIf="shuffle == 'Filter'">
+        <ion-label style="display: flex;align-items: center;justify-content: center;"><ion-icon name="grid" class="c-white"></ion-icon>Filter</ion-label>
+      </ion-segment-button>
+        <ion-segment-button *ngIf="shuffle == 'Aggregate'">
+        <ion-label style="display: flex;align-items: center;justify-content: center;"><ion-icon name="calculator" class="c-white"></ion-icon>Aggregate</ion-label>
+      </ion-segment-button> 
+      <ion-segment-button *ngIf="shuffle == 'Sort'">
+        <ion-label style="display: flex;align-items: center;justify-content: center;"><ion-icon name="menu" class="c-white"></ion-icon>Sort</ion-label>
+      </ion-segment-button> 
+      <ion-segment-button *ngIf="shuffle == 'Rows Per Page'">
+        <ion-label style="display: flex;align-items: center;justify-content: center;"><ion-icon name="grid"  class="c-white"></ion-icon>Rows Per Page</ion-label>
+      </ion-segment-button> 
+      <ion-segment-button *ngIf="shuffle == 'Control Break'">
+        <ion-label style="display: flex;align-items: center;justify-content: center;"><ion-icon name="grid" class="c-white"></ion-icon>Control Break</ion-label>
+      </ion-segment-button>
+      <ion-segment-button *ngIf="shuffle == 'Group By'">
+        <ion-label style="display: flex;align-items: center;justify-content: center;"><ion-icon name="grid" class="c-white"></ion-icon>Group By</ion-label>
+      </ion-segment-button>
+      
+      
+    </ion-segment>
+  </ion-toolbar>
+  
+  <div class="popover-page">
+  
+    <!-- <div *ngIf="shuffle">
+  <ion-row>
+    <ion-col size="12">
+        <ion-label>Name</ion-label>
+        <ion-input type="text" ></ion-input>
+  
+    </ion-col>
+  </ion-row>
+  <ion-row>
+      <ion-col size="12">
+          <ion-label>Filter Expression</ion-label>
+          <ion-textarea rows="3" cols="20" placeholder="Enter any notes here..." [(ngModel)]="expressionQuery"></ion-textarea>
+  
+    
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col size="6">
+        <div class="list">
+        <h3 class="text-center">Columns</h3>
+        <div class="inner-list inner-list-apex">
+          <ng-container *ngFor="let x of thead ;let i=index">
+                     <p (click)="addElement(x,i)">{{x}}</p>
+          </ng-container>
+        </div>
+  </div>
+      </ion-col>
+      <ion-col size="6">
+        <div class="list">
+            <h3 class="text-center">Functions/Operations</h3>
+            <div class="inner-list inner-list-apex">
+              <ng-container *ngFor="let y of dbFunction ;let j=index">
+                <p (click)="addElement(y,j)">{{y}}</p>
+     </ng-container>
+               
+              </div>
+        </div>
+      </ion-col>
+    </ion-row>
+     <ion-row>
+       <ion-col class="text-right" size="12">
+          <ion-button color="secondary" size="small">Cancel</ion-button>
+          <ion-button  color="primary" size="small">Apply</ion-button>
+          
+       </ion-col>
+     </ion-row>
+    </div> -->
+      <!-- <div *ngIf="shuffle">
+    <ion-segment value="Column">
+        <ion-segment-button  (click)="formatShuffle('Control-Break')" value="Column">
+          <ion-label style="display: flex;align-items: center;justify-content: center;"><ion-icon name="grid" color="primary"></ion-icon>Sort</ion-label>
+        </ion-segment-button>
+          <ion-segment-button (click)="formatShuffle('Set-Row')" value="Rows">
+          <ion-label style="display: flex;align-items: center;justify-content: center;"><ion-icon name="calculator" color="primary"></ion-icon>Aggregate</ion-label>
+        </ion-segment-button> 
+      </ion-segment> -->
+   
+  
+  
+    <!-- Format -->
+    
+  <div *ngIf="shuffle == 'Sort'">
+  
+    <table>
+        <thead>
+          <tr>
+            <th>
+              Column Name
+            </th>
+            <th>
+              Direction
+            </th>
+            <th>
+              Null Sorting
+            </th>
+            <th class="tdClass">
+              Actions
+            </th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor = "let r of formatRows;let i=index">
+            <td>
+              <ion-select [(ngModel)]="r.coloumns">
+                <ion-select-option *ngFor="let d of apexThead" [value]="d">{{d.prompt_name}}
+                </ion-select-option>
+              </ion-select>
+            </td>
+            <td>
+              <ion-select [(ngModel)]="r.ordFormat" >
+                <ion-select-option *ngFor="let d of orderFormat" [value]="d">{{d}}
+                </ion-select-option>
+              </ion-select>
+            </td>
+            <td>
+              <ion-select [(ngModel)]="r.nullPosition">
+                <ion-select-option *ngFor="let d of nullValue" [value]="d">{{d}}
+                </ion-select-option>
+              </ion-select>
+            </td>
+            <td class="tdClass">
+  
+              <ion-button (click)="addFieldValue('formRows')"  size="small" class="icon-btn action-btn" style="margin-top: 0px;margin-bottom: 0px;" color="primary">
+                <ion-icon name="add-circle"></ion-icon>
+              </ion-button>
+  
+              <ion-button (click)="rmFieldValue(i,'formRows')" *ngIf="formatRows.length > 1" size="small" class="icon-btn action-btn" style="margin-top: 0px;margin-bottom: 0px;" color="primary">
+                <ion-icon name="remove-circle"></ion-icon>
+              </ion-button>
+            
+            </td>
+          </tr>
+        </tbody>
+        </table>
+  
+        <ion-row>
+        
+              <ion-col size="12" style="text-align: center;">
+            <ion-button (click)="createFormat()" color="primary" size="small">Ok</ion-button>
+            <ion-button (click)="cancel()" color="secondary" size="small">Cancel</ion-button>
+          </ion-col>
+  
+        </ion-row>
+      </div>
+    <!-- <ion-grid>
+      <ion-row *ngFor = "let r of formatRows;let j=index">
+        <ion-col size="5">
+          <div>
+            <ion-label>Column Name</ion-label>
+            <ion-select [(ngModel)]="r.coloumns" >
+              <ion-select-option *ngFor="let d of thead" [value]="d">{{d}}
+              </ion-select-option>
+            </ion-select>
+          </div>
+        </ion-col>
+        <ion-col size="5">
+          <div>
+            <ion-label>Status</ion-label>
+            <ion-select [(ngModel)]="r.status" >
+              <ion-select-option *ngFor="let d of orderFormat" [value]="d">{{d}}
+              </ion-select-option>
+            </ion-select>
+          </div>
+        </ion-col>
+        <ion-col size="2">
+          <div class="delete-columm">
+            
+            
+            <ion-button class="icon-btn" size="small" fill="clear"   (click)="deleteFieldValue(j)">
+              <ion-icon color="danger" name="trash"></ion-icon>
+            </ion-button>
+          </div>
+        </ion-col>
+        </ion-row>
+        </ion-grid>
+        <div>
+          <ion-grid>
+            <ion-row>
+              <ion-col size="4">
+                <ion-button (click)="addFieldValue()"  class="icon-btn" color="primary" size="small">
+                  <ion-icon name="add-circle"></ion-icon></ion-button>
+                  </ion-col>
+                   <ion-col size="8">
+                <ion-button (click)="createFormat()" color="primary" size="small">Ok</ion-button>
+                <ion-button (click)="cancel()" color="secondary" size="small">Cancel</ion-button>
+              </ion-col>
+  
+            </ion-row>
+          </ion-grid> -->
+         
+  
+  
+  
+  <div *ngIf="shuffle == 'Aggregate'">
+    <table>
+      <thead>
+        <tr>
+          <th>
+            Function
+          </th>
+          <th>
+            Column Name
+          </th>
+          <th class="tdClass">
+            Actions
+          </th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor = "let r of aggregateFun;let i=index">
+          <td>
+            <ion-select [(ngModel)]="r.fun" >
+              <ion-select-option *ngFor="let d of functions" [value]="d.value">{{d.name}}
+              </ion-select-option>
+            </ion-select>
+          </td>
+         
+          <td>
+            <ion-select [(ngModel)]="r.coloumns">
+              <ion-select-option *ngFor="let d of apexAggriHead" [value]="d">{{d.prompt_name}}
+              </ion-select-option>
+            </ion-select>
+          </td>
+         
+          <td class="tdClass">
+  
+            <ion-button (click)="addFieldValue('aggreFun')"  class="icon-btn" style="margin-top: 0px;margin-bottom: 0px;" color="primary" size="small">
+              <ion-icon name="add-circle"></ion-icon>
+            </ion-button>
+  
+            <ion-button (click)="rmFieldValue(i,'aggreFun')" *ngIf="aggregateFun.length > 1"  class="icon-btn" style="margin-top: 0px;margin-bottom: 0px;" color="primary" size="small">
+              <ion-icon name="remove-circle"></ion-icon>
+            </ion-button>
+          
+          </td>
+        </tr>
+      </tbody>
+      </table>
+  
+      <ion-row>
+       
+             <ion-col size="12" style="text-align: center;">
+          <ion-button (click)="createFunction()" color="primary" size="small">Apply</ion-button>
+          <ion-button (click)="cancel()" color="secondary" size="small">Cancel</ion-button>
+        </ion-col>
+  
+      </ion-row>
+  
+  </div>
+  
+  
+    <div *ngIf="shuffle == 'Filter'">
+  
+      <table>
+        <thead>
+          <tr>
+            <th>
+              Column Name
+            </th>
+            <th>
+              Operator
+            </th>
+            <th>
+              Description
+            </th>
+            <th class="tdClass">
+              Actions
+            </th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor = "let r of rowsFilter;let i=index">
+            <td>
+              <ion-select [(ngModel)]="r.coloumns" (ionChange)="columnValChng($event)">
+                <ion-select-option *ngFor="let d of apexThead" [value]="d">{{d.prompt_name}}
+                </ion-select-option>
+              </ion-select>
+            </td>
+            <td>
+              <ion-select [(ngModel)]="r.operators" (ionChange)="operatorValChng($event)">
+                <ion-select-option *ngFor="let d of operators" [value]="d">{{d}}
+                </ion-select-option>
+              </ion-select>
+            </td>
+            <td>
+              <ion-input type="text" [(ngModel)]="r.description"></ion-input>
+            </td>
+            <td class="tdClass">
+  
+              <ion-button (click)="addFieldValue('rowsFil')" size="small" class="icon-btn action-btn" style="margin-top: 0px;margin-bottom: 0px;" color="primary">
+                <ion-icon name="add-circle"></ion-icon>
+              </ion-button>
+  
+              <ion-button (click)="rmFieldValue(i,'rowsFil')" *ngIf="rowsFilter.length > 1" size="small" class="icon-btn action-btn" style="margin-top: 0px;margin-bottom: 0px;" color="primary">
+                <ion-icon name="remove-circle"></ion-icon>
+              </ion-button>
+            
+            </td>
+          </tr>
+        </tbody>
+        </table>
+    
+      <div>
+        <ion-grid>
+          <ion-row>
+            <ion-col size="12" style="text-align: center;">
+              <ion-button (click)="createRow()" color="primary" size="small">Ok</ion-button>
+              <ion-button (click)="cancel()" color="secondary" size="small">Cancel</ion-button>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+       
+      </div>
+    </div>
+  
+   
+    <div *ngIf="shuffle == 'Rows Per Page'">
+      <ion-row>
+        <ion-col>
+          <div>
+              <ion-label>Number Of Rows</ion-label>
+              <ion-select [(ngModel)]="rowPerPage">
+                <ion-select-option *ngFor="let d of rowsInpage" [value]="d">{{d}}
+                </ion-select-option>
+              </ion-select>
+           
+          </div>
+        </ion-col>
+        </ion-row>
+  
+        <ion-row>
+           
+          <ion-col size="12" style="text-align: center;">
+       <ion-button (click)="changeRows(rowPerPage)" color="primary" size="small">Apply</ion-button>
+       <ion-button (click)="cancel()" color="secondary" size="small">Cancel</ion-button>
+     </ion-col>
+   </ion-row>
+    </div>
+  
+  
+    <div *ngIf="shuffle == 'Control Break'">
+  
+      <table>
+        <thead>
+          <tr>
+            <th>
+              Column Name
+            </th>
+            <th>
+              Status
+            </th>
+            <th class="tdClass">
+              Actions
+            </th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor = "let c of controlBreakArr;let i=index">
+            <td>
+              <ion-select [(ngModel)]="c.coloumns" interface="popover" (ionChange)="columnValChng($event)">
+                <ion-select-option *ngFor="let d of apexThead" [value]="d">{{d.prompt_name}}
+                </ion-select-option>
+              </ion-select>
+            </td>
+           
+            <td>
+              <ion-select [(ngModel)]="c.status" (ionChange)="columnValChng($event)" interface="popover">
+                <ion-select-option value="Enabled">Enabled
+                </ion-select-option>
+                <ion-select-option value="Disabled">Disabled
+                </ion-select-option>
+              </ion-select>
+            </td>
+            <td class="tdClass">
+  
+              <ion-button (click)="addFieldValue('controlBr')"  size="small" class="icon-btn action-btn" style="margin-top: 0px;margin-bottom: 0px;" color="primary" >
+                <ion-icon name="add-circle"></ion-icon>
+              </ion-button>
+  
+              <ion-button (click)="rmFieldValue(i,'controlBr')" size="small"  *ngIf="controlBreakArr.length > 1"  class="icon-btn action-btn" style="margin-top: 0px;margin-bottom: 0px;" color="primary" >
+                <ion-icon name="remove-circle"></ion-icon>
+              </ion-button>
+            
+            </td>
+          </tr>
+        </tbody>
+        </table>
+    
+      <div>
+        <ion-grid>
+          <ion-row>
+           
+                 <ion-col size="12" style="text-align: center;">
+              <ion-button (click)="createBreak()" color="primary" size="small">Apply</ion-button>
+              <ion-button (click)="cancel()" color="secondary" size="small">Cancel</ion-button>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+       
+      </div>
+    </div>
+  
+  
+    <div *ngIf="shuffle == 'Group By'">
+  
+      <ion-row *ngFor = "let c of controlBreakArr;let i=index">
+        <ion-col size="9" style="padding-left: 0px;">
+          <ion-select [(ngModel)]="c.coloumns" placeholder="Select Group By Coloumn" interface="popover" (ionChange)="columnValChng($event)">
+            <ion-select-option *ngFor="let d of apexThead" [value]="d">{{d.prompt_name}}
+            </ion-select-option>
+          </ion-select>
+        </ion-col>
+  
+        <ion-col size="3">
+          <ion-button (click)="addFieldValue('controlBr')"  size="small" class="icon-btn action-btn" style="margin-top: 0px;margin-bottom: 0px;" color="primary" >
+            <ion-icon name="add-circle"></ion-icon>
+          </ion-button>
+  
+          <ion-button (click)="rmFieldValue(i,'controlBr')" size="small"  *ngIf="controlBreakArr.length > 1"  class="icon-btn action-btn" style="margin-top: 0px;margin-bottom: 0px;" color="primary" >
+            <ion-icon name="remove-circle"></ion-icon>
+          </ion-button>
+        </ion-col>
+      </ion-row>
+  
+      <table style="margin-top: 10px;">
+        <thead>
+          <tr>
+            <th>
+              Function
+            </th>
+            <th>
+              Column Name
+            </th>
+            <th class="tdClass">
+              Actions
+            </th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor = "let r of aggregateFun;let i=index">
+            <td>
+              <ion-select [(ngModel)]="r.fun" interface="popover">
+                <ion-select-option *ngFor="let d of functions" [value]="d.value">{{d.name}}
+                </ion-select-option>
+              </ion-select>
+            </td>
+           
+            <td>
+              <ion-select [(ngModel)]="r.coloumns" interface="popover">
+                <ion-select-option *ngFor="let d of apexAggriHead" [value]="d">{{d.prompt_name}}
+                </ion-select-option>
+              </ion-select>
+            </td>
+           
+            <td class="tdClass">
+    
+              <ion-button (click)="addFieldValue('aggreFun')"  size="small" class="icon-btn action-btn" style="margin-top: 0px;margin-bottom: 0px;" color="primary" size="small">
+                <ion-icon name="add-circle"></ion-icon>
+              </ion-button>
+    
+              <ion-button (click)="rmFieldValue(i,'aggreFun')" *ngIf="aggregateFun.length > 1"  size="small" class="icon-btn action-btn" style="margin-top: 0px;margin-bottom: 0px;" color="primary" size="small">
+                <ion-icon name="remove-circle"></ion-icon>
+              </ion-button>
+            
+            </td>
+          </tr>
+        </tbody>
+        </table>
+    
+      <div>
+        <ion-grid>
+          <ion-row>
+           
+            <ion-col size="12" style="text-align: center;">
+              <ion-button (click)="createGroupBy()" color="primary" size="small">Apply</ion-button>
+              <ion-button (click)="cancel()" color="secondary" size="small">Cancel</ion-button>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+       
+      </div>
+    </div>
+  
+  </div>
+  </div>
+  
+  
+  
+  <!-- 
+  <ion-icon class="code-btn" name="information-circle-outline"  color="primary" *ngIf="globalObjects.toggleDevloperMode" (click)="showDeveloperData()"></ion-icon>
+  <ion-button class="icon-btn" size="small"  (click)="buttonClick(event)">
+    <ion-icon name="add-circle"></ion-icon>
+  </ion-button> -->
+  <!-- 
+  <ion-grid>
+    <ion-row>
+      <ion-col>
+        <div>
+            <ion-label>Column Name</ion-label>
+            <ion-select [(ngModel)]="columnName" (ionChange)="columnValChng($event)">
+              <ion-select-option *ngFor="let d of thead" [value]="d">{{d}}
+              </ion-select-option>
+            </ion-select>
+         
+        </div>
+      </ion-col>
+      <ion-col col-6>
+        <div>
+          <ion-label>Operator</ion-label>
+          <ion-select [(ngModel)]="operatorName" (ionChange)="operatorValChng($event)">
+            <ion-select-option *ngFor="let d of operators" [value]="d">{{d}}
+            </ion-select-option>
+          </ion-select>
+        </div>
+      </ion-col>
+      <ion-col>
+        <div>
+          <ion-label>Description</ion-label>
+          <ion-input type="text" [(ngModel)]="description"></ion-input>
+        </div>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+  
+  
+  
+  
+  <div class="text-center">
+    <ion-button shape="round" class="ok-btn" size="small" (click)="sendDatatoApex()">
+      Apply
+    </ion-button>
+  
+    <ion-button color="secondary" shape="round" size="small" (click)="cancelModal()">
+      Cancel
+    </ion-button>
+  </div> -->
+  
+  

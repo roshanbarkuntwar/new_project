@@ -1,0 +1,471 @@
+<ng-container
+  *ngIf="lovinput.item_sub_type!='LV' && lovinput.item_sub_type !='L_T' && lovinput.item_sub_type !='M' && lovinput.item_sub_type !='LIST_COMBO_BOX' && lovinput.item_sub_type !='M' && lovinput.item_sub_type !='COMBO_BOX' && lovinput.item_sub_type != 'LOV_ON_CHOICE' && lovinput.item_sub_type !='L_BROWSER' && lovinput.item_sub_type != 'CODE_LOV' ">
+  <div class="{{lovObjFlag ? 'lov-append' : ''}}">
+    <ion-item class="{{(lovinput.css_class == null) ? 'ion-input-item ion-input-item-border' : lovinput.css_class}}">
+      <ion-label position="{{(lovinput.position == null) ? 'stacked' : lovinput.position}}">{{lovinput.prompt_name}}
+      </ion-label>
+      <ion-icon class="code-btn" name="information-circle-outline" color="primary" slot="end"
+        *ngIf="globalObjects.toggleDevloperMode" (click)="showDeveloperData()"></ion-icon>
+
+        <ion-input class="append-input" style="overflow-x: auto;" type="text" id="{{lovinput.item_name ? lovinput.item_name : lovinput.apps_item_seqid}}" (click)="openLov()"
+        [(ngModel)]="lovinput.value" [readonly]="true" [required]="(current_page_parameter.MODE && (lovinput.data_required_flag && 
+          (lovinput.data_required_flag.indexOf(current_page_parameter.MODE)>-1)) )
+          ||lovinput.data_required_flag=='T' 
+          ||(lovinput.prompt_name && lovinput.prompt_name[lovinput.prompt_name.length -1] =='*')"
+        (ionChange)="lovinput.isValid=lovInputName.valid;onChange('ionChange');"
+        (ngInit)="lovinput.isValid=lovInputName.valid" #lovInputName='ngModel'
+        (click)="itemClickedPreEvent()">
+      </ion-input>
+      <div class="input-buttons-container">
+
+        <button class="input-btn float-right" (click)="openLov()" ion-button icon-only small>
+          <ion-icon name="chevron-forward-outline"></ion-icon>
+        </button>
+        <button style="z-index: 9999;" *ngIf="lovinput.value && lovinput.item_enable_flag == 'T'" class="input-btn float-right" ion-button
+          icon-only small (click)="cleardata()">
+          <ion-icon name="close"></ion-icon>
+        </button>
+      </div>
+
+
+    </ion-item>
+  </div>
+  <ion-button color="primary" size="small" class="lov-append-button" *ngIf="lovObjFlag" (click)="openLovObject()">
+    <ion-icon slot="icon-only" name="eye"></ion-icon>
+  </ion-button>
+  <div class="error" *ngIf="lovInputName.hasError('required') && lovinput.touched"> Please Enter
+    {{lovinput.prompt_name}}
+  </div>
+</ng-container>
+
+
+
+<div class="table-input-container" *ngIf="lovinput.item_sub_type=='L_T'">
+  <ion-icon class="code-btn" name="information-circle-outline" color="primary" slot="end"
+    *ngIf="globalObjects.toggleDevloperMode" (click)="showDeveloperData()"></ion-icon>
+  <div class="input-group table-lov-input">
+    <ion-input class="table-input" type="text" (click)="openLov()" [(ngModel)]="lovinput.value" [readonly]="true"
+      [required]="(current_page_parameter.MODE && (lovinput.data_required_flag && 
+          (lovinput.data_required_flag.indexOf(current_page_parameter.MODE)>-1)) )
+          ||lovinput.data_required_flag=='T' 
+          ||(lovinput.prompt_name && lovinput.prompt_name[lovinput.prompt_name.length -1] =='*')"
+      (ionChange)="onChange('ionChange');lovinput.isValid=lovInputName.valid"
+      (ngInit)="lovinput.isValid=lovInputName.valid" #lovInputName='ngModel'
+      (click)="itemClickedPreEvent()"></ion-input>
+    <div class="input-group-append">
+      <button class="lov-btn" (click)="openLov()" ion-button icon-only small>
+        <ion-icon name="chevron-forward-outline"></ion-icon>
+      </button>
+    </div>
+  </div>
+
+</div>
+
+
+<!-- below item item type is shown becuase of shashank sir told to vijay sir -->
+<!-- we have to type related word which is present in lov list then click on lov side button to chose like options -->
+<ng-container *ngIf="lovinput.item_sub_type=='LV'">
+  <ion-item class="{{lovinput.css_class}}">
+    <ion-label position="{{(lovinput.position == null) ? 'stacked' : lovinput.position}}">{{lovinput.prompt_name}}
+    </ion-label>
+    <ion-icon class="code-btn" name="information-circle-outline" color="primary" slot="end"
+      *ngIf="globalObjects.toggleDevloperMode" (click)="showDeveloperData()"></ion-icon>
+    <ion-input type="text" id="{{lovinput.item_name ? lovinput.item_name : lovinput.apps_item_seqid}}" [(ngModel)]="lovinput.value" [required]="(current_page_parameter.MODE && (lovinput.data_required_flag && 
+            (lovinput.data_required_flag.indexOf(current_page_parameter.MODE)>-1)) )
+            ||lovinput.data_required_flag=='T' 
+            || (lovinput.prompt_name && lovinput.prompt_name[lovinput.prompt_name.length -1] =='*')"
+      (ionChange)="onChange('ionChange');lovinput.isValid=lovInputName.valid"
+      (ngInit)="lovinput.isValid=lovInputName.valid" #lovInputName='ngModel'
+      (click)="itemClickedPreEvent()"></ion-input>
+    <div class="input-buttons-container">
+
+      <button class="input-btn float-right" (click)="openLov()" ion-button icon-only small>
+        <ion-icon name="chevron-forward-outline"></ion-icon>
+      </button>
+      <button *ngIf="lovinput.value && lovinput.item_enable_flag == 'T'" class="input-btn float-right" ion-button
+        icon-only small (click)="cleardata()">
+        <ion-icon name="close"></ion-icon>
+      </button>
+    </div>
+  </ion-item>
+  <div class="error" *ngIf="lovInputName.hasError('required') && lovinput.touched"> Please Enter
+    {{lovinput.prompt_name}}
+  </div>
+</ng-container>
+
+<ng-container *ngIf="lovinput.item_sub_type=='M'">
+  <ion-item class="{{(lovinput.css_class == null) ? 'ion-input-item ion-input-item-border' : lovinput.css_class}}"  (click)="(chips.length <= 0 && !lovObjFlag )? openLov(): itemClickedPreEvent()">
+    <ion-label position="{{(lovinput.position == null) ? 'stacked' : lovinput.position}}"
+      [ngStyle]="lovinput.labelStyle">{{lovinput.prompt_name}}
+    </ion-label>
+    <ion-icon class="code-btn" name="information-circle-outline" color="primary" slot="end"
+      *ngIf="globalObjects.toggleDevloperMode" (click)="showDeveloperData()"></ion-icon>
+    <div class="selected-value"  >
+      <a class="selected-chip" *ngFor="let e of chips; let i = index;">
+        <span (click)="openLov()">{{e}}</span>
+        <ion-icon name="close" (click)="removeItemCombo(i)"></ion-icon>
+      </a>
+    </div>
+    <!-- <ion-input type="text" id="{{lovinput.item_name}}" (click)="openLov()"
+      [readonly]="true" [required]="(current_page_parameter.MODE && (lovinput.data_required_flag && 
+          (lovinput.data_required_flag.indexOf(current_page_parameter.MODE)>-1)) )
+          ||lovinput.data_required_flag=='T' 
+          ||(lovinput.prompt_name && lovinput.prompt_name[lovinput.prompt_name.length -1] =='*')"
+      (ionChange)="onChange('ionChange');lovinput.isValid=lovInputName.valid"
+      (ngInit)="lovinput.isValid=lovInputName.valid" #lovInputName>
+    </ion-input> -->
+    <div class="input-buttons-container {{ lovObjFlag ? 'eye-btn-shifter' : ''}}">
+
+      <button class="input-btn float-right" (click)="openLov()" ion-button icon-only small>
+        <ion-icon name="chevron-forward-outline"></ion-icon>
+      </button>
+      <button *ngIf="chips.length > 0 && lovinput.item_enable_flag == 'T'" class="input-btn float-right" ion-button
+        icon-only small (click)="cleardata()">
+        <ion-icon name="close"></ion-icon>
+      </button>
+    </div>
+    <ion-button color="primary" size="small" (click)="openLovObject()" class="lov-append-button" *ngIf="lovObjFlag">
+      <ion-icon slot="icon-only" name="eye"></ion-icon>
+    </ion-button>
+  </ion-item>
+  <div class="error"
+    *ngIf="lovinput.data_required_flag=='T' && lovinput.touched && (lovinput.value && lovinput.value.length == 0)">
+    Please Enter
+    {{lovinput.prompt_name}}
+  </div>
+
+</ng-container>
+
+
+
+<!-- <div
+  class="{{(lovinput.css_class == null) ? 'ion-input-select-item ion-input-select-item-border' : lovinput.css_class}}"
+  *ngIf="lovinput.item_sub_type == 'COMBO_BOX'">
+  <ion-label position="{{(lovinput.position == null) ? 'stacked' : lovinput.position}}">
+    {{lovinput.prompt_name}}</ion-label>
+
+  <ion-icon class="code-btn" name="information-circle-outline" color="primary" slot="end"
+    *ngIf="globalObjects.toggleDevloperMode" (click)="showDeveloperData()"></ion-icon>
+
+  <div style="border-bottom:#ccc;">
+    <div style="position: relative;">
+
+    
+      <ion-input type="text" class="select-inp" [(ngModel)]="lovinput.value" (keydown)="keyDown($event)"
+        (ionFocus)="showDD();" [required]="(current_page_parameter.MODE && (lovinput.data_required_flag && 
+   (lovinput.data_required_flag.indexOf(current_page_parameter.MODE)>-1)) )
+   ||lovinput.data_required_flag=='T' 
+   ||lovinput.prompt_name[lovinput.prompt_name.length -1] =='*'"
+        (ionChange)="onChangeFirst(autoValue);lovinput.isValid=lovinputName.valid"
+        (ngInit)="lovinput.isValid=lovinputName.valid" #lovinputName='ngModel'></ion-input>
+      <button class="input-btn float-right butn" ion-button icon-only small style="right: 35px;"
+        (click)="lovinput.flag=true">
+        <ion-icon name="chevron-down-outline"></ion-icon>
+      </button>
+      <button class="input-btn float-right butn" ion-button icon-only small (click)="onClear()">
+        <ion-icon name="close"></ion-icon>
+      </button>
+
+    </div>
+
+    <div class="select-dropdown-new" *ngIf="lovinput.flag">
+      <ng-container>
+        <ion-list *ngFor="let object of objectList | lovComboSearch:lovinput.value;let i=index">
+
+          <ion-item tappable (click)="getModeCombo(i)" [ngClass]="i == arrowkeyLocation ? 'active':''">
+            <ng-container *ngFor="let key of keyList ">
+              {{object[key.key]}}
+            </ng-container>
+          </ion-item>
+        </ion-list>
+      </ng-container>
+    </div>
+
+    <div class="error" *ngIf="lovinputName.hasError('required') && lovinput.touched"> Please Enter
+      {{lovinput.prompt_name}}
+    </div>
+
+    <div class="error" *ngIf="lovinput.blurError && (lovinput.data_required_flag=='T' 
+    ||lovinput.prompt_name[lovinput.prompt_name.length -1] =='*')">{{lovinput.blurError}}
+      {{lovinput.prompt_name}}</div>
+  </div>
+
+
+</div> -->
+
+<!-- bdhfksdfashdsf -->
+<ng-container *ngIf="lovinput.item_sub_type=='COMBO_BOX'">
+  <ion-item class="{{(lovinput.css_class == null) ? 'ion-input-item ion-input-item-border' : lovinput.css_class}}">
+    <ion-label position="{{(lovinput.position == null) ? 'stacked' : lovinput.position}}"
+      [ngStyle]="lovinput.labelStyle">{{lovinput.prompt_name}}
+    </ion-label>
+    <ion-icon class="code-btn" name="information-circle-outline" color="primary" slot="end"
+      *ngIf="globalObjects.toggleDevloperMode" (click)="showDeveloperData()"></ion-icon>
+
+    <div class="selected-value" style="position: relative;">
+      <div style="overflow: auto;width: 100%;">
+        <div style="float: left;width: 100%;">
+          <a class="selected-chip" *ngFor="let e of chips; let i = index;">
+            <span>{{e}}</span>
+            <ion-icon name="close" (click)="removeItemCombo(i)"></ion-icon>
+          </a>
+        </div>
+        <div style="float: left;width: 100%;">
+          <ion-input type="text" style="padding: 0 !important;" [(ngModel)]="lovinput.value" (keydown)="keyDown($event)"
+          (ionFocus)="showDD();" [required]="(current_page_parameter.MODE && (lovinput.data_required_flag && 
+       (lovinput.data_required_flag.indexOf(current_page_parameter.MODE)>-1)) )
+       ||lovinput.data_required_flag=='T' 
+       ||(lovinput.prompt_name && lovinput.prompt_name[lovinput.prompt_name.length -1] =='*')"
+          (ionChange)="onChangeFirst(autoValue);lovinput.isValid=lovinputName.valid"
+          (ngInit)="lovinput.isValid=lovinputName.valid" #lovinputName='ngModel'
+          (click)="itemClickedPreEvent()"></ion-input>
+          
+        </div>
+      </div>
+      <!-- <ion-input type="text"  style="border-bottom: 1px solid #ccc;" [(ngModel)]="selectModel" [ngClass]="autoCompleteflag ? 'my_class1' : 'my_class2'" (ionChange)="serchtextChange(selectModel)" ></ion-input>   -->
+     
+        
+      </div>
+       <div class="input-buttons-container {{ lovObjFlag ? 'eye-btn-shifter' : ''}}">
+      <button class="input-btn float-right butn" ion-button icon-only small style="right: 35px;"
+        (click)="lovinput.flag=true">
+        <ion-icon name="chevron-down-outline"></ion-icon>
+      </button>
+      <button class="input-btn float-right butn" ion-button icon-only small (click)="onClear()">
+        <ion-icon name="close"></ion-icon>
+      </button>
+    </div>
+    <div class="select-dropdown-new" *ngIf="lovinput.flag">
+      <ng-container>
+        <ion-list *ngFor="let object of objectList | lovComboSearch:lovinput.value;let i=index">
+
+          <ion-item tappable (click)="getModeCombo(i)" [ngClass]="i == arrowkeyLocation ? 'active':''">
+            <ng-container *ngFor="let key of keyList ">
+              {{object[key.key]}}
+            </ng-container>
+          </ion-item>
+        </ion-list>
+      </ng-container>
+    </div>
+  </ion-item>
+  <div class="error"
+    *ngIf="lovinput.data_required_flag=='T' && lovinput.touched && (lovinput.value && lovinput.value.length == 0)">
+    Please Enter
+    {{lovinput.prompt_name}}
+  </div>
+
+</ng-container>
+<!--  bhfahssdhfpaodhfopdasf sidfposdfip  -->
+
+<ng-container *ngIf="lovinput.item_sub_type=='LIST_COMBO_BOX'">
+  <ion-item class="{{(lovinput.css_class == null) ? 'ion-input-item ion-input-item-border' : lovinput.css_class}}">
+    <ion-label position="{{(lovinput.position == null) ? 'stacked' : lovinput.position}}"
+      [ngStyle]="lovinput.labelStyle">{{lovinput.prompt_name}}
+    </ion-label>
+    <ion-icon class="code-btn" name="information-circle-outline" color="primary" slot="end"
+      *ngIf="globalObjects.toggleDevloperMode" (click)="showDeveloperData()"></ion-icon>
+    <div class="selected-value" style="position: inherit;" (click)="showDD()">
+      <div style="white-space: nowrap;height: 35px;">
+        <div style="white-space: nowrap;height: 35px;">
+          <a class="selected-chip" *ngFor="let e of chips; let i = index;">
+            <span>{{e}}</span>
+            <ion-icon name="close" (click)="removeItemCombo(i)"></ion-icon>
+          </a>
+          <div style="max-width: fit-content;min-width: fit-content;width: unset;display: contents;">
+          <ion-input type="text" style="width: 100%;display: contents;padding: 0 !important;" (click)="showDD()" [(ngModel)]="searchText" (keyup)="checkEndOfString($event)" (click)="itemClickedPreEvent()" (ionBlur)="onChange('')">
+          </ion-input>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="input-buttons-container {{ lovObjFlag ? 'eye-btn-shifter' : ''}}">
+      <button class="input-btn float-right" (click)="openLov()" ion-button icon-only small>
+        <ion-icon name="chevron-forward-outline"></ion-icon>
+      </button>
+      <button *ngIf="chips.length > 0 && lovinput.item_enable_flag == 'T'" class="input-btn float-right" ion-button
+        icon-only small (click)="cleardata()">
+        <ion-icon name="close"></ion-icon>
+      </button>
+      <button *ngIf="lovinput.flag && chips.length > 0" class="input-btn float-right" ion-button icon-only small
+        (click)="cleardata()">
+        <ion-icon name="ios-arrow-up"></ion-icon>
+      </button>
+    </div>
+
+    <div class="select-dropdown-new" *ngIf="lovinput.flag" tabindex="1" (onblur)="alert()">
+   
+        <ion-list *ngFor="let object of objectList |  lovComboSearch:searchText ;let i=index">
+          <ion-item tappable (keydown)="keyDown($event)" (click)="selectval(object, i)">
+            <ion-checkbox [(ngModel)]="object.isChecked" style="margin: 2px 5px;"></ion-checkbox>
+            
+            <label for=""><ng-container *ngFor="let key of keyList ">
+             {{object[key.key]}}
+            </ng-container> 
+          </label>
+          </ion-item>
+        </ion-list>
+    </div>
+  </ion-item>
+  <div class="error"
+    *ngIf="lovinput.data_required_flag=='T' && lovinput.touched && (lovinput.value && lovinput.value.length == 0)">
+    Please Enter
+    {{lovinput.prompt_name}}
+  </div>
+
+</ng-container>
+
+
+
+<ng-container *ngIf="lovinput.item_sub_type=='LOV_ON_CHOICE'">
+  <ion-item class="{{(lovinput.css_class == null) ? 'ion-input-item ion-input-item-border' : lovinput.css_class}}">
+    <ion-label position="{{(lovinput.position == null) ? 'stacked' : lovinput.position}}"
+      [ngStyle]="lovinput.labelStyle">{{lovinput.prompt_name}}
+    </ion-label>
+    <ion-icon class="code-btn" name="information-circle-outline" color="primary" slot="end"
+      *ngIf="globalObjects.toggleDevloperMode" (click)="showDeveloperData()"></ion-icon>
+      <div class="selected-value" style="position: inherit;" (click)="showDD()">
+        <div style="white-space: nowrap;height: 35px;">
+          <div style="white-space: nowrap;height: 35px;">
+            <a class="selected-chip" *ngFor="let e of chips; let i = index;">
+              <span>{{e}}</span>
+              <ion-icon name="close" (click)="removeItemCombo(i)"></ion-icon>
+            </a>
+            <div style="max-width: fit-content;
+            min-width: fit-content;
+            width: unset;
+            display: contents;">
+            <ion-input type="text" style="width: 100%;
+            display: contents;
+            padding: 0 !important;" (keyup)="checkEndOfString($event)" [(ngModel)]="chipValue"  (click)="itemClickedPreEvent()" (ionBlur)="onChange('')">
+            </ion-input>
+            </div>
+          </div>
+        </div>
+      </div>
+    <!-- <div class="selected-value" style="position: inherit;">
+      <a class="selected-chip" *ngFor="let e of chips; let i = index;">
+        <span>{{e}}</span>
+        <ion-icon name="close" (click)="removeItemCombo(i)"></ion-icon>
+      </a>
+    </div>
+    <ion-input type="text" tappable (keyup)="checkEndOfString($event)" [(ngModel)]="chipValue"></ion-input> -->
+
+    <div class="input-buttons-container {{ lovObjFlag ? 'eye-btn-shifter' : ''}}">
+      <button class="input-btn float-right" (click)="openLov()" ion-button icon-only small>
+        <ion-icon name="chevron-forward-outline"></ion-icon>
+      </button>
+      <button *ngIf="chips.length > 0 && lovinput.item_enable_flag == 'T'" class="input-btn float-right" ion-button
+        icon-only small (click)="cleardata()">
+        <ion-icon name="close"></ion-icon>
+      </button>
+    </div>
+
+    <!-- <div class="select-dropdown-new" *ngIf="lovinput.flag">
+      <ng-container>
+        <ion-list *ngFor="let object of objectList ;let i=index">
+
+          <ion-item tappable (keydown)="keyDown($event)" (click)="selectval(object, i)"
+            [ngClass]="i == arrowkeyLocation ? 'active':''">
+            <ion-checkbox [(ngModel)]="object.isChecked"></ion-checkbox>
+            <ng-container *ngFor="let key of keyList ">
+              {{object[key.key]}}
+            </ng-container>
+          </ion-item>
+        </ion-list>
+      </ng-container>
+    </div> -->
+  </ion-item>
+  <div class="error"
+    *ngIf="lovinput.data_required_flag=='T' && lovinput.touched && (lovinput.value && lovinput.value.length == 0)">
+    Please Enter
+    {{lovinput.prompt_name}}
+  </div>
+
+</ng-container>
+
+
+<div *ngIf="lovinput.item_sub_type == 'L_BROWSER'" class="new-input-item-type">
+  <ion-icon class="code-btn" name="information-circle-outline" color="primary" slot="end"
+      *ngIf="globalObjects.toggleDevloperMode" (click)="showDeveloperData()"></ion-icon>
+  <ion-row>
+    <ion-col size="3" class="text-left">
+      <span>{{lovinput.prompt_name}}</span>
+    </ion-col>
+
+    <ion-col size="9">
+      <div class="input-group input-group-sm">
+        <ion-input class="form-control form-control-sm" type="text" [ngStyle]="getParsedJson(lovinput.display_setting_str)"
+          type="text" id="{{lovinput.item_name ? lovinput.item_name : lovinput.apps_item_seqid}}" [(ngModel)]="lovinput.value" [maxlength]="lovinput.item_size"
+          #lovinputname="ngModel"
+          [readonly]="lovinput.item_enable_flag && (!(lovinput.item_enable_flag.indexOf(current_page_parameter.MODE)>-1)||(lovinput.item_enable_flag=='F'))"
+          [required]="(current_page_parameter.MODE && (lovinput.data_required_flag && 
+    (lovinput.data_required_flag.indexOf(current_page_parameter.MODE)>-1)) )
+    ||lovinput.data_required_flag=='T' 
+    ||(lovinput.prompt_name && lovinput.prompt_name[lovinput.prompt_name.length -1]) =='*'"
+          [pattern]="lovinput.input_pattern"
+          (ionChange)="lovinput.isValid=lovinputname.valid; lovinput.touched=true;onChange('ionChange')"
+          (ionBlur)="lovinput.isValid=lovinputname.valid;lovinput.touched=true;"
+          (ngInit)="lovinput.isValid=lovinputname.valid" title="{{lovinput.tool_tip}}"
+          (dblclick)="doubleClickFun($event)" (click)="openLov()"
+          (click)="itemClickedPreEvent()"></ion-input>
+        
+      <button class="btn btn-secondary" type="button" *ngIf="lovObjFlag" ion-button (click)="openLovObject()">
+        <i class="fa fa-eye" aria-hidden="true"></i>
+      </button>
+      <button class="btn btn-secondary" type="button" ion-button (click)="lovinput.value='';lovinput.codeOfValues=''"
+      *ngIf="lovinput.value && lovinput.item_enable_flag == 'T'">
+      <i class="fa fa-close" aria-hidden="true"></i>
+    </button>
+    <button class="btn btn-secondary" type="button" ion-button (click)="openLov()">
+      <i class="fa fa-chevron-right" aria-hidden="true"></i>
+    </button>
+      </div>
+    </ion-col>
+          <div class="error" *ngIf="lovinputname.hasError('required') && lovinput.touched">Please Enter
+            {{lovinput.prompt_name}}
+          </div>
+  </ion-row>
+</div>
+
+<ng-container *ngIf="lovinput.item_sub_type == 'CODE_LOV' ">
+  <div class="{{lovObjFlag ? 'lov-append' : ''}}">
+    <ion-item class="{{(lovinput.css_class == null) ? 'ion-input-item ion-input-item-border' : lovinput.css_class}}">
+      <ion-label position="{{(lovinput.position == null) ? 'stacked' : lovinput.position}}">{{lovinput.prompt_name}}
+      </ion-label>
+      <ion-icon class="code-btn" name="information-circle-outline" color="primary" slot="end"
+        *ngIf="globalObjects.toggleDevloperMode" (click)="showDeveloperData()"></ion-icon>
+        <div style="width: 100%;position: relative;display: flex;align-items: flex-end;justify-content: center;">
+        <div class="code-cont" style="width: calc(100% - 100px);position: relative;display: inline-block;">
+      <ion-input class="code-input " type="text" id="{{lovinput.item_name ? lovinput.item_name : lovinput.apps_item_seqid}}" (click)="openLov()"
+        [(ngModel)]="lovinput.value" [readonly]="true" [required]="(current_page_parameter.MODE && (lovinput.data_required_flag && 
+          (lovinput.data_required_flag.indexOf(current_page_parameter.MODE)>-1)) )
+          ||lovinput.data_required_flag=='T' 
+          ||(lovinput.prompt_name && lovinput.prompt_name[lovinput.prompt_name.length -1] =='*')"
+        (ionChange)="onChange('ionChange');lovinput.isValid=lovInputName.valid"
+        (ngInit)="lovinput.isValid=lovInputName.valid" #lovInputName='ngModel'>
+      </ion-input>
+      <div class="input-buttons-container" style="top:5px !important;">
+
+        <button class="input-btn float-right" (click)="openLov()" ion-button icon-only small>
+          <ion-icon name="chevron-forward-outline"></ion-icon>
+        </button>
+        <button *ngIf="lovinput.value && lovinput.item_enable_flag == 'T'" class="input-btn float-right" ion-button
+          icon-only small (click)="cleardata()">
+          <ion-icon name="close"></ion-icon>
+        </button>
+      </div>
+    </div>
+<button type="button" class="code-btn1" style="width: 95px;height: 31px;">
+  {{lovinput.codeOfValues}}
+</button>
+</div>
+    </ion-item>
+  </div>
+  <ion-button color="primary" size="small" class="lov-append-button" *ngIf="lovObjFlag" (click)="openLovObject()">
+    <ion-icon slot="icon-only" name="eye"></ion-icon>
+  </ion-button>
+  <div class="error" *ngIf="lovInputName.hasError('required') && lovinput.touched"> Please Enter
+    {{lovinput.prompt_name}}
+  </div>
+</ng-container>

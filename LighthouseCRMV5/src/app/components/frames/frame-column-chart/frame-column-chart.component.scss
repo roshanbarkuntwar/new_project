@@ -1,0 +1,28 @@
+
+.columnChart{
+    width: 100%;
+    height		: 220px !important;
+    font-size	: 11px;
+    max-width   : 450px !important;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid #ccc;
+
+}
+
+.columnChart-4{
+    height: 220px !important;
+    border: 1px solid #ccc;
+    overflow: hidden;
+}
+.columnChart-6{
+    height: 320px !important;
+    border: 1px solid #ccc;
+    overflow: hidden;
+}
+.columnChart-12{
+    height: 420px !important;
+    border: 1px solid #ccc;
+    overflow: hidden;
+}

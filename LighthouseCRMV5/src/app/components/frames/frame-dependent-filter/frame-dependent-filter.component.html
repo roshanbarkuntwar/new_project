@@ -1,0 +1,41 @@
+<!-- 
+<ion-button  size="small" color="medium" slot="end" (click)="clearAll()">Clear All</ion-button>
+
+
+<ion-button  size="small" color="medium" slot="end" (click)="SkipFilter()">Skip Filter</ion-button> -->
+
+
+<div class="filters">
+  <div class="filter-icon-container position-relative">
+      <ion-icon class="position-relative" name="funnel"></ion-icon>
+      <h6 class="d-inline-block mt-0">Filters</h6>
+  </div>
+  <!-- <app-frame-smart-filter-container></app-frame-smart-filter-container>
+  <app-frame-smart-filter-sliding-buttons></app-frame-smart-filter-sliding-buttons>
+  <app-frame-smart-filter-range></app-frame-smart-filter-range>
+  <app-frame-smart-filter-column></app-frame-smart-filter-column>
+  <app-frame-smart-filter-checklist></app-frame-smart-filter-checklist>  -->
+  <div class="filter-body p-1">
+     
+          <!-- ---------------------------------------------------- -->
+          <ion-row *ngFor="let itemGroup of itemData">
+              <ng-container *ngFor="let item of itemGroup.Level5;let i=index">
+                  <ion-col class="p-0" [hidden]="item.item_filter_flag=='BT'" [size]="itemGroup.groupCol ? itemGroup.groupCol[i] : 12 ">
+                      <app-items [item]="item" [wscp]="wscp_send_input"  [itemData]="frame.tableDependentRows" (emitfilterParam)="fiteredData($event)"></app-items>
+                  </ion-col>
+              </ng-container>
+          </ion-row>
+          <!-- ---------------------------------------------------- -->
+      
+      <!-- <ion-button expand="block" (click)="filerData()" >Show Filtered Data</ion-button> -->
+      <ion-row>
+          <ion-col col-12 class="p-0 ion-text-center">
+            <ion-button shape="round" size="small"  class="mr-1 globe-btn" color="primary" (click)="sendData('closefilter')">Show
+            </ion-button>
+            <ion-button shape="round" size="small" color="secondary" fill="outline" (click)="clearAll()">Clear</ion-button>
+          </ion-col>
+        </ion-row>
+        
+
+  </div>
+</div>

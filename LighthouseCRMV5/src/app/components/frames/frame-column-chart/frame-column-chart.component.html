@@ -1,0 +1,15 @@
+
+  <!-- <div id="columnchart_material" style="width: 800px; height: 500px;"></div> -->
+
+  
+  <ion-row *ngIf="frame.apps_page_frame_name">
+    <ion-col class="pl-0" >
+      <h1 class="frame-name ">{{frame.apps_page_frame_name}}<span style="margin-left: 10px;" *ngIf="globalObjects.toggleDevloperMode">[{{frame.apps_page_frame_seqid}}]</span></h1>
+    </ion-col>
+  </ion-row>
+  <div [id]="barchart_values" class="columnChart" *ngIf="columnChartFlag"></div>
+  <div *ngIf="!columnChartFlag">
+    <div [id]="barchart_values" class="columnChart-4" *ngIf="columnChartValue==4"></div>
+    <div [id]="barchart_values" class="columnChart-6" *ngIf="columnChartValue==6"></div>
+    <div [id]="barchart_values" class="columnChart-12" *ngIf="columnChartValue==12"></div>
+  </div>

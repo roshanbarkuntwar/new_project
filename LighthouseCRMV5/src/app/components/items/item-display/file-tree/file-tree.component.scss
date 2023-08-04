@@ -1,0 +1,76 @@
+ul
+{
+    padding:0px;
+    margin:0px;
+    span
+    {
+        font-size: 0.8rem;
+
+    font-weight: 600;
+    vertical-align: text-top;
+    }
+}
+.tree-outer
+{
+    padding: 5px;
+}
+li {
+    font-size: 15px;
+    list-style: none;
+}
+
+.children-list {
+    padding: 0 10px;
+    margin-left: 30px;
+    position: relative;
+    &::before {
+        display: block;
+        content: "";
+        position: absolute;
+        top: -7px;
+        left: 0;
+        width: 15px;
+        height: 20px;
+    }
+}
+
+.trees-items { 
+    padding:5px 0 0 0;
+    margin-bottom: 2px;
+    position: relative;
+    &:hover {
+        cursor: pointer;
+    }
+    &::after{
+        content: "";
+        position: absolute;
+        width: 0;
+        height: 0;
+        border-bottom: 10px solid transparent;
+        right: 0%;
+        top: 6%;
+    
+    }
+}
+
+.file-ico {
+    display: inline-block;
+    margin-right: 5px;
+
+    text-align: left;
+    .ico {
+        font-size:15px;
+        margin: 0;
+    }
+    .fa-file {
+        margin-left: 21px;
+    }
+}
+
+.item-children {
+    overflow: hidden;
+}
+
+.check-label {
+    float: left;
+}

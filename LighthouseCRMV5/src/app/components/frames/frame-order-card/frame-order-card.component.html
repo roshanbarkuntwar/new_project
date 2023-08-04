@@ -1,0 +1,124 @@
+<ng-container  *ngIf = "!loading">
+  <div class="order-card-container" *ngFor="let p of parentRows ;let h=index">
+    <div class="single-order-card">
+      <div class="card-header">
+        <ng-container *ngFor="let itemGroup of p.cardRow">
+          <ng-container *ngFor="let item of itemGroup.Level5">
+            <ng-container *ngIf="item.item_sub_type == 'ONLY_VIEW_PARENT'">
+              <h5>{{item.value}}</h5>
+            </ng-container>
+          </ng-container>
+        </ng-container>
+      </div>
+      <div class="addto-card" (click)="goCart()">
+        <ion-icon name="cart"></ion-icon>
+      </div>
+      <div class="card-body">
+        <ion-row style="display:flex;align-items:center;">
+          <ion-col size="2">
+            <div class="img-container">
+              <!-- <img src="../../../../assets/imgs/amul-taaza-milk-250x250.jpg" alt=""> -->
+              <ng-container *ngFor="let itemGroup of p.cardRow">
+                <ng-container *ngFor="let item of itemGroup.Level5">
+                  <ng-container *ngIf="item.item_type == 'DISPLAY_PHOTO'">
+                    <app-item-image [displayPhoto]="item" [styleCss]="item.display_setting_str">
+                    </app-item-image>
+                  </ng-container>
+                </ng-container>
+              </ng-container>
+            </div>
+          </ion-col>
+          <ion-col size="10">
+            <div class="desc">
+              <ion-row *ngFor="let itemData of p.parentRow ;let rowindex=index">
+                <ng-container *ngFor="let itemGroup of itemData">
+                  <ng-container *ngFor="let input_item of itemGroup.Level5; let i = index">
+                    <ion-col size="5" *ngIf="input_item.item_name == 'ITEM_NAME'">
+                      <span class="features">{{input_item.value}}</span></ion-col>
+  
+                    <!-- <span class="features">Nape Color Green</span></ion-col> -->
+                    <ion-col size="5" class="p-0" *ngIf="input_item.item_name == 'AQTYORDER'">
+                      <ion-input [(ngModel)]="input_item.value" (ionBlur)="itemValueChange(input_item,h,itemData)"
+                        type="text" placeholder="{{input_item.prompt_name}}"></ion-input>
+                    </ion-col>
+                    <ion-col size="2" class="p-0" *ngIf="input_item.item_name == 'UM'">
+                      <div class="count">
+                        {{input_item.value}}
+                      </div>
+                    </ion-col>
+                  </ng-container>
+                </ng-container>
+              </ion-row>
+              <!--  <ion-row>
+        <ion-col size="5"> 
+          <span class="features">Nape Color Green</span></ion-col>
+        <ion-col size="5" class="p-0">
+          <ion-input placeholder="Quantity"></ion-input>
+        </ion-col>
+        <ion-col size="2" class="p-0">
+          <div class="count">
+            MT
+          </div>
+        </ion-col>
+      </ion-row> -->
+            </div>
+          </ion-col>
+        </ion-row>
+        <div class="card-footer">
+          <ion-row>
+  
+            <ion-col size="4">
+              <div class="rate">
+                <ng-container *ngFor="let itemGroup of p.cardRow">
+                  <ng-container *ngFor="let item of itemGroup.Level5">
+                    <ng-container *ngIf="item.item_name == 'FC_RATE'">
+                      <span>Rate</span> : {{item.value}}
+                    </ng-container>
+                  </ng-container>
+                </ng-container>
+              </div>
+            </ion-col>
+            <ion-col size="4"></ion-col>
+            <ion-col size="4">
+              <div class="rate text-right">
+                <ng-container *ngFor="let itemGroup of p.cardRow">
+                  <ng-container *ngFor="let item of itemGroup.Level5">
+                    <ng-container *ngIf="item.item_name == 'MIN_QTY'">
+                      <span>Min Qty</span> : {{item.value}}
+                    </ng-container>
+                  </ng-container>
+                </ng-container>
+              </div>
+            </ion-col>
+          </ion-row>
+          <ion-row class="p-0">
+            <ion-col size="8">
+  
+            </ion-col>
+            <ion-col size="4" class="text-right p-0">
+              <div class="t-container">
+                <div class="total-sec">
+                  {{p.totalQty}}
+                </div>
+              </div>
+            </ion-col>
+          </ion-row>
+        </div>
+      </div>
+  
+    </div>
+  </div>
+  </ng-container>
+  
+  
+  <ng-container *ngIf = "loading">
+      <!-- Skeleton screen -->
+      <div class="center" >
+        <div class="text-center" >
+          <img src="../../../../assets/dot.gif" width="20%">
+        </div>
+        <!-- <div class="text-center" *ngIf="noRecordMessage != ''">
+          <h2>{{noRecordMessage}}</h2>
+        </div> -->
+      </div>
+  </ng-container>

@@ -1,0 +1,51 @@
+.chat-dashboard-title
+{
+    padding-inline-start: 0px;
+    padding-inline-end: 0px;
+    img
+     {
+       width:30px;
+    }
+}
+.chat-dashboard-footer
+{
+   
+    bottom: 0px;
+    left: 0px;
+    width: 100%;
+    padding: 0px 10px;
+}
+
+.chat-input-container
+{
+    .lov-btn {
+      
+        border-radius: 0px 15px 15px 0px;
+        padding: 0px 10px;
+    }
+    
+}
+.chat-input-container
+{
+    .speaker-btn {
+        border-radius: 50%;
+        width: 30px;
+        height: 30px !important;
+        padding: 5px;
+        margin-left: 10px;
+        font-size: 11px !important;
+               ion-icon
+        {
+            font-size: 20px;
+        }
+    }
+    
+}
+.chat-dashboard-footer
+{
+    ion-toolbar
+    {
+        --min-height: 45px;
+    }
+}
+

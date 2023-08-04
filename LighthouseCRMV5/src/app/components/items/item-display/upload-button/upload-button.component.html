@@ -1,0 +1,27 @@
+<div *ngIf="this.button.item_sub_type == 'S'">
+  <p class="Upload-buton">
+    <span>Upload</span>
+  <i class="fa fa-upload" aria-hidden="true"></i>
+  <ion-input id="singlefile" type="file" (change)="readFile($event)" [accept]="acceptParameter"></ion-input>
+</p>
+  <ng-container *ngIf="fileNames.length > 0">
+    <ion-chip *ngFor="let file of fileNames; let i = index;" color="primary">
+      <ion-label>{{file.name}}</ion-label>
+      <ion-icon name="close" (click)="removeItem(i)" color="danger"></ion-icon>
+    </ion-chip>
+  </ng-container>
+
+</div>
+
+<div *ngIf="this.button.item_sub_type == 'M'" style="cursor: pointer;">
+  <p class="Upload-buton">
+    <span>Upload</span>
+    <i class="fa fa-upload" aria-hidden="true"></i>
+  <ion-input id="multifiles" type="file" multiple (change)="readFile($event)" [accept]="acceptParameter"></ion-input>
+  </p>
+  <!-- <p style="margin: 0;text-align: left;">{{fileNames}}</p> -->
+  <ion-chip *ngFor="let file of fileNames; let i = index;" color="primary">
+    <ion-label>{{file.name}}</ion-label>
+    <ion-icon name="close" (click)="removeItem(i)" color="danger"></ion-icon>
+  </ion-chip>
+</div>

@@ -1,0 +1,1005 @@
+
+@import 'variables';
+@import 'mixins';
+.c1[_ngcontent-ffa-c60] {
+    overflow: visible;
+    z-index: 9999;
+}
+
+.label-fixed-in{
+    --min-height: 25px;
+    --padding-start: 0px;
+    border-bottom: 1px solid #efefef !important;
+    
+ion-label{
+    background: #efefef;
+    margin: 0px !important;
+    height: 100%;
+    padding-left: 10px;
+    color: #2d2d2d;
+    margin-right: 8px !important;
+    width: 50% !important;
+    max-width: 50% !important;
+    min-width: 50% !important;
+
+}    
+ion-input{
+    --padding-top:0px;
+    --padding-bottom:0px;
+}
+}
+
+%input-property
+{
+    
+    padding: 5px;
+    width: 100%;
+    border: 1px solid #bcbcbc;
+    box-sizing: border-box;
+    
+    border-radius: 3px;
+}
+.lov-input .native-input,
+.lov-input .native-textarea,
+.lov-input.browser-date-input
+{
+    border-radius: 3px 0px 0px 3px;
+    border-right: 0px;
+}
+.non-lov-input-group
+{
+    border-radius: 0px 3px 3px 0px;
+    border-right: 1px solid #bcbcbc;
+}
+%input-text-property
+{
+   
+    font-weight: 600;
+    font-size: 15px;
+}
+label,
+ion-label
+{
+    font-size:14px !important;
+    font-weight: 500;
+    margin:3px 0px;
+  
+}
+.input-text
+{
+    @extend %input-text-property;
+    .native-input
+    {
+       @extend %input-property; 
+        height: 25px;
+      
+    }
+}
+.input-textarea
+{
+    @extend %input-text-property; 
+    margin-top:0px;
+    .native-textarea
+    {
+        @extend %input-property; 
+        resize:none;
+        height:25px;
+    }
+   
+}
+.input-number
+{
+    .native-input
+    {
+        text-align:right;
+    }
+}
+.browser-date-input
+{
+    margin: 3px 0px !important;
+    padding: 0px 5px;
+    box-sizing: border-box;
+    border-radius: 3px;
+    height: 25px;
+}
+.input-group {
+    position: relative;
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-wrap: wrap;
+    flex-wrap: wrap;
+    -ms-flex-align: stretch;
+    align-items: stretch;
+    width: 100%;
+}
+.input-group>.custom-select:not(:last-child), .input-group>.form-control:not(:last-child) {
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+}
+.input-group>.custom-file, .input-group>.custom-select, .input-group>.form-control, .input-group>.form-control-plaintext {
+    position: relative;
+    -ms-flex: 1 1 auto;
+    flex: 1 1 auto;
+    width: 1%;
+    margin-bottom: 0;
+}
+.input-group-append {
+    margin-left: -1px;
+}
+.input-group-append, .input-group-prepend {
+    
+    display:inline-flex;
+    align-items: center;
+}
+.input-group>.input-group-append>.lov-btn 
+{
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+}
+.input-group-append .btn, .input-group-prepend .btn {
+    position: relative;
+    z-index: 2;
+}
+.lov-btn
+{
+    min-width: 5px;
+    margin: 0px;
+    height: 25px;
+    box-sizing: border-box;
+    font-size: 1rem;
+    box-shadow: none;
+    padding:3px 10px;
+    border-left:0px !important;
+    border-radius: 0px 3px 3px 0px;
+    transition:background-color 0.2s;
+    outline:none;
+    &:active
+    {
+        background-color: #e3e7ec;
+    }
+ 
+}
+.lov-btn-img
+{
+    font-size:15px !important;
+}
+.qty-input
+{
+    .text-input
+    {
+        border-right:0px;
+        border-top-right-radius: 0;
+        border-bottom-right-radius: 0;
+    }
+}
+.um-input
+{
+    .text-input
+    {
+        border-top-left-radius: 0;
+        border-bottom-left-radius: 0;
+    }
+}
+
+.select-container
+{
+    min-height: 0;
+    .item-inner {
+        padding-right: 0 !important;
+        border-bottom: none !important;
+    }
+     ion-select
+    {
+        @extend %input-property; 
+        height: 28px;
+    max-width: 100%;
+    margin-top: 10px;
+        
+        @extend %input-text-property;
+       .select-icon {
+           
+            width: 15px;
+            height: 15px;
+        }
+    }
+}
+.rating-input
+{
+    font-size: 25px;
+    display: flex;
+    justify-content: space-between;
+    margin:3px 0px;
+}
+.capture-img-container
+{
+    margin:3px 0px;
+}
+.button-only-input-group
+{
+    margin:3px 0px;
+    .lov-btn
+    {
+        font-weight: 600;
+        font-size:12px;
+
+    }
+    
+   
+}
+[aria-checked=true].sc-ion-alert-md .alert-checkbox-inner.sc-ion-alert-md {
+   
+    border-color: #000000;
+}
+.error
+{
+    font-size: 12px;
+    font-weight: 500;
+    color: #c22b34;
+}
+
+/* Css for New Fixed-Input format  */
+.fix-input-component {
+    --border-width: 0;
+    --highlight-background: none;
+    --background: none;
+    --min-height: 30px;
+    --inner-border-width: 0;
+    --padding-start: 0px;
+}
+
+.fix-input {
+    margin: 0;
+    padding: 5px;
+    width: 100%;
+   
+    box-sizing: border-box;
+  
+    border-radius: 3px;
+  
+    --padding-top: 0;
+    --padding-bottom: 0;
+    max-width: 100%;
+}
+
+.fix-label {
+    margin: 0 !important;
+    
+    --padding-start: 0;
+    width: 100%;
+    height: auto;
+    padding: 10px;
+    text-align: right;
+   
+    font-size: 14px !important;
+    font-weight: 400;
+    height: 100%;
+    white-space: normal !important;
+}
+
+.fix-textarea {
+ 
+    --padding-top: 0;
+    --padding-bottom: 0;
+    
+}
+
+.fix-lov-btn {
+    padding: 3px 10px;
+    background: transparent;
+    font-size: 16px;
+   
+}
+
+/* Css for New Fixed-Input format  */
+
+/* Css for Border-bottom Input format  */
+.border-bottom-input {
+    margin: 3px 0px;
+    padding: 5px;
+    width: 100%;
+   
+    box-sizing: border-box;
+
+    border-radius: 3px;
+    height:30px;
+}
+.border-bottom-lov-btn {
+    padding: 3px 10px;
+    background: transparent;
+    font-size: 20px;
+   
+}
+
+/* Css for Border-bottom Input format  */
+
+/* Css for Floating  Input format  */
+
+
+.floating-input-item {
+    position: relative;
+
+    .floating-ion-item {
+        width: calc(100% - 80px);
+    }
+ion-item
+{
+    --padding-start:0px;
+   
+}
+
+}
+.floating-ion-item-100
+{
+    --padding-start: 0px;
+  
+}
+.item-label-floating
+{
+    --padding-start: 0px;
+}
+.floating-buttons {
+    position: absolute;
+    top: 25px;
+    right: 0px;
+    width: 80px;
+    border-bottom: 1px solid #dedede;
+}
+
+.floating-lov-btn {
+    padding: 6px 10px 0px 10px;
+    background: transparent;
+    font-size: 20px;
+   
+}
+
+/* Css for Floating  Input format  */
+
+/*Image Capture Section*/
+.img-capture-sec
+{
+    width: 30px;
+    height: 30px;
+    background: linear-gradient(180deg, #4990e2 50%, #1368cb 10%);
+    font-size: 1.3rem;
+    border-radius: 50%;
+    text-align: center;
+    margin-right:20px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 99999;
+ion-button{
+    --background: none;
+    --padding-bottom: 0;
+    --padding-end: 0;
+    --padding-start: 0;
+    --padding-top: 0;
+    width: 30px;
+    height: 20px;
+    z-index: 0;
+}
+span{
+    width: 30px;
+    height: 30px;
+    background: none;
+    cursor: pointer;
+    border-radius: 50%;
+}
+    button{
+    background: none;
+    position: relative;
+    width: 30px;
+    height: 30px;
+    }
+    button:focus {
+        outline: none;
+    }
+ 
+}
+
+.img-capture-sec.trash-btn-sec
+{
+    background: linear-gradient(180deg, #ec4141 50%, #bf2c2c 10%);
+    button:active::after
+    {
+        border:1px dashed #f04141;
+        
+    }
+}
+/*Image Capture Section*/
+
+/*Ion-Input-Conditional*/
+.ion-input-item.ion-input-item-fixed.input-100
+{
+    --inner-padding-end:0px !important;
+    ion-input{
+        padding-right:0px !important;
+    }
+}
+.ion-input-item.ion-input-item-fixed.input-100.ion-input-item
+{
+    --inner-padding-end:0px !important;
+    ion-input{
+        padding-right:0px !important;
+    }
+}
+.ion-input-item.ion-input-item-fixed.input-100.ion-input-item-border
+{
+    --inner-padding-end:0px !important;
+    ion-input{
+        padding-right:0px !important;
+    }
+}
+.ion-input-item
+{
+    width: 100%;
+    position: relative;
+    --padding-start:0px;
+   --padding-end:0px;
+   --inner-padding-end:0px;
+    ion-label
+    {
+        --padding-start: 0px;
+    }
+    .label-stacked
+    {
+        font-size:17px !important;
+        white-space: break-spaces;
+    }
+
+   
+    .label-fixed
+    {
+        
+            width: 150px;
+            min-width: 150px;
+            max-width: 150px;
+       
+    }
+    ion-input
+    {
+       
+        padding: 2px 80px 6px 0px !important;
+    }
+    .new-date-input{
+        width: 100%;
+        border: none;
+        margin-top: 20px;
+        padding: 4px;
+        
+    }
+    .new-date-input:focus {
+        outline: none;
+    }
+    input
+    {
+        color: #2b2d2f;
+        font-weight: 500;
+         font-size: 15px;
+         --padding-top: 0px;
+         --padding-bottom: 0px;
+    }
+    .input-buttons-container
+    {
+        position: absolute;
+        top: 23px;
+        right: 0px;
+        width: 80px;
+        z-index:99;
+        
+    }
+    .input-btn
+    {
+        padding: 6px 10px 0px 10px;
+        background: transparent;
+        font-size: 20px;
+        outline:none;
+    }
+    ion-datetime
+    {
+     --padding-top: 5px;
+    --padding-end: 0;
+    --padding-bottom: 5px;
+     --padding-start: 0px !important;
+     --min-height: 30px;
+     height: 28px;
+    }
+}
+.ion-input-item.item-has-focus
+{
+    .label-floating
+    {
+        font-size:17px !important;
+    }
+}
+.ion-input-item.item-has-focus
+{
+    .label-stacked
+    {
+        font-size:17px !important;
+    }
+}
+.ion-input-item.item-has-value
+{
+    .label-floating
+    {
+        font-size:17px !important;
+    }
+}
+.ion-input-item.item-has-value
+{
+    .label-stacked
+    {
+        font-size:17px !important;
+    }
+}
+.ion-input-item-border
+{
+    --inner-padding-end:0px;
+    .input-buttons-container {
+       
+        top:29px;
+      
+    }
+    .input-btn {
+        padding: 10px 10px 0px 10px !important;
+    }
+    ion-input
+    {
+        border: 1px solid #dedede !important;
+        padding: 0px 80px 0px 5px !important;
+        margin-top: 10px;
+        border-bottom: 0px !important;
+        input{
+            height:30px;
+        }
+    }
+    .new-date-input{
+        border: 1px solid #dedede !important;
+        margin-top: 10px;
+        padding: 5px;
+    }
+    ion-datetime{
+        border: 1px solid #dedede !important;
+        margin-top: 10px;
+        border-bottom: 0px !important;
+        --padding-top: 4px !important;
+        --padding-start: 5px !important;
+        --padding-bottom: 2px;
+        height: 30px;
+    }
+}
+.ion-input-item-fixed
+{
+    --padding-start: 0px;
+    --inner-padding-end: 0px;
+    --min-height:29px;
+    .input-buttons-container {
+       
+        top:0px !important;
+      
+    }
+    ion-label
+    {
+        background: #ededed;
+        padding: 6px 5px;
+         margin: 0px;
+    }
+    ion-input,ion-datetime
+    {
+       
+        padding: 0px 80px 0px 5px !important;
+    }
+    ion-datetime{
+        margin-left: 157px;
+    }
+    .new-date-input{
+        margin-top: 0 !important;
+    }
+// ion-textarea , ion-datetime{
+//     padding: 0px 80px 0px 5px !important;
+ 
+// }
+}
+.select-container .ion-input-item-fixed{
+    %input-property
+{
+    
+    padding: 1px 12px;
+    width: 100%;
+    border: 1px solid #bcbcbc;
+    box-sizing: border-box;
+    
+    border-radius: 3px;
+}
+}
+/*Ion-Input-Conditional*/
+
+ /* All in one Select Input */
+    .ion-input-select-item{
+        width: 100%;
+        position: relative;
+        --padding-start:0px;
+        ion-label
+        {
+            --padding-start: 0px;
+        }
+        .label-stacked
+        {
+            font-size:17px !important;
+        }
+        .label-fixed
+        {
+            
+                width: 150px;
+                min-width: 150px;
+                max-width: 150px;
+           
+        }
+        ion-select 
+        {
+            border: none !important;
+            padding-left: 0px !important;
+            border-bottom: 0px !important;
+            --padding-top: 5px;
+            --padding-bottom: 5px;
+            height:30px;
+            width: 100%;
+          
+        }
+        .select-inp{
+            border-bottom: 1px solid #ccc;
+            --padding-bottom: 4px;
+            --padding-top: 0px;
+            font-size: 14px !important;
+            font-weight: 500 !important;
+            color: #3b3b3b !important;
+            --padding-start: 0;
+           input {
+                color: #2b2d2f;
+                font-weight: 500;
+            }
+        }
+     
+    }
+    .item-select.ion-input-select-item .label-floating
+    {
+       
+        transform: translate3d(0,50%,0);
+    }
+    .item-select.ion-input-select-item.item-has-value .label-floating
+    {
+        transform: translate3d(0,50%,0) scale(.75);
+    }
+    .ion-input-select-item.item-has-focus
+    {
+        .label-floating
+        {
+            font-size:17px !important;
+            
+        }
+    }
+    .ion-input-select-item.item-has-focus
+    {
+        .label-stacked
+        {
+            font-size:17px !important;
+        }
+    }
+    .ion-input-select-item.item-has-value
+    {
+        .label-floating
+        {
+            font-size:17px !important;
+        }
+    }
+    .ion-input-select-item.item-has-value
+    {
+        .label-stacked
+        {
+            font-size:17px !important;
+        }
+     
+    }
+    .ion-input-select-item-border
+{
+    --inner-padding-end:0px;
+
+ 
+    ion-select 
+    {
+        border: 1px solid #dedede !important;
+         margin-top: 10px;
+        border-bottom: 0px !important;
+        --padding-top: 5px;
+        --padding-bottom: 5px;
+        height:30px;
+        border-radius:0px;
+        padding: 5px 5px !important;
+    }
+    .select-text
+    {
+        padding-top:2px;
+    }
+    .select-icon {
+     
+        top: 3px;
+    }
+}
+.ion-input-select-item-fixed
+{
+    --padding-start: 0px;
+    --inner-padding-end: 0px;
+    --min-height: 30px;
+
+    ion-label
+    {
+        background: #ededed;
+        padding: 6px 5px;
+         margin: 0px;
+    }
+    ion-select{
+        --padding-top: 0px;
+        --padding-bottom: 0px;
+        --padding-start: 0px;
+        width: 100%;
+    }
+ 
+}
+
+/* All in one textarea Input */
+
+    .ion-input-textarea-item{
+        width: 100%;
+        position: relative;
+        --padding-start:0px;
+        --inner-padding-end:0px;
+        ion-label
+        {
+            --padding-start: 0px;
+        }
+        .label-stacked
+        {
+            font-size:17px !important;
+        }
+      
+        .label-fixed
+        {
+            
+                width: 150px;
+                min-width: 150px;
+                max-width: 150px;
+           
+        }
+        .input-buttons-container
+        {
+            position: absolute;
+            top:22px;
+            right: 0px;
+            width: 80px;
+            z-index:99;
+            
+        }
+    
+        .input-btn
+        {
+            padding: 6px 10px 0px 10px;
+            background: transparent;
+            font-size: 20px;
+        }
+        ion-textarea{
+        height:30px !important;
+        --padding-top: 5px !important;
+        --padding-bottom: 5px !important;
+       
+        margin-top: 0px;
+        }
+        textarea{
+          
+            padding-right:80px !important;
+        }
+  
+    }
+    .ion-input-textarea-item.item-has-focus
+{
+    .label-floating
+    {
+        font-size:17px !important;
+    }
+}
+.ion-input-textarea-item.item-has-focus
+{
+    .label-stacked
+    {
+        font-size:17px !important;
+    }
+}
+.ion-input-textarea-item.item-has-value
+{
+    .label-floating
+    {
+        font-size:17px !important;
+    }
+}
+.ion-input-textarea-item.item-has-value
+{
+    .label-stacked
+    {
+        font-size:17px !important;
+    }
+ 
+}
+    .ion-input-textarea-item-border
+{
+    --inner-padding-end:0px;
+    .input-buttons-container {
+        top: 28px !important;
+    }
+ 
+    ion-textarea{
+        border: 1px solid #dedede !important;
+        margin-top: 10px;
+       border-bottom: 0px !important;
+       --padding-top: 0px !important;
+       --padding-start: 2px !important;
+       --padding-bottom: 0px ;
+      
+    }
+    .input-buttons-container
+    {
+        top:29px !important;
+    }
+    textarea{
+        padding-top: 1px !important;
+        padding-left: 5px !important;
+        padding-bottom: 2px !important;
+        height: 25px;
+        padding-right:80px;
+    }
+}
+.ion-input-textarea-item-fixed
+{
+    --padding-start: 0px;
+    --inner-padding-end: 0px;
+    --min-height: 30px;
+
+    ion-label
+    {
+        background: #ededed;
+        padding: 6px 5px;
+         margin: 0px;
+    }
+    // ion-textarea {
+    //     padding: 0px 80px 0px 5px !important;
+    //    height: 33px !important;
+    // }
+ textarea{
+    padding: 1px 80px 2px 5px !important;
+ }
+ ion-textarea {
+    height: 23px !important;
+}
+ .input-buttons-container {
+    top:0px !important;
+ }
+}
+.ion-input-item input,
+.ion-input-item ion-datetime,
+.ion-input-select-item ion-select,
+.ion-input-textarea-item textarea
+{
+    font-size:14px !important;
+    font-weight:500 !important;
+    color:#3b3b3b !important;
+}
+/*Ios  related Input changes start*/
+.ion-input-item.ios,.ion-input-select-item.ios ,.ion-input-textarea-item.ios
+{
+    --min-height: 50px;
+}
+.ion-input-item.ios,.ion-input-select-item.ios ,.ion-input-textarea-item.ios
+{
+    .label-floating
+    {
+        transform: translate3d(0,10px,0);
+    }
+    
+}
+.ion-input-item.item-has-value.ios,.ion-input-select-item.item-has-value.ios ,.ion-input-textarea-item.item-has-value.ios
+{
+    .label-floating
+    {
+        transform: translate3d(0, 3px, 0);
+        font-size: 13px !important;
+    }
+    
+    
+}
+.ion-input-item.item-has-focus.ios,.ion-input-select-item.item-has-focus.ios ,.ion-input-textarea-item.item-has-focus.ios
+{
+    .label-floating
+    {
+        color:#4990e2;
+        transform: translate3d(0, 3px, 0);
+        font-size: 13px !important;
+    }
+    
+    
+}
+.ion-input-item.ios  .input-buttons-container,ion-input-textarea-item.ios  .input-buttons-container
+ {
+   
+    top: 19px;
+  
+}
+/*Stack*/
+.ion-input-item.ios,.ion-input-select-item.ios ,.ion-input-textarea-item.ios
+{
+    .label-stacked
+    {
+        
+        font-size: 13px !important;
+        margin-bottom:0px;
+    }
+    
+}
+.ion-input-item.item-has-focus.ios,.ion-input-select-item.item-has-focus.ios ,.ion-input-textarea-item.item-has-focus.ios
+{
+    .label-stacked
+    {
+        
+        font-size: 13px !important;
+    }
+    
+    
+}
+.ion-input-item.item-has-value.ios,.ion-input-select-item.item-has-value.ios ,.ion-input-textarea-item.item-has-value.ios
+{
+    .label-stacked
+    {
+      
+        font-size: 13px !important;
+    }
+    
+    
+}
+/*Stack*/
+
+/*----Border Input Changes---*/
+.ion-input-item.ion-input-item-border.ios  ion-datetime,
+.ion-input-item.ion-input-item-border.ios  ion-input,
+.ion-input-textarea-item.ion-input-textarea-item-border.ios ion-textarea,
+.ion-input-select-item.ion-input-select-item-border.ios ion-select
+{
+   margin-top:5px;
+}
+.ion-input-item.ion-input-item-border.ios  .input-buttons-container,.ion-input-textarea-item.ion-input-textarea-item-border.ios .input-buttons-container
+ {
+   
+    top:21px !important;
+  
+}
+/*----Border Input Changes---*/
+/*Fixed Input*/
+.ion-input-item.ion-input-item-fixed.ios,
+.ion-input-item.ion-input-item-fixed.ios,
+.ion-input-textarea-item.ion-input-textarea-item-fixed.ios,
+.ion-input-select-item.ion-input-select-item-fixed.ios
+{
+    --min-height: 30px;
+}
+.ion-input-textarea-item-fixed.ios .input-buttons-container {
+    top: 0px !important;
+}
+/*Fixed Input*/
+/*Ios  related Input changes end*/
+
+.ion-date-item-floating{
+    .new-date-input{
+        margin-top: 18px !important;
+    }
+    .input-buttons-container {
+ 
+        top: 35px;
+    }
+}

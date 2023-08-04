@@ -1,0 +1,79 @@
+<!-- ion-input-textarea-item ion-input-textarea-item-border position="stacked" -->
+<!-- ion-input-textarea-item ion-input-textarea-item-fixed  position="fixed"-->
+<!-- ion-input-textarea-item position="floating"-->
+<!-- ion-input-textarea-item position="stacked"-->
+
+<div class="input-group" *ngIf="itemTxtInp.item_sub_type !='TEXT_BOX'">
+  <ion-item class="{{(itemTxtInp.css_class == null) ? 'ion-input-textarea-item ion-input-textarea-item-border' : itemTxtInp.css_class}}">
+  <ion-label position="{{(itemTxtInp.position == null) ? 'stacked': itemTxtInp.position}}">{{itemTxtInp.prompt_name}}</ion-label>
+  <ion-textarea class="autofit-textarea" autoGrow="true" [ngStyle]="getParsedJson(itemTxtInp.display_setting_str)" type="text" [disabled]="itemTxtInp.item_enable_flag=='F'" [(ngModel)]="itemTxtInp.value"
+     [maxlength]="itemTxtInp.item_size" [required]="(current_page_parameter.MODE && (itemTxtInp.data_required_flag && 
+    (itemTxtInp.data_required_flag.indexOf(current_page_parameter.MODE)>-1)) )
+    ||itemTxtInp.data_required_flag=='T' 
+    ||itemTxtInp.prompt_name[itemTxtInp.prompt_name.length -1] =='*'" 
+    (ionChange)="onChange('ionChange');itemTxtInp.isValid=textAreaName.valid"
+    (ionBlur)="postEvent()"
+    (ngInit)="itemTxtInp.isValid=textAreaName.valid" #textAreaName="ngModel"
+    (ngInit)="itemTxtInp.isValid=textAreaName.valid;itemTxtInp.isValid=textAreaName.valid"></ion-textarea>
+  <div class="input-buttons-container">
+
+    <!-- <button class="input-btn float-right"  ion-button icon-only small (click)="textAreaPopOver()">
+      <ion-icon name="md-create"></ion-icon>
+    </button> -->
+    <button class="input-btn float-right"  *ngIf="itemTxtInp.value" ion-button icon-only small (click)="clear()">
+      <ion-icon name="close"></ion-icon>
+    </button>
+  </div>
+</ion-item>
+<div class="error" *ngIf="textAreaName.hasError('required') && textAreaName.touched">Please Enter
+  {{itemTxtInp.prompt_name}}
+</div>
+<div class="error" *ngIf="textAreaName.hasError('maxlength')">{{itemTxtInp.prompt_name}} max {{itemTxtInp.item_size}}
+  Character
+</div>
+<div class="error" *ngIf="textAreaName.hasError('minlength')">{{itemTxtInp.prompt_name}} min 3 Character</div>
+</div>
+
+<!-- <label>{{itemTxtInp.prompt_name}}</label>
+<div class="input-group">
+    <ion-textarea type="text" class="input-textarea" [(ngModel)]="itemTxtInp.value" [required]="itemTxtInp.data_required_flag=='T'" placeholder="{{itemTxtInp.tool_tip}}" [maxlength]="itemTxtInp.item_size" #textAreaName="ngModel"></ion-textarea>
+    <div class="input-group-append">
+        <button class="lov-btn" ion-button icon-only small (click)="textAreaPopOver()">
+      <ion-icon name="md-create"></ion-icon>
+    </button>
+    </div>
+    <div class="input-group-append">
+        <button class="lov-btn" ion-button icon-only small (click)="clear()">
+      <ion-icon name="close"></ion-icon>
+    </button>
+    </div>
+</div>
+<div class="error" *ngIf="textAreaName.hasError('required') && textAreaName.touched">Please Enter {{itemTxtInp.prompt_name}}
+</div>
+<div class="error" *ngIf="textAreaName.hasError('maxlength')">{{itemTxtInp.prompt_name}} max {{itemTxtInp.item_size}} Character
+</div>
+<div class="error" *ngIf="textAreaName.hasError('minlength')">{{itemTxtInp.prompt_name}} min 3 Character</div> -->
+
+<div class="input-group" *ngIf="itemTxtInp.item_sub_type =='TEXT_BOX'">
+  <ion-item class="{{(itemTxtInp.css_class == null) ? 'ion-input-textarea-item ion-input-textarea-item-border' : itemTxtInp.css_class}}">
+    <ion-label position="{{(itemTxtInp.position == null) ? 'stacked': itemTxtInp.position}}">{{itemTxtInp.prompt_name}}</ion-label>
+  <ion-textarea class="text-box-txt" 	auto-grow='true'   rows="8" cols="20" [ngStyle]="itemTxtInp.focusstyle"
+  [ngStyle]="getParsedJson(itemTxtInp.display_setting_str)" type="text" [disabled]="itemTxtInp.item_enable_flag=='F'" [(ngModel)]="itemTxtInp.value"
+     [maxlength]="itemTxtInp.item_size" [required]="(current_page_parameter.MODE && (itemTxtInp.data_required_flag && 
+    (itemTxtInp.data_required_flag.indexOf(current_page_parameter.MODE)>-1)) )
+    ||itemTxtInp.data_required_flag=='T' 
+    ||itemTxtInp.prompt_name[itemTxtInp.prompt_name.length -1] =='*'" 
+    (ionChange)="onChange('ionChange');itemTxtInp.isValid=textAreaName.valid" (click)="focusClick('yes')"
+    (ngInit)="itemTxtInp.isValid=textAreaName.valid" #textAreaName="ngModel" (ionBlur)="focusClick('not')"
+    (ngInit)="itemTxtInp.isValid=textAreaName.valid;itemTxtInp.isValid=textAreaName.valid"
+  ></ion-textarea>
+
+</ion-item>
+<div class="error" *ngIf="textAreaName.hasError('required') && textAreaName.touched">Please Enter
+  {{itemTxtInp.prompt_name}}
+</div>
+<div class="error" *ngIf="textAreaName.hasError('maxlength')">{{itemTxtInp.prompt_name}} max {{itemTxtInp.item_size}}
+  Character
+</div>
+<div class="error" *ngIf="textAreaName.hasError('minlength')">{{itemTxtInp.prompt_name}} min 3 Character</div>
+</div>

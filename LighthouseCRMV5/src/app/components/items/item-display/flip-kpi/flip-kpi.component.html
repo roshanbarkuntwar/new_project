@@ -1,0 +1,25 @@
+<div class="flip-kpi card">
+    <input type="checkbox" id="{{kpi.apps_item_seqid}}" class="more" aria-hidden="true">
+    <div class="content">
+        <label class="front" for="{{kpi.apps_item_seqid}}" [ngStyle]="imgStyle">
+            <div class="inner">
+                <h2>{{kpi.prompt_name}}</h2>
+                
+            </div>
+          </label>
+        <label class="back" [ngStyle]="getParsedJson(kpi.display_setting_str)" for="{{kpi.apps_item_seqid}}">
+            <div class="inner">
+                
+                <div class="description">
+                    <p class="kpi-numeric-value">{{values[1]}}</p>
+                    <p>{{values[0]}}.</p>
+                </div>
+                <!-- <div class="kpi-title">KPI 1</div>
+                <div class="kpi-value">00</div>
+                <label for="{{kpi.apps_item_seqid}}" class="button return" aria-hidden="true">
+                    <i class="fa fa-arrow-right"></i>
+                </label> -->
+            </div>
+        </label>
+    </div>
+</div>

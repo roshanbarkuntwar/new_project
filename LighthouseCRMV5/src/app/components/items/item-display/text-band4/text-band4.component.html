@@ -1,0 +1,113 @@
+<!-- <ion-row class="threeD-textband-container">
+    <ion-col (click)="itemClick($event)">
+        <div class="threeD-textband-card h-100">
+            <div class="threeD-textband-body">
+                <h5>{{itemInput.prompt_name}}</h5>
+            </div>
+            <div class="threeD-textband-footer">
+                    {{itemInput.value}}
+            </div>
+        </div>
+
+    </ion-col>
+
+</ion-row>  -->
+<!-- <ion-col size="6" >
+                <div  class="threeD-textband-card h-100">
+                   <div class="threeD-textband-body">
+                       <h5>Todays Rate</h5>
+                   </div>
+                   <div class="threeD-textband-footer">
+                      1,00000
+                   </div>
+               </div> 
+   
+    </ion-col> -->
+
+
+
+    <ion-row class="threeD-textband-container" *ngIf="num==1">
+        <ion-col (click)="itemClick($event)">
+    
+            <div class="threeD-textband-card threeD-blue h-100">
+                <div class="threeD-textband-body">
+                    <h5>{{itemInput.prompt_name}}</h5>
+                </div>
+                <div class="threeD-textband-footer">
+                    {{itemInput.value}}
+                </div>
+            </div>
+    
+        </ion-col>
+    </ion-row>
+    
+    
+    
+    
+    <ion-row class="threeD-textband-container" *ngIf="num==2">
+        <ion-col (click)="itemClick($event)">
+    
+            <div class="threeD-textband-card threeD-grey h-100">
+                <div class="threeD-textband-body">
+                    <h5>{{itemInput.prompt_name}}</h5>
+                </div>
+                <div class="threeD-textband-footer">
+                    {{itemInput.value}}
+                </div>
+            </div>
+    
+        </ion-col>
+    </ion-row>
+    
+    
+    
+    
+    <ion-row class="threeD-textband-container" *ngIf="num==3">
+        <ion-col (click)="itemClick($event)">
+    
+            <div class="threeD-textband-card threeD-green h-100">
+                <div class="threeD-textband-body">
+                    <h5>{{itemInput.prompt_name}}</h5>
+                </div>
+                <div class="threeD-textband-footer">
+                    {{itemInput.value}}
+                </div>
+            </div>
+    
+        </ion-col>
+    </ion-row>
+    
+    
+    
+    
+    <ion-row class="threeD-textband-container" *ngIf="num==4">
+        <ion-col (click)="itemClick($event)">
+    
+            <div class="threeD-textband-card threeD-yellow h-100">
+                <div class="threeD-textband-body">
+                    <h5>{{itemInput.prompt_name}}</h5>
+                </div>
+                <div class="threeD-textband-footer">
+                    {{itemInput.value}}
+                </div>
+            </div>
+    
+        </ion-col>
+    </ion-row>
+    
+    <!-- 
+    
+    <div *ngIf="num % 2!=0">
+    <ion-row [ngClass]="{'threeD-textband-container' :  num % 2!=0}">
+        <ion-col (click)="itemClick($event)">
+    <div class="threeD-textband-card h-100">
+        <div class="threeD-textband-body">
+            <h5>{{itemInput.prompt_name}}</h5>
+        </div>
+        <div class="threeD-textband-footer">
+                {{itemInput.value}}
+        </div>
+    </div>
+    </ion-col>
+    </ion-row> 
+    </div> -->

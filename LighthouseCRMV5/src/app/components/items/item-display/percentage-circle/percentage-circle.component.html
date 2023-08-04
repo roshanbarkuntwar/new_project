@@ -1,0 +1,12 @@
+<div class="percentage-circle-wraper" >
+  <h5>{{pcircleinput.prompt_name}}</h5>
+  <div (click)="itemClick()" class="c100 p{{classPercentageVar}} {{colorOfRing}}">
+    <span>{{pcircleinput.value}}</span>
+    <div class="slice">
+
+      <div class="bar"></div>
+      <div class="fill"></div>
+    </div>
+  </div>
+  <div class="clearfix"></div>
+</div>

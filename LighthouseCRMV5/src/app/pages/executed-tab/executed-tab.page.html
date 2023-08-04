@@ -1,0 +1,22 @@
+
+    <div class="offline-entry-card-container" *ngFor="let object of executedData; let i= index;">
+      <div class="offline-entry-card" *ngFor="let cardData of object | keyvalue">
+        <p>{{cardData.key}} : {{cardData.value}}</p>
+      </div>
+      <div class="offline-entry-card-footer">
+        <ion-grid>
+          <ion-row>
+            <ion-col class="p-0" size="6">
+              <ion-button color="secondary" expand="full" size="small" (click)="updateCard(i)">
+                Edit
+              </ion-button>
+            </ion-col>
+            <ion-col class="p-0" size="6">
+              <ion-button color="secondary" expand="full" size="small" (click)="deleteCard(i)">
+                Delete
+              </ion-button>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+      </div>
+    </div>

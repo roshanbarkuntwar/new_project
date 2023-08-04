@@ -1,0 +1,44 @@
+.left-fixed-table
+  {
+      th
+      {
+        
+        .th-inner
+        {
+            width:100px;
+            text-overflow:ellipsis;
+            overflow: hidden;
+            white-space:nowrap;
+        }
+      }
+      td,th
+      {
+       height:24px;
+       white-space:nowrap;
+      }
+  }
+  .table-fix-container
+  {
+    .table-fix-head,
+    .table-fix-body,
+    .table-fix-footer
+    {
+      overflow:auto;
+    }
+    .table-fix-footer
+    {
+      margin-top: -1px;
+    }
+
+  }
+
+  .active {
+    background-color:#7cb6f9 !important;
+  }
+
+  .title{
+    width: 100%;
+    text-align: center;
+    padding-left: 0px;
+    padding-right: 30px;  
+  }

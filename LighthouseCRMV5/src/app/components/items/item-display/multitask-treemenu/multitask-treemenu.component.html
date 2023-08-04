@@ -1,0 +1,131 @@
+<ion-row>
+  <ion-col size="6">
+    <div class="tree treemenu">
+      <ul class="file-ul">
+        <li *ngFor="let item of model" [ngClass]="{'children-list':isChild}">
+          <div class="trees-items" (click)="toggleItem(item)">
+            <div class="file-ico">
+              <span class="close-icon br-50" color="secondary" *ngIf="isFile"><i class="fa fa-chevron-right"
+                  aria-hidden="true"></i></span>
+              <span class="close-icon" *ngIf="item.folders&&(item.toggle === 'off'||item.toggle === 'init')"><i
+                  class="fa fa-square" aria-hidden="true"></i></span>
+              <span class="close-icon br-50 "
+                *ngIf="!isFile&&item.folders&&(item.toggle === 'off'||item.toggle === 'init')"><i
+                  class="fa fa-chevron-right" aria-hidden="true"></i></span>
+              <span class="open-icon br-50" *ngIf="item.folders&&item.toggle === 'on'"><i class="fa fa-chevron-down"
+                  aria-hidden="true"></i></span>
+              <span class="open-icon" *ngIf="item.folders&&item.toggle === 'on'"><i class="fa fa-square"
+                  aria-hidden="true"></i></span>
+            </div>
+            <span *ngIf="!isFile" class="bg-light">{{item.folderName}}</span>
+            <span *ngIf="isFile" (click)="DownloadandOpenPdf(item.fileName,i)">{{item.fileName}}</span>
+          </div>
+          <div class="item-children" [@collapse]="item.toggle">
+            <app-multitask-treemenu *ngIf="!isFile && item.folders" [model]="item.folders" isChild="true">
+            </app-multitask-treemenu>
+            <app-multitask-treemenu *ngIf="!isFile && item.files" [model]="item.files" [isFile]="true" isChild="true">
+            </app-multitask-treemenu>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </ion-col>
+  <ion-col size="6">
+    <ion-row>
+      <ion-col size="12">
+        <div class="related-data-container" >
+          <div class="table-responsive">
+            <table>
+              <thead>
+                <tr>
+                  <th>Sr No</th>
+                  <th>Action</th>
+                  <th>Item Name</th>
+                  <th>Item Type</th>
+                  <th>Status</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>1</td>
+                  <td>action</td>
+                  <td>hello</td>
+                  <td>type</td>
+                  <td>active</td>
+                </tr>
+                <tr>
+                  <td>1</td>
+                  <td>action</td>
+                  <td>hello</td>
+                  <td>type</td>
+                  <td>active</td>
+                </tr>
+                <tr>
+                  <td>1</td>
+                  <td>action</td>
+                  <td>hello</td>
+                  <td>type</td>
+                  <td>active</td>
+                </tr>
+                <tr>
+                  <td>1</td>
+                  <td>action</td>
+                  <td>hello</td>
+                  <td>type</td>
+                  <td>active</td>
+                </tr>
+                <tr>
+                  <td>1</td>
+                  <td>action</td>
+                  <td>hello</td>
+                  <td>type</td>
+                  <td>active</td>
+                </tr>
+                <tr>
+                  <td>1</td>
+                  <td>action</td>
+                  <td>hello</td>
+                  <td>type</td>
+                  <td>active</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+        </ion-col>
+     
+    </ion-row>
+    <ion-row>
+      <ion-col size="6">
+        <div  class="related-data-container">
+        <img src="../../../../../assets/imgs/graph.png" alt="">
+        </div>
+      </ion-col>
+    <ion-col size="6" >
+      <div  class="related-data-container" style="text-align: center;">
+      <img src="../../../../../assets/imgs/pie.webp" alt="" style="height: 163px;">
+      </div>
+      </ion-col>
+    </ion-row>
+<ion-row>
+  <ion-col size="12">
+    <div class="accordion" id="accordionExample">
+      <div class="accordion-item">
+        <h2 class="accordion-header" id="headingOne">
+          <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+            Accordion Item #1
+          </button>
+        </h2>
+        <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
+          <div class="accordion-body">
+            <strong>This is the first item's accordion body.</strong> It is shown by default, until the collapse plugin adds the appropriate classes that we use to style each element. These classes control the overall appearance, as well as the showing and hiding via CSS transitions. You can modify any of this with custom CSS or overriding our default variables. It's also worth noting that just about any HTML can go within the <code>.accordion-body</code>, though the transition does limit overflow.
+          </div>
+        </div>
+      </div>
+ 
+  
+    </div>
+  </ion-col>
+</ion-row>
+  </ion-col>
+</ion-row>

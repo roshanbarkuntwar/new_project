@@ -1,0 +1,158 @@
+@import './../../mixins';
+
+.tab-menu
+  { 
+    height: 100%;
+    position: relative;
+    padding-bottom:10px;
+    cursor: pointer;
+    .img-container {
+      
+      padding: 12px 0;
+      position: relative;
+      overflow: hidden;
+      &::before{
+        @include before-after;
+        width: 25px;
+        height: 70px;
+        background-size: 15px 11px;
+        background-position: 0 0, 10px 10px;
+        top: -24px;
+        left: 0;
+      }     
+ .img-circle{
+  width: 75px;
+  height: 75px;
+  margin: auto;
+  border-radius: 50%;
+  padding-top: 22px;
+  padding-left: 4px;
+  position: relative;
+
+  &::after{
+    @include before-after;
+    width: 63px;
+    height: 35px;
+    background-size: 15px 11px;
+    background-position: 0 0, 10px 10px;
+    left: 0px;
+    bottom: -31px;
+  }
+    img
+    {
+      width: 35px;
+      height: 35px;
+    }
+  }
+
+  }
+  .name-container{
+     padding: 0;
+    position: relative;
+
+    h6{
+      margin-bottom: 5px;
+      margin-top: 5px;
+      font-size:14px;
+      font-weight:500;
+    }
+  }
+  &::after
+  {
+    content:"";
+    position:absolute;
+    left:0px;
+    width:0px;
+    height:1px;
+    bottom:0px;
+    transition: width 0.1s ease;
+    z-index: 1;
+  }
+  &:active::after
+  {
+   
+    width:100%;
+ 
+  }
+  }
+
+  
+.tab-menu-large
+{ 
+  height: 100%;
+  position: relative;
+  padding-bottom:10px;
+  cursor: pointer;
+  .img-container {
+    
+    padding: 0;
+    position: relative;
+    overflow: hidden;
+    &::before{
+      @include before-after;
+      width: 25px;
+      height: 70px;
+      background-size: 15px 11px;
+      background-position: 0 0, 10px 10px;
+      top: -24px;
+      left: 0;
+    }     
+.img-circle{
+margin: auto;
+  border-radius: 10px;
+  padding-left: 4px;
+  position: relative;
+  box-shadow:none !important;
+&::after{
+  @include before-after;
+  width: 63px;
+  height: 35px;
+  background-size: 15px 11px;
+  background-position: 0 0, 10px 10px;
+  left: 0px;
+  bottom: -31px;
+}
+  img
+  {
+    width: auto;
+    height: 80px;
+  }
+}
+
+}
+.name-container{
+   padding: 0;
+  position: relative;
+
+  h6{
+    margin-bottom: 5px;
+    margin-top: 5px;
+    font-size:14px;
+    font-weight:500;
+  }
+}
+&::after
+{
+  content:"";
+  position:absolute;
+  left:0px;
+  width:0px;
+  height:1px;
+  bottom:0px;
+  transition: width 0.1s ease;
+  z-index: 1;
+}
+&:active::after
+{
+ 
+  width:100%;
+
+}
+}
+@media only screen and (max-width: 900px) {
+  .full-width {
+    width: 100% !important;
+    max-width: 100% !important;
+    flex: unset !important;
+  }
+}

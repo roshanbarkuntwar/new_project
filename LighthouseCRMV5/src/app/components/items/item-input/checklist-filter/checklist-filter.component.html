@@ -1,0 +1,42 @@
+<div class="smart-filter-section smart-filter-section-checklist" *ngIf ="!itemData">
+  <div class="smart-filter-section__header">
+    <h5 class="m-0 d-inline-block">{{checklistFilter.prompt_name}}<sup>{{range}} of {{Vlength}}</sup></h5>
+    <ion-button class="float-right view-all-btn" color="primary" fill="clear" size="small"  (click)="clearall(dataSet)">Clear</ion-button>
+  </div>
+  <div class="clearfix"></div>
+ 
+  <ion-item  *ngFor="let object of map | keyvalue;let i=index" [hidden]="i>=range" (click)="onButtonGroupClick($event,object,i)">
+    <div class="d-flex" >
+    <ion-checkbox color="primary" slot="start"  [(ngModel)]="object.isChecked">
+
+    </ion-checkbox>
+    <ion-label>{{object.key}}</ion-label>
+  </div>
+  </ion-item>
+  <div>
+    <ion-button class="float-right view-all-btn" color="primary" fill="clear" size="small"  [hidden] ="range >= Vlength" (click)="increaseRange()">View more item</ion-button>
+  </div>
+ 
+</div>
+
+
+<div class="smart-filter-section smart-filter-section-checklist"  *ngIf ="itemData">
+  <div class="smart-filter-section__header">
+    <h5 class="m-0 d-inline-block">{{checklistFilter.prompt_name}}<sup>{{range}} of {{Vlength}}</sup></h5>
+    <ion-button class="float-right view-all-btn" color="primary" fill="clear" size="small"  (click)="clearall(dataSet)">Clear</ion-button>
+  </div>
+  <div class="clearfix"></div>
+ 
+  <ion-item  *ngFor="let object of itemDataArr;let i=index" [hidden]="i>=range"(click)="onSelect($event,object,i)" >
+    <div class="d-flex" >
+    <ion-checkbox color="primary" slot="start"  [(ngModel)]="object.isChecked">
+
+    </ion-checkbox>
+    <ion-label>{{object.value}}</ion-label>
+  </div>
+  </ion-item>
+  <div>
+    <ion-button class="float-right view-all-btn" color="primary" fill="clear" size="small"  [hidden] ="range >= Vlength" (click)="increaseRange()">View more item</ion-button>
+  </div>
+ 
+</div>

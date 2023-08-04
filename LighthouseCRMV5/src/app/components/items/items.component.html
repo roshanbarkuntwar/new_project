@@ -1,0 +1,267 @@
+<ng-container *ngIf = "item">
+  <ng-container *ngIf = "item.item_visible_flag == 'T' || item.item_filter_flag">
+  <div [ngSwitch]="item.item_type" class="h-100" (click)="getPosition($event)" (contextmenu)="onRightClickgetPosition($event)">
+  
+    <ion-icon style="cursor: pointer" name="create"  *ngIf="globalobject.toggleDevloperMode && globalobject.toggleDevloperModePro && globalobject.devItemEditFlag" (click)="openItemEditPage(item)"></ion-icon>
+  
+    <div *ngSwitchCase="'BT'">
+      <app-button [ngStyle]="item.display_setting_str" [button]="item" (emitPass)="itemClicked($event)"></app-button>
+    </div>
+  
+    <div *ngSwitchCase="'FILE_UPLOAD'">
+        <app-upload-button [ngStyle]="item.display_setting_str" [parentComponent]="parentComponent" [button]="item" (emitPass)="itemClicked($event)"></app-upload-button>
+      </div>
+  
+    <div *ngSwitchCase="'LBL'">
+      <app-label [labelInput]="item" (emitPass)="itemClicked($event)"></app-label>
+    </div>
+    <div *ngSwitchCase="'BADGE'">
+      <app-ion-badges [ngStyle]="item.display_setting_str" [labelInput]="item" (emitPass)="itemClicked($event)">
+      </app-ion-badges>
+    </div>
+    <div *ngSwitchCase="'TAB'">
+      <app-menu-list [ngStyle]="item.display_setting_str" (emitPass)="itemClicked($event)" [menulist]="item">
+      </app-menu-list>
+    </div>
+    <div *ngSwitchCase="'TABV2'">
+      <app-new-menu-list [ngStyle]="item.display_setting_str" (emitPass)="itemClicked($event)" [menulistNEW]="item">
+      </app-new-menu-list>
+    </div>
+    <div class="h-100" *ngSwitchCase="'GTAB'">
+      <app-menu-tab class="h-100" [ngStyle]="item.display_setting_str" (emitPass)="itemClicked($event)" [menutab]="item">
+      </app-menu-tab>
+    </div>
+  
+    <div class="h-100" *ngSwitchCase="'DEV_ICON'">
+      <app-dev-item-icon class="h-100" [ngStyle]="item.display_setting_str" (emitPass)="itemClicked($event)" [menutab]="item">
+      </app-dev-item-icon>
+    </div>
+   
+    <div *ngSwitchCase="'FLIP_KPI'">
+      <app-flip-kpi  [kpi]="item" (emitPass)="itemClicked($event)"></app-flip-kpi>
+    </div>
+  
+  
+    <div *ngSwitchCase="'TB'" class="h-100">
+      <app-text-band [textband]="item" (emitPass)="itemClicked($event)"></app-text-band>
+    </div>
+    <div *ngSwitchCase="'D'">
+      <app-date-input [ngStyle]="item.display_setting_str" [dateinput]="item" [frame_type]="frame_type" (emitOnChange)="itemValueChange($event)" (emitOnBlur)="itemOnBlur($event)">
+      </app-date-input>
+    </div>
+    <div *ngSwitchCase="'D_BROWSER'">
+      <app-date-input [ngStyle]="item.display_setting_str" [dateinput]="item" [frame_type]="frame_type" (emitOnChange)="itemValueChange($event)" (emitOnBlur)="itemOnBlur($event)">
+      </app-date-input>
+    </div>
+    <div *ngSwitchCase="'I'">
+      <app-image-input [ngStyle]="item.display_setting_str" [imageinput]="item"></app-image-input>
+    </div>
+    <div *ngSwitchCase="'UPLOAD_VIDEO'">
+      <app-video-input [ngStyle]="item.display_setting_str" [videoInput]="item"></app-video-input>
+    </div>
+    <div *ngSwitchCase="'L'">
+      <app-lov-input [ngStyle]="item.display_setting_str" (emitOnChange)="itemValueChange($event)" [lovinput]="item"
+        [wscp]="wscp" [parentComponent]="parentComponent"></app-lov-input>
+    </div>
+    <div *ngSwitchCase="'LP'">
+      <app-lov-input [ngStyle]="item.display_setting_str" (emitOnChange)="itemValueChange($event)" [lovinput]="item"
+        [wscp]="wscp" [parentComponent]="parentComponent"></app-lov-input>
+    </div>
+  
+    <div *ngSwitchCase="'N'">
+      <app-number-input [ngStyle]="item.display_setting_str" [frame_type]="frame_type" [numberinput]="item"
+        (emitOnChange)="itemValueChange($event)"></app-number-input>
+    </div>
+  
+     <div *ngSwitchCase="'DD'">
+      <app-select-input [ngStyle]="item.display_setting_str" [l_wscp]="wscp" (emitOnChange)="itemValueChange($event)"
+        [selectinput]="item"  [parentComponent]="parentComponent"></app-select-input>
+    </div> 
+    <div *ngSwitchCase="'DD_BROWSER'">
+      <app-select-input [ngStyle]="item.display_setting_str" [l_wscp]="wscp" (emitOnChange)="itemValueChange($event)"
+        [selectinput]="item"  [parentComponent]="parentComponent"></app-select-input>
+    </div> 
+    <div *ngSwitchCase="'T'">
+      <app-text-input [textinput]="item" [frame_type]="frame_type" (emitOnChange)="itemValueChange($event)">
+      </app-text-input>
+    </div>
+    <div *ngSwitchCase="'B'">
+      <app-barcode-input [ngStyle]="item.display_setting_str" [barcodeinput]="item"
+        (emitOnChange)="itemValueChange($event)"></app-barcode-input>
+    </div>
+    <div *ngSwitchCase="'AT'">
+      <app-textarea-input [ngStyle]="item.display_setting_str" [itemTxtInp]="item" (emitOnChange)="itemValueChange($event)"></app-textarea-input>
+    </div>
+    <div *ngSwitchCase="'E'">
+      <app-email-input [ngStyle]="item.display_setting_str" [emailinput]="item"></app-email-input>
+    </div>
+  
+    <div *ngSwitchCase="'FDT'">
+      <app-date-filter-input [ngStyle]="item.display_setting_str" [dateinput]="item"></app-date-filter-input>
+    </div>
+    <div *ngSwitchCase="'FILE_TREE'">
+      <app-file-tree [itemData]="item" [isMainFolder]="true"></app-file-tree>
+    </div>
+    <div *ngSwitchCase="'TEXT'">
+    <!--   <pre>{{globalobject.location_name | json}}</pre> -->
+      <app-para-text [itemInput]="item" [frame_type]="frame_type" (emitPass)="itemClicked($event)" (emitOnChange)="itemValueChange($event)" ></app-para-text>
+    </div>
+  
+    <div *ngSwitchCase="'SUMMARY-CARD'">
+      <app-summary-card [summ_card_input]="item" [frame_type]="frame_type" (emitPass)="itemClicked($event)">
+      </app-summary-card>
+    </div>
+  
+    <div *ngSwitchCase="'TEXT-BAND4-3D'">
+      <app-text-band4 [itemInput]="item" [frame_type]="frame_type" (emitPass)="itemClicked($event)"></app-text-band4>
+    </div>
+  
+    <div *ngSwitchCase="'CARD_TITLE'">
+      <app-para-text [itemInput]="item" [frame_type]="frame_type" (emitPass)="itemClicked($event)"></app-para-text>
+    </div>
+    <div *ngSwitchCase="'RT'">
+      <app-rating-input [ngStyle]="item.display_setting_str" [ratinginput]="item"></app-rating-input>
+    </div>
+    <!-- <div *ngSwitchCase="'I'">  ---ss
+      <app-image [ngStyle]="item.display_setting_str" [image]="item"></app-image>
+    </div> -->
+    <div *ngSwitchCase="'IS'">
+      <app-image-slider [ngStyle]="item.display_setting_str" [imageslider]="item"></app-image-slider>
+    </div>
+    <div *ngSwitchCase="'REP-CARD'">
+      <app-rep-card [ngStyle]="item.display_setting_str" [rep_card]="item" (emitPass)="itemClicked($event)">
+      </app-rep-card>
+    </div>
+  
+    <div *ngSwitchCase="'SC'">
+      <app-news-scroll [newsscroll]="item" [frame_type]="frame_type" (emitPass)="itemClicked($event)"></app-news-scroll>
+    </div>
+  
+    <div *ngSwitchCase="'FILE'">
+      <app-attach-file [fileInput]="item" (emitPass)="itemClicked($event)"></app-attach-file>
+    </div>
+  
+  
+    <div *ngSwitchCase="'SLIDELIST'">
+      <app-sliding-list [slidelist]="item" (emitPass)="itemClicked($event)"></app-sliding-list>
+    </div>
+  
+  
+    <div *ngSwitchCase="'CHAT-LEFT'">
+      <app-chat-left [chatlefttinput]="item" [frame_type]="frame_type" (emitOnChange)="itemValueChange($event)">
+      </app-chat-left>
+    </div>
+  
+    <div *ngSwitchCase="'CHAT-RIGHT'">
+      <app-chat-right [chatrightinput]="item" [frame_type]="frame_type" (emitOnChange)="itemValueChange($event)">
+      </app-chat-right>
+    </div>
+  
+    <div *ngSwitchCase="'P-CIRCLE'">
+      <app-percentage-circle [pcircleinput]="item" (emitPass)="itemClicked($event)"></app-percentage-circle>
+    </div>
+  
+    <div *ngSwitchCase="'PROGRESS-BAR'">
+      <app-progress-bar [pbarinput]="item" (emitPass)="itemClicked($event)"></app-progress-bar>
+    </div>
+  
+    <div *ngSwitchCase="'CB'">
+      <app-check-box [checkBox]="item" [frame_type]="frame_type" (emitPass)="itemClicked($event)"></app-check-box>
+    </div>
+    
+    <div *ngSwitchCase="'DI'">
+      <app-dialer-input [dialer]="item" (emitPass)="itemClicked($event)" [frame_type]="frame_type"></app-dialer-input>
+    </div>
+  
+    <div *ngSwitchCase="'DISPLAY_PHOTO'">
+      <app-item-image [displayPhoto]="item" [styleCss]="item.display_setting_str" (emitPass)="itemClicked($event)">
+      </app-item-image>
+    </div>
+  
+    <div *ngSwitchCase="'EI'">
+      <app-email-composer [email]="item" (emitPass)="itemClicked($event)"></app-email-composer>
+    </div>
+  
+    <div *ngSwitchCase="'CHECKLIST-FILTER'">
+      <app-checklist-filter [ngStyle]="item.display_setting_str" [itemData]="itemData"
+        (emitOnChange)="itemValueChange($event)" [checklistFilter]="item" [parentComponent]="parentComponent"
+        (emitfilterParam)="fiteredData($event)"></app-checklist-filter>
+    </div>
+    <div *ngSwitchCase="'COLUMN-FILTER'">
+      <app-column-filter [ngStyle]="item.display_setting_str" [itemData]="itemData"
+        (emitOnChange)="itemValueChange($event)" [colFilter]="item" [parentComponent]="parentComponent"
+        (emitfilterParam)="fiteredData($event)"></app-column-filter>
+    </div>
+  
+    <div *ngSwitchCase="'IONCHIP-FILTER'">
+      <app-ionchip-filter [ngStyle]="item.display_setting_str" [itemData]="itemData"
+        (emitOnChange)="itemValueChange($event)" [iFilter]="item" [parentComponent]="parentComponent"
+        (emitfilterParam)="fiteredData($event)"></app-ionchip-filter>
+    </div>
+  
+    <div *ngSwitchCase="'SLIDELIST-FILTER'">
+      <app-sliding-filter [ngStyle]="item.display_setting_str" [itemData]="itemData"
+        (emitOnChange)="itemValueChange($event)" [sFilter]="item" [parentComponent]="parentComponent"
+        (emitfilterParam)="fiteredData($event)"></app-sliding-filter>
+    </div>
+    <div *ngSwitchCase="'RANGE-FILTER'">
+      <app-range-filter [ngStyle]="item.display_setting_str" [itemData]="itemData"
+        (emitOnChange)="itemValueChange($event)" [rFilter]="item" [parentComponent]="parentComponent"
+        (emitfilterParam)="fiteredData($event)"></app-range-filter>
+    </div>
+  
+    <div *ngSwitchCase="'COLUMN-COUNT'">
+      <app-column-count [ngStyle]="item.display_setting_str" (emitPass)="itemClicked($event)" [colCount]="item">
+      </app-column-count>
+    </div>
+  
+    <div *ngSwitchCase="'DISPLAY-COUNT'">
+      <app-display-count [ngStyle]="item.display_setting_str" (emitPass)="itemClicked($event)" [dispCount]="item">
+      </app-display-count>
+    </div>
+
+    <div *ngSwitchCase="'KPI'" class="h-100">
+      <app-two-d-kpi [dKpi]="item" (emitPass)="itemClicked($event)"></app-two-d-kpi>
+    </div>
+
+    <div *ngSwitchCase="'SLIDE-KPI'" class="h-100">
+      <app-kpi-slider [sKpi]="item" (emitPass)="itemClicked($event)"></app-kpi-slider>
+    </div>
+    <div *ngSwitchCase="'DOWNLOAD_DOC'" class="h-100">
+        <app-download-doc [doc]="item" [ngStyle]="item.display_setting_str" (emitPass)="itemClicked($event)"></app-download-doc>
+    </div>
+   
+    <div *ngSwitchCase="'ICON-MENU'" class="h-100">
+      <app-icon-menu [iconMenu]="item" [ngStyle]="item.display_setting_str" (emitPass)="itemClicked($event)"></app-icon-menu>
+    </div>
+    <!-- <app-icon-menu></app-icon-menu> -->
+    <div *ngSwitchCase="'IMG-MENU'" class="h-100">
+      <app-image-menu [imageMenu]="item" [ngStyle]="item.display_setting_str" (emitPass)="itemClicked($event)"></app-image-menu>
+    </div>
+    <div *ngSwitchCase="'SUB-SELECT'">
+      <app-sub-select-input [subselect]="item" [ngStyle]="item.display_setting_str" (emitPass)="itemClicked($event)"></app-sub-select-input>
+    </div>
+    <div *ngSwitchCase="'TOGGLE'">
+      <app-toogle-switch [toggle]="item" [ngStyle]="item.display_setting_str" (emitPass)="itemClicked($event)"></app-toogle-switch>
+    </div>
+    
+    <div *ngSwitchCase="'DEV-CLICK-EVENT'">
+      <app-dev-click-event-str [textEvent]="item" [ngStyle]="item.display_setting_str" (emitPass)="itemClicked($event)"></app-dev-click-event-str>
+    </div>
+    <div *ngSwitchDefault>
+      {{item.prompt_name}} -- {{item.item_type}}
+    </div>
+  
+    <div *ngSwitchCase="'STREAM_VIDEO'">
+      <app-video-stream [streamEvent]="item" [ngStyle]="item.display_setting_str" (emitPass)="itemClicked($event)"></app-video-stream>
+    </div>
+  
+    <div *ngSwitchCase="'SEPARATOR'">
+      <app-partition-item [separator]="item" [ngStyle]="item.display_setting_str"></app-partition-item>
+    </div>
+  
+    <!-- <app-column-count></app-column-count> -->
+  
+  </div>
+  </ng-container>
+  </ng-container>

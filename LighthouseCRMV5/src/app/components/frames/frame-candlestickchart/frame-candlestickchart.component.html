@@ -1,0 +1,18 @@
+
+
+
+
+<ion-row *ngIf="frame.apps_page_frame_name">
+  <ion-col class="pl-0" >
+    <h1 class="frame-name ">{{frame.apps_page_frame_name}}<span style="margin-left: 10px;" *ngIf="globalObjects.toggleDevloperMode">[{{frame.apps_page_frame_seqid}}]</span></h1>
+  </ion-col>
+</ion-row>
+<div >
+
+  <div id="chart_div"  style="width: 500px;height: 500px;" *ngIf="candleGraphFlag"></div>
+  <div *ngIf="!candleGraphFlag">
+    <div id="chart_div" class="candlestrick-4" *ngIf="candleGraphValue==4"></div>
+    <div id="chart_div" class="candlestrick-6" *ngIf="candleGraphValue==6"></div>
+    <div id="chart_div" class="candlestrick-12" *ngIf="candleGraphValue==12"></div>
+  </div>
+</div>

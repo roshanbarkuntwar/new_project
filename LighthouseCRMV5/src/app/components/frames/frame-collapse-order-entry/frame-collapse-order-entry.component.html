@@ -1,0 +1,176 @@
+<div class="open-toggle" (click)="toggleTable()" *ngIf="show">
+  <div class="arr-div"><span class="arrow down"></span></div>
+  <h5>{{frame.apps_page_frame_name}}</h5>
+</div>
+
+<div class="close-toggle" (click)="toggleTable()" *ngIf="!show">
+  <div class="arr-div"><span class="arrow right"></span></div>
+  <h5>{{frame.apps_page_frame_name}}</h5>
+</div>
+
+
+<div [hidden]="!show">
+  <ion-row class="box" *ngFor="let p of parentRows ;let h=index">
+    <ion-col size="12" class="order-entry-head">
+<p>{{p.parentKey}}</p>
+    </ion-col>
+    <ion-col size="4" class="d-flex pt-0">
+
+      <ng-container *ngFor="let itemGroup of p.cardRow">
+        <ng-container *ngFor="let item of itemGroup.Level5">
+          <ng-container *ngIf="item.item_type == 'DISPLAY_PHOTO'">
+            <app-item-image [displayPhoto]="item" [frame_type]="frame.apps_frame_type" [styleCss]="imgStyle">
+            </app-item-image>
+          </ng-container>
+        </ng-container>
+      </ng-container>
+
+
+    </ion-col>
+    <ion-col size="8" class="pt-0 pr-0">
+      <div class="table-responsive">
+        <table>
+          <thead>
+            <!-- <tr>
+              <th colspan="11" class="text-center">{{p.parentKey}}</th>
+            </tr> -->
+            <tr>
+              <th *ngFor="let th of thead; let i = index">{{th}}</th>
+            </tr>
+          </thead>
+          <!-- <thead>
+            <tr>
+              <th colspan="11" class="text-center">{{p.parentKey}}</th>
+            </tr>
+            <tr>
+              <th rowspan="2" class="text-center text-middle">NOMINAL OUTSIDE DIAMETER (MM)</th>
+              <th colspan="2" class="text-center text-middle">MEAN OUTSIDE DIAMETER IN (MM)</th>
+              <th colspan="2" class="text-center">OUTSIDE DIAMETER AT ANY POINT (MM)</th>
+              <th colspan="2" class="text-center">CLASS-1(2.5 kg/cm<sup>2</sup>)</th>
+              <th colspan="2" class="text-center">CLASS-2(4.0 kg/cm<sup>2</sup>)</th>
+              <th colspan="2" class="text-center">CLASS-3(6.0 kg/cm<sup>2</sup>)</th>
+
+
+            </tr>
+            <tr>
+              <th class="text-center text-middle">2525</th>
+              <th class="text-center text-middle">24</th>
+              <th class="text-center">OUTNT (MM)</th>
+              <th class="text-center">C</th>
+              <th class="text-center">CL)</th>
+              <th class="text-center">3</th>
+              <th class="text-center">CL)</th>
+              <th class="text-center">3</th>
+              <th class="text-center">CL)</th>
+              <th class="text-center">3</th>
+
+            </tr>
+          </thead> -->
+          <tbody>
+
+            <!-- <tr>
+              <ng-container>
+                <ng-container *ngFor="let item of itemGroup.Level5">
+              <td>1</td>
+              <td>3</td>
+              <td>2</td>
+              <td>88</td>
+              <td>10cm</td>
+              <td>33</td>
+              <td>25</td>
+              <td>10cm</td>
+              <td>33</td>
+              <td>25</td>
+              <td>1</td>
+            </tr> -->
+
+            <tr *ngFor="let tableData of p.parentRow ;let rowindex=index">
+              <ng-container *ngFor="let itemGroup of tableData;">
+                <ng-container *ngFor="let input_item of itemGroup.Level5; let i = index">
+                  <!-- <ng-container *ngIf="input_item.item_visible_flag =='T' || input_item.item_sub_type != 'ONLY_VIEW_PARENT'
+                  || input_item.item_sub_type != 'ONLY_VIEW_COUNT' || input_item.item_type != 'DISPLAY_PHOTO'"> -->
+                  <ng-container *ngIf="input_item.item_visible_flag =='T'">
+                    <ng-container *ngIf=" input_item.item_sub_type != 'DELETE_BUTTON'">
+                    <ng-container *ngIf=" input_item.item_sub_type != 'ONLY_VIEW_PARENT'">
+                      <ng-container *ngIf=" input_item.item_sub_type != 'ONLY_VIEW_COUNT'">
+                      <ng-container *ngIf=" input_item.item_type != 'DISPLAY_PHOTO'">
+                    <td>
+                      <ng-container [ngSwitch]="input_item.item_type">
+
+                        <!-- <div *ngSwitchCase="'LBL'">
+                        <app-label [labelInput]="input_item" [frame_type]="frame.apps_frame_type" 
+                          (emitPass)="itemValueChange($event,rowindex)"></app-label>
+                      </div> -->
+
+                        <div *ngSwitchCase="'L'">
+                          <app-items [item]="input_item" [wscp]="wscp_send_input" [frame_type]="frame.apps_frame_type"
+                            (LHSOnChange)="itemValueChange(input_item,tableData,h,rowindex)">
+                          </app-items>
+                        </div>
+
+                        <div *ngSwitchCase="'D'">
+                          <app-date-input [ngStyle]="input_item.display_setting_str" [dateinput]="input_item"
+                            [frame_type]="frame.apps_frame_type" (LHSOnChange)="itemValueChange(input_item,tableData,h,rowindex)">
+                          </app-date-input>
+                        </div>
+
+                        <div *ngSwitchCase="'BT'">
+                          <app-button [ngStyle]="input_item.display_setting_str" [button]="input_item"
+                            (emitOnChange)="itemValueChange(input_item,tableData,h,rowindex)">
+                          </app-button>
+                        </div>
+
+                        <div *ngSwitchCase="'CB'">
+                          <app-check-box [checkBox]="input_item" [frame_type]="frame.apps_frame_type"
+                            (emitOnChange)="itemValueChange(input_item,tableData,h,rowindex)">
+                          </app-check-box>
+                        </div>
+
+                        <div *ngSwitchCase="'TEXT'">
+
+                          <app-para-text [itemInput]="input_item" [frame_type]="frame.apps_frame_type"
+                            (LHSOnChange)="itemValueChange(input_item,tableData,h,rowindex)"></app-para-text>
+
+                        </div>
+
+                        <div *ngSwitchCase="'N'" class="number-value">
+                         <!--  <app-number-input [frame_type]="frame.apps_frame_type" [numberinput]="input_item"
+                            (emitOnChange)="itemValueChange(input_item,tableData,h,rowindex)"></app-number-input> -->
+
+                            <input class="table-input" style="text-align: right;width: 100%;" type="number" [(ngModel)]="input_item.value"
+                            [ngStyle]="input_item.displysettingstr" (change)="itemValueChange(input_item,tableData,h,rowindex)" />
+                        </div>
+
+                        <div *ngSwitchCase="'T'">
+                         <!--  <app-text-input [textinput]="input_item" [frame_type]="frame.apps_frame_type"
+                            (emitOnChange)="itemValueChange(input_item,tableData,h,rowindex)">
+                          </app-text-input> -->
+
+                          <input class="table-input" type="text" [(ngModel)]="input_item.value"
+                          [ngStyle]="input_item.displysettingstr" (change)="itemValueChange(input_item,tableData,h,rowindex)" />
+                        </div>
+
+
+
+                      </ng-container>
+
+                      <!-- <app-para-text [itemInput]="input_item" [frame_type]="frame.apps_frame_type"
+                (emitOnChange)="itemValueChange($event,rowindex)" ></app-para-text> -->
+                    </td>
+                  </ng-container>
+                </ng-container>
+              </ng-container>
+            </ng-container>
+            </ng-container>
+            </ng-container>
+          </ng-container>
+            
+            </tr>
+
+
+          </tbody>
+        </table>
+      </div>
+    </ion-col>
+  </ion-row>
+</div>

@@ -1,0 +1,380 @@
+
+.setting-menu-list{
+  
+  padding: 0;
+  padding-left: 12px;
+  padding-right: 12px;
+  border-radius: 5px;
+  position: relative;
+  
+  ion-item {
+    --min-height: 50px;
+ 
+   
+  }
+
+  ion-icon {
+    font-size: 23px;
+    margin-top: 14px;
+  }
+
+  .thumbnail-container {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    text-align: center;
+    padding: 3px;
+    padding-top: 5px;
+  }
+
+  ion-thumbnail {
+    padding: 5px;
+    width: 35px;
+    height: 35px;
+    text-align: center;
+    padding-top: 5px;
+    border-radius: 50%;
+    z-index: 2;
+    margin-bottom: 10px;
+
+    img {
+      width: 20px !important;
+      height: auto !important;
+    }
+  }
+
+  h2 {
+      color: #60666b;
+    font-weight: 5
+    
+    00;
+    font-size:14px;
+    margin-left: 0.7em;
+    margin-top: 10px;
+  }
+
+  ion-label {
+    margin: 0px 10px !important;
+  }
+
+  .item-native {
+
+    --padding-start: 0px;
+  }
+
+  .next-arrow {
+    position: absolute;
+    top: 0px;
+    right: 0px;
+  }
+  &::before
+  {
+    content:"";
+    position:absolute;
+    left:0px;
+    width:0px;
+    height:1px;
+    bottom:0px;
+    transition: width 0.1s ease;
+    z-index: 1;
+  }
+  &:active::before
+  {
+   
+    width:100%;
+ 
+  }
+}
+.ios.menu-list
+{
+  margin-bottom:0px;
+}
+.inner-section{
+ion-item{
+
+  --background:  rgb(234 225 225 / 42%);
+}
+ion-list{
+  padding-top: 0;
+  padding-bottom: 0;
+}
+ion-list-header{
+  background: rgb(234 225 225 / 42%);
+}
+}
+.developer-popover{
+   --top: 20px;
+  --left: 15px;
+    --right: 15px;
+    --width: auto;
+}
+.font-container {
+  border: 1px solid #bdc3c7;
+  margin-top: 0px;
+  border-top: 0;
+  background: #f6f2f2;
+  ion-select{
+    border: 1px solid #ccc;
+    margin-top: 5px;
+    --padding-top: 5px;
+    --padding-end: 0;
+    --padding-bottom: 5px;
+  }
+}
+.inner-section {
+  border: 1px solid #ccc;
+  /* background: #fff; */
+}
+.drop-open{
+  transform: rotate(270deg) !important;
+}
+#form-wrapper {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+form {
+  width: 90%;
+  max-width: 500px;
+  padding-bottom: 44px;
+}
+form #form-title {
+  margin-top: 0;
+  font-weight: 400;
+  text-align: center;
+}
+form #debt-amount-slider {
+  display: flex;
+  flex-direction: row;
+  align-content: stretch;
+  position: relative;
+  width: 100%;
+  height: 50px;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none;
+}
+form #debt-amount-slider::before {
+  content: " ";
+  position: absolute;
+  height: 2px;
+  width: 100%;
+  width: calc(100% * (4 / 5));
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: #595d61
+}
+form #debt-amount-slider input, form #debt-amount-slider label {
+  box-sizing: border-box;
+  flex: 1;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none;
+  cursor: pointer;
+}
+form #debt-amount-slider label {
+  display: inline-block;
+  position: relative;
+  width: 20%;
+  height: 100%;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none;
+}
+form #debt-amount-slider label::before {
+  content: attr(data-debt-amount);
+  position: absolute;
+  left: 50%;
+  padding-top: 10px;
+  transform: translate(-50%, 45px);
+  font-size: 14px;
+  letter-spacing: 0.4px;
+  font-weight: 400;
+  white-space: nowrap;
+  opacity: 0.85;
+  transition: all 0.15s ease-in-out;
+}
+form #debt-amount-slider label::after {
+  content: " ";
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  width: 30px;
+  height: 30px;
+  border: 2px solid #595d61;
+  background: #fff;
+  border-radius: 50%;
+  pointer-events: none;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none;
+  z-index: 1;
+  cursor: pointer;
+  transition: all 0.15s ease-in-out;
+}
+form #debt-amount-slider label:hover::after {
+  transform: translate(-50%, -50%) scale(1.25);
+}
+form #debt-amount-slider input {
+  display: none;
+}
+form #debt-amount-slider input:checked + label::before {
+  font-weight: 800;
+  opacity: 1;
+}
+form #debt-amount-slider input:checked + label::after {
+  border-width: 4px;
+  transform: translate(-50%, -50%) scale(0.75);
+}
+form #debt-amount-slider input:checked ~ #debt-amount-pos {
+  opacity: 1;
+}
+form #debt-amount-slider input:nth-child(5) ~ #debt-amount-pos {
+  opacity: 1;
+  left: 50%;
+}
+form #debt-amount-slider input:checked:nth-child(1) ~ #debt-amount-pos {
+  left: 10%;
+}
+form #debt-amount-slider input:checked:nth-child(3) ~ #debt-amount-pos {
+  left: 30%;
+}
+form #debt-amount-slider input:checked:nth-child(5) ~ #debt-amount-pos {
+  left: 50%;
+}
+form #debt-amount-slider input:checked:nth-child(7) ~ #debt-amount-pos {
+  left: 70%;
+}
+form #debt-amount-slider input:checked:nth-child(9) ~ #debt-amount-pos {
+  left: 90%;
+}
+form #debt-amount-slider #debt-amount-pos {
+  display: block;
+  position: absolute;
+  top: 56%;
+  width: 12px;
+  height: 12px;
+  background: #595d61;
+  border-radius: 50%;
+  transition: all 0.15s ease-in-out;
+  transform: translate(-50%, -50%);
+  border: 2px solid #fff;
+  opacity: 0;
+  z-index: 2;
+}
+form:valid #debt-amount-slider input + label::before {
+  transform: translate(-50%, 45px) scale(0.9);
+  transition: all 0.15s linear;
+}
+form:valid #debt-amount-slider input:checked + label::before {
+  transform: translate(-50%, 45px) scale(1.1);
+  transition: all 0.15s linear;
+}
+
+form + button:hover {
+  background: #595d61;
+  color: #fff;
+}
+form + button:hover:active {
+  transform: scale(0.9);
+}
+form + button:focus {
+  background: #4caf50;
+  border-color: #4caf50;
+  color: #fff;
+  pointer-events: none;
+}
+form + button:focus::before {
+  -webkit-animation: spin 1s linear infinite;
+          animation: spin 1s linear infinite;
+}
+form + button::before {
+  display: inline-block;
+  width: 0;
+  opacity: 0;
+  content: "";
+  font-family: "Font Awesome 5 Pro";
+  font-weight: 900;
+  margin-right: 0;
+  transform: rotate(0deg);
+}
+form:invalid + button {
+  pointer-events: none;
+  opacity: 0.25;
+}
+
+@-webkit-keyframes spin {
+  from {
+    transform: rotate(0deg);
+    width: 24px;
+    opacity: 1;
+    margin-right: 12px;
+  }
+  to {
+    transform: rotate(360deg);
+    width: 24px;
+    opacity: 1;
+    margin-right: 12px;
+  }
+}
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+    width: 24px;
+    opacity: 1;
+    margin-right: 12px;
+  }
+  to {
+    transform: rotate(360deg);
+    width: 24px;
+    opacity: 1;
+    margin-right: 12px;
+  }
+}
+.menuTab-container{
+  border: 1px solid #bdc3c7;
+  margin-top: 0px;
+  border-top: 0;
+  background: #f6f2f2;
+ .input-div{
+  border: 1px solid #ccc;
+.menutab-input{
+  --padding-top: 5px;
+  --padding-bottom: 5px;
+  width: calc(100% - 50px);
+  display: inline-block;
+}
+
+span.percent {
+  width: 50px;
+  height: 34px;
+  background: #989797;
+  display: inline-block;
+  font-size: 20px;
+  text-align: center;
+  color: #fff;
+  cursor: pointer;
+}
+ }
+ ion-select{
+  --padding-top: 5px;
+  --padding-bottom: 5px;
+  border: 1px solid #ccc;
+}
+}
+.d-flex{
+  display: flex;
+  align-items: center;
+}
+.mt-30{
+  margin-top: 30px;
+}
