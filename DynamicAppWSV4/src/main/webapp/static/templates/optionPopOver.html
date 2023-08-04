@@ -1,0 +1,23 @@
+<ion-popover-view style="height:22%; width:30%">
+    <ion-content class="optionPopover-container">
+        <div class="list">
+            <a class="item" style="padding: 8px !important;" ng-if="flagForApproveButton == 'A#'">
+                <i class="icon ion-checkmark-round"></i> Approve
+            </a>
+            <a class="item" style="padding: 8px !important;" ng-if="flagForUploadButton == 'UP#'" ng-click="uploadEntry(item, index);optionPopOver.hide();">
+                <i class="icon ion-ios-upload"></i> Upload
+            </a>
+            <a class="item" style="padding: 8px !important;" ng-if="flagForUploadAllButton == 'UPA#'" ng-click="uploadAllEntry();optionPopOver.hide();">
+                <i class="icon ion-ios-upload"></i> Upload All
+            </a>
+            <a class="item" style="padding: 8px !important;" ng-if="flagForUpdateButton == 'U#'" ng-click="openUpdateEntry(item, index);optionPopOver.hide();">
+                <i class="icon ion-edit"></i> Update
+            </a>
+            <a class="item" style="padding: 8px !important;" ng-if="flagForDeleteButton == 'D#'" ng-click="deleteEntry(item, index);optionPopOver.hide();">
+                <i class="icon ion-close-round"></i> Detete
+            </a>
+
+
+        </div>
+    </ion-content>
+</ion-popover-view>

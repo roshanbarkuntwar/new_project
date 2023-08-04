@@ -1,0 +1,139 @@
+<ion-view cache-view="false">
+
+    <ion-header-bar class="bar bar-header  App-header">
+        <button class="button button-icon icon icon-left ion-ios-arrow-left back-btn" ng-click="backNavigate()"></button>
+        <div class="h1 title">Entry Details</div>
+    </ion-header-bar>
+    <ion-content overflow-scroll="true">
+        <form name="frm">
+            <p>
+            <ion-spinner icon="ios" class="dash-spin " ng-hide="tableData"> </ion-spinner>
+            </p>
+            <div class="Career-details">
+                <div class="responsive-table">
+                    <table class="table" style="border: 1px solid black;">
+                        <thead>
+                            <tr>
+                                <th class="borders" ng-repeat="data in tableHeader track by $index">
+                                    <b style="font-size: 15px;">{{data}}</b>
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr data-ng-repeat="list in tableData track by $index">
+                                <td ng-click="editrow(list[list.length - 1])">
+                                    <button class="button button-icon icon ion-edit customize-icon"></button>
+                                    <!-- <i class = "icon icon ion-edit" style="height:20px; width:20px"></i> -->
+                                    <!-- <img src='img/edit-icon.png' style="height:20px; width:20px"> -->
+                                </td>
+                                <td ng-click="deleterow($index, list[list.length - 1])">
+                                    <button class="button button-icon icon ion-close customizeDelete-icon"></button>
+                                    <!-- <i class = "icon icon ion-close" style="height:20px; width:20px"></i> -->
+                                    <!-- <img src='img/del_hover.png' style="height:20px; width:20px"> -->
+                                </td>
+                                <td ng-repeat="item in list track by $index" class="borders" ng-show="!$last">
+
+                                    <div ng-switch="item_help_property[$index]">
+                                        <div ng-switch-when="L" ng-hide="entry_by_user[$index] == 'F'">
+                                            <input type="text" ng-model="list[$index]" placeholder="{{item.tool_tip}}" ng-readonly="true" ng-required="nullable[$index]=='F'" ng-disabled="(flagForEdit[list[list.length - 1]] != 1 || entry_by_user[$index] == 'R') && (entry_by_user[$index] == 'R')">
+
+                                        </div>
+
+                                        <div ng-switch-when="R" ng-hide="entry_by_user[$index] == 'F'">
+                                            <div ng-repeat="choice in item.choices">
+                                                <input type="radio" ng-change="dependent_nullable_logic(item)" name="single-{{ field.id}}" id="single-{{ choice.id}}" data-ng-model="choice.selected" data-ng-value="true" ng-change='updateRadioChoices(field, choice)' ng-required="nullable[$index]=='F'"
+                                                       ng-disabled="(flagForEdit[list[list.length - 1]] != 1 || entry_by_user[$index] == 'R') && (entry_by_user[$index] == 'R')" />
+
+                                                <label for="single-{{ choice.id}}">{{ choice.name}}</label>
+                                            </div>
+                                        </div>
+                                        <div ng-switch-when="T" ng-hide="entry_by_user[$index] == 'F'">
+                                            <input type="text" placeholder="{{tool_tip[$index]}}" ng-model="list[$index]" ng-readonly="entry_by_user[$index] == 'R'" ng-required="nullable[$index]=='F'" ng-maxlength="column_size[$index]" ng-disabled="(flagForEdit[list[list.length - 1]] != 1 || entry_by_user[$index] == 'R') && (entry_by_user[$index] == 'R')">
+                                        </div>
+
+                                        <div ng-switch-when="A" ng-hide="entry_by_user[$index] == 'F'">
+
+                                            <textarea class="remark-textarea" ng-model="list[$index]" ng-readonly="entry_by_user[$index] == 'R'" name="{{column_name[$index]}}{{$index}}" ng-required="nullable[$index]=='F'" ng-maxlength="column_size[$index]" placeholder="{{tool_tip[$index]}}" ng-disabled="(flagForEdit[list[list.length - 1]] != 1 || entry_by_user[$index] == 'R') && (entry_by_user[$index] == 'R')">
+                                            </textarea>
+
+                                        </div>
+                                        <div ng-switch-when="C" ng-hide="entry_by_user[$index] == 'F'">
+                                            <div class="item item-icon-left" ion-datetime-picker date ng-model="list[$index]" ng-disabled="(flagForEdit[list[list.length - 1]] != 1 || entry_by_user[$index] == 'R') && (entry_by_user[$index] == 'R')" ng-required="nullable[$index]=='F'" name="{{column_name[$index]}}{{$index}}"
+                                                 only-valid="{'before': 'today', 'inclusive': true}">
+                                                <i class="icon ion-ios-calendar positive">&nbsp;&nbsp;<p>{{item| date: "dd-MM-yyyy"}}</p>
+                                                    <p ng-show="frm.{{column_name[$index]}}{{$index}}.$error.required">{{tool_tip[$index]}}<p></i>
+                                            </div>
+                                        </div>
+                                        <div ng-switch-when="DT" ng-hide="entry_by_user[$index] == 'F'">
+                                            <div class="item item-icon-left" ion-datetime-picker date time ng-model="list[$index]" ng-disabled="(flagForEdit[list[list.length - 1]] != 1 || entry_by_user[$index] == 'R') && (entry_by_user[$index] == 'R')" ng-required="nullable[$index]=='F' " name="{{column_name[$index]}}{{$index}} "
+                                                 only-valid="{ 'before': 'today', 'inclusive': true} ">
+                                                <i class="icon ion-ios-calendar positive ">&nbsp;&nbsp;<p>{{item| date: "dd-MM-yyyy hh:mm:ss "}}</p>
+                                                    <p ng-show="frm.{{column_name[$index]}}{{$index}}.$error.required ">{{tool_tip[$index]}}<p></i>
+                                            </div>
+                                        </div>
+                                        <div ng-switch-when="N" ng-hide="entry_by_user[$index] == 'F'">
+
+                                            <input type="tel" valid-number decimaldigit="decimal_digit[$index]" name="{{column_name[$index]}}{{$index}} " placeholder="{{tool_tip[$index]}} " ng-model="list[$index]" ng-required="nullable[$index]=='F' " ng-maxlength="column_size[$index]" ng-min="from_value[$index]"
+                                                   ng-max="to_value[$index]" ng-disabled="(flagForEdit[list[list.length - 1]] != 1 || entry_by_user[$index] == 'R') && (entry_by_user[$index] == 'R')" ng-change="rowWiseAutoCalculation(auto_calculation[$index], equationCOL[$index], tableData, list[list.length - 1]);">
+
+                                        </div>
+                                        <div ng-switch-when="MB" ng-hide="entry_by_user[$index] == 'F'">
+
+                                            <input type="tel" valid-number name="{{column_name[$index]}}{{$index}} " placeholder="{{tool_tip[$index]}} " ng-model="list[$index]" ng-required="nullable[$index]=='F' " ng-maxlength="column_size[$index]" ng-min="from_value[$index]" ng-max="to_value[$index]"
+                                                   ng-disabled="(flagForEdit[list[list.length - 1]] != 1 || entry_by_user[$index] == 'R') && (entry_by_user[$index] == 'R')">
+
+
+                                        </div>
+                                        <div ng-switch-when="E" ng-hide="entry_by_user[$index] == 'F'">
+
+
+                                            <input type="email" validate-email name="{{column_name[$index]}}{{$index}}" placeholder="{{tool_tip[$index]}}" ng-model="list[$index]" ng-required="nullable[$index]=='F'" ng-maxlength="to_value[$index]" ng-minlength="from_value[$index]" ng-disabled="(flagForEdit[list[list.length - 1]] != 1 || entry_by_user[$index] == 'R') && (entry_by_user[$index] == 'R')">
+
+
+
+                                        </div>
+                                        <div ng-switch-when="H" ng-hide="entry_by_user[$index] == 'F'">
+
+                                            <div class="col Dispenser-Entry-container">
+                                                <select ng-model="list[$index]" class="Dispenser-Entry-container-dropdown" ng-required="nullable[$index]=='F' " ng-disabled="(flagForEdit[list[list.length - 1]] != 1 || entry_by_user[$index] == 'R') && (entry_by_user[$index] == 'R')">
+                                                    <option ng-repeat="option in dropdownVal[$index] track by $index" value="{{option.code}}">{{option.name}}</option>
+                                                </select>
+
+                                            </div>
+                                        </div>
+                                        <div ng-switch-when="D" ng-hide="entry_by_user[$index] == 'F'">
+                                            <div class="col Dispenser-Entry-container">
+                                                <select ng-model="list[$index]" class="Dispenser-Entry-container-dropdown" ng-required="nullable[$index]=='F' " style="width:100%; " ng-disabled="(flagForEdit[list[list.length - 1]] != 1 || entry_by_user[$index] == 'R') && (entry_by_user[$index] == 'R')">
+                                                    <option ng-repeat="option in item.dropdownVal track by $index"  value="{{option}}">{{option}}</option>
+                                                </select>
+
+                                            </div>
+                                        </div>
+                                        <div ng-switch-when="DD" ng-hide="entry_by_user[$index] == 'F'">
+                                            <div class="item" style="padding: 6px; ">
+                                                <input type="text " ng-model="list[$index]" ng-required="nullable[$index]=='F'" list="list " style="width:90%; " ng-disabled="(flagForEdit[list[list.length - 1]] != 1 || entry_by_user[$index] == 'R') && (entry_by_user[$index] == 'R')">
+                                            </div>
+                                            <datalist id="list ">
+                                                <option data-ng-repeat="data in item.column_default_value" value="{{ data}} " >
+                                            </datalist>
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <div class="row animated fadeInUp" ng-if="tableData">
+                        <div class="col">
+                            <button class="button button-assertive button-block cancel-btn " ng-click="cancelAddUpdateEntry()" type="button">Cancel</button>
+                        </div>
+                        <div class="col">
+                            <button class="button button-balanced button-block Save-btn" type="submit " value="Upload" name="upload" id="upload" ng-click="addUpdatedEntry(tableData)">
+                                Save
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </ion-content>
+</ion-view>
