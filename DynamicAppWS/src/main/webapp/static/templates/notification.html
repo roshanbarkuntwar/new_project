@@ -1,0 +1,149 @@
+<ion-view cache-view="false" view-title="Entry List">
+
+    <ion-header-bar class="bar bar-header  App-header">
+        <button class="button button-icon icon icon-left ion-ios-arrow-left back-btn" ng-click="backNavigate()"></button>
+        <div class="h1 title">Notifications </div>
+        <!--<button class="button button-icon icon icon-right" style="top: -2px" ng-click="recoverEntry()"><img src="img/recover-data.png" style="height:50px;" /></button>-->
+        <button class="button button-icon icon icon-right ion-android-upload" ng-click="recoverEntry()"></button>
+    </ion-header-bar>
+
+    <!--action_flag:"T"-->
+
+    <ion-content class="promo_code_container notification-wrapper" on-swipe-right="backNavigate()">
+
+        <!--<div class="entry-list-wrapper notification-list" >-->
+        <div class=" list card notification-container entry-list-wrapper common-white-div" ng-class="{'entry-list-wrapper-active' :  item.actionType!=='NA'}"
+            ng-repeat="item in notificationList.notifDetails track by $index">
+
+            <div class="row">
+                <h5>
+                    <b>Date</b> :
+                    <span>
+                        {{item.col6}}
+                        </span>
+                </h5>
+            </div>
+            
+            <div class="row">
+                <h5>
+                    <b>Date</b> :
+                    <span>
+                        {{item.col6}}
+                        </span>
+                </h5>
+            </div>
+            <div class="row">
+                <h5>
+                    <b>Note</b> :
+                    <div bind-html="item.col5">
+                        <!--{{item.col5}}-->
+                    </div>
+                </h5>
+            </div>
+            <div class="row">
+                <h5>
+                    <b>Created By</b> :
+                    <span>
+                        {{ item.col9 }}
+                        </span>
+                </h5>
+            </div>
+
+            <div class="item tabs tabs-secondary tabs-icon-left noti-tab" style="">
+                <!--<div ng-if="item.isRead=='yes'" style="margin-left: 10px">
+                        <p><i class="icon ion-ios-circle-filled balanced"></i> </p>
+                    </div>
+                    <div ng-if="item.isRead=='no'" style="margin-left: 10px">
+                        <p><i class="icon ion-ios-circle-filled assertive"></i> </p>
+                    </div>-->
+                <button ng-if="item.isRead=='yes'" class="button icon  button-clear" ng-click="markAsUnread(item,$index)" style="margin-top: -7px;margin-left: 10px">
+                        <i class="icon ion-email balanced"></i>
+                        Unread
+                    </button>
+
+                <button ng-if="item.isRead=='no'" class="button icon button-clear button-assertive" ng-click="markAsRead(item,$index)" style="margin-top: -7px;margin-left: 10px">
+                         <i class="icon ion-email-unread" style="color: #ef473a;"></i>
+                        Read
+                    </button>
+
+                <button ng-if="item.actionType!=='NA'" class="button icon button-clear " ng-click="open(item,$index)" style="margin-top: -7px;margin-left: 10%">
+                         <i class="icon ion-share " style="color:#387ef5" ></i>
+                        Open
+                    </button>
+
+                <button class="button icon  button-clear" ng-click="archieveEntry(item,$index)" style="margin-top: -7px;margin-left: 10%;">
+                        <i class="icon ion-android-upload royal"></i>
+                        Archieve
+                    </button>
+
+
+                <!--<button class="button icon ion-android-more-vertical button-clear" style="float: left !important;
+    margin-top: -5px; margin-left: 55%;" ng-click="openPopover($event,item.seq_id,$index,item.isRead,item)" </button>-->
+            </div>
+        </div>
+        <!--</div>-->
+
+
+
+        <!--<div class="list ">
+            <div class="card" ng-repeat="item in notificationList.notifDetails track by $index">
+                <div class="item">
+                    <div>
+                        <b>Date</b> :
+                        <span>
+                        {{item.col6}}
+                        </span>
+                    </div>
+                    <div>
+                        <b>Note</b> :
+                        <span>
+                        {{item.col5}}
+                        </span>
+                       </div>
+                     <div>
+                        <b>Created By</b> :
+                        <span>
+                        {{ item.col9 }}
+                        </span>
+                    </div>
+
+                    <div class="item">
+                        <p>
+                            <a href="#" class="subdued">1 Like</a>
+                            <a href="#" class="subdued">5 Comments</a>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>-->
+
+
+    </ion-content>
+
+</ion-view>
+
+<script id="template/notif-popover.html" type="text/ng-template">
+    <ion-popover-view style="height:22%; width:35%">
+        <ion-content class="optionPopover-container">
+            <div class="list">
+                <!--<a class="item" style="padding: 8px !important;" ng-click="notifiDeatils(seq_id,index);popover.hide();markAsRead(seq_id,index)">
+                More Details
+            </a>-->
+                <a class="item" style="padding: 8px !important;" ng-click="markAsUnread(seq_id,index);popover.hide()" ng-if="isRead=='yes'">
+               Mark As Unread
+            </a>
+                <a class="item" style="padding: 8px !important;" ng-click="markAsRead(seq_id,index);popover.hide()" ng-if="isRead=='no'">
+               Mark As Read
+            </a>
+                <a class="item" style="padding: 8px !important;" ng-click="archieveEntry(itemValue,index);popover.hide()">
+               Archieve
+            </a>
+                <!--<a class="item" style="padding: 8px !important;" ng-click="deleteEntry(seq_id,index);popover.hide()">
+               Detete
+            </a>-->
+
+
+            </div>
+        </ion-content>
+    </ion-popover-view>
+</script>

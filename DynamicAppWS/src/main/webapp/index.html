@@ -1,0 +1,103 @@
+
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width">
+
+        <title></title>
+        <link rel="manifest" href="manifest.json">
+        <script>
+            if ('serviceWorker' in navigator) {
+            navigator.serviceWorker.register('service-worker.js')
+                    .then(() => console.log('service worker installed'))
+                    .catch(err => console.log('Error', err));
+            }
+        </script>
+
+        <link href="static/lib/ionic/css/ionic.css" rel="stylesheet">
+        <link href="static/css/style.css" rel="stylesheet">
+
+
+        <!-- jQuery -->
+        <script src="static/lib/jquery/dist/jquery.min.js"></script>
+
+        <!-- ionic/angularjs js -->
+        <script src="static/lib/ionic/js/ionic.bundle.js"></script>
+
+        <!-- ngCordova plugins -->
+        <script src="static/lib/ngCordova/dist/ng-cordova.js"></script>
+
+        <!--date time picker-->
+        <script src="static/lib/ion-datetime-picker/release/ion-datetime-picker.min.js"></script>
+        <link href="static/lib/ion-datetime-picker/release/ion-datetime-picker.min.css" rel="stylesheet">
+
+
+        <!--  app's CSS -->
+        <link href="static/css/ng-nlFramework.css" rel="stylesheet">
+        <link href="static/css/style.css" rel="stylesheet">
+        <link href="static/css/style-new.css" rel="stylesheet">
+        <link href="static/css/dashboard.css" rel="stylesheet">
+        <link href="static/css/form.css" rel="stylesheet">
+        <link href="static/css/animate.css" rel="stylesheet">
+        <link href="static/css/login.css" rel="stylesheet">
+        <link href="static/css/addUpdateEntryTable.css" rel="stylesheet">
+        <link href="static/css/addUpdateEntry.css" rel="stylesheet">
+        <link href="static/css/textAreaPopOver.css" rel="stylesheet">
+        <link href="static/css/reportAnalysis.css" rel="stylesheet">
+        <link href="static/css/lov.css" rel="stylesheet">
+        <link href="static/css/entryFormWithEntryList.css" rel="stylesheet">
+        <link href="static/css/pinAuthAndChangeSetting.css" rel="stylesheet">
+        <link href="static/css/notification.css" rel="stylesheet">
+        <link href="static/css/forgotPassword.css" rel="stylesheet">
+        <link href="static/css/archieveEntries.css" rel="stylesheet">
+        <link href="static/css/calendar.css" rel="stylesheet" />
+        <link href="static/css/media-query.css" rel="stylesheet">
+
+
+        <!--  app's js -->
+        <script src="static/js/app.js"></script>
+        <!--controllr-->
+        <script src="static/js/controllers.js"></script>
+        <script src="static/js/addUpdateEntryController.js"></script>
+        <script src="static/js/addUpdateOrderController.js"></script>
+        <script src="static/js/addPopulatedEntryCtrl.js"></script>
+        <script src="static/js/addPopulatedLocationEntryCtrl.js"></script>
+        <script src="static/js/entryFormWithEntryList.js"></script>
+        <script src="static/js/searchEntry.js"></script>
+        <script src="static/js/reportCardView.js"></script>
+        <script src="static/js/HotSeatEntryCtrl.js"></script>
+        <script src="static/js/addUpdateEntryServices.js"></script>
+        <script src="static/js/entryWithGrid.js"></script>
+        <script src="static/js/imageEntryCtrl.js"></script>
+        <!--services-->
+        <script src="static/js/globalObjectServices.js"></script>
+        <script src="static/js/services.js"></script>
+        <script src="static/js/reportAnalysisServices.js"></script>
+
+        <!-- for Offline app -->
+        <script src="static/lib/pouchdb/dist/pouchdb.min.js"></script>
+        <script src="static/js/pouchDB.service.js"></script>
+
+        <!--predefined js-->
+        <script src="static/js_pre/angular-translate.js"></script>
+        <script src="static/js/calendarController.js"></script>
+        <script src="static/js_pre/ng-img-crop.js"></script>
+        <script src="static/js_pre/Chart.min.js"></script>
+        <script src="static/js_pre/angular-chart.min.js"></script>
+        <script src="static/js_pre/hammer.min.js"></script>
+        <script src="static/js_pre/ng-nlFramework.js"></script>
+        <script src="static/js_pre/signature_pad.min.js"></script>
+
+        <!--adress from location-->
+        <script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?key=AIzaSyD67OrUk2G-zQ9PGPiM_S8tWXXp4bmZu84"></script>
+    </head>
+
+    <body ng-app="starter" ng-controller="AppMainCtrl">
+    <ion-nav-view></ion-nav-view>
+
+    <canvas id="tempCanvas"></canvas>
+    <script src="cordova.js"></script>
+</body>
+
+</html>

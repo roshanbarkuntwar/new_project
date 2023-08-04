@@ -1,0 +1,176 @@
+<ion-view class="lov-container-main">
+    <ion-header-bar class="bar bar-header  App-header">
+        <button class="button button-icon icon icon-left ion-ios-arrow-left back-btn" ng-click="addEntryLOVModal.hide()" ng-if="itemHelpPropertyFlag == 'L'"></button>
+        <button class="button button-icon icon icon-left ion-ios-checkmark-empty back-btn btn-check-icon" ng-click="setmultiLOVvalue(lov,column_desc,column_name)"
+            ng-if="itemHelpPropertyFlag == 'M'"></button>
+        <!--<div class="h1 title">{{column_desc}}</div>-->
+        <div class="h1 title">{{lovHeading}}</div>
+        <!-- <button class="button button-icon icon icon-right ion-ios-list-outline"></button> -->
+    </ion-header-bar>
+
+    <div class="bar bar-subheader Project-subheader">
+        <div class="row">
+            <div class="col">
+                <div class="list">
+                    <div class="item item-input-inset">
+                        <label class="item-input-wrapper">
+                            <input type="text" placeholder="Search..." ng-model="searchEntity.search">
+                        </label>
+                        <!-- <button class="button button-small" ng-click="search=''">
+                            <i class="icon ion-search"></i>
+                        </button> -->
+                    </div>
+
+                </div>
+            </div>
+            <div class="col col-10">
+                <a class="button button-icon icon ion-close-round lov-close" ng-click="searchEntity.search=''"></a>
+            </div>
+        </div>
+    </div>
+
+    <!--Code for generating LOV, to be used in ng-if condition, if side search bar flag='F'-->
+
+    <!--<ion-content class="has-header has-subheader">
+        <div class="project-table-container">
+            <table class="project-table">
+                <tr>
+                    <th style="width:25%" ng-if="flagLOVCodeValue !='Empty'">Code </th>
+                    <th style="width:75%"> Name</th>
+                </tr>
+                <tr ng-repeat="item in lov |filter: searchEntity.search" ng-click='setLOVValues(item.code,item.name,column_desc,column_name,item.rowId)'>
+                    <td ng-if="flagLOVCodeValue !='Empty'"> <a>{{item.code }}</a></td>
+                    <td><a>{{item.name}}</a></td>
+                </tr>
+            </table>
+        </div>
+    </ion-content>-->
+
+    <!--Code for generating LOV, to be used in ng-if condition, if side search bar flag='T'-->
+
+    <!--<ion-content scroll="true" class="has-header" padding="true">
+        <div data-ng-repeat="(letter, authors) in sorted_users" class="alpha_list">
+            <ion-item class="item item-divider" id="index_{{letter}}">
+                {{letter}}
+            </ion-item>
+            <div class="project-table-container">
+                <table class="project-table">
+                    <tr>
+                        <th style="width:25%" ng-if="code !='Empty'">{{current}} </th>
+                        <th style="width:75%">{{current}} </th>
+                    </tr>
+                    <tr ng-repeat="item in authors |filter: searchEntity.search" ng-click='setCostCode(item.code,item.name,current,column_name,item.rowId)'>
+                        <td ng-if="code !='Empty'"><a>{{item.code }}</a></td>
+                        <td><a>{{item.name}}</a></td>
+                    </tr>
+                </table>
+            </div>
+    </ion-content>
+    <ul class="alpha_sidebar">
+        <li ng-click="searchLovbyAlpha('index_{{letter}}')" ng-repeat="letter in alphabet">
+            {{letter}}
+        </li>
+    </ul>-->
+
+    <!--CODE BY SNEHA ON 20160923 Code for generating LOV, to be used in ng-if condition, if side search bar flag='T'-->
+
+    <ion-content scroll="true" class="has-header has-subheader" padding="true" on-swipe-right="addEntryLOVModal.hide()">
+        <div class="project-table-container" ng-if="itemHelpPropertyFlag == ''">
+            <table class="project-table">
+                <tr>
+                    <th style="width:25%" ng-if="flagLOVCodeValue !='Empty'">Code </th>
+                    <th style="width:75%" ng-if="item.name"> Name</th>
+                </tr>
+                <tr ng-repeat="item in lov |filter: searchEntity.search" ng-click='setLOVValues(item.code,item.name,column_desc,column_name,item.rowId,item.dependent_column_name)'>
+                    <td ng-if="flagLOVCodeValue !='Empty' && item.name==item.code">
+                        <a>{{::item.code }}</a>
+                    </td>
+                    <td ng-if="item.name">
+                        <a>{{::item.name}}</a>
+                    </td>
+                </tr>
+            </table>
+        </div>
+
+
+
+        <div class="alpha-sorting" ng-if="itemHelpPropertyFlag == 'L'">
+            <div class="row">
+                <div class="col" style="background-color: #f2f2f2;">
+                    <!-- data-ng-repeat="(letter, authors) in sorted_users" -->
+                    <div class="alpha_list">
+                        <ion-item class="item item-divider" id="index_{{letter}}">
+                        </ion-item>
+                        <div class="project-table-container">
+                            <table class="project-table">
+                                <tr ng-repeat="item in lov |filter: searchEntity.search" ng-click='setLOVValues(item.code,item.name,column_desc,column_name,item.rowId,item.dependent_column_name)'>
+                                    <td ng-if="code !='Empty'" style="width:20%">
+                                        <a>{{::item.code }}</a>
+                                    </td>
+                                    <td style="width:80%" ng-if="item.name">
+                                        <a>{{::item.name}}</a>
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+
+
+
+
+
+
+
+
+
+
+        <!-- <div class="alpha-sorting" ng-if="itemHelpPropertyFlag == 'L'">
+            <div class="row">
+                <div class="col" style="background-color: #f2f2f2;">
+                    <div data-ng-repeat="(letter, authors) in sorted_users" class="alpha_list">
+                        <ion-item class="item item-divider" id="index_{{letter}}">
+                           
+                        </ion-item>
+                        <div class="project-table-container">
+                            <table class="project-table">
+                                <tr ng-repeat="item in authors |filter: searchEntity.search" ng-click='setLOVValues(item.code,item.name,column_desc,column_name,item.rowId,item.dependent_column_name)'>
+                                    <td ng-if="code !='Empty'" style="width:20%">
+                                        <a>{{::item.code }}</a>
+                                    </td>
+                                    <td style="width:80%" ng-if="item.name">
+                                        <a>{{::item.name}}</a>
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+
+                    </div>
+                </div>
+                <div class="col col-10">
+                    <div class="scroll-alpha">
+                        <ul class="alpha_sidebar">
+                            <li ng-click="searchLovbyAlpha('index_{{letter}}')" ng-repeat="letter in alphabet">
+                                {{::letter}}
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div> -->
+
+        <div class="multiselect-lov-container" ng-if="itemHelpPropertyFlag == 'M'">
+            <div class=" item-checkbox-right" ng-repeat="item in lov |filter: searchEntity.search">
+                <ion-checkbox ng-model="item.checked" ng-checked="" class="item-multiSelectLOV">
+                    <h4> {{ ::item.name }} | {{:: item.code }}</h4>
+                </ion-checkbox>
+            </div>
+        </div>
+    </ion-content>
+
+
+</ion-view>
