@@ -1,0 +1,49 @@
+<div class="input-div-n">
+  <ion-label class="input-label" position="{{(bluetooth.position == null) ? 'stacked' : bluetooth.position}}"
+    position="{{(bluetooth.position == null) ? 'stacked' : bluetooth.position}}">{{bluetooth.prompt_name}}</ion-label>
+  <ion-input [(ngModel)]="this.bluetooth.value" class="form-control form-control-sm" type="text"
+    [ngStyle]="bluetooth.display_setting_str" id="{{bluetooth.item_name}}"
+    [readonly]="bluetooth.item_enable_flag && bluetooth.item_enable_flag=='F'"
+    [disabled]="bluetooth.item_enable_flag && bluetooth.item_enable_flag=='F'" (ionBlur)="onBlur()"
+    title="{{bluetooth.tool_tip}}"></ion-input>
+
+
+  <!-- <ion-input [(ngModel)]="bluetooth.value" class="form-control form-control-sm" type="number"
+    [ngStyle]="bluetooth.display_setting_str" id="{{bluetooth.item_name}}" [maxlength]="bluetooth.item_size"
+    #bluetoothname="ngModel"
+    [readonly]="bluetooth.item_enable_flag && (!(bluetooth.item_enable_flag.indexOf(current_page_parameter.MODE)>-1)||(bluetooth.item_enable_flag=='F'))"
+    [disabled]="bluetooth.item_enable_flag && (!(bluetooth.item_enable_flag.indexOf(current_page_parameter.MODE)>-1)||(bluetooth.item_enable_flag=='F'))"
+    [required]="(current_page_parameter.MODE && (bluetooth.data_required_flag && 
+(bluetooth.data_required_flag.indexOf(current_page_parameter.MODE)>-1)) )
+||bluetooth.data_required_flag=='T' 
+||(bluetooth.prompt_name && bluetooth.prompt_name[bluetooth.prompt_name.length -1]) =='*'"
+    title="{{bluetooth.tool_tip}}"></ion-input> -->
+
+  <ion-button [disabled]="bluetooth.item_enable_flag && bluetooth.item_enable_flag=='F'"
+    [ngStyle]="bluetooth.display_setting_str" (click)="getScanData()">
+    <ion-icon name="bluetooth"></ion-icon>
+  </ion-button>
+</div>
+<!-- <div class="error" *ngIf="bluetoothname.hasError('required') && bluetoothname.touched">Please Enter
+  {{bluetooth.prompt_name}}
+</div> -->
+<div class="error" *ngIf="!bluetooth.isValid && bluetooth.vadidateMsg">{{bluetooth.vadidateMsg}}</div>
+<div class="error" *ngIf="bluetooth.msgError">{{bluetooth.msgError}}</div>
+
+<ng-container *ngIf="bluetooth.item_sub_type == 'ONLY_BLUETOOTH'">
+  <div class="input-div-n">
+    <ion-label class="input-label" position="{{(bluetooth.position == null) ? 'stacked' : bluetooth.position}}"
+      position="{{(bluetooth.position == null) ? 'stacked' : bluetooth.position}}"> {{bluetooth.prompt_name}}
+    </ion-label>
+    <!-- <ion-input   class="bg-input" [(ngModel)]="this.bluetooth.value"></ion-input> -->
+    <ion-input [(ngModel)]="this.bluetooth.value" (ionBlur)="onBlur()" title="{{bluetooth.tool_tip}}"
+      class="form-control form-control-sm" type="text" disabled></ion-input>
+
+    <ion-button [disabled]="bluetooth.item_enable_flag && bluetooth.item_enable_flag=='F'"
+      [ngStyle]="bluetooth.display_setting_str" (click)="getScanData()">
+      <ion-icon name="bluetooth"></ion-icon>
+    </ion-button>
+  </div>
+  <div class="error" *ngIf="!bluetooth.isValid && bluetooth.vadidateMsg">{{bluetooth.vadidateMsg}}</div>
+  <div class="error" *ngIf="bluetooth.msgError">{{bluetooth.msgError}}</div>
+</ng-container>

@@ -1,0 +1,51 @@
+<ng-container *ngIf="frame.apps_frame_type == 'IMG_SLIDER'">
+  <ion-slides class="image-slider" pager="true" [options]="slideOpts">
+    <ng-container *ngIf="frame.Level4.length > 0">
+      <ion-slide *ngFor="let slideItem of frame.Level4[0].Level5">
+        <img
+          [src]="globalObjects.getScopeUrl()+'getImage?id='+slideItem.apps_item_seqid+'&appTheme='+globalObjects.appTheme" />
+        <div class="img-caption-cont" *ngIf="slideItem.prompt_name">
+          <div class="img-caption">
+            <h1 class="mt-0 mb-4" class="heading">{{slideItem.value}}</h1>
+            <span class="size" *ngIf="globalObjects.toggleDevloperMode">300 width x 150 height (Suggested size)</span>
+          </div>
+        </div>
+      </ion-slide>
+    </ng-container>
+    <!-- 
+  <ion-slide>
+    <img src="assets/imgs/2.jpg">
+    <h1 class="mt-0 mb-4">Slide 2</h1>
+  </ion-slide>
+
+  <ion-slide>
+    <img src="assets/imgs/3.jpg">
+    <h1 class="mt-0 mb-4">Slide 3</h1>
+  </ion-slide> -->
+
+    <!-- 
+  <ion-slides class="image-slider" pager="true">
+    <ion-slide *ngFor="let slideItem of imgUrl">
+      <img [src]="'https://firebasestorage.googleapis.com/v0/b/testimageload.appspot.com/o/'+slideItem.name+'?alt=media'" />
+    </ion-slide>
+  </ion-slides> -->
+
+  </ion-slides>
+</ng-container>
+<ng-container *ngIf="frame.apps_frame_type == 'IMG_SLIDER_V2'">
+  <ion-slides #slides class="image-slider" pager="true" [options]="slideOpts">
+    <!-- <ng-container *ngIf="frame.Level4.length > 0"> -->
+    <ion-slide *ngFor="let slideItem of sliderList">
+      <img [src]="'data:image/png;base64,' + slideItem" />
+      <div class="img-caption-cont" *ngIf="slideItem.prompt_name">
+        <div class="img-caption">
+          <!-- <h1 class="mt-0 mb-4" class="heading">{{slideItem.prompt_name}}</h1> -->
+          <span class="size" *ngIf="globalObjects.toggleDevloperMode">300 width x 150 height (Suggested size)</span>
+        </div>
+      </div>
+    </ion-slide>
+    <!-- </ng-container> -->
+  </ion-slides>
+  <!-- <button type="submit" float-left ion-button  color="primary"  (click)="prev()">Prev</button>
+<button type="submit" float-right ion-button color="primary"  (click)="next()">Next</button> -->
+</ng-container>

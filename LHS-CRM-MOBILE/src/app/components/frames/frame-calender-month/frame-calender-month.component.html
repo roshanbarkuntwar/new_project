@@ -1,0 +1,98 @@
+
+<ion-row *ngIf="frame.apps_page_frame_name">
+  <ion-col class="pl-0" size="7">
+    <!-- <h1 class="frame-name position-relative">{{frame.apps_page_frame_name}}</h1> -->
+    <h1 class="frame-name position-relative">{{frame.apps_page_frame_name}}<span style="margin-left: 10px;"
+        *ngIf="globalservice.toggleDevloperMode">[{{frame.apps_page_frame_seqid}}]<ion-icon class="code-btn"
+          color="primary" name="information-circle-outline" *ngIf="developerModeData" (click)="showDeveloperData()">
+        </ion-icon></span></h1>
+  </ion-col>
+  <ion-col class="pr-0 data-view-type text-right" size="5">
+    <!-- <ion-icon (click)="toggle()" [hidden]="horizontal_table=='Hide'" name="ios-arrow-dropdown-circle"></ion-icon>
+      <ion-icon (click)="toggle()" [hidden]="horizontal_table=='Show'" name="ios-arrow-dropright-circle"></ion-icon> -->
+    <!-- <ion-icon name="ios-funnel" (click)="filterToggle()" class="filter-btn ml-3"></ion-icon> -->
+  </ion-col>
+</ion-row>
+
+
+
+
+<div class="plsql-container">
+  <ion-row>
+
+    <ion-col size="1">
+      <div class="month">
+        <ion-icon></ion-icon>
+      </div>
+    </ion-col>
+
+    <ion-col size="1">
+      <ion-icon name="ios-arrow-back" color="dark" style="float: left;font-size: 22px;cursor: pointer;" id="previous"
+        (click)="previous()"></ion-icon>
+    </ion-col>
+
+    <ion-col size="8">
+      <div class="month">
+        <p class="dark" #monthAndYear></p>
+      </div>
+    </ion-col>
+
+    <ion-col size="1">
+      <ion-icon name="ios-arrow-forward" color="dark" style="float: right;font-size: 22px;cursor: pointer;" id="next"
+        (click)="next()"></ion-icon>
+    </ion-col>
+
+    <ion-col size="1">
+      <div class="month">
+        <ion-icon></ion-icon>
+      </div>
+    </ion-col>
+
+  </ion-row>
+
+  <table>
+    <thead>
+      <tr>
+        <th style="color:red">Sun</th>
+        <th>Mon</th>
+        <th>Tue</th>
+        <th>Wed</th>
+        <th>Thu</th>
+        <th>Fri</th>
+        <th>Sat</th>
+      </tr>
+    </thead>
+    <tbody id="calendar-body">
+    </tbody>
+  </table>
+
+</div>
+<form class="form-inline">
+  <ion-grid>
+    <ion-row>
+      <ion-col>
+        <div>
+          <ion-item>
+            <ion-label>Select Month</ion-label>
+            <ion-select class="form-control col-sm-4"  [(ngModel)]="currentMonth1"  [ngModelOptions]="{standalone:true}"
+              (ionChange)="jump2(currentMonth1,year)">
+              <ion-select-option *ngFor="let c of monthdordropdown; let i=index" value="{{c}}" [selected] = "currentMonth1 == c"> {{c}} </ion-select-option>
+       
+            </ion-select>
+          </ion-item>
+        </div>
+      </ion-col>
+      <ion-col>
+        <div>
+          <ion-item>
+            <ion-label>Select Year</ion-label>
+            <ion-select class="form-control col-sm-4"  [(ngModel)]="currentYear1"  [ngModelOptions]="{standalone:true}"
+              (ionChange)="jump(month,currentYear1)">
+              <ion-select-option *ngFor="let c of yeardordropdown" value="{{c}}" [selected] = "currentYear1 == c"> {{c}} </ion-select-option>
+            </ion-select>
+          </ion-item>
+        </div>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</form>

@@ -1,0 +1,93 @@
+<div class="task-management-container">
+  <div class="task-card">
+    <div class="card-title">
+      <ng-container *ngFor="let framedata of frame.tablerows;let rowindex =index">
+        <ion-row class="ion-align-items-center" *ngFor="let itemGroup of framedata">
+            <ng-container *ngFor="let item of itemGroup.Level5;let i=index">
+          <ion-col class="p-0"  *ngIf="item.item_name == 'CARD_TITLE'"  [hidden]="item.position != 'UPPER'"
+            [size]="itemGroup.groupCol[i]">
+            <div class="card-heading" (click)="itemClicked(item,framedata,rowindex)">
+              <!-- <app-items [item]="item" [wscp]="wscp" (emitPass)="itemClicked($event,rowindex)"
+              (LHSOnChange)="itemValueChange($event,rowindex)"></app-items> -->
+              <h3>
+                {{item.value}}
+              </h3>
+            </div>
+          </ion-col>
+          <ion-col size="4" class="p-0" *ngIf="item.item_name == 'COUNT'">
+              <div class="total-count" (click)="itemClicked(item,framedata,rowindex)">
+                <span>{{item.value}}</span>
+              </div>
+            </ion-col>
+            </ng-container>
+        </ion-row>
+      </ng-container>
+    </div>
+    <div class="card-body">
+      <ng-container *ngFor="let framedata of frame.tablerows;let rowindex =index">
+        <ion-row class="ion-align-items-center" *ngFor="let itemGroup of framedata">
+         
+          <ion-col *ngFor="let item of itemGroup.Level5;let i=index; let i = index" [hidden]="item.position != 'LOWER'"
+            [size]="itemGroup.groupCol[i]">
+            <div [class]="itemGroup.Level5.length == i+1? 'urgent' : 'urgent border-right'" (click)="itemClicked(item,framedata,rowindex)">
+              <!-- <app-items [item]="item" [wscp]="wscp" (emitPass)="itemClicked($event,rowindex)"
+                (LHSOnChange)="itemValueChange($event,rowindex)"></app-items> -->
+                <p class="count">{{item.value}}</p>
+            <span>{{item.prompt_name}}</span>
+            </div>
+          </ion-col>
+         
+        </ion-row>
+      </ng-container>
+    </div>
+  </div>
+</div>
+
+<!--<div class="task-management-container">
+  <div class="task-card">
+    <div class="card-title">
+      <ion-row class="ion-align-items-center">
+        <ion-col size="8" class="p-0">
+          <div class="card-heading">
+            <h3>
+              Pending
+            </h3>
+          </div>
+        </ion-col>
+        <ion-col size="4" class="p-0">
+          <div class="total-count">
+            <span>90</span>
+          </div>
+        </ion-col>
+      </ion-row>
+    </div>
+    <div class="card-body">
+      <ion-row>
+        <ion-col size="3">
+          <div class="urgent border-right">
+            <p class="count">19</p>
+            <span>Urgent</span>
+          </div>
+        </ion-col>
+        <ion-col size="3">
+          <div class="urgent border-right">
+            <p class="count">19</p>
+            <span>High</span>
+          </div>
+        </ion-col>
+        <ion-col size="3">
+          <div class="urgent border-right">
+            <p class="count">19</p>
+            <span>Medium</span>
+          </div>
+        </ion-col>
+        <ion-col size="3">
+          <div class="urgent">
+            <p class="count">19</p>
+            <span>Low</span>
+          </div>
+        </ion-col>
+      </ion-row>
+    </div>
+  </div>
+</div>-->

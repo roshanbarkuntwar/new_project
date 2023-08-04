@@ -1,0 +1,225 @@
+
+// .super-card .super-card-inner .card-title {
+//   border-bottom: 1px dashed #00af3e;
+// }
+// .super-card .sr-no {
+//   background: #00af3e;
+//   }
+//   .super-card .super-card-inner::before {
+//     background: #00af3e;
+//   }
+//   .super-card .super-card-inner::after {
+//     background: #03af44;
+// }
+
+  
+
+
+.text-right{
+  text-align: right;
+}
+.card-title {
+  padding-bottom: 0px !important;
+  padding-top: 0px !important;
+}
+.card-body{
+  margin-bottom: 8px;
+  padding: 0;
+}
+.card-footer {
+  padding:0px;
+  margin-top: 0px;
+  /* background: #ddd; */
+  border-top: 1px dashed #ddd;
+  p{
+    font-size: 15px !important;
+  }
+}
+.checkbox-div{
+  position: absolute;
+  right: 0;
+  padding: 0;
+  top: -48px;
+}
+
+.thumbnail-card
+{
+  border: 1px solid #e6e6e6;
+  --padding-start: 10px;
+  color: #423f3f;
+  ion-label
+  {
+    text-overflow: unset;
+    white-space: normal;
+    overflow: visible;
+  }
+  h1,h2,h3,h4,h5,h6,p,label,ion-label
+  {
+    color: #423f3f;
+  }
+  ion-thumbnail
+  {
+    width: 65px;
+    height: 65px;
+    margin-inline-end: 10px;
+    img
+    {
+        border-radius: 5px;
+    }
+  }
+}
+
+.red{
+  .sr-no {
+    background: #E74C3C;
+    box-shadow: 5px 2px 10px #861e14, inset -2px -1px 4px #e74c3c;
+}
+  .super-card-inner::after {
+    background: #e74c3c;
+}
+.super-card-inner::before {
+  background: #e74c3c;
+  box-shadow: 2px 7px 10px #decfce;
+}
+.super-card-inner .card-title {
+  border-bottom: 1px dashed #e74c3c;
+}
+.super-card-inner {
+  border-bottom: 1px solid #e74c3c;
+  padding: 10px 4px 0px 45px !important;
+}
+}
+.green{
+  .sr-no {
+    background: #58D68D;
+    color: #fff;
+    box-shadow: 5px 2px 10px #169a4e, inset -2px -1px 4px #25dc72;
+}
+  .super-card-inner::after {
+    background: #58D68D
+}
+.super-card-inner::before {
+  background: #58D68D;
+    box-shadow: 2px 7px 10px #b2f1c6;
+}
+.super-card-inner .card-title {
+  border-bottom: 1px dashed #58D68D;
+}
+.super-card-inner {
+  border-bottom: 1px solid #58D68D;
+}
+}
+.yellow{
+  .sr-no {
+    background: #F5B041;
+    color: #fff;
+    box-shadow: 5px 2px 10px #906014, inset -2px -1px 4px #f5b041;
+}
+  .super-card-inner::after {
+    background: #F5B041
+}
+.super-card-inner::before {
+  background: #F5B041;
+  box-shadow: 2px 7px 10px #f9d08e;
+}
+.super-card-inner .card-title {
+  border-bottom: 1px dashed #F5B041;
+}
+.super-card-inner {
+  border-bottom: 1px solid #F5B041;
+}
+}
+.blue{
+  .sr-no {
+    background: #03A9F4;
+    color: #fff;
+    box-shadow: 5px 2px 10px #216786, inset -2px -1px 4px #15aae7;
+}
+  .super-card-inner::after {
+    background: #03A9F4
+}
+.super-card-inner::before {
+  background: #04a9f3;
+  box-shadow: 2px 7px 10px #b9e9ff;
+}
+.super-card-inner .card-title {
+  border-bottom: 1px dashed #03A9F4;
+}
+.super-card-inner {
+  border-bottom: 1px solid #03A9F4;
+}
+}
+.black{
+  .sr-no {
+    background: #000;
+    color: #fff;
+    box-shadow: 5px 2px 10px #000000, inset -2px -1px 4px #6d7171;
+}
+  .super-card-inner::after {
+    background: #000;
+}
+.super-card-inner::before {
+  background: #000000;
+    box-shadow: 2px 7px 10px #c6c8ca;
+}
+.super-card-inner .card-title {
+  border-bottom: 1px dashed #000;
+}
+.super-card-inner {
+  border-bottom: 1px solid #000;
+}
+}
+
+.orange{
+  .sr-no {
+    background: #ff8c00;
+    color: #fff;
+    box-shadow: 5px 2px 10px #ff8c00, inset -2px -1px 4px #fd920f;
+}
+  .super-card-inner::after {
+    background: #ff8c00;
+}
+.super-card-inner::before {
+  background: #ef8402;
+    box-shadow: 2px 7px 10px #c6c8ca;
+}
+.super-card-inner .card-title {
+  border-bottom: 1px dashed #ff8c00;
+}
+.super-card-inner {
+  border-bottom: 1px solid #ff8c00;
+}
+}
+.code-btn{
+  font-size: 25px;
+  vertical-align: middle;
+  cursor: pointer;
+}
+
+:host{
+  ion-toggle{
+padding: 0;
+  }
+  .top-switch{
+    --min-height: 30px;
+    --background: none;
+    padding: 0;
+  }
+}
+
+.blink_text {
+  animation-name: blinker;
+  animation-duration: 1s;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+ }
+ 
+ @keyframes blinker {  
+  0% { opacity: 1.0; }
+  50% { opacity: 0.0; }
+  100% { opacity: 1.0; }
+ }
+ button:focus {
+  outline: none;
+  outline: none
+}

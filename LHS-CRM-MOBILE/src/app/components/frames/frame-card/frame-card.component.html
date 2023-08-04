@@ -1,0 +1,157 @@
+<div *ngIf="filter">
+  <app-frame-canvas-filter [frametable]="frame" (passdataToframetable)="getdataFromcanvasFilter($event)"
+    [frame]='frame'></app-frame-canvas-filter>
+</div>
+
+<ion-row *ngIf="frame.apps_page_frame_name">
+  <ion-col size="12" [hidden]="frame.cardFlag">
+    <h1 class="frame-name position-relative">{{frame.apps_page_frame_name}}<span style="margin-left: 10px;"
+        *ngIf="globalObjects.toggleDevloperMode">[{{frame.apps_page_frame_seqid}}][{{frame.frame_alias}}]<ion-icon class="code-btn"
+          color="primary" name="information-circle-outline" *ngIf="developerModeData" (click)="showDeveloperData()">
+        </ion-icon></span><span *ngIf="switchFlag"  style="float: right;"><i class="fa fa-table" style="cursor: pointer;" aria-hidden="true"(click)="onSwitch()"></i></span></h1>
+<!--         <ion-item lines="none" style="margin-left: auto;" class="top-switch" > -->
+          <!-- <ion-label style="font-size:14px;">Switch To Table</ion-label> -->
+          
+          <!-- <ion-toggle (ionChange)="onSwitch()"  style="padding: 0;"  color="primary"  checked></ion-toggle> -->
+          <!-- <i class="fa fa-id-card-o" aria-hidden="true" ></i> -->
+       <!--  </ion-item> -->
+        
+  </ion-col>
+
+ 
+
+</ion-row>
+
+
+<div>
+  <div class="input-group primary-search-section" *ngIf="searchFlag  && !filter ">
+    <ion-input class="input-text" placeholder="Search Here..." (ionChange)="searchAllData()" [(ngModel)]="tablerowsfilter" ></ion-input>
+    <div class="input-group-append">
+      <button *ngIf="platform.is('ios') || platform.is('android')" class="lov-btn" ion-button icon-only small (click)="openMike()">
+        <img src="/assets/imgs/google-speaker.png">
+      </button>
+      <button *ngIf="!platform.is('ios') && !platform.is('android')"  class="lov-btn" ion-button icon-only small (click)="sppeak()">
+        <!-- <img src="/assets/imgs/google-speaker.png"> -->
+        <ion-icon name="mic" [ngClass]="mikeStyle" color="primary"></ion-icon>
+      </button>
+    </div>
+    <div class="input-group-append">
+      <button class="lov-btn" ion-button icon-only small>
+        <ion-icon name="qr-scanner" (click)="openbarcodescanner()"></ion-icon>
+      </button>
+    </div>
+
+    <div class="input-group-append" *ngIf="enablefunnel">
+      <button class="lov-btn" ion-button icon-only small (click)="filterToggle()">
+        <ion-icon name="ios-funnel"></ion-icon>
+      </button>
+    </div>
+  </div>
+</div>
+<div *ngIf="show_filter=='show' ">
+  <div *ngIf="toggleFilter">
+    <app-frame-canvas-filter [frame]="frame" [frametable]='frame'
+      (passdataToframetable)="getdataFromcanvasFilter($event)" (emitFilter)="getFilterParameter($event)">
+    </app-frame-canvas-filter>
+  </div>
+</div>
+
+
+<div *ngIf="!filter && !scrollFlag">
+  <div *ngFor="let rows of frame.tableRows | tableSearch :tablerowsfilter;let j=index;">
+    <div class="super-card {{rows ? rows.status : ''}}  position-relative">
+
+      <div class="sr-no position-absolute">{{j+1}}</div>
+
+      <div class="super-card-inner position-relative">
+
+        <div class="card-title" *ngIf="(cardtitleFlag  || rows.cardtitleFlag) && headerarr.length > 0">
+          <ion-row class="px-1 py-0" style="display: flex; align-items: center;"
+            *ngFor="let itmGrp of headerarr[j];let rowindex=index" focusDir>
+            <ng-container *ngFor="let input_item of itmGrp.Level5;let i=index">
+              <ng-container *ngIf="input_item.item_visible_flag =='T'">
+                <ion-col class="px-1 py-0" [size]="itmGrp.groupCol ? itmGrp.groupCol[i] : 12">
+                  <div class="p-0" *ngIf=" input_item.item_type =='CARD_TITLE'">
+                    <app-items class="p-0" [item]="input_item" [wscp]="wscp" (emitPass)="itemClicked($event,rows,i,j)"
+                      (LHSOnChange)="itemValueChange($event,j)">
+                    </app-items>
+                  </div>
+
+                  <div class="p-0 " *ngIf="input_item.position =='CARD_HEADER'">
+                    <app-items class="p-0" [item]="input_item" [wscp]="wscp" (emitPass)="itemClicked($event,rows,i,j)"
+                      (LHSOnChange)="itemValueChange($event,j)">
+                    </app-items>
+                  </div>
+                </ion-col>
+              </ng-container>
+            </ng-container>
+          </ion-row>
+        </div>
+
+        <div class="card-body">
+          <ion-row *ngFor="let itemGroup of rows; let rowindex=index" class="px-1 py-0" focusDir>
+            <ng-container *ngFor="let input_item of itemGroup.Level5;let i=index">
+              <ion-col class="px=1 py-0"
+                [hidden]="input_item.item_visible_flag != 'T' || input_item.position == 'CARD_HEADER' || input_item.position == 'CARD_FOOTER'"
+                [size]="itemGroup.groupCol ? itemGroup.groupCol[i] : 12 ">
+                <div *ngIf="input_item.item_type != 'CARD_TITLE'">
+                  <app-items class="p-0" [item]="input_item" [wscp]="wscp" (emitPass)="itemClicked($event,rows,i,j)"
+                    (LHSOnChange)="itemValueChange($event,j)">
+                  </app-items>
+                </div>
+              </ion-col>
+            </ng-container>
+          </ion-row>
+        </div>
+
+        <div class="card-footer pl-1" *ngIf="(footer_flag || (rows && rows.footer)) && footerArr.length > 0 ">
+          <ion-row class="px-1 py-0" *ngFor="let itmGrp of footerArr[j];let rowindex=index" focusDir>
+            <ng-container *ngFor="let input_item of itmGrp.Level5;let i=index">
+              <ion-col class="px=1 py-0"
+                [hidden]="input_item.position !='CARD_FOOTER' || input_item.item_visible_flag =='F' "
+                [size]="itmGrp.groupCol ? itmGrp.groupCol[i] : 12">
+                <app-items class="p-0" [item]="input_item" [wscp]="wscp" (emitPass)="itemClicked($event,rows,i,j)"
+                  (LHSOnChange)="itemValueChange($event,j)">
+                </app-items>
+              </ion-col>
+            </ng-container>
+          </ion-row>
+        </div>
+
+      </div>
+
+
+      <div class="clearfix"></div>
+    </div>
+  </div>
+
+
+    <!-- <ion-infinite-scroll class="ispinner" (ionInfinite)="doInfinite($event)">
+      <ion-infinite-scroll-content loadingSpinner="bubbles" loadingColor="red"
+        loadingText="Populating page {{currentPage}} of {{total_Pages}}">
+      </ion-infinite-scroll-content>
+    </ion-infinite-scroll> -->
+
+  <div *ngIf="frame.tableRows && (frame.tableRows.length < this.l_total_rows) && (!frame.calenderflag)">
+      <ion-infinite-scroll threshold="100px" (ionInfinite)="loadData($event)">
+        <ion-infinite-scroll-content
+          loadingSpinner="bubbles"
+          loadingText="Populating page {{l_current_page}} of {{total_Pages}}">
+        </ion-infinite-scroll-content>
+      </ion-infinite-scroll>
+  </div>
+
+
+
+
+</div>
+
+<!-- Skeleton screen -->
+<div class="center" *ngIf="scrollFlag">
+  <div class="text-center">
+    <img src="../../../../assets/dot.gif" width="20%">
+  </div>
+</div>
+<div class="text-center" *ngIf="noRecordMessage != '' && !scrollFlag">
+  <h2>{{noRecordMessage}}</h2>
+</div>

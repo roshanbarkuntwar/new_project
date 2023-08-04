@@ -1,0 +1,39 @@
+
+<div>
+  <!-- <button type="button" (click)="openPivot();"> Pivot view </button>
+  <button type="button" (click)="openTreeTable();"> Tree table </button> -->
+  </div>
+  
+  <button pButton type="button"  icon="pi pi-plus" (click)="expandAll()">expand All </button>
+  <button pButton type="button"  icon="pi pi-minus" (click)="collapseAll()">collapse All</button>
+  
+  <button pButton type="button"  icon="pi pi-plus" (click)="onExpandOneLevel()">expand one Level </button>
+  <button pButton type="button"  icon="pi pi-minus" (click)="onCollapseOneLevel()">collapse one Level </button>
+  
+  <div class="card" *ngIf="flag">
+  
+    <p-treeTable [value]="files" [columns]="cols"  expanded="true" [reorderableColumns]="true" styleClass="p-treetable-sm"   [scrollable]="true" scrollHeight="600px" >
+     
+        <ng-template pTemplate="header" let-columns>
+            <tr>
+                <th *ngFor="let col of columns" ttReorderableColumn [ttSortableColumn]="col.field" style="width:250px">
+                    {{col.header}}
+                     <!-- <p-sortIcon [field]="col.field"></p-sortIcon>  -->
+                  </th>
+            </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-rowNode let-rowData="rowData" let-columns="columns">
+            <tr>
+                <td *ngFor="let col of columns; let i = index" style="width:250px">
+                    <p-treeTableToggler [rowNode]="rowNode" *ngIf="i == 0"></p-treeTableToggler>
+  
+                    {{rowData[col.field]}}
+                    
+                    <!-- <p-badge [value]="rowData['COUNT1']" *ngIf="i == 0 && rowData['COUNT1'] "></p-badge> -->
+                </td>
+            </tr>            
+        </ng-template>
+    </p-treeTable>
+  </div>
+  
+  <!-- <router-outlet *ngIf="!flag"></router-outlet> -->

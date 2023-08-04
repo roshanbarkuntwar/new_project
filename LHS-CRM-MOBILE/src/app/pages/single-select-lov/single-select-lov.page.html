@@ -1,0 +1,180 @@
+
+<ion-toolbar color="primary"  class="ion-toolbar iosheight"  *ngIf="platform.is('ios')">
+    
+    <div *ngIf="globalObjects.toggleDevloperMode" style="font-size: 11px;color:rgba(249, 249, 249, 0.7803921568627451)">
+        <span>{{userDetails.appkey}}</span> / <span>{{userDetails.user_code}}</span>
+      </div>
+
+    <ion-buttons slot="start" (click)="closeLov()" fill="clear" icon-only start > 
+        <ion-icon slot="icon-only" name="arrow-back"></ion-icon>
+    </ion-buttons>
+    <ion-title>
+        {{prompt_name}}
+    </ion-title>
+
+    <ion-buttons fill="outline" class="toolbar-text-btn" slot="end" *ngIf="lovinput.item_sub_type=='M'  || this.lovinput.item_sub_type == 'LIST_COMBO_BOX'"
+        (click)="setmultiLOVvalue(objectList)">
+        Ok
+    </ion-buttons>
+</ion-toolbar>
+
+<ion-toolbar color="primary"  class="ion-toolbar" *ngIf="!platform.is('ios')">
+    <div *ngIf="globalObjects.toggleDevloperMode" style="font-size: 11px;color:rgba(249, 249, 249, 0.7803921568627451)">
+        <span>{{userDetails.appkey}}</span> / <span>{{userDetails.user_code}}</span>
+        
+      </div>
+    <ion-buttons slot="start" (click)="closeLov()">
+        <ion-icon slot="icon-only" name="arrow-back"></ion-icon>
+    </ion-buttons>
+    <ion-title>
+        {{prompt_name}}
+    </ion-title>
+           
+    <ion-buttons fill="outline" class="toolbar-text-btn" slot="end" *ngIf="lovinput.item_sub_type=='M'  || this.lovinput.item_sub_type == 'LIST_COMBO_BOX'"
+        (click)="setmultiLOVvalue(objectList)">
+        Ok
+    </ion-buttons>
+</ion-toolbar>
+
+<ion-content class="page-single-select-lov bg-shrink" padding>
+    <div class="shrinkMyscreen">
+    <div class="left2-title"  *ngIf="globalObjects.toggleDevloperMode">
+    
+        <span  *ngFor="let x of globalObjects.breadCrumpsArray" >{{x.prompt_name}}</span> 
+    </div>
+
+   
+       
+    <div class="input-group non-lov-input-group">
+
+        <ion-input type="text" id="search" placeholder="Search" [(ngModel)]="searchText" (ionChange)="noChange(searchText)" autofocus="true" class="input-text lov-input" #autofocus></ion-input>
+        <div class="input-group-append">
+            <button *ngIf="platform.is('ios') || platform.is('android')" class="lov-btn" ion-button icon-only small (click)="openMike()">
+                <img src="./assets/imgs/google-speaker.png">
+            </button>
+            <button  *ngIf="!platform.is('ios') && !platform.is('android')" class="lov-btn" ion-button icon-only small (click)="sppeak()">
+                <img src="./assets/imgs/google-speaker.png">
+            </button>
+        </div>
+        <div class="input-group-append">
+            <button class="lov-btn" ion-button icon-only small>
+                <ion-icon name="qr-scanner" (click)="openbarcodescanner()"></ion-icon>
+            </button>
+        </div>
+
+
+
+        <div class="input-group-append" *ngIf="searchText">
+            <button class="lov-btn border-left-0 border-right-0" ion-button icon-only small (click)="searchText=''">
+                <ion-icon name="close"></ion-icon>
+            </button>
+        </div>
+    </div>
+
+
+    <div class="table-responsive" *ngIf="lovinput.item_sub_type=='M'  || this.lovinput.item_sub_type == 'LIST_COMBO_BOX'; else elsetag">
+
+        <table>
+            <thead>
+                <tr>
+                    <!-- <th class="check-outer paddingOuter" colspan="3">
+                        <ion-item class=" ionMultipleSelect">
+                            <ion-checkbox color="secondary" [(ngModel)]="SelAll" (click)="SelectAll()"></ion-checkbox>
+                            <ion-label>Select All</ion-label>
+                        </ion-item>
+                    </th> -->
+                </tr>
+                <tr>
+                    <th>
+                        <ion-checkbox color="secondary" [(ngModel)]="SelAll" (click)="SelectAll()"></ion-checkbox>
+                    </th>
+                    <th *ngFor="let head of lovHead" class="check-outer paddingOuter">
+                        {{head.th}}
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let object of limitedRecords  | searchfilter : searchText"
+                    (click)="object.isChecked=!object.isChecked">
+                    <td>
+                        <ion-checkbox color="secondary" [(ngModel)]="object.checked"></ion-checkbox>
+                    </td>
+                    <td *ngFor="let key of keyList " [ngStyle]=" getParsedJson(key.display_setting_str)"
+                    [hidden]="key.item_visible_flag=='F'" class="check-outer paddingOuter">
+                    {{object[key.key]}}
+
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <ng-template #elsetag>
+        <div class="table-responsive">
+            <table>
+                <thead>
+                    <tr>
+                        <th *ngFor="let head of lovHead ; let i = index;" (click)="thClick(head.code,i)">
+                            {{head.th}}
+                            <ion-icon name="arrow-round-up" *ngIf="head.code==orderByParam.th && orderByParam.direction > 0"></ion-icon>
+                            <ion-icon name="arrow-round-down" *ngIf="head.code==orderByParam.th && orderByParam.direction < 0"></ion-icon>
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let object of limitedRecords | searchfilter : searchText" (click)='setLOVValues(object)'>
+                        <ng-container *ngFor="let key of keyList ">
+                            <td [ngStyle]=" getParsedJson(key.display_setting_str)"
+                                [hidden]="key.item_visible_flag=='F'" class="label-outer">
+                                {{object[key.key]}}
+                            </td>
+                        </ng-container>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </ng-template>
+
+
+    
+    <div class="center" *ngIf="!objectList">
+        <div class="text-center">
+            <img src="../../../assets/dot.gif" width="20%">
+        </div>
+    </div>
+
+
+    <div class="pagination-container" *ngIf="objectList && objectList.length > noOfRecords">
+        <ul class="paginator my-1">
+          <li (click)="clickShare=!clickShare">
+            <ion-icon style="padding-top: 6px" name="share"></ion-icon>
+            <div *ngIf="clickShare" class="dropdownShare">
+           
+            </div>
+          </li>
+          <li class="pt-1">Total Records : {{this.objectList.length}}</li>
+          <li>
+            <ion-icon class="paginator-btn" *ngIf="l_current_page !=1" name="skip-backward" (click)="paginate(1);">
+            </ion-icon>
+          </li>
+          <!-- <li>
+              <ion-icon class="paginator-btn" *ngIf="l_current_page !=1" name="arrow-round-back"
+                (click)='paginate(this.l_current_page-1);'></ion-icon>
+            </li> -->
+          <li class="pt-1"> Page {{(this.l_current_page)}} Of {{this.l_total_remain_pages}}</li>
+          <!-- {{(this.l_total_remain_pages>this.l_total_rows) ? this.l_total_rows : this.l_total_remain_pages}}</li> -->
+          <li>
+            <ion-icon class="paginator-btn next-btn" *ngIf="l_current_page !=l_total_remain_pages" name="arrow-round-forward"
+              (click)='paginate(this.l_current_page+1);'>
+            </ion-icon>
+          </li>
+          <li>
+            <ion-icon class="paginator-btn next-btn" *ngIf="l_current_page!=l_total_remain_pages" name="skip-forward"
+              (click)='goToLast(this.l_total_remain_pages);'>
+            </ion-icon>
+          </li>
+      
+        </ul>
+      </div>
+
+    </div>
+</ion-content>

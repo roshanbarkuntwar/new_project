@@ -1,0 +1,74 @@
+.plsql-container{
+    ion-label {
+        font-size: 18px !important;
+    }
+    table {
+        border: 1px solid #ddd;
+        tbody{
+            td{
+                border: 1px solid rgb(200 200 200) ;
+                 width: 10.2857%;
+                 padding: 8px 5px;
+                 text-align: center;
+             height: 40px;
+                span{
+                    display: block;
+                }
+            }
+        }
+    }
+    .time{
+        background: #606060;
+        color: #fff;
+    }
+    .enabled{
+        background: rgb(204 204 204 / 57%);
+    }
+.month {
+    text-align: center;
+}
+.booked-primary{
+    background: #4185d3;
+    color: #fff;
+    padding: 4px;
+}
+.booked-secondary{
+    background: #ab35ab;
+    color: #fff;
+    padding: 4px;
+}
+.booked-success{
+    background: #009688;
+    color: #fff;
+    padding: 4px;
+}
+.booked-dark{
+    background: #3e3b3b;
+    color: #fff;
+    padding: 4px;
+}
+.booked-pink{
+    background:#ed877f;
+    color: #fff;
+    padding: 4px;
+}
+.booked-activity {
+    background: #d22323;
+    color: #fff;
+    padding: 4px;
+}
+.task-not-so-imp{
+    color: #968e8e;
+}
+.sunday{
+    color: red
+}
+}
+table tbody tr:nth-child(even) {
+    background: #ffffff !important;
+}
+ table thead th {
+    background: #ffffff ;
+    color: #232323 ;
+    border: 1px solid rgb(200 200 200) ;
+}

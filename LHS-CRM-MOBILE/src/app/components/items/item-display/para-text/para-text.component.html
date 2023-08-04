@@ -1,0 +1,33 @@
+<!-- <p *ngIf='!itemInput.value' id="{{itemInput.itemName}}" [ngStyle]="itemInput.display_setting_str"
+  (click)="itemClick($event)">
+  {{itemInput.prompt_name}}</p>
+<p *ngIf='itemInput.value' id="{{itemInput.itemName}}" [ngStyle]="itemInput.display_setting_str"
+  (click)="itemClick($event)">
+  {{itemInput.prompt_name}} : {{itemInput.value}}</p> -->
+
+<!-- 
+<p class="m-0" *ngIf="!itemInput.value && (frame_type !='TABLE' && frame_type != 'ENTRY_TABLE')"
+  id="{{itemInput.itemName}}" [ngStyle]="itemInput.display_setting_str" (click)="itemClick($event)">
+  {{itemInput.prompt_name}}</p> -->
+
+<p class="m-0 label-white timeline-p"
+  *ngIf="(frame_type !='TABLE' && frame_type != 'ENTRY_TABLE' && frame_type != 'FRAME_COLLAPSE' && frame_type != 'PLASTO_SUMMARY' && frame_type != 'APPROVAL-TAB' && frame_type != 'STRING' && itemInput.item_sub_type != 'ALIGN-TEXT' ) "
+  id="{{itemInput.itemName}}" [ngStyle]="itemInput.display_setting_str"  (ionChange)="valueChange($event)" (click)="itemClick($event)">
+  <span *ngIf='itemInput.prompt_name'> {{itemInput.prompt_name}} :</span> {{itemInput.value}}</p>
+
+<p class="m-0" *ngIf="itemInput.value && ((frame_type =='TABLE' || frame_type == 'ENTRY_TABLE' || frame_type == 'FRAME_COLLAPSE' || frame_type == 'PLASTO_SUMMARY' || itemInput.item_sub_type == 'T_TABLE') && itemInput.item_sub_type != 'ALIGN-TEXT' )"
+  id="{{itemInput.itemName}}" [ngStyle]="getParsedJson(itemInput.display_setting_str)" (ionChange)="valueChange($event)" (click)="itemClick($event)">
+  {{itemInput.value}}</p>
+
+<ion-item class="name-value-text" lines="none" *ngIf="itemInput.value && ((frame_type =='APPROVAL-TAB'  || frame_type =='STRING') && itemInput.item_sub_type != 'ALIGN-TEXT' )">
+  <ion-label class="label-name" [ngStyle]="itemInput.display_setting_str">{{itemInput.prompt_name}}
+  </ion-label>
+  <ion-label class="label label-value" (click)="itemClick($event)" (ionChange)="valueChange($event)" [ngStyle]="itemInput.display_setting_str">
+    {{itemInput.value}}</ion-label>
+</ion-item>
+
+<ion-item class="name-value-text block-text" lines="none" *ngIf="frame_type !='TABLE' && frame_type != 'ENTRY_TABLE' && frame_type != 'FRAME_COLLAPSE' && frame_type != 'PLASTO_SUMMARY' && frame_type != 'APPROVAL-TAB' && frame_type != 'STRING' && (itemInput.item_sub_type == 'ALIGN-TEXT')">
+  <ion-label style="color: #5f5a5a;" [ngStyle]="itemInput.display_setting_str">{{itemInput.prompt_name}} :
+  </ion-label>
+  <ion-label class="label-white" (click)="itemClick($event)" (ionChange)="valueChange($event)" [ngStyle]="itemInput.display_setting_str">{{itemInput.value}}</ion-label>
+</ion-item>

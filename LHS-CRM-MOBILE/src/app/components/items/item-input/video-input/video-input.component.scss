@@ -1,0 +1,116 @@
+.choose-file {
+    position: relative;
+    width: 35px;
+}
+.choose-file-ip{
+    position: absolute;
+    z-index: 99;
+    left: 0%;
+    opacity: 0;
+    width: 35px;
+    top: 0;
+}
+.choose-file-new {
+    position: relative;
+    width: 150px;
+    height: 150px;
+    text-align: center;
+    margin: auto;
+    cursor: pointer;
+}
+.choose-file-ip-new {
+    position: absolute;
+    z-index: 99;
+    left: 0%;
+    opacity: 0;
+    width: 150px;
+    height: 150px;
+    top: 0;
+    cursor: pointer;
+}
+.img-ic{
+    color: #000;
+    padding: 0;
+    border-radius: 18px;
+    font-size: 20px;
+    width: 30px;
+    /* line-height: 30px; */
+    /* display: block; */
+    /* margin-top: 5px; */
+    position: absolute;
+    left: 0;
+    top: 5px;
+}
+.img-ic-new {
+    color: #000;
+    padding: 0;
+    border-radius: 18px;
+    font-size: 20px;
+    height: 150px;
+    width: 150px;
+    position: absolute;
+    left: 0;
+    top: 5px;
+    cursor: pointer;
+}
+.choose-file-ip{
+    position: absolute;
+    z-index: 99;
+    left: 0%;
+    opacity: 0;
+    width: 35px;
+    top: 0;
+}
+.choose-file-ip-new {
+    position: absolute;
+    z-index: 99;
+    left: 0%;
+    opacity: 0;
+    width: 150px;
+    height: 150px;
+    top: 0;
+    cursor: pointer;
+}
+
+input {
+    width: 100%;       
+}
+
+.info {
+    background-color: aqua;            
+}
+
+.error {
+    background-color: red;
+    color: white;
+}
+.videoAlign {
+    width: 100%;
+    height: auto
+    ;
+}
+.video-container{
+    position: relative;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center; 
+}
+span.error-msg {
+    position: absolute;
+    text-align: center;
+    color: #0866cc;
+    font-size: 20px;
+    z-index: 1;
+}
+.pathname{
+    margin-top: 8px;
+    margin-left: 0;
+    --padding-start: 8;
+    padding-left: 9px;
+    word-break: break-word;
+    height: auto;
+    ion-icon{
+        font-size: 25px;
+    }
+}

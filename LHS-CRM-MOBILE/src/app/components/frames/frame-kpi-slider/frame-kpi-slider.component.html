@@ -1,0 +1,108 @@
+<ion-row *ngIf="frame.apps_page_frame_name" class="align-center">
+  <ion-col col-12>
+    <h1 class="frame-name position-relative">{{frame.apps_page_frame_name}}<span style="margin-left: 10px;" *ngIf="globalObjects.toggleDevloperMode">[{{frame.apps_page_frame_seqid}}]<ion-icon class="code-btn"  color="primary" name="information-circle-outline" *ngIf="developerModeData" (click)="showDeveloperData()"></ion-icon></span></h1>
+  </ion-col>
+</ion-row>
+
+<div class="kpi-slider-container">
+    <ion-slides pager="true" [options]="slideOpts">
+        <ion-slide *ngFor="let tableData of frame.tableRows;let rowindex =index">
+          <ion-row style="width: 100%">
+          
+            <!-- [hidden]="item.item_visible_flag=='F'"   -->
+
+          <ng-container *ngFor = "let itemGroup of tableData; let j = index">
+            <ion-col *ngFor="let item of itemGroup.Level5;let i=index"
+              [hidden]="item.item_visible_flag=='F'"
+              [size]="itemGroup.groupCol[i]">
+              <app-items [item]="item" [wscp]="wscp" (emitPass)="itemClickedKpi($event,rowindex,i,j)"
+                (LHSOnChange)="itemValueChange($event,rowindex,i)"></app-items>
+            </ion-col>
+          </ng-container>  
+         
+          </ion-row>
+        </ion-slide>
+     <!--    <ion-slide>
+            <ion-row>
+                <ion-col size="4">
+                  <div class="kpi-Slider">
+                    <span>44,440</span>
+                    <p>Value 1</p>
+                  </div>
+                </ion-col>
+                <ion-col size="4">
+                    <div class="kpi-Slider">
+                        <span>44,440</span>
+                        <p>Value 1</p>
+                      </div>
+                </ion-col>
+                <ion-col size="4">
+                    <div class="kpi-Slider">
+                        <span>44,440</span>
+                        <p>Value 1</p>
+                      </div>
+                </ion-col>
+              
+                  <ion-col size="4">
+                    <div class="kpi-Slider">
+                      <span>44,440</span>
+                      <p>Value 1</p>
+                    </div>
+                  </ion-col>
+                  <ion-col size="4">
+                      <div class="kpi-Slider">
+                          <span>44,440</span>
+                          <p>Value 1</p>
+                        </div>
+                  </ion-col>
+                  <ion-col size="4">
+                      <div class="kpi-Slider">
+                          <span>44,440</span>
+                          <p>Value 1</p>
+                        </div>
+                  </ion-col>
+                </ion-row>
+        </ion-slide>
+        <ion-slide>
+            <ion-row>
+                <ion-col size="4">
+                  <div class="kpi-Slider">
+                    <span>44,440</span>
+                    <p>Value 1</p>
+                  </div>
+                </ion-col>
+                <ion-col size="4">
+                    <div class="kpi-Slider">
+                        <span>44,440</span>
+                        <p>Value 1</p>
+                      </div>
+                </ion-col>
+                <ion-col size="4">
+                    <div class="kpi-Slider">
+                        <span>44,440</span>
+                        <p>Value 1</p>
+                      </div>
+                </ion-col>
+              
+                  <ion-col size="4">
+                    <div class="kpi-Slider">
+                      <span>44,440</span>
+                      <p>Value 1</p>
+                    </div>
+                  </ion-col>
+                  <ion-col size="4">
+                      <div class="kpi-Slider">
+                          <span>44,440</span>
+                          <p>Value 1</p>
+                        </div>
+                  </ion-col>
+                  <ion-col size="4">
+                      <div class="kpi-Slider">
+                          <span>44,440</span>
+                          <p>Value 1</p>
+                        </div>
+                  </ion-col>
+                </ion-row>
+        </ion-slide>-->
+      </ion-slides> 
+</div>

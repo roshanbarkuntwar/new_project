@@ -1,0 +1,92 @@
+<ion-header>
+    <ion-toolbar color="primary">
+        <ion-title class="text-center">Authentication PIN</ion-title>
+        <ion-buttons slot="start">
+            <ion-button slot="start" (click)="goBack()">  
+                <ion-icon name="arrow-round-back"></ion-icon>
+            </ion-button>
+            <!-- <ion-button>
+            </ion-button> -->
+        </ion-buttons>
+    </ion-toolbar>
+</ion-header>
+
+<ion-content class="change-setting-body entry-form">
+
+    <div class="change-setting-container">
+        <form [formGroup]="authPinForm" class="key-container" (ngSubmit)="checkAuthPin(authPinForm.value)">
+            <div class="form-section">
+                <ion-grid>
+                    <ion-row>
+
+
+                        <ion-col col-8 col-sm-8>
+                            <ion-item>
+                                <!--              <ion-label stacked>Authentication PIN</ion-label> -->
+                                <ion-icon name="lock"></ion-icon>
+                                <ion-input formControlName="authPin" placeholder="Enter Authentication PIN "
+                                    type="text"></ion-input>
+                            </ion-item>
+
+                        </ion-col>
+                    </ion-row>
+                    <ion-row>
+                        <ion-col col-12 class="btn-outer btn-pin">
+                            <ion-button icon-only shape="round" color="secondary" class="global-btn" class="cancel-btn"
+                                type="button" (click)="cancelPage()" round> Cancel
+                            </ion-button>
+                            <ion-button icon-only shape="round" color="primary" class="global-btn" class="save-btn"
+                                [disabled]="!authPinForm.valid" type="submit" round> Save
+                            </ion-button>
+                        </ion-col>
+
+                    </ion-row>
+                </ion-grid>
+
+            </div>
+            <!-- <div class="text-right">
+            <a href="">Cancel</a>
+        </div> -->
+            <div class="app-button">
+                <ion-grid>
+                    <ion-row>
+                        <ion-col col-6>
+                            <div class="card-container">
+                                <div class="key-card" (click)="changeAppKey()">
+                                    <div class="icon-in">
+                                        <ion-icon name="key" class="icon-white" slot="center"></ion-icon>
+                                    </div>
+                                    <p> Change App Key</p>
+                                </div>
+                            </div>
+                        </ion-col>
+                        <ion-col col-6>
+                            <div class="card-container">
+                                <div class="key-card" (click)="appCollectionPage()">
+                                    <div class="icon-in">
+                                        <ion-icon name="apps" class="icon-white" slot="center"></ion-icon>
+                                    </div>
+                                    <p>App Collection</p>
+                                </div>
+                            </div>
+                        </ion-col>
+                    </ion-row>
+                    <!--     <ion-row>
+                <ion-col col-6 class="btn-outer">
+                    <ion-button icon-only shape="round" color="primary"  class="global-btn"
+                        class="save-btn" (click)="changeAppKey()" type="button" round> Change App Key
+                    </ion-button>
+                </ion-col>
+                <ion-col col-6 class="btn-outer">
+                    <ion-button icon-only shape="round" color="primary"  class="global-btn" 
+                        class="save-btn" (click)="appCollectionPage()" round>App Collection
+                    </ion-button>
+                </ion-col>
+            </ion-row> -->
+                </ion-grid>
+            </div>
+        </form>
+
+    </div>
+
+</ion-content>

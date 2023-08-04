@@ -1,0 +1,20 @@
+<!-- <ion-fab vertical="bottom" horizontal="start" slot="fixed">
+    <ion-fab-button>
+      <ion-icon name="add"></ion-icon>
+    </ion-fab-button>
+  </ion-fab> -->
+
+
+  <ion-fab vertical="bottom" horizontal="start"slot="fixed">
+      <ion-fab-button >
+        <ion-icon name="add"></ion-icon>
+      </ion-fab-button>
+      <ion-fab-list side="end">
+        
+      <ng-container *ngFor="let itemGroups of tableRows">
+        <ion-fab-button color="secondary" *ngFor="let item of itemGroups.Level5" (click)="itemClicked(item)">
+          <ion-icon name="{{item.item_sub_type | lowercase}}"></ion-icon>
+        </ion-fab-button>
+      </ng-container> 
+      </ion-fab-list>
+  </ion-fab>

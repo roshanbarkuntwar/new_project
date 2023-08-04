@@ -1,0 +1,14 @@
+.graph-filters
+{
+   ion-item
+   {
+        --min-height: 30px;
+
+        ion-select
+        {
+                --padding-top: 7px;
+    --padding-bottom: 7px;
+    --padding-start: 5px;
+        }
+   }
+}  

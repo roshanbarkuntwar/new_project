@@ -1,0 +1,33 @@
+<ion-header id="popover-head">
+  <ion-toolbar>
+    <ion-title>Bluetooth</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content id="blutooth-popover">
+  <div (click)="disconnect()" >Device Name : {{this.globalObjectService.deviceNamee}}</div>
+  <!-- <ion-button expand="block"
+  (click)="disconnect()">Disconnect</ion-button> -->
+  <ion-list padding>
+    <ion-list-header>
+      <div>Scan Devices</div>
+    </ion-list-header>
+    <ion-item *ngFor="let device of pairedDevices">
+      <span (click)="selectDevices(device.id)">
+        {{device.name || device.address}}
+      </span>
+    </ion-item>
+
+    <ion-list-header>
+      <div>
+        availlable Devices
+      </div>
+    </ion-list-header>
+    <ion-item *ngFor='let device of unpairedDevices'>
+      <span (click)="selectDevices(device.id)">
+        {{device.name || device.address}}
+      </span>
+    </ion-item>
+    <ion-spinner name="crescent" *ngIf="gettingDevices"></ion-spinner>
+  </ion-list>
+</ion-content>

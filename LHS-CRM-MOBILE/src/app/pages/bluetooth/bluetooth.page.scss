@@ -1,0 +1,40 @@
+
+ion-header[id="popover-head"]{
+    ion-toolbar {
+        background: #dcdcdc;
+        --background: none;
+        color: #474747;
+        font-weight: 500;
+    }
+    .ion-title{
+        color:white;
+        font-weight:500;
+    }
+
+}
+ion-content[id="blutooth-popover"]{
+    text-align: center;
+    --padding-bottom: 10px;
+    --padding-end: 17px;
+    --padding-start: 0px;
+    --padding-top: 20px;
+    text-align: center;
+    ion-button{
+        --padding-end: 30px;
+        --padding-start: 29px;
+        margin: 15px;
+        width: 100%;
+    }
+}
+
+
+@media (min-width: 320px) and (max-width: 480px) {
+   
+  }
+ 
+@media (min-width: 481px) and (max-width: 768px) {
+   
+}
+@media (min-width:769px) and (max-width: 1024px) {
+   
+}

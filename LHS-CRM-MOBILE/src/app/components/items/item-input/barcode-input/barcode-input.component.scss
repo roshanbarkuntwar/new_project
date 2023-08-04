@@ -1,0 +1,34 @@
+.ion-input-item.ion-input-item-fixed.input-100
+{
+    --inner-padding-end:0px !important;
+    ion-input{
+        padding-right:0px !important;
+    }
+}
+.ion-input-item.ion-input-item-fixed.input-100.ion-input-item
+{
+    --inner-padding-end:0px !important;
+    ion-input{
+        padding-right:0px !important;
+    }
+}
+.ion-input-item.ion-input-item-fixed.input-100.ion-input-item-border
+{
+    --inner-padding-end:0px !important;
+    ion-input{
+        padding-right:0px !important;
+    }
+}
+.ion-input-item-fixed 
+{
+    ion-input
+    {
+       
+        padding-right:40px !important;
+    }
+}
+.ion-input-item-border{
+    ion-input{
+        padding-top:2px !important;
+    } 
+}

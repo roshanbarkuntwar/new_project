@@ -1,0 +1,57 @@
+<!-- <ion-header>
+  <ion-toolbar>
+    <ion-title>appkey-validation</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+</ion-content> -->
+
+
+<ion-content class="theme-blue bg-shrink">
+  <div class="shrinkMyscreen">
+  <div class="app-key-container">
+    <ion-grid class="upper-container" style="height: 175px;">
+      <!-- <ion-row>
+        <ion-col col-sm-8 class="ion-padding primaryTextColor text-center">
+          <div class="appkey-logo">
+            <img class="lhs-logo" src="assets/imgs/logo-n.png">
+          </div>
+        </ion-col>
+      </ion-row> -->
+    </ion-grid>
+    <form name="appkey" class="key-container" (submit)="save(appkey)">
+      <div class="form-section">
+        <ion-grid>
+          <ion-row>
+            <!-- <ion-col col-1 col-sm-2></ion-col> -->
+            <ion-col col-8 col-sm-8>
+              <ion-toolbar>
+                <ion-item>
+                  <ion-icon name="md-key" item-start class="text-orange"></ion-icon>
+                  <ion-input type="text" autocomplete='on' placeholder="Enter App-key" name="App-key" [(ngModel)]="appkey"
+                    (ionChange)="UpdateSearchResults(appkey)" (ionBlur)="onBlur()" (ionFocus)="onFocus()"></ion-input>
+                </ion-item>
+              </ion-toolbar>
+
+              <!-- <ion-list *ngIf="showAuto">
+                <ion-item *ngFor="let item of autocompleteItems" tappable (click)="SelectSearchResult(item)">
+                  {{ item }}
+                </ion-item>
+              </ion-list> -->
+
+
+              <div class="btn-outer">
+                <ion-button icon-only shape="round" [disabled]="disableFlag" type="submit" color="primary"
+                  class="global-btn" round>
+                  Enter</ion-button>
+              </div>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+      </div>
+    </form>
+  </div>
+</div>
+</ion-content>

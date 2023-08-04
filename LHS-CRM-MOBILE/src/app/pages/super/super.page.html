@@ -1,0 +1,973 @@
+<ion-header>
+  <ion-toolbar color="primary" class="ion-toolbar" *ngIf="!platform.is('ios')">
+    <span class="left-bg"></span>
+    <span class="left-bg2"></span>
+    <ion-buttons slot="start" *ngIf="isModal === 'Menu' && !otpFlag && toggleSideMenu">
+      <ion-menu-button auto-hide=false></ion-menu-button>
+    </ion-buttons>
+    <ion-button slot="start" class="back" (click)="closePage()" fill="clear" icon-only start *ngIf="isModal == 'M'">
+      <ion-icon name="arrow-back" color="light"></ion-icon>
+    </ion-button>
+    <ion-button slot="start" (click)="popDismiss()" fill="clear" icon-only start *ngIf="isModal == 'P' || otpFlag">
+      <ion-icon name="close" color="light"></ion-icon>
+    </ion-button>
+    <!--    <span class="left-title">
+      {{userDetails.app_disp_header}}
+    </span> -->
+    <ion-title *ngIf="object_mast && object_mast.Level2 && !platform.is('ios')" class="ion-title">
+      <div class="left3-title" *ngIf="globalObjects.toggleDevloperMode">
+
+        <!-- <span    *ngFor="let x of globalObjects.breadCrumpsArray;let i=index" (click)="goItemClicked(x,i)">{{x.prompt_name}}</span>  -->
+        <span>{{userDetails.appkey}}</span> / <span>{{userDetails.user_code}}</span>
+
+      </div>
+      <div class="central-title" style="padding-right: 20px;">
+        {{userDetails.app_disp_header}}
+      </div>
+      <div>
+        {{ object_mast.Level2[page_no].apps_page_name }}
+      </div>
+      <ion-icon style="cursor: pointer; font-size: 18px;" name="create" (click)="openObjectEditorPage(object_mast)"
+        *ngIf="globalObjects.toggleDevloperMode && globalObjects.toggleDevloperModePro && globalObjects.devItemEditFlag">
+      </ion-icon>
+      <ion-icon style="cursor: pointer; font-size: 18px;" name="add" (click)="openObjectEditorPage(object_mast)"
+        *ngIf="globalObjects.toggleDevloperMode && globalObjects.toggleDevloperModePro && globalObjects.devItemEditFlag">
+      </ion-icon>
+      <ion-icon name="home" class="home-btn" (click)="gotosuper()"></ion-icon>
+    </ion-title>
+
+    <span class="right-title" *ngIf="object_mast && object_mast.Level2" slot="end">
+      <span *ngIf="globalObjects.toggleDevloperMode">
+        iud=[{{object_mast.Level2[page_no].iud_seqid}}]ws_seqid=[{{object_mast.same_ws_seqid}}]</span>
+      [{{object_mast.Level2[page_no].object_code}}]<ion-icon class="code-btn" color="primary" name="download"
+        *ngIf="globalObjects.toggleDevloperModePro" (click)="downloadScript(object_mast.Level2[page_no].object_code)">
+      </ion-icon>[{{this.object_mast.object_saved_to_localdb_time}}]
+    </span>
+    <!-- apps_page_no -->
+
+    <ion-buttons slot="end" fill="clear" icon-only (click)="openNotification()" *ngIf="toggleNotification">
+      <ion-icon name="notifications"></ion-icon>
+      <ion-badge *ngIf="notificationCount > 0" class="position-absolute header-count" color="danger">
+        {{notificationCount}}</ion-badge>
+      <!-- CARD-NOTIFICATION -->
+    </ion-buttons>
+
+    <ion-button slot="end" fill="outline" (click)="logOut()" class="logout-btn" style="color:white"
+      *ngIf="!toggleSideMenu" title="Logout">
+      <ion-icon name="log-out" class="log-out"></ion-icon>
+    </ion-button>
+    <div>
+
+    </div>
+  </ion-toolbar>
+
+  <ion-toolbar color="primary" class="ion-toolbar iosheight" *ngIf="platform.is('ios')">
+    <span class="left-bg"></span>
+    <span class="left-bg2"></span>
+    <ion-buttons slot="start" *ngIf="isModal === 'Menu' && !otpFlag">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-button slot="start" class="back" (click)="closePage()" fill="clear" icon-only start *ngIf="isModal == 'M'">
+      <ion-icon name="arrow-back" color="light"></ion-icon>
+    </ion-button>
+    <ion-button slot="start" (click)="popDismiss()" fill="clear" icon-only start *ngIf="isModal == 'P' || otpFlag">
+      <ion-icon name="close" color="light"></ion-icon>
+    </ion-button>
+    <ion-title *ngIf="object_mast && object_mast.Level2 && platform.is('ios')" slot="end" class="ion-title">
+      {{ object_mast.Level2[page_no].apps_page_name }}
+      <ion-icon name="home" class="home-btn" (click)="gotosuper()"></ion-icon>
+    </ion-title>
+
+    <span class="right-title" *ngIf="object_mast && object_mast.Level2" slot="end"><span
+        *ngIf="globalObjects.toggleDevloperMode">[{{object_mast.Level2[page_no].iud_seqid}}]</span>
+      [{{object_mast.Level2[page_no].object_code}}][{{this.object_mast.object_saved_to_localdb_time}}]
+    </span>
+    <!-- apps_page_no -->
+
+    <ion-buttons slot="end" fill="clear" icon-only (click)="openNotification()" *ngIf="toggleNotification">
+      <ion-icon name="notifications"></ion-icon>
+      <ion-badge *ngIf="notificationCount > 0" class="position-absolute header-count" color="danger">
+        {{notificationCount}}</ion-badge>
+      <!-- CARD-NOTIFICATION -->
+    </ion-buttons>
+  </ion-toolbar>
+  <!--  -->
+</ion-header>
+
+<ion-content class="inner-padding pop-ion-content bg-shrink" id="super">
+
+  <div class="clearfix"></div>
+  <div class="shrinkMyscreen">
+    <ng-container *ngIf="globalObjects.toggleDevloperMode  && !platform.is('ios') && globalObjects.breadCrumpsArray && globalObjects.breadCrumpsArray.length > 0">
+    <div class="left2-title-ios">
+
+      <div class="clearfix"></div>
+      <!-- <span    *ngFor="let x of globalObjects.breadCrumpsArray;let i=index" (click)="goItemClicked(x,i)">{{x.prompt_name}}</span>  -->
+      <span *ngFor="let x of globalObjects.breadCrumpsArray">{{x.prompt_name}}</span>
+
+    </div>
+    </ng-container>
+    <div class="left2-title" *ngIf="globalObjects.toggleDevloperMode  && !platform.is('ios')  && globalObjects.breadCrumpsArray && globalObjects.breadCrumpsArray.length > 0">
+
+      <!-- <span    *ngFor="let x of globalObjects.breadCrumpsArray;let i=index" (click)="goItemClicked(x,i)">{{x.prompt_name}}</span>  -->
+      <span *ngFor="let x of globalObjects.breadCrumpsArray">{{x.prompt_name}}</span>
+
+    </div>
+    <div class="clearfix"></div>
+
+
+
+    <div class="chatbox" *ngIf="lovFlag">
+      <div class="chatbox-input">
+
+        <ion-chip *ngFor="let l of this.globalObjects.lovObjData; let i = index">
+
+          <ion-label>{{l.value.values}}</ion-label>
+          <ion-icon name="close" (click)="deleteLov(i)"></ion-icon>
+        </ion-chip>
+
+      </div>
+
+      <ion-button color="primary" size="small" shape="round" (click)="setLovVal()">OK</ion-button>
+    </div>
+
+    <!-- <app-frame-tree-table></app-frame-tree-table> -->
+
+    <!--  <app-treemenu [isMainFolder]="true"></app-treemenu>  -->
+    <!-- <app-frame-multilevel-table></app-frame-multilevel-table> -->
+    <!-- <app-frame-table-vertical></app-frame-table-vertical> -->
+
+    <!--  {{attr | number}} -->
+
+
+
+    <!-- <app-frame-calender-month></app-frame-calender-month> -->
+
+    <!-- <app-frame-plsql-calender></app-frame-plsql-calender> -->
+    <!-- <app-frame-plsql-weekcalender></app-frame-plsql-weekcalender>    -->
+    <!--  <app-sql-light-tran></app-sql-light-tran> -->
+    <!-- <ion-row class="row">
+    <ion-col size="2" *ngIf="showTree">
+      <div class="inner-sidebar">
+        <ion-item lines="none">
+          <ion-icon slot="start" name="add-circle-outline" color="primary"></ion-icon>
+          <ion-label>
+            Item
+          </ion-label>
+        </ion-item>
+        <ion-item lines="none">
+          <ion-icon slot="start" name="add-circle-outline" color="primary"></ion-icon>
+          <ion-label>
+            Item
+          </ion-label>
+        </ion-item>
+        <ion-item-group class="sub-item">
+          <ion-item lines="none">
+            <ion-icon slot="start" name="add-circle-outline" color="primary"></ion-icon>
+            <ion-label>Sub Item</ion-label>
+          </ion-item>
+          <ion-item lines="none">
+            <ion-icon slot="start" name="add-circle-outline" color="primary"></ion-icon>
+            <ion-label>Sub Item</ion-label>
+          </ion-item>
+          <ion-item lines="none">
+            <ion-icon slot="start" name="add-circle-outline" color="primary"></ion-icon>
+            <ion-label>Sub Item</ion-label>
+          </ion-item>
+        </ion-item-group>
+        <ion-item lines="none">
+          <ion-icon slot="start" name="add-circle-outline" color="primary"></ion-icon>
+          <ion-label>
+            Item
+          </ion-label>
+        </ion-item>
+        <ion-item lines="none">
+          <ion-icon slot="start" name="add-circle-outline" color="primary"></ion-icon>
+          <ion-label>
+            Item
+          </ion-label>
+        </ion-item>
+        <ion-item lines="none">
+          <ion-icon slot="start" name="add-circle-outline" color="primary"></ion-icon>
+          <ion-label>
+            Item
+          </ion-label>
+        </ion-item>
+        <ion-item-group class="sub-item">
+
+          <ion-item lines="none">
+            <ion-icon slot="start" name="add-circle-outline" color="primary"></ion-icon>
+            <ion-label>Sub Item</ion-label>
+          </ion-item>
+          <ion-item lines="none">
+            <ion-icon slot="start" name="add-circle-outline" color="primary"></ion-icon>
+            <ion-label>Sub Item</ion-label>
+          </ion-item>
+          <ion-item lines="none">
+            <ion-icon slot="start" name="add-circle-outline" color="primary"></ion-icon>
+            <ion-label>Sub Item</ion-label>
+          </ion-item>
+        </ion-item-group>
+        <ion-item lines="none">
+          <ion-icon slot="start" name="add-circle-outline" color="primary"></ion-icon>
+          <ion-label>
+            Item
+          </ion-label>
+        </ion-item>
+        <ion-item lines="none">
+          <ion-icon slot="start" name="add-circle-outline" color="primary"></ion-icon>
+          <ion-label>
+            Item
+          </ion-label>
+        </ion-item>
+        <ion-item lines="none">
+          <ion-icon slot="start" name="add-circle-outline" color="primary"></ion-icon>
+          <ion-label>
+            Item
+          </ion-label>
+        </ion-item>
+        <ion-item lines="none">
+          <ion-icon slot="start" name="add-circle-outline" color="primary"></ion-icon>
+          <ion-label>
+            Item
+          </ion-label>
+        </ion-item>
+        <ion-item-group class="sub-item">
+
+          <ion-item lines="none">
+            <ion-icon slot="start" name="add-circle-outline" color="primary"></ion-icon>
+            <ion-label>Sub Item </ion-label>
+          </ion-item>
+          <ion-item lines="none">
+            <ion-icon slot="start" name="add-circle-outline" color="primary"></ion-icon>
+            <ion-label>Sub Item</ion-label>
+          </ion-item>
+          <ion-item lines="none">
+            <ion-icon slot="start" name="add-circle-outline" color="primary"></ion-icon>
+            <ion-label>Sub Item</ion-label>
+          </ion-item>
+        </ion-item-group>
+      </div>
+    </ion-col>
+  </ion-row> -->
+
+    <!-- <div class="developer-mode-container">
+    <div class="editorial">
+  
+             <div class="edit">
+<ion-icon name="create"></ion-icon>
+    </div>
+  
+    
+  </div>
+    <div class="add">
+      <ion-icon name="add"></ion-icon>
+    </div>
+  </div> -->
+    <!-- <pre>Ionic : {{this.globalObjects.location_address_ionic | json}}</pre>
+ <pre>Java Script : {{this.globalObjects.location_address_js | json}}</pre> -->
+    <!-- <app-frame-sub-select></app-frame-sub-select> -->
+    <!-- <app-kpi-slider></app-kpi-slider> -->
+
+    <!-- <app-flip-kpi></app-flip-kpi> -->
+
+    <!-- <ion-button (click)="fullScreen('in')" >Full Screen</ion-button> -->
+
+    <ion-fab vertical="bottom" horizontal="end" edge slot="fixed" #fab (cdkDragEnded)="fabDrop()" cdkDrag
+      cdkDragBoundary="ion-header" *ngIf="toggleFab && !otpFlag">
+
+      <ion-fab-button size="small" color="medium">
+        <img class="rounds" src="../../../assets/icon.png" alt="">
+      </ion-fab-button>
+      <ion-fab-list>
+
+        <ion-fab-button *ngIf="globalObjects.toggleDevloperMode" color="light" (click)="openDeveloperPage()">
+          <ion-icon name="code" title="Developer Page"></ion-icon>
+        </ion-fab-button>
+
+        <ng-container *ngIf="plt == 'browser'">
+          <ng-container *ngFor="let f of deviceMode; let i = index">
+            <ion-fab-button [ngClass]="f.class" (click)="selectDevice(f.name,i)" [title]="f.name" color="light">
+              <ion-icon name="{{f.icon}}"></ion-icon>
+            </ion-fab-button>
+          </ng-container>
+        </ng-container>
+        <ion-fab-button title="Userdetail" color="light" (click)="popoveruser()">
+          <ion-icon name="business"></ion-icon>
+        </ion-fab-button>
+        <ion-fab-button title="Refresh" (click)="refreshObjFab()" color="light">
+          <ion-icon name="refresh"></ion-icon>
+        </ion-fab-button>
+        <ion-fab-button title="Settings" (click)="openSettingPage()" color="light">
+          <ion-icon name="settings"></ion-icon>
+        </ion-fab-button>
+        <ion-fab-button color="light" (click)="gotosuper()">
+
+          <ion-icon name="home" title="Home"></ion-icon>
+        </ion-fab-button>
+        <ion-fab-button title="minimise" color="light" (click)="fullScreen('in');fullsScreen=!fullsScreen"
+          *ngIf="(!platform.is('ios') && !platform.is('android')) && !fullsScreen">
+          <ion-icon name="contract"></ion-icon>
+        </ion-fab-button>
+      </ion-fab-list>
+    </ion-fab>
+
+    <div class="clearfix"></div>
+    <!-- <app-frame-drag-drop></app-frame-drag-drop> -->
+    <!--<app-image-menu></app-image-menu>
+ <app-icon-menu></app-icon-menu>
+ <app-simple-kpi></app-simple-kpi>-->
+    <!-- <div>
+    <ion-button class="icon-btn" (click)="sendEmail('','SEND_EMAIL')">Send Email
+    </ion-button>
+  </div>  -->
+    <!-- <div>
+    <app-frame-kpi-slider></app-frame-kpi-slider>
+  </div> -->
+    <!-- <h1>batterstatus</h1>
+  <h2>{{levelbattery}}</h2> -->
+    <!-- <app-simple-kpi></app-simple-kpi> -->
+    <!-- <app-treeset [isMainFolder]="true"></app-treeset> -->
+
+    <!-- <app-frame-footer></app-frame-footer> -->
+    <!-- <app-frame-drag-drop></app-frame-drag-drop>
+<app-image-menu></app-image-menu>
+ <app-icon-menu></app-icon-menu>
+ <app-simple-kpi></app-simple-kpi> -->
+
+    <!-- <ion-slides class="image-slider">
+
+  <ion-slide *ngFor = "let slideItem of imgUrl">
+    <img
+       [src]="'https://firebasestorage.googleapis.com/v0/b/photo-cbbee.appspot.com/o/'+slideItem.name+'?alt=media'" />
+  </ion-slide>
+  </ion-slides>  -->
+
+    <!-- [src]="'https://firebasestorage.googleapis.com/v0/b/testimageload.appspot.com/o/'+slideItem.name+'?alt=media'" /> -->
+    <!-- 
+  https://firebasestorage.googleapis.com/v0/b/photo-cbbee.appspot.com/o/Chrysanthemum.jpg?alt=media
+  https://firebasestorage.googleapis.com/v0/b/photo-cbbee.appspot.com/o/Desert.jpg?alt=media -->
+    <!-- <div class="table-responsive">
+    <table class="entry-table">
+      <thead >
+        <tr>
+          <th>Sr. No</th>
+        <th>Item Name</th>
+        <th>Number</th>
+        <th>Text</th>
+        <th>LOV</th>
+        <th>Select</th>
+        <th>Date</th>
+      </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>1</td>
+          <td>Alluminium</td>
+          <td>
+            <div class="table-input-container">
+              <ion-input class="table-input text-right" type="Number"></ion-input>
+            </div>
+          </td>
+          <td>
+            <div class="table-input-container">
+              <ion-input class="table-input"  type="text"></ion-input>
+            </div>
+          </td>
+          <td>
+            <div class="table-input-container">
+            <div class="input-group table-lov-input">
+              <ion-input class="table-input" required type="text"></ion-input>
+              <div class="input-group-append">
+                <button class="lov-btn" ion-button icon-only small>
+                  <ion-icon name="ios-arrow-forward"></ion-icon>
+                </button>
+              </div>
+            </div>
+            </div>
+          </td>
+          <td>
+              <div class="table-input-container">
+                <ion-select class="table-input" interface="popover">
+                  <ion-select-option value="cat">Cat</ion-select-option>
+                  <ion-select-option value="dog">Dog</ion-select-option>
+                </ion-select>
+              </div>
+          <td>
+              <div class="table-input-container">
+                <div class="input-group table-lov-input">
+                <ion-datetime class="table-input"></ion-datetime>
+                <div class="input-group-append">
+                  <button class="lov-btn" ion-button icon-only small>
+                    <ion-icon name="calendar"></ion-icon>
+                  </button>
+                </div>
+              </div>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+      
+          
+    </table>
+  </div> -->
+    <!-- <app-bar-horizontal-graph></app-bar-horizontal-graph> -->
+    <!-- <ion-toggle [(ngModel)]="dargMode" (ionChange)="dragable(dargMode)" *ngIf="this.globalObjects.toggleDrag">Draggable</ion-toggle> -->
+
+    <!-- <app-frame-plsql-calender></app-frame-plsql-calender> -->
+    <!-- <input class="table-input text-right" type="date" /> -->
+
+    <!-- <app-frame-group-table></app-frame-group-table>  -->
+    <!-- <app-frame-drag-drop></app-frame-drag-drop> -->
+
+    <!-- <p><ion-button (click)="runSpeechRecognition()">Speech to Text</ion-button> &nbsp; <span id="action"></span></p>
+ <div id="output" class="hide"></div> -->
+
+
+
+    <!-- New Item Type Number Input -->
+    <!-- <div class="new-input-item-type">
+  <ion-row>
+    <ion-col size="2" class="text-right">
+      <span>Number</span>
+    </ion-col>
+    <ion-col size="10">
+      <input class="form-control form-control-sm" type="Number">
+    </ion-col>
+  </ion-row>
+</div>
+
+
+
+<div class="new-input-item-type">
+  <ion-row>
+    <ion-col size="2" class="text-right">
+      <span>Text</span>
+    </ion-col>
+    <ion-col size="10">
+      <input class="form-control form-control-sm" type="text">
+    </ion-col>
+  </ion-row>
+</div>
+
+
+
+<div class="new-input-item-type">
+  <ion-row>
+    <ion-col size="2" class="text-right"> 
+      <span>Select</span>
+    </ion-col>
+    <ion-col size="10">
+      <select class="form-select form-select-sm" aria-label="Default select example">
+        <option selected>Open this select menu</option>
+        <option value="1">One</option>
+        <option value="2">Two</option>
+        <option value="3">Three</option>
+      </select>
+    </ion-col>
+  </ion-row>
+</div> -->
+
+<!-- <ion-button color="primary" size="small" shape="round" (click)="openBrowser('I', '_self')">open InApp self</ion-button>
+<ion-button color="primary" size="small" shape="round" (click)="openBrowser('I', '_blank')">open InApp blank</ion-button>
+<ion-button color="primary" size="small" shape="round" (click)="openBrowser('I', '_system')">open InApp System</ion-button>
+<ion-button color="primary" size="small" shape="round" (click)="openBrowser('a', '_self')">open  self</ion-button>
+<ion-button color="primary" size="small" shape="round" (click)="openBrowser('a', '_blank')">open  blank</ion-button>
+<ion-button color="primary" size="small" shape="round" (click)="openBrowser('a', '_system')">open  System</ion-button> -->
+
+<!-- <app-frame-waypoints></app-frame-waypoints> -->
+<!-- <ion-button (click)="searchBluetoothPrinter()">Search</ion-button>
+<ion-button (click)="connectToBluetoothPrinter('')">Connect</ion-button>
+<ion-button (click)="sendToBluetoothPrinter()">Print</ion-button>
+<ion-button (click)="disconnectBluetoothPrinter()">Disconnect</ion-button>
+<ion-list>
+  <ion-item *ngFor="let item of bluetoothList" (click)="sendToBluetoothPrinter(item.id)">
+      {{item.name}} {{item.id}}
+  </ion-item>
+  </ion-list>
+
+  <div>
+    Selected Printer: {{selectedPrinter}}
+</div> -->
+
+
+    <ng-container *ngIf="!otpFlag">
+      <div class="center loading" *ngIf="scriptLoading">
+        <div class="text-center">
+          <img src="../../../assets/dot.gif" width="20%">
+        </div>
+      </div>
+
+      <!-- <app-frame-collapse-order-entry></app-frame-collapse-order-entry>  -->
+      <ion-row cdkDropList cdkDropListOrientation="{{dragPosition}}" *ngIf="object_mast && object_mast.Level2"
+        (cdkDropListDropped)="drop($event)" style="padding-bottom: 100px;">
+        <ion-col *ngFor="let frame of object_mast.Level2[page_no].Level3"
+          [size]="frame.design_control_type ? frame.design_control_type : 12" [ngSwitch]="frame.apps_frame_type"
+          cdkDrag>
+
+          <ion-icon style="cursor: pointer" color="primary" class="icon-white" name="create"
+            *ngIf="globalObjects.toggleDevloperMode && globalObjects.toggleDevloperModePro && globalObjects.devItemEditFlag"
+            (click)="openFrameEditorPage(frame)"></ion-icon>
+          <ion-icon style="cursor: pointer" color="primary" class="icon-white" name="add"
+            *ngIf="globalObjects.toggleDevloperMode && globalObjects.toggleDevloperModePro && globalObjects.devItemEditFlag"
+            (click)="openItemAddPage(frame)"></ion-icon>
+
+          <div [hidden]="!this.globalObjects.toggleDrag" cdkDragHandle>
+            <ion-icon style="cursor:pointer;" name="move"></ion-icon>
+          </div>
+          <div *ngSwitchCase="'CANVAS'">
+            <ng-container *ngIf="(frame.apps_page_frame_seqid == (object_mast.Level2[page_no].object_code + '-PARA') && globalObjects.toggleDevloperMode) || (frame.apps_page_frame_seqid != (object_mast.Level2[page_no].object_code + '-PARA')) ">
+              <app-frame-canvas [frame]="frame" [wsdp]="wsdp" [sessionObj]="sessionObj" [wscp_send_input]="wscp"
+                [sessionObj]="sessionObj" [wsdpcl]="wsdpcl" (emitPass)="itemClicked($event)">
+              </app-frame-canvas>
+            </ng-container>
+          </div>
+
+          <!-- <div *ngSwitchCase="'PARAMETER'">
+            <app-frame-canvas [frame]="frame" [wsdp]="wsdp" [sessionObj]="sessionObj" [wscp_send_input]="wscp"
+              [sessionObj]="sessionObj" [wsdpcl]="wsdpcl" (emitPass)="itemClicked($event)" >
+            </app-frame-canvas>
+          </div> -->
+
+
+          <div *ngSwitchCase="'CANVAS-KPI'">
+            <app-frame-canvas [frame]="frame" [wsdp]="wsdp" [wscp_send_input]="wscp" [sessionObj]="sessionObj"
+              [wsdpcl]="wsdpcl" (emitPass)="itemClicked($event)">
+            </app-frame-canvas>
+          </div>
+          <div *ngSwitchCase="'DRAG-DROP'">
+            <app-frame-drag-drop [frame]="frame" [wsdp]="wsdp" [wscp_send_input]="wscp" [sessionObj]="sessionObj"
+              [wsdpcl]="wsdpcl" (emitPass)="itemClicked($event)"></app-frame-drag-drop>
+          </div>
+
+          <div *ngSwitchCase="'CALENDER-MONTH1'">
+            <app-frame-calender-month [frame]="frame" [wsdp]="wsdp" [wsdpcl]="wsdpcl" (emitPass)="itemClicked($event)">
+            </app-frame-calender-month>
+          </div>
+          <div *ngSwitchCase="'CALENDER-MONTH'">
+            <app-frame-calendar-week [frame]="frame" [wsdp]="wsdp" [wsdpcl]="wsdpcl" (emitPass)="itemClicked($event)">
+            </app-frame-calendar-week>
+          </div>
+          <div *ngSwitchCase="'APPROVAL-TAB'">
+            <app-approval-tab [frame]="frame" [wsdp]="wsdp" [wscp]="wscp" [obj_mast]="object_mast"
+              (emitPass)="itemClicked($event)">
+            </app-approval-tab>
+          </div>
+
+          <div *ngSwitchCase="'TABLE'">
+            <app-frame-table [frame]="frame" [wsdp]="wsdp"  [wsdpcl]="wsdpcl" [sessionObj]="sessionObj"
+              [wscp_send_input]="wscp" (emitPass)="itemClicked($event)">
+            </app-frame-table>
+          </div>
+
+          <div *ngSwitchCase="'PIVOT-TABLE'">
+            <app-frame-table [frame]="frame" [wsdp]="wsdp" [wsdpcl]="wsdpcl" [sessionObj]="sessionObj"
+              [wscp_send_input]="wscp" (emitPass)="itemClicked($event)">
+            </app-frame-table>
+          </div>
+
+          <div *ngSwitchCase="'REPORT'">
+
+            <app-frame-report [frame]="frame" [wsdp]="wsdp" [wsdpcl]="wsdpcl" [sessionObj]="sessionObj"
+              [wscp_send_input]="wscp" (emitPass)="itemClicked($event)">
+            </app-frame-report>
+          </div>
+
+          <div *ngSwitchCase="'GRPTABLE'">
+            <app-frame-group-table [frame]="frame" [wsdp]="wsdp" [wsdpcl]="wsdpcl" [sessionObj]="sessionObj"
+              [wscp_send_input]="wscp" (emitPass)="itemClicked($event)">
+            </app-frame-group-table>
+          </div>
+
+          <div *ngSwitchCase="'TABLE_KPI'">
+            <app-frame-table-kpi [frame]="frame" [wsdp]="wsdp" [wsdpcl]="wsdpcl" (emitPass)="itemClicked($event)">
+            </app-frame-table-kpi>
+          </div>
+
+          <div *ngSwitchCase="'CARD'">
+            <app-frame-card [frame]="frame" [wsdp]="wsdp" [sessionObj]="sessionObj" [wscp_send_input]="wscp"
+              [wsdpcl]="wsdpcl" (emitPass)="itemClicked($event)">
+            </app-frame-card>
+          </div>
+          <div *ngSwitchCase="'PROFILE-CARD'">
+            <app-frame-user-profile [frame]="frame" [wsdp]="wsdp" [wsdpcl]="wsdpcl" [wscp_send_input]="wscp"
+              (emitPass)="itemClicked($event)">
+
+            </app-frame-user-profile>
+          </div>
+          <div *ngSwitchCase="'SLIDING-CARD'">
+            <app-frame-card-slider [frame]="frame" [wsdp]="wsdp" [wsdpcl]="wsdpcl" (emitPass)="itemClicked($event)">
+            </app-frame-card-slider>
+          </div>
+          <div *ngSwitchCase="'CANVAS-BORDERED'">
+            <app-frame-summ-card [frame]="frame" [wsdp]="wsdp" [wscp_send_input]="wscp" [wsdpcl]="wsdpcl"
+              (emitPass)="itemClicked($event)">
+            </app-frame-summ-card>
+          </div>
+
+          <!-- <div *ngSwitchCase="'TGRAPH'">
+          <app-frame-graph [tabledata]="frame" [wsdp]="wsdp" (emitPass)="itemClicked($event)"></app-frame-graph>
+        </div> -->
+          <div *ngSwitchCase="'GRAPH'">
+            <app-frame-dashboard-graph [frame]="frame" [wsdp]="wsdp" (emitPass)="itemClicked($event)">
+            </app-frame-dashboard-graph>
+          </div>
+
+          <div *ngSwitchCase="'IMG_SLIDER'">
+            <app-frame-img-slider [frame]="frame" [wsdp]="wsdp" (emitPass)="itemClicked($event)">
+            </app-frame-img-slider>
+          </div>
+          <div *ngSwitchCase="'MINI_IMG_SLIDER'">
+            <app-frame-img-mini-slider [frame]="frame" [wsdp]="wsdp" (emitPass)="itemClicked($event)">
+            </app-frame-img-mini-slider>
+          </div>
+          <div *ngSwitchCase="'IMG_SLIDER_V2'">
+            <app-frame-img-slider [frame]="frame" [wsdp]="wsdp" (emitPass)="itemClicked($event)">
+            </app-frame-img-slider>
+          </div>
+          <div *ngSwitchCase="'TERMS'">
+            <app-frame-terms-conditions [frame]="frame" [wsdp]="wsdp" [wscp_send_input]="wscp"
+              (emitPass)="itemClicked($event)" [sessionObj]="sessionObj"></app-frame-terms-conditions>
+          </div>
+          <div *ngSwitchCase="'ADDON'">
+            <app-frame-addon [sessionObj]="sessionObj" [frame]="frame" [wsdp]="wsdp" [wscp_send_input]="wscp"
+              (emitPass)="itemClicked($event)">
+            </app-frame-addon>
+          </div>
+          <div *ngSwitchCase="'COLLAPSE'">
+            <app-frame-collaps [frame]="frame" [wscp]="wscp" [wsdp]="wsdp" [wsdpcl]="wsdpcl"
+              (emitPass)="itemClicked($event)">
+            </app-frame-collaps>
+          </div>
+          <div *ngSwitchCase="'CALENDER'">
+            <app-frame-calender [frame]="frame" [wsdp]="wsdp" [wsdpcl]="wsdpcl" (emitPass)="itemClicked($event)">
+            </app-frame-calender>
+          </div>
+          <div *ngSwitchCase="'NEWCALENDER'">
+            <app-frame-newcalender [frame]="frame" [wsdp]="wsdp" [wsdpcl]="wsdpcl" (emitPass)="itemClicked($event)">
+            </app-frame-newcalender>
+          </div>
+          <!-- <div *ngSwitchCase="'TASKM'">
+          <app-frame-task-management [frame]="frame" [wsdp]="wsdp" (emitPass)="itemClicked($event)">
+          </app-frame-task-management>
+        </div> -->
+          <!--  <div *ngSwitchCase="'ENTRY_TABLE'">
+          <app-frame-entry-table [frame]="frame" [wsdp]="wsdp" (emitPass)="itemClicked($event)">
+          </app-frame-entry-table>
+        </div>  -->
+          <div *ngSwitchCase="'ENTRY_TABLE'">
+            <app-frame-table2 [frame]="frame" [wsdp]="wsdp" [wsdpcl]="wsdpcl" (emitPass)="itemClicked($event)"
+              [wscp_send_input]="wscp">
+            </app-frame-table2>
+          </div>
+
+          <div *ngSwitchCase="'TABLE_VERTICAL'">
+            <app-frame-table-vertical [frame]="frame" [wsdp]="wsdp" [wsdpcl]="wsdpcl" (emitPass)="itemClicked($event)"
+              [wscp_send_input]="wscp">
+            </app-frame-table-vertical>
+          </div>
+
+          <div *ngSwitchCase="'ENTRY_TABLE_VERTICAL'">
+            <app-frame-table2 [frame]="frame" [wsdp]="wsdp" [wsdpcl]="wsdpcl" (emitPass)="itemClicked($event)"
+              [wscp_send_input]="wscp">
+            </app-frame-table2>
+          </div>
+
+          <div *ngSwitchCase="'ORDER-ENTRY'">
+            <app-frame-order-entry [frame]="frame" [wsdp]="wsdp" [wscp_send_input]="wscp" [wsdpcl]="wsdpcl"
+              (emitPass)="itemClicked($event)">
+            </app-frame-order-entry>
+          </div>
+
+          <div *ngSwitchCase="'FRAME_COLLAPSE'">
+            <app-frame-collapse-order-entry [frame]="frame" [wsdp]="wsdp" [wsdpcl]="wsdpcl"
+              (emitPass)="itemClicked($event)">
+
+            </app-frame-collapse-order-entry>
+          </div>
+
+          <div *ngSwitchCase="'PLASTO_SUMMARY'">
+            <app-frame-plasto-summary-card [frame]="frame" [wsdp]="wsdp" [wsdpcl]="wsdpcl"
+              (emitPass)="itemClicked($event)"></app-frame-plasto-summary-card>
+          </div>
+
+          <div *ngSwitchCase="'CHAT-LIVE'">
+            <app-frame-chat-dashboard [frame]="frame" [wsdp]="wsdp" [wscp_send_input]="wscp" [sessionObj]="sessionObj"
+              (emitPass)="itemClicked($event)"></app-frame-chat-dashboard>
+          </div>
+          <div *ngSwitchCase="'CANVAS-FILTER'">
+            <app-frame-canvas [frame]="frame" [wsdp]="wsdp" [wscp_send_input]="wscp" [sessionObj]="sessionObj"
+              (emitPass)="itemClicked($event)">
+            </app-frame-canvas>
+          </div>
+          <div *ngSwitchCase="'MAP'">
+            <app-frame-map [frame]="frame" [wsdp]="wsdp" [wscp_send_input]="wscp" [sessionObj]="sessionObj"
+              (emitPass)="itemClicked($event)"></app-frame-map>
+          </div>
+          <div *ngSwitchCase="'TIMELINE-CARD'">
+            <app-frame-timeline-card [frame]="frame" [wsdp]="wsdp" [wsdpcl]="wsdpcl" (emitPass)="itemClicked($event)">
+            </app-frame-timeline-card>
+          </div>
+          <div *ngSwitchCase="'LOC-TRACK-CARD'">
+            <app-frame-location-tracking-card [frame]="frame" [wsdp]="wsdp" [wsdpcl]="wsdpcl"
+              (emitPass)="itemClicked($event)">
+            </app-frame-location-tracking-card>
+          </div>
+          <div *ngSwitchCase="'ORDER ENTRY'">
+            <app-frame-add-to-cart [frame]="frame" [wsdp]="wsdp" (emitPass)="itemClicked($event)">
+            </app-frame-add-to-cart>
+          </div>
+
+          <div *ngSwitchCase="'ACCORIDION'">
+            <app-frame-parent-child-order [frame]="frame" [wsdp]="wsdp" [wsdpcl]="wsdpcl" [sessionObj]="sessionObj"
+              (emitPass)="itemClicked($event)"></app-frame-parent-child-order>
+          </div>
+
+          <div *ngSwitchCase="'PLAIN-KPI'">
+            <app-frame-plain-kpi [frame]="frame" [wsdp]="wsdp" [wsdpcl]="wsdpcl" (emitPass)="itemClicked($event)">
+            </app-frame-plain-kpi>
+          </div>
+
+          <div *ngSwitchCase="'SUMMARY_CARD'">
+            <app-frame-summary-card [frame]="frame" [wsdp]="wsdp" [wsdpcl]="wsdpcl" (emitPass)="itemClicked($event)">
+            </app-frame-summary-card>
+          </div>
+          <div *ngSwitchCase="'SUMMARY_TABLE'">
+            <app-frame-summary-card-detail [frame]="frame" [wsdp]="wsdp" [wsdpcl]="wsdpcl"
+              (emitPass)="itemClicked($event)">
+            </app-frame-summary-card-detail>
+          </div>
+
+          <div *ngSwitchCase="'CART-SUMMARY-PLAIN'">
+            <app-frame-cart-summary-plain [frame]="frame" [wsdp]="wsdp" [wsdpcl]="wsdpcl"
+              (emitPass)="itemClicked($event)">
+            </app-frame-cart-summary-plain>
+          </div>
+
+          <div *ngSwitchCase="'CARTD'">
+            <app-frame-cart-summary [cartdata]="cartdata" [wsdp]="wsdp" [wscp_send_input]="wscp" [wsdpcl]="wsdpcl"
+              [frame]="frame"></app-frame-cart-summary>
+          </div>
+          <div *ngSwitchCase="'ROUTE-MAP'">
+            <app-frame-route-map [frame]="frame" [wsdp]="wsdp" [wsdpcl]="wsdpcl"></app-frame-route-map>
+          </div>
+          <div *ngSwitchCase="'BAR-GRAPH'">
+            <app-frame-bar [frame]="frame" [wsdp]="wsdp" [wsdpcl]="wsdpcl"></app-frame-bar>
+          </div>
+          <div *ngSwitchCase="'BARHORIZONTAL-GRAPH'">
+            <app-bar-horizontal-graph [frame]="frame" [wsdp]="wsdp" [wsdpcl]="wsdpcl"></app-bar-horizontal-graph>
+          </div>
+
+          <div *ngSwitchCase="'COLUMN-CHART'">
+            <app-frame-column-chart [frame]="frame" [wsdp]="wsdp" [wsdpcl]="wsdpcl"></app-frame-column-chart>
+          </div>
+          <div *ngSwitchCase="'3DPIECHART-GRAPH'">
+            <app-frame-piechart [frame]="frame" [wsdp]="wsdp" [wsdpcl]="wsdpcl"></app-frame-piechart>
+          </div>
+          <div *ngSwitchCase="'DOUGHNOUT-GRAPH'">
+            <app-frame-doughnout [frame]="frame" [wsdp]="wsdp" [wsdpcl]="wsdpcl"></app-frame-doughnout>
+          </div>
+
+          <div *ngSwitchCase="'LINE-GRAPH'">
+            <app-frame-line-graph [frame]="frame" [wsdp]="wsdp" [wsdpcl]="wsdpcl"></app-frame-line-graph>
+          </div>
+
+          <div *ngSwitchCase="'TREEMAP-GRAPH1'">
+            <app-frame-treemap [frame]="frame" [wsdp]="wsdp" [wsdpcl]="wsdpcl"></app-frame-treemap>
+          </div>
+          <div *ngSwitchCase="'GEOCHART-GRAPH'">
+            <app-frame-geochart [frame]="frame" [wsdp]="wsdp" [wsdpcl]="wsdpcl" (emitPass)="itemClicked($event)">
+            </app-frame-geochart>
+          </div>
+          <div *ngSwitchCase="'SCATTERCHART-GRAPH'">
+            <app-frame-scattechart [frame]="frame" [wsdp]="wsdp" [wsdpcl]="wsdpcl"></app-frame-scattechart>
+          </div>
+          <div *ngSwitchCase="'CANDLESTICK-GRAPH'">
+            <app-frame-candlestickchart [frame]="frame" [wsdp]="wsdp" [wsdpcl]="wsdpcl"></app-frame-candlestickchart>
+          </div>
+          <div *ngSwitchCase="'FUNNEL-GRAPH'">
+            <app-frame-funnelgraph [frame]="frame" [wsdp]="wsdp" [wsdpcl]="wsdpcl"></app-frame-funnelgraph>
+          </div>
+          <div *ngSwitchCase="'PROFILE-INFO'">
+            <app-frame-profile-info [frame]="frame" [wsdp]="wsdp" [wsdpcl]="wsdpcl" [wscp_send_input]="wscp"
+              (emitPass)="itemClicked($event)">
+            </app-frame-profile-info>
+          </div>
+
+          <div *ngSwitchCase="'HOTLINE-DASHBOARD'">
+            <app-chat-list [frame]="frame" [wsdp]="wsdp" [wsdpcl]="wsdpcl" [wscp_send_input]="wscp"
+              (emitPass)="itemClicked($event)">
+            </app-chat-list>
+          </div>
+
+          <div *ngSwitchCase="'FAB-BALL'">
+            <app-fab-ball [frame]="frame" [wsdp]="wsdp" [wsdpcl]="wsdpcl" [wscp_send_input]="wscp"
+              (emitPass)="itemClicked($event)">
+            </app-fab-ball>
+          </div>
+
+          <div *ngSwitchCase="'KPI-SLIDER'">
+            <app-frame-kpi-slider [frame]="frame" [wsdp]="wsdp" [wsdpcl]="wsdpcl" [wscp_send_input]="wscp"
+              (emitPass)="itemClicked($event)"></app-frame-kpi-slider>
+          </div>
+          <div *ngSwitchCase="'ORDER_CART'">
+            <app-frame-order-card [frame]="frame" [wsdp]="wsdp" [wsdpcl]="wsdpcl" (emitPass)="itemClicked($event)">
+            </app-frame-order-card>
+          </div>
+          <div *ngSwitchCase="'TRAVEL-PATH'">
+            <app-frame-waypoints [frame]="frame" [wsdp]="wsdp" [wscp_send_input]="wscp"
+              (emitPass)="itemClicked($event)">
+            </app-frame-waypoints>
+          </div>
+          <div *ngSwitchCase="'TRAVEL-LOCATION-PIN'">
+            <app-frame-travel-location [frame]="frame" [wsdp]="wsdp" [wscp_send_input]="wscp"
+              (emitPass)="itemClicked($event)">
+            </app-frame-travel-location>
+          </div>
+          <div *ngSwitchCase="'3D-FUNNEL-GRAPH'">
+            <app-frame-three-d-funnel [frame]="frame" [wsdp]="wsdp" [wsdpcl]="wsdpcl"></app-frame-three-d-funnel>
+          </div>
+          <div *ngSwitchCase="'3D-PYRAMID-GRAPH'">
+            <app-frame-three-d-funnel [frame]="frame" [wsdp]="wsdp" [wsdpcl]="wsdpcl"></app-frame-three-d-funnel>
+          </div>
+          <div *ngSwitchCase="'BAR-COLUMN-CHART'">
+            <app-frame-single-scale-column-chart [frame]="frame" [wsdp]="wsdp" [wsdpcl]="wsdpcl"></app-frame-single-scale-column-chart>
+          </div>
+          <div *ngSwitchCase="'TREE-TABLE'">
+            <app-frame-tree-table [frame]="frame" [wsdp]="wsdp" [wsdpcl]="wsdpcl"></app-frame-tree-table>
+          </div>
+
+          
+          <!-- <ng-container *ngIf="globalObjects.toggleDevloperMode"> -->
+          
+          <!-- </ng-container> -->
+          <!--<div *ngSwitchCase="'FRAMENEW'">
+          <app-frame-hml [frame]="frame" [wsdp]="wsdp" [wsdpcl]="wsdpcl" [wscp_send_input]="wscp"
+            (emitPass)="itemClicked($event)"></app-frame-hml>
+        </div>-->
+
+          <!--  <div *ngSwitchDefault>  
+          <app-frame-canvas (itemClicked)="itemClicked($event)" [frame]="frame"> </app-frame-canvas>
+        </div> -->
+        </ion-col>
+      </ion-row>
+    </ng-container>
+
+    <div *ngIf="otpFlag">
+      <app-frame-otp [frame]="otpFrameObjCode">
+      </app-frame-otp>
+    </div>
+
+    <div class="center" *ngIf="!object_mast && !otpFlag">
+      <div class="text-center">
+        <img src="../../../assets/dot.gif" width="20%">
+      </div>
+    </div>
+    <!-- 
+  <ion-button (dblclick)="func2()">Click</ion-button> -->
+
+    <!-- <p>
+  {{networkParams}}
+</p> -->
+
+    <!-- 
+  <div>
+    <ion-button class="icon-btn"  (click)="sendEmail($event, 'SEND_HARDCODED_EMAIL')">Send HTML Email
+      
+    </ion-button>
+  </div> -->
+
+    <!-- <app-sliding-list></app-sliding-list> -->
+
+    <!-- <div class="fab-gap">
+  </div> -->
+
+
+
+
+    <!-- 
+  <ion-fab class="refresh-page-btn" vertical="bottom" size="small" horizontal="end" slot="fixed">
+    <ion-fab-button>
+      <ion-icon name="refresh" (click)="ngOnInit()"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>  -->
+
+    <!--  <div *ngFor ="let x of z">
+    <{{}} {{}}>
+  </div> -->
+
+    <!-- Skeleton screen -->
+    <!-- <div *ngIf="!object_mast && notificationCount > 0">
+    <div class="ion-padding custom-skeleton">
+      <ion-skeleton-text animated style="width: 60%"></ion-skeleton-text>
+      <ion-skeleton-text animated></ion-skeleton-text>
+      <ion-skeleton-text animated style="width: 88%"></ion-skeleton-text>
+      <ion-skeleton-text animated style="width: 70%"></ion-skeleton-text>
+      <ion-skeleton-text animated style="width: 60%"></ion-skeleton-text>
+    </div>
+
+    <ion-list>
+      <ion-list-header>
+        <ion-skeleton-text animated style="width: 20%"></ion-skeleton-text>
+      </ion-list-header>
+      <ion-item>
+        <ion-avatar slot="start">
+          <ion-skeleton-text animated></ion-skeleton-text>
+        </ion-avatar>
+        <ion-label>
+          <h3>
+            <ion-skeleton-text animated style="width: 50%"></ion-skeleton-text>
+          </h3>
+          <p>
+            <ion-skeleton-text animated style="width: 80%"></ion-skeleton-text>
+          </p>
+          <p>
+            <ion-skeleton-text animated style="width: 60%"></ion-skeleton-text>
+          </p>
+        </ion-label>
+      </ion-item>
+      <ion-item>
+        <ion-thumbnail slot="start">
+          <ion-skeleton-text animated></ion-skeleton-text>
+        </ion-thumbnail>
+        <ion-label>
+          <h3>
+            <ion-skeleton-text animated style="width: 50%"></ion-skeleton-text>
+          </h3>
+          <p>
+            <ion-skeleton-text animated style="width: 80%"></ion-skeleton-text>
+          </p>
+          <p>
+            <ion-skeleton-text animated style="width: 60%"></ion-skeleton-text>
+          </p>
+        </ion-label>
+      </ion-item>
+      <ion-item>
+        <ion-skeleton-text animated style="width: 27px; height: 27px" slot="start"></ion-skeleton-text>
+        <ion-label>
+          <h3>
+            <ion-skeleton-text animated style="width: 50%"></ion-skeleton-text>
+          </h3>
+          <p>
+            <ion-skeleton-text animated style="width: 80%"></ion-skeleton-text>
+          </p>
+          <p>
+            <ion-skeleton-text animated style="width: 60%"></ion-skeleton-text>
+          </p>
+        </ion-label>
+      </ion-item>
+    </ion-list>
+  </div> -->
+
+    <!-- <div *ngIf="!object_mast || notificationCount > 0">
+    <div class="text-center">
+        <img src = "../../../assets/dot.gif" width="30%">
+      </div>
+  </div>    -->
+
+    <!-- <ion-button class="primary" (click) = "sendHtml()">Click To send Email</ion-button> -->
+    <!-- </ion-col> -->
+
+  </div>
+  
+</ion-content>

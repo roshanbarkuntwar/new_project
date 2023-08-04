@@ -1,0 +1,116 @@
+@import 'variables';
+table
+{
+    margin:5px 0px;
+    width:100%;
+   thead
+  {
+    th {
+        padding:5px;
+        font-size: 14px;
+        font-weight: 600;
+       /*white-space:nowrap; */
+      } 
+    
+  }
+  td
+  {
+    font-weight: 500;
+    padding: 4px 6px 10px 2px;
+    border: 1px solid #bcbcbc;
+    font-size: 13px;
+    color: #423f3f;
+    label,ion-label
+    {
+      font-size: 13px !important;
+    }
+  }   
+}
+.pagination-container
+{
+  .paginator
+  {
+    justify-content: space-between;
+    display: flex;
+    padding-left: 0px;
+    background: #fff;
+     border-radius: 10px;
+    li
+     {
+      justify-content: space-between;
+      text-align: center;
+      flex-grow: 1;
+      list-style: none;
+      font-weight: 600;
+      color: #2d2d2d;
+      font-size:0.9rem;
+     
+     }
+     li:last-child
+     {
+       border-right:none;
+     }
+    .paginator-btn
+    {
+      width: 15px;
+      height: 15px;
+     
+      padding: 3px 10px;
+      border-radius: 50%;
+      color: #fff;
+     
+      margin-top: 3px;
+      border-radius:10px 0px 0px 10px;
+    }
+    .next-btn
+    {
+      border-radius:0px 10px 10px 0px;
+    }
+    .pt-1{
+      padding-top:2px !important;
+  }
+  }
+}
+/*Table Inputc Start*/
+.entry-table
+{
+  th {
+
+    min-width:150px;
+  }
+}
+.table-input
+{
+    --padding-top: 0px;
+    --padding-bottom: 0px;
+    input
+    {
+        border: 1px solid #bcbcbc !important;
+    height: 30px !important;
+    border-radius: 3px !important;
+    padding: 0px 10px;
+    }
+}
+ion-select.table-input,ion-datetime.table-input
+    {
+        border: 1px solid #bcbcbc !important;
+    height: 30px !important;
+    border-radius: 3px !important;
+    padding: 3px 10px;
+    }
+.table-lov-input
+{
+  input
+  {
+      border-right: 0px !important;
+  }
+  ion-datetime.table-input{
+    border-right: 0px !important;
+    width:calc(100% - 37px);
+  }
+  .lov-btn {
+  
+    height: 30px !important;
+}
+}
+/*Table Input End*/

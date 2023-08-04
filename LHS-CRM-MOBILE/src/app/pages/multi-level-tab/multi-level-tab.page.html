@@ -1,0 +1,127 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-button slot="start" (click)="closeModal()" fill="clear" icon-only start>
+      <ion-icon color="light" name="arrow-back"></ion-icon>
+    </ion-button>
+    <ion-title >MULTIPLE level TAB </ion-title>
+  </ion-toolbar>
+</ion-header>
+<div>
+  <div class="input-group">
+    <ion-input class="input-text" placeholder="search data" [(ngModel)]="searchText"></ion-input>
+    <div class="input-group-append">
+      <!-- <button class="lov-btn" ion-button icon-only small>
+        <ion-icon (click)="toggle()" [hidden]="horizontal_table=='Hide'" name="ios-arrow-dropdown-circle"></ion-icon>
+        <ion-icon (click)="toggle()" [hidden]="horizontal_table=='Show'" name="ios-arrow-dropright-circle"></ion-icon>
+      </button> -->
+    </div>
+    <div class="input-group-append">
+      <button class="lov-btn" ion-button icon-only small (click)="filterToggle()">
+        <ion-icon name="ios-funnel"></ion-icon>
+      </button>
+    </div>
+  </div>
+</div>
+
+<div *ngIf="show_filter=='show'">
+  <app-frame-filter [frame]="filterFormData"></app-frame-filter>
+</div>
+<ion-segment class="tab-container theme-maroon" scrollable (ionChange)="segmentChanged($event)">
+  <ng-container *ngFor="let headings of  tabHeadings;let i=index;">
+    <div *ngIf="selectedTab==headings">
+      <ion-segment-button value="{{headings}}" (click)="selectTab(headings,i)" checked>{{headings}}</ion-segment-button>
+    </div>
+    <div *ngIf="selectedTab!=headings">
+      <ion-segment-button value="{{headings}}" (click)="selectTab(headings,i)">{{headings}}</ion-segment-button>
+    </div>
+  </ng-container>
+</ion-segment>
+<ion-content>
+  <div *ngFor="let tabData of  allTabData;let tabindex = index">
+    <div *ngIf="selectedTab==tabData.tabHeadings">
+      <h1>{{headings}}</h1>
+      <div class="table-responsive">
+            <ion-row>
+              <ion-button shape="round" class="mr-1 globe-btn" color="primary" (click)="clearalldata()">clear all
+              </ion-button>
+            </ion-row>
+
+            
+             <ion-item>
+                 <ion-chip outline color="secondary" *ngFor="let x of selecttruevalue;let chipid=index">
+                    <ion-label >{{x.value}}__{{chipid}}</ion-label>
+                    <ion-icon name="close-circle" (click)="selectremove(x.j,x.itemchecked,x.tabindex,chipid)"></ion-icon>
+                  </ion-chip>
+                </ion-item>
+           
+       
+      
+         <table>
+           <thead>
+             <tr>
+               <!-- <th>check box</th> -->
+               <th *ngFor="let headss of tabData.frame">
+                 <div *ngFor="let h of  headss.Level5">{{h.prompt_name}}</div>
+              </th>
+             </tr>
+           </thead>
+           <tbody>
+                <!-- | tableSearch:searchText -->
+             <tr *ngFor="let tableData of tabData.frame.tableRows;let j=index">
+              <!-- <td>
+                <ion-checkbox [(ngModel)]="tableData.isChecked" (ionChange)="checkboxselect($event,j,tabindex)">
+                </ion-checkbox>
+              </td>  -->
+                <ng-container *ngFor="let itemGroup of tableData;let itemchecked=index">
+                  <td *ngFor="let input_item of itemGroup.Level5 ;let itemarray=index" [hidden]="input_item.item_visible_flag=='F'"                    
+                  (click)="input_item.isChecked=!input_item.isChecked ;selectitem(j,itemchecked,tabindex,itemarray)" ng-model="input_item.isChecked">
+                  <div [ngClass]="input_item.isChecked==true? 'tomato_scss' : 'sky_scss'">
+                    <ion-item>
+                        <!-- <ion-icon slot="end"  name="arrow-dropright" (click)="changetabselection(tabindex,tabData.tabHeadings)"></ion-icon> -->
+                        <app-items [item]="input_item" (emitPass)="itemClicked($event,i)">  </app-items>
+                    </ion-item>                                  
+                  </div>
+                </td>
+              </ng-container>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</ion-content>
+<ion-footer>
+
+  <ion-row>
+    <ion-col col-6 class="ion-text-center">
+      <!-- <ion-button shape="round" class="mr-1 globe-btn" color="primary" (click)="get_checkboxdetail()">Checkbox Send</ion-button> -->
+    </ion-col>
+    <ion-col col-6 class="ion-text-center">
+      <!-- <ion-button shape="round" class="mr-1 globe-btn" color="primary" >Item Send</ion-button> -->
+    </ion-col>
+  </ion-row>
+
+  <div ng-show="allTabData">
+    <div class="pagination-container">
+      <ul class="paginator my-1">
+
+        <li class="pt-1">Total Records : {{noOfrows}}</li>
+        <li>
+          <ion-icon class="paginator-btn" name="arrow-round-back">
+            <!-- <ion-icon class="paginator-btn" name="arrow-round-back" (click)='paginate(this.l_current_page-1);'> -->
+          </ion-icon>
+        </li>
+
+        <!-- (this.allTabData[pagetabIndex].l_current_page) -->
+        <!-- this.allTabData[pagetabIndex].l_total_remain_pages -->
+
+        <li class="pt-1"> Page 1 Of 1</li>
+        <li>
+          <ion-icon class="paginator-btn next-btn" name="arrow-round-forward">
+            <!-- <ion-icon class="paginator-btn next-btn" name="arrow-round-forward" (click)='paginate(this.l_current_page+1);'> -->
+          </ion-icon>
+        </li>
+      </ul>
+    </div>
+  </div>
+</ion-footer>

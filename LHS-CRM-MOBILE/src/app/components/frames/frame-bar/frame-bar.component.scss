@@ -1,0 +1,29 @@
+.frame-bar{
+    width: 100%;
+    height		: 220px !important;
+    font-size	: 11px;
+    max-width   : 450px !important;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid #ccc;
+    padding-top: 30px;
+}
+
+.frame-bar-4{
+    border: 1px solid #ccc;
+    padding-top: 30px;
+    height: 220px !important;
+}
+
+.frame-bar-6{
+    border: 1px solid #ccc;
+    padding-top: 30px;
+    height: 320px !important;
+}
+
+.frame-bar-12{
+    border: 1px solid #ccc;
+    padding-top: 30px;
+    height: 420px !important;
+}

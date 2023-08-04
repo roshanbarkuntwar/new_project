@@ -1,0 +1,39 @@
+.sliding-list
+{
+    border-radius:5px;
+    box-shadow: 2px 1px 5px 1px rgba(214, 214, 214, 0.69);
+    padding-right: 28px;
+    ion-avatar
+    {
+    width: 28px;
+    height: 28px;
+    text-align: center;
+    font-weight: bold;
+    border-radius: 8px;
+    }
+    h2
+    {
+        color: #423f3f;
+      font-weight: 500;
+      font-size: 15px;
+    }
+    p
+    {
+        font-size: 13px;
+        color: #808080;
+    }
+    ion-label
+    {
+        text-overflow: unset;
+    white-space: normal;
+    overflow: visible;
+    }
+    .notification-checkbox{
+    position: absolute;
+    right: 6px;
+    top: 17px;
+    }
+   
+}
+
+

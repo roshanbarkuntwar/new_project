@@ -1,0 +1,21 @@
+
+<ion-list class="new-menu-list">
+    <ion-item class="ion-no-padding" (click)="buttonClick($event)" (contextmenu)="onRightClick($event)">
+        <div class="thumbnail-container">
+            <ion-thumbnail slot="start"> 
+                <!-- <img src="../../../../../assets/imgs/location.png"> -->
+                <img [src]="baseImg" (error)="onImgError($event)">
+            </ion-thumbnail>
+        </div>
+        <h2>{{menulistNEW.prompt_name}}{{menulistNEW.value}}</h2>
+        
+        <ion-icon name="ios-arrow-forward" slot="end" color="primary" class="i1"></ion-icon>
+        <!-- <ion-icon name="ios-arrow-forward" slot="end" color="primary" class="i2"></ion-icon>
+        <ion-icon name="ios-arrow-forward" slot="end" color="primary" class="i3"></ion-icon> -->
+    </ion-item>
+
+  
+</ion-list>
+
+
+

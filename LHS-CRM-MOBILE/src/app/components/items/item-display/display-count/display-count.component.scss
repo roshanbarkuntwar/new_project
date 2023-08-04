@@ -1,0 +1,19 @@
+.single-count {
+    text-align: center;
+    padding: 2px 2px;
+    padding-bottom: 10px;
+    position: relative;
+   
+    .count-value{
+        span{
+font-weight: 700;
+margin-bottom: 18px;
+color: #4990e2;
+        }
+    }
+    .count-name{
+        span{
+            color: #7b7878;  
+        }
+    }
+}

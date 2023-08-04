@@ -1,0 +1,54 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="end" (click)="clearData()">
+      <ion-icon name="trash" class="close-btn"></ion-icon>
+    </ion-buttons>
+      <ion-buttons slot="end" (click)="closePopover()">
+        <ion-icon name="close" class="close-btn"></ion-icon>
+      </ion-buttons>
+    <ion-title class="title">Developer Mode</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="bg-shrink">
+  <div class="shrinkMyscreen">
+  <!-- <div>
+    <ion-input placeholder="Search here.." [(ngModel)]="searchText" (ionChange)="filterTable()"></ion-input>
+  </div> -->
+    <div class="table-fix-container">
+  <div class="table-fix-body" style="margin-top:18px">
+    <table class="my-0">
+        <thead>
+            <tr>
+              <!--<th *ngFor="let th of thead; let i=index">{{th}}
+              </th>-->
+              <th>Sr. No.</th>
+              <th>Apps_page_frame_seqid</th>
+              <th>Object Code</th>
+              <th>WS_SEQ No.</th>
+              <th> Service Type</th>
+              <th>Timestamp</th>
+              <th>Response Status</th>
+              <th>Response Message</th>
+              <th>Ex WS_SEQ No.</th>
+            </tr>
+          </thead>
+      <tbody>
+        <tr *ngFor="let item of clickedEventData; let i = index">
+          <td>{{i+1}}</td>
+          <td>{{item.reqData.wscp.apps_page_frame_seqid}}</td>
+          <td *ngIf="item.reqData.wscp.object_code">{{item.reqData.wscp.object_code}}</td>
+          <td *ngIf="!item.reqData.wscp.object_code">{{item.reqData.wslp.homeObjectCode}}</td>
+          <td >{{item.response.ws_seq_no}}</td>
+          <td>{{item.reqData.wscp.service_type}}</td>
+          <td >{{item.timeStamp}}</td> 
+          <td >{{item.response.status}}</td> 
+          <td >{{item.response.message}}</td> 
+          <td >{{item.response.ex_ws_seq_no!=-1? item.response.ex_ws_seq_no : ""}}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div> 
+</div>
+</div>
+</ion-content>

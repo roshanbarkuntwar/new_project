@@ -1,0 +1,62 @@
+.plsql-container{
+        ion-label {
+            font-size: 18px !important;
+        }
+        table {
+            border: 1px solid #ddd;
+            tbody{
+                td{
+                    border: none !important;
+                     width: 14.2857%;
+                    padding:0;
+                    span{
+                        display: block;
+                    }
+                }
+            }
+        }
+    .month {
+        text-align: center;
+    }
+    .stat{
+        float: right;
+    }
+    .prev-month{
+        opacity: 0.3;
+    }
+    .date {
+        font-size: 22px;
+    }
+    .task-primary {
+        color: #2196F3;
+    }
+    .task-urgent{
+        color: red;
+    }
+    .task-low{
+        color: orange;
+    }
+    .booked-activity {
+        background: #d22323;
+        color: #fff;
+        padding: 4px;
+    }
+    .task-not-so-imp{
+        color: #968e8e;
+    }
+    .sunday{
+        color: red
+    }
+    }
+    table tbody tr:nth-child(even) {
+        background: #ffffff !important;
+    }
+     table thead th {
+        background: #5e656d !important;
+    }
+   
+    .bg-info{
+        background-color: lightskyblue;
+}
+
+   

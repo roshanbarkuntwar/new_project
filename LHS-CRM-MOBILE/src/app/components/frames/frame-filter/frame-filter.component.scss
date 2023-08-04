@@ -1,0 +1,58 @@
+@import '../../../mixins';
+.p-0{
+  padding: 0;
+}
+.filters
+{
+     min-height:40px;
+     overflow:hidden;
+    
+     h6
+     {
+        margin-left: 25px;
+     }
+    .filter-icon-container
+    {
+        ion-icon
+        {
+           
+            z-index: 3;
+            
+            padding-left: 5px;
+            padding-top:3px;
+        }
+
+    
+      &::before
+      {
+        @include before-after;
+     
+        top: -25px;
+        left: -31px;
+        width: 60px;
+        height: 60px;
+        border-radius: 50px;
+        z-index:1;
+      }
+      &::after
+      {
+        @include before-after;
+       
+        top: -35px;
+        left: -16px;
+        width: 60px;
+        height: 60px;
+        border-radius: 50px;
+        z-index:1;
+        
+      }
+     
+    }
+}
+
+.globe-btn1{
+  margin-bottom: 0px !important;
+  padding: 8px 26px;
+  border-radius: 64px;
+  color: #fff;
+}

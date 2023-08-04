@@ -1,0 +1,38 @@
+h5{
+    font-size: 16px;
+}
+
+ion-range {
+    --knob-size: 28px;
+    --bar-height: 6px;
+}
+.range-right{
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+}
+.range-val{
+    width: 75px;
+}
+ion-input{
+    border: 1px solid #ccc;
+    margin: 0 8px;
+}
+.smart-filter-section {
+    background: #fff;
+    padding: 8px;
+}
+
+@media only screen and (max-width:400px){
+    ion-label{
+        display: none;
+    }
+}
+@media only screen and (max-width:890px){
+    .range-val{
+        width: 40px;
+    }
+    ion-input {
+        margin: 0 0px;
+    }
+}

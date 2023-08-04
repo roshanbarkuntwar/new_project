@@ -1,0 +1,26 @@
+<div class="parent-name-container">
+    <!-- <ion-button  (click)="toggle()" id="bt" color="secondary">Dropdown</ion-button> -->
+    <ng-container >
+    <div  class="dropdown-content" *ngIf="!openNewTab">
+      <div class="inner-div"> 
+      <a *ngFor="let c of childItems" (click)="closePop(c)"><ion-icon name="ios-arrow-forward" class="inner-icon" ></ion-icon>{{c.prompt_name}}</a>
+      <!-- <a><ion-icon name="ios-arrow-forward" class="inner-icon"></ion-icon>About</a>
+      <a><ion-icon name="ios-arrow-forward" class="inner-icon"></ion-icon>Contact</a>
+      <a><ion-icon name="ios-arrow-forward" class="inner-icon"></ion-icon>Home</a>
+      <a><ion-icon name="ios-arrow-forward" class="inner-icon"></ion-icon>About</a>
+      <a><ion-icon name="ios-arrow-forward" class="inner-icon"></ion-icon>Contact</a>
+      <a><ion-icon name="ios-arrow-forward" class="inner-icon"></ion-icon>Contact</a>
+      <a><ion-icon name="ios-arrow-forward" class="inner-icon"></ion-icon>Contact</a>
+      <a><ion-icon name="ios-arrow-forward" class="inner-icon"></ion-icon>About</a>
+      <a><ion-icon name="ios-arrow-forward" class="inner-icon"></ion-icon>Contact</a>
+      <a><ion-icon name="ios-arrow-forward" class="inner-icon"></ion-icon>Contact</a>
+      <a><ion-icon name="ios-arrow-forward" class="inner-icon"></ion-icon>Contact</a> -->
+    </div>
+    </div>
+    <div  class="dropdown-content" *ngIf="openNewTab">
+      <div class="inner-div"> 
+      <a (click)="closePop(c)"><ion-icon name="ios-arrow-forward"></ion-icon>Open In New Tab</a>
+    </div>
+    </div>
+  </ng-container>
+</div>

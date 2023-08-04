@@ -1,0 +1,45 @@
+$secondary-text:#423f3f;
+.marquee-container
+{
+   margin-bottom:7px;
+   padding-top: 0px;
+   padding-bottom: 0px;
+   font-size: 14px;
+    font-weight: 500;
+    color: $secondary-text;
+    marquee
+    {
+        font-size: 14px;
+        color: $secondary-text;
+        font-weight: 500;
+    }
+
+    .item {
+      padding-left:0px;
+      --min-height: 30px;
+    }
+    ion-icon
+    {
+        padding: 3px 10px;
+        margin:0px !important;
+    }
+    .item-inner
+    {
+        min-height:0px;
+    }
+    .item-block
+    {
+        min-height:0px;
+    }
+    ion-label {
+        margin: 0 !important;
+        z-index:-1;
+    }
+    .ion-marquee
+    {
+        div
+        {
+            position: relative !important;
+        }
+    }
+}

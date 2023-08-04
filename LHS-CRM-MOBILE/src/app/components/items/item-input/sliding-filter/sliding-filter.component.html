@@ -1,0 +1,42 @@
+
+<div class="smart-filter-section" *ngIf ="!itemData">
+  <div class="smart-filter-section__header">
+    <h5 class="m-0 d-inline-block">{{sFilter.prompt_name}}<sup>{{range}} of {{Vlength}}</sup></h5>
+    <ion-button class="float-right view-all-btn" color="primary" fill="clear" size="small"  (click)="clearall(dataSet)">Clear</ion-button>
+  </div>
+  <div class="clearfix"></div>
+
+    <div  class="d-inline-block" *ngFor="let object of map | keyvalue;let i=index" [hidden]="i>=range" >
+      <ion-button class="active" fill="clear"  size="small" (click)="onButtonGroupClick($event,object,i)" checked>{{object.key}}</ion-button>
+    </div>
+
+  <div>
+    <ion-button class="float-right view-all-btn" color="primary" fill="clear" size="small"  [hidden] ="range >= Vlength" (click)="increaseRange()">View more item</ion-button>
+  </div>
+</div>
+
+
+
+<div class="smart-filter-section" *ngIf ="itemData">
+  <div class="smart-filter-section__header">
+    <h5 class="m-0 d-inline-block">{{sFilter.prompt_name}}<sup>{{range}} of {{Vlength}}</sup></h5>
+    <ion-button class="float-right view-all-btn" color="primary" fill="clear" size="small"  (click)="clearall(dataSet)">Clear</ion-button>
+  </div>
+  <div class="clearfix"></div>
+
+    <div class="d-inline-block" *ngFor="let object of itemDataArr let i=index" [hidden]="i>=range " >
+    
+      <ion-button [ngClass]="object.isChecked?'active':'inactive'" size="small" fill="clear"    (click)="onSelect($event,object,i)" checked=true>{{object.value}}</ion-button>
+    </div>
+
+  <div>
+    <ion-button class="float-right view-all-btn" color="primary" fill="clear" size="small"  [hidden] ="range >= Vlength" (click)="increaseRange()">View more item</ion-button>
+  </div>
+</div>
+
+
+  <!-- <ion-button color="light" size="small" (click)="onButtonGroupClick($event)">Mumbai</ion-button>
+    <ion-button color="light" size="small" (click)="onButtonGroupClick($event)">Delhi</ion-button>
+    <ion-button color="light" size="small" (click)="onButtonGroupClick($event)">Bangalore</ion-button>
+    <ion-button color="light" size="small" (click)="onButtonGroupClick($event)">Hyderabad</ion-button>
+    <ion-button color="light" size="small" (click)="onButtonGroupClick($event)">Ahmedabad</ion-button> -->

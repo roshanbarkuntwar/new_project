@@ -1,0 +1,189 @@
+
+<!-- ion-input-item-border position="stacked" -->
+<!-- ion-input-item-fixed  position="fixed"-->
+<!-- null position="floating"-->
+<!-- null position="stacked"-->
+<div class="email" *ngIf = "emailinput.item_sub_type != 'E_BROWSER'">
+<ion-item class="{{(emailinput.css_class == null) ? 'ion-input-item ion-input-item-border' : emailinput.css_class}}" >
+  <ion-label position="{{(emailinput.position == null) ? 'stacked': emailinput.position}}">{{emailinput.prompt_name}}</ion-label>
+  <ion-input type="email"   id="{{emailinput.item_name ? emailinput.item_name : emailinput.apps_item_seqid}}" #emailInputname="ngModel"
+  [(ngModel)]="emailinput.value" [maxlength]="emailinput.item_size"  [disabled]="emailinput.item_enable_flag=='F'"
+  [required]="emailinput.data_required_flag=='T' || (emailinput.prompt_name && emailinput.prompt_name[emailinput.prompt_name.length -1] =='*')"
+
+            (ionChange)="emailinput.isValid=emailInputname.valid; emailinput.touched=true"
+            (ionBlur)="emailinput.isValid=emailInputname.valid;emailinput.touched=true;onChange('ionChange')"
+            (ngInit)="emailinput.isValid=emailInputname.valid"
+ 
+  pattern="[A-Za-z0-9._%+-]{3,}@[a-zA-Z]{3,}([.]{1}[a-zA-Z]{2,}|[.]{1}[a-zA-Z]{2,}[.]{1}[a-zA-Z]{2,})" title="{{emailinput.tool_tip}}">
+</ion-input>
+  <div class="input-buttons-container" >
+
+      <button class="input-btn float-right"  *ngIf="emailinput.value"  ion-button icon-only small
+      (click)="cleardata()">
+          <ion-icon name="close"></ion-icon>
+      </button>
+  </div>
+
+  
+</ion-item>
+
+<div class="error" *ngIf="emailInputname.hasError('required') && emailinput.touched">Please Enter
+    {{emailinput.prompt_name}}
+  </div>
+  <div class="error"
+    *ngIf="emailInputname.hasError('minlength') || emailInputname.hasError('pattern') ||emailInputname.hasError('required') && emailinput.touched">
+    Please enter a valid email address
+  </div>
+  <div class="error" *ngIf="emailInputname.hasError('pattern') && emailinput.touched">
+    Email address invalid
+  </div>
+
+</div>
+
+<!-- <div *ngIf="emailinput.item_sub_type!='EMAIL_COMPOSER'">
+  <label>{{emailinput.prompt_name}}</label>
+  <div class="input-group non-lov-input-group">
+    <ion-input type="email" placeholder="{{emailinput.tool_tip}}" id="{{emailinput.item_name}}"
+      [(ngModel)]="emailinput.value" [maxlength]="emailinput.item_size" class="input-text lov-input"
+      [required]="emailinput.data_required_flag=='T'" [readonly]="true" [required]="(current_page_parameter.MODE && (emailinput.data_required_flag && 
+        (emailinput.data_required_flag.indexOf(current_page_parameter.MODE)>-1)) )
+        ||emailinput.data_required_flag=='T' 
+        ||emailinput.prompt_name[emailinput.prompt_name.length -1] =='*'"
+      (ionChange)="onChange('ionChange');emailinput.isValid=emailinputName.valid; emailinput.touched=true;"
+      (ngInit)="emailinput.isValid=emailinputName.valid;"
+      (ionBlur)="emailinput.isValid=emailinputName.valid; emailinput.touched=true;" #emailinputName='ngModel'
+      #emailInputname="ngModel" value=""
+      pattern="[A-Za-z0-9._%+-]{3,}@[a-zA-Z]{3,}([.]{1}[a-zA-Z]{2,}|[.]{1}[a-zA-Z]{2,}[.]{1}[a-zA-Z]{2,})">
+    </ion-input>
+    <div *ngIf="emailinput.value" class="input-group-append">
+      <button class="lov-btn border-left-0 border-right-0" ion-button icon-only small (click)="cleardata()">
+        <ion-icon name="close"></ion-icon>
+      </button>
+    </div>
+  </div>
+  <div class="error" *ngIf="emailInputname.hasError('required') && emailinput.touched">Please Enter
+    {{emailinput.prompt_name}}
+  </div>
+  <div class="error"
+    *ngIf="emailInputname.hasError('minlength') || emailInputname.hasError('pattern') ||emailInputname.hasError('required') && emailinput.touched">
+    Please enter a valid email address
+  </div>
+  <div class="error" *ngIf="emailInputname.hasError('pattern') && emailinput.touched">
+    Email address invalid
+  </div>
+</div>
+
+<div *ngIf="emailinput.item_sub_type=='EMAIL_COMPOSER'">
+  <span>{{emailinput.prompt_name}} :</span>
+  <span class="email-composer" (click)="emailcomposer(emailinput.value)">{{emailinput.value}}</span>
+</div> -->
+
+<!-- <div *ngIf="emailinput.item_sub_type!='EMAIL_COMPOSER'">
+  <label>{{emailinput.prompt_name}}</label>
+  <ion-input type="email" placeholder="{{emailinput.tool_tip}}" id="{{emailinput.item_name}}"
+    [(ngModel)]="emailinput.value" [maxlength]="emailinput.item_size" class="input-text"
+    [required]="emailinput.data_required_flag=='T'" [readonly]="emailinput.item_enable_flag== 'R'"
+    #emailInputname="ngModel" value=""
+    pattern="[A-Za-z0-9._%+-]{3,}@[a-zA-Z]{3,}([.]{1}[a-zA-Z]{2,}|[.]{1}[a-zA-Z]{2,}[.]{1}[a-zA-Z]{2,})">
+  </ion-input>
+
+  <div class="error" *ngIf="emailInputname.hasError('required') && emailInputname.touched">Please Enter
+    {{emailinput.prompt_name}}
+  </div>
+  <div class="error"
+    *ngIf="emailInputname.hasError('minlength') || emailInputname.hasError('pattern') ||emailInputname.hasError('required') && emailInputname.touched">
+    Please enter a valid email address
+  </div>
+  <div class="error" *ngIf="emailInputname.hasError('pattern') && emailInputname.touched">
+    Email address invalid
+  </div>
+</div>
+
+<div *ngIf="emailinput.item_sub_type=='EMAIL_COMPOSER'">
+  <span>{{emailinput.prompt_name}} :</span>
+  <span class="email-composer" (click)="emailcomposer(emailinput.value)">{{emailinput.value}}</span>
+</div> -->
+
+<!-- ion-input-item-border position="stacked" -->
+<!-- ion-input-item-fixed  position="fixed"-->
+<!-- null position="floating"-->
+<!-- null position="stacked"-->
+<!-- <ion-item class="ion-input-item">
+  <ion-label position="stacked">{{emailinput.prompt_name}}</ion-label>
+  <ion-input type="email" placeholder="{{emailinput.tool_tip}}" id="{{emailinput.item_name}}"  *ngIf="emailinput.item_sub_type!='EMAIL_COMPOSER'"
+  [(ngModel)]="emailinput.value" [maxlength]="emailinput.item_size" 
+  [required]="emailinput.data_required_flag=='T'" [readonly]="true" [required]="(current_page_parameter.MODE && (emailinput.data_required_flag && 
+    (emailinput.data_required_flag.indexOf(current_page_parameter.MODE)>-1)) )
+    ||emailinput.data_required_flag=='T' 
+    ||emailinput.prompt_name[emailinput.prompt_name.length -1] =='*'"
+  (ionChange)="onChange('ionChange');emailinput.isValid=emailinputName.valid; emailinput.touched=true;"
+  (ngInit)="emailinput.isValid=emailinputName.valid;"
+  (ionBlur)="emailinput.isValid=emailinputName.valid; emailinput.touched=true;" #emailinputName='ngModel'
+  #emailInputname="ngModel" value=""
+  pattern="[A-Za-z0-9._%+-]{3,}@[a-zA-Z]{3,}([.]{1}[a-zA-Z]{2,}|[.]{1}[a-zA-Z]{2,}[.]{1}[a-zA-Z]{2,})">
+</ion-input>
+  <div class="input-buttons-container"
+  *ngIf="emailinput.value">
+
+      <button class="input-btn float-right"  ion-button icon-only small
+      (click)="cleardata()">
+          <ion-icon name="close"></ion-icon>
+      </button>
+  </div>
+</ion-item>
+
+<div class="error" *ngIf="emailInputname.hasError('required') && emailinput.touched">Please Enter
+  {{emailinput.prompt_name}}
+</div>
+<div class="error"
+  *ngIf="emailInputname.hasError('minlength') || emailInputname.hasError('pattern') ||emailInputname.hasError('required') && emailinput.touched">
+  Please enter a valid email address
+</div>
+<div class="error" *ngIf="emailInputname.hasError('pattern') && emailinput.touched">
+  Email address invalid
+</div>
+<div *ngIf="emailinput.item_sub_type=='EMAIL_COMPOSER'">
+  <span>{{emailinput.prompt_name}} :</span>
+  <span class="email-composer" (click)="emailcomposer(emailinput.value)">{{emailinput.value}}</span>
+</div> -->
+
+<div class="new-input-item-type"  *ngIf = "emailinput.item_sub_type == 'E_BROWSER'">
+  <ion-row> 
+   <ion-col size="3"class="text-left" >
+   <span>
+     {{emailinput.prompt_name}}</span>
+   </ion-col> 
+   <ion-col size="9">
+     <div class="input-group input-group-sm">
+   <ion-input type="email" class="form-control form-control-sm"   id="{{emailinput.item_name}}" #emailInputname="ngModel"
+   [(ngModel)]="emailinput.value" [maxlength]="emailinput.item_size"  [disabled]="emailinput.item_enable_flag=='F'"
+   [required]="emailinput.data_required_flag=='T' || emailinput.prompt_name[emailinput.prompt_name.length -1] =='*'"
+ 
+             (ionChange)="emailinput.isValid=emailInputname.valid; emailinput.touched=true"
+             (ionBlur)="emailinput.isValid=emailInputname.valid;emailinput.touched=true;onChange('ionChange')"
+             (ngInit)="emailinput.isValid=emailInputname.valid"
+  
+   pattern="[A-Za-z0-9._%+-]{3,}@[a-zA-Z]{3,}([.]{1}[a-zA-Z]{2,}|[.]{1}[a-zA-Z]{2,}[.]{1}[a-zA-Z]{2,})" title="{{emailinput.tool_tip}}">
+ </ion-input>
+   <div class="input-buttons-container" >
+ 
+       <button class="input-btn float-right"  *ngIf="emailinput.value"  ion-button icon-only small
+       (click)="cleardata()">
+           <ion-icon name="close"></ion-icon>
+       </button>
+   </div>
+   </div>
+ </ion-col>
+ </ion-row>
+ 
+ <div class="error" *ngIf="emailInputname.hasError('required') && emailinput.touched">Please Enter
+     {{emailinput.prompt_name}}
+   </div>
+   <div class="error"
+     *ngIf="emailInputname.hasError('minlength') || emailInputname.hasError('pattern') ||emailInputname.hasError('required') && emailinput.touched">
+     Please enter a valid email address
+   </div>
+   <div class="error" *ngIf="emailInputname.hasError('pattern') && emailinput.touched">
+     Email address invalid
+   </div>
+ </div>

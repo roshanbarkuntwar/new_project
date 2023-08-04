@@ -1,0 +1,30 @@
+.image-slider {
+    --bullet-background:#000;
+      :root {
+          --ion-safe-area-top: 20px;
+          --ion-safe-area-bottom: 22px;
+        }
+        .swiper-slide {
+          display: block;
+        }
+        ion-slide > img {
+          max-height: 150px;
+          max-width: 100%;
+          width: 100%;
+          object-fit: cover;
+        }
+       ion-slide > h1{
+        font-size: 19px;
+        padding: 10px 0;
+        margin: 0 18px;
+        margin-top: -5px !important;
+        height: 48px;
+        box-shadow: 0px -4px 10px #e1d6d6;
+        border-bottom: 3px solid #a9222f;
+      }
+      .swiper-pagination
+      {
+        bottom:25px;
+      }
+  }
+  

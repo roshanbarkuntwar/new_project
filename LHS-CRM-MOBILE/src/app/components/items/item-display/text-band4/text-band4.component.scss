@@ -1,0 +1,130 @@
+@import '../../../../mixins';
+.threeD-textband-container {
+    ion-col{
+        padding-bottom: 0 !important;
+        margin-bottom: 15px !important;
+    }
+
+ 
+    .threeD-textband-header
+    {
+        color: #2d2d2d;
+        font-size: 1.6rem;
+        margin-bottom: 4px;
+        margin-top: 0px;
+        &::after
+        {
+          @include before-after;
+          bottom: -4px;
+          left: 0px;
+         
+          width: 19px;
+          height: 3px;
+        }
+      
+    }
+  
+      
+        .threeD-textband-footer
+        {
+            
+               font-size: 18px;
+              margin: 5px 5px;
+        }
+        .threeD-textband-body
+        {
+          
+            h5 {
+                              font-size:14px;
+                              margin: 5px 5px
+            }
+        }
+
+
+
+    .threeD-textband-card:active{
+        &::after{
+            display: none;
+        }
+        &::before{
+            display: none;
+        }
+    }
+
+}
+.threeD-textband-container .threeD-green
+{
+
+background: #1bbe9a;
+&::after{
+    background: #0a6b56;
+}
+&::before{
+    background: #1f967c;
+}
+}
+.threeD-textband-container .threeD-grey
+{
+    
+    background: #9c9c9c;
+&::after{
+    background: #3e3939;
+}
+&::before{
+    background: #656565;
+}
+
+}
+.threeD-textband-container .threeD-blue
+{
+
+background: #4b92da;
+&::after{
+    background: #1a4c80;
+}
+&::before{
+    background: #2b6db1;
+}
+}
+.threeD-textband-container .threeD-yellow
+{
+
+    background: #e87322;
+&::after{
+    background: #8b3d07;
+}
+&::before{
+    background: #c8590c;
+}
+}
+
+.threeD-textband-card {
+    width: 90%;
+    height: 100%;
+    padding: 3px;
+   color: #fff;
+    position: relative;
+    
+    transition:  all 0.1s;
+    &::after{
+        @include before-after;
+        width: 100%;
+    height: 12px;
+    -webkit-transform: skewX(48deg);
+    transform: skewX(46deg);
+    bottom: -12px;
+    left: 6.2px;
+    }
+    &::before{
+        @include before-after;
+        width: 12px;
+        height: 100%;
+        right: -12px;
+        top: 6px;
+        -webkit-transform: skewY(36deg);
+        transform: skewY(44deg);
+    }
+    }
+
+
+

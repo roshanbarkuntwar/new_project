@@ -1,0 +1,92 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <!-- <ion-button slot="start" (click)="closePage()" fill="clear" icon-only start>
+      <ion-icon name="arrow-back" color="light"></ion-icon>
+    </ion-button> -->
+    <ion-button slot="start" (click)="closePage()" fill="clear" icon-only start>
+      <ion-icon name="arrow-back" color="light"></ion-icon>
+    </ion-button>
+    <ion-title>
+      Image Icon Import/Export
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-button (click)="exportImages()" [disabled]="isEnabledExport">Export Images</ion-button>
+  <ion-button (click)="importZipImages()" [disabled]="isEnabledImport">Import Images</ion-button>
+
+  <ion-item [disabled]="isEnabledImportChoose">
+    <ion-input type="file" accept=".zip" (change)="changeListener($event)" multiple="multiple">Import Zip File</ion-input>
+  </ion-item>
+
+  <ion-item *ngIf="downloadStatus">
+    <ion-label style="color: #30cf37">Downloading Folder <img src="../../assets/dot.gif" width="1%"> {{downloadItem | json}}</ion-label>
+  </ion-item>
+
+  <ion-item *ngIf="uploadStatus">
+    <ion-label style="color: #30cf37">Uploading Folder <img src="../../assets/dot.gif" width="1%"> {{uploadItem | json}}</ion-label>
+  </ion-item>
+
+  <ion-item *ngIf="downloadStatus">
+    <ion-label style="color: #30cf37">Items
+      Progress....{{percentage}}%______{{remainingDownloadCount}}/{{totalDownloadCount}}</ion-label>
+  </ion-item>
+
+  <ion-item *ngIf="uploadStatus">
+    <ion-label style="color: #30cf37">Items
+      Progress....{{percentage}}%______{{remainingDownloadCount}}/{{totalDownloadCount}}</ion-label>
+  </ion-item>
+
+  <ion-item *ngIf="downloadStatus">
+    <ion-label style="color: #d6091a">Remaining Folder {{storageRef | json}}</ion-label>
+  </ion-item>
+
+  <ion-item *ngIf="uploadStatus">
+    <ion-label style="color: #d6091a">Remaining Folder {{storageRef | json}}</ion-label>
+  </ion-item>
+
+  <ion-item *ngIf="completeDownload">
+    <ion-label style="color: #30cf37;">Wait Downloaded all folders will show in a minutes</ion-label>
+  </ion-item>
+
+  <ion-item *ngIf="errorMessage">
+      <ion-label style="color:orangered;">You import wrong zip file---->{{errorMsg | json}}</ion-label>
+  </ion-item>
+
+  <ion-item *ngIf="serverMessage">
+    <ion-label style="color: #30cf37">{{serverMsg}}</ion-label>
+  </ion-item>
+  
+  <div class="textCenter" *ngIf="loading">
+    <label style="color: orangered;">Taking longer than usual</label>
+  </div>
+
+  <ion-item *ngIf="responceError">
+    <table>
+      <thead>
+        <tr>
+          <th>
+            Image Name
+          </th>
+          <th>
+            Errors
+          </th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let obj of responseKey">
+          <td>
+            {{obj.key}}
+          </td>
+          <td>
+            <ion-label style="color: #d6091a">{{obj.value}}</ion-label>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </ion-item>
+  <div style="text-align: center;" *ngIf="loading">
+    <img src="../../assets/dot.gif" width="20%">
+  </div>
+</ion-content>

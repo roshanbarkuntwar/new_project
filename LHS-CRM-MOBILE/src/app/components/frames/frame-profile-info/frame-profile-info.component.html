@@ -1,0 +1,88 @@
+<div class="profile-info-container" *ngFor="let rows of frame.tableRows |tableSearch :tablerowsfilter;let j=index;">
+  <div class="profile-card">
+    <div class="card-header">
+      <ion-item>
+        <ion-row *ngFor="let itemGroup of rows; let i=index" class="p-0">
+          <ion-col class="p-0" *ngFor="let input_item of itemGroup.Level5;let i=index"
+            [hidden]="input_item.item_visible_flag!='T'">
+            <div *ngIf="input_item.item_type =='DISPLAY_PHOTO'">
+              <app-items  [item]="input_item" (emitPass)="itemClicked($event,j)"
+                (LHSOnChange)="itemValueChange($event,j)"></app-items>
+            </div>
+          </ion-col>
+        </ion-row>
+
+        <ion-label>
+          <ion-row *ngFor="let itemGroup of rows; let i=index" class="p-0">
+            <ng-container *ngFor="let input_item of itemGroup.Level5;let i=index">
+              <ng-container *ngIf="input_item.item_visible_flag =='T'">
+                <ion-col class="p-0" [size]="itemGroup.groupCol ? itemGroup.groupCol[i] : 12 " >
+                  <div *ngIf="input_item.item_position_divider =='UPPER'">
+                    <app-items  [item]="input_item" (emitPass)="itemClicked($event,j)"
+                      (LHSOnChange)="itemValueChange($event,j)"></app-items>
+                  </div>
+                </ion-col>
+              </ng-container>
+            </ng-container>
+          </ion-row>
+        </ion-label>
+      </ion-item>
+    </div>
+    <div class="card-footer">
+      <ion-row justify-content-start align-items-center *ngFor="let itemGroup of rows; let i=index" class="p-0">
+        <ion-col class="p-0" *ngFor="let input_item of itemGroup.Level5;let i=index"
+          [hidden]="input_item.item_visible_flag!='T'">
+          <div *ngIf="input_item.item_position_divider =='LOWER'">
+            <app-items  [item]="input_item" (emitPass)="itemClicked($event,j)"></app-items>
+          </div>
+        </ion-col>
+      </ion-row>
+    </div>
+  </div>
+</div>
+
+
+<!-- 
+  <div class="profile-info-container">
+  <div class="profile-card">
+    <div class="card-header">
+      <ion-row>
+        <ion-col size="2">
+          <div class="profile-pic">
+            <img src="../../../../assets/imgs/defaultUser.png" alt="" srcset="">
+          </div>
+        </ion-col>
+        <ion-col size="10">
+          <div class="info">
+            <p><span>Name</span> Sukanya Marbade</p>
+            <p><span>Phone</span> 999999999</p>
+            <p><span>E-mail</span> Sukanya.Marbade@gmail.com</p>
+          </div>
+        </ion-col>
+      </ion-row>
+    </div>
+    <div class="card-footer">
+      <ion-row justify-content-start align-items-center>
+        <ion-col size="4" className="ion-align-items-center">
+          <div class="count">
+            <p>35</p>
+            <span>Dealer</span>
+          </div>
+        </ion-col>
+        <ion-col size="4" className="ion-align-items-center">
+          <div class="count">
+            <p>35</p>
+            <span>Dealer</span>
+          </div>
+        </ion-col>
+        <ion-col size="4" className="ion-align-items-center">
+          <div class="count">
+            <p>35</p>
+            <span>Dealer</span>
+          </div>
+        </ion-col>
+      </ion-row>
+    </div>
+  </div>
+</div>
+ -->

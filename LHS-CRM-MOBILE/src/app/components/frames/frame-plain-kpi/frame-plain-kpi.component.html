@@ -1,0 +1,48 @@
+<div class="information-card-container" *ngFor="let rows of frame.tableRows |tableSearch :tablerowsfilter;let j=index;">
+
+  <div class="single-card">
+    <div >
+      <div class="card-header">
+        <ion-row *ngFor="let itemGroup of rows; let i=index" class="p-0">
+
+          <ion-col size=12 class="p-0" *ngFor="let input_item of itemGroup.Level5;let i=index"
+            [hidden]="input_item.item_visible_flag!='T'">
+            <div class="individual-name" *ngIf="input_item.item_type =='TEXT'">
+              <h6>
+                <app-items [item]="input_item" (emitPass)="itemClicked($event,j)"></app-items>
+              </h6>
+                <a href="https://api.whatsapp.com/send?phone={{dialer}}" *ngIf="dialer"><ion-icon class="contact-icon" name="logo-whatsapp"></ion-icon></a>
+                <a href="tel:{{dialer}}" *ngIf="dialer"><ion-icon class="contact-icon" name="call"></ion-icon></a>
+              <!-- <h6>RSM Vijaywada</h6> -->
+            </div>
+          </ion-col>
+           <!--<ion-col size=1 *ngFor="let input_item of itemGroup.Level5;let i=index"
+            [hidden]="input_item.item_visible_flag!='T'">
+            <div class="connection" *ngIf="input_item.item_type =='DI'">
+              <ion-icon class="contact-icon" name="logo-whatsapp"></ion-icon>
+            </div>
+          </ion-col>
+          <ion-col size="1" *ngFor="let input_item of itemGroup.Level5;let i=index"
+            [hidden]="input_item.item_visible_flag!='T'">
+            <div class="connection" *ngIf="input_item.item_type =='DI'">
+              <ion-icon class="contact-icon" name="call"></ion-icon>
+
+            </div>
+          </ion-col> -->
+
+        </ion-row>
+      </div>
+      <!-- </div> -->
+      <!-- <div *ngFor="let rows of frame.tableRows |tableSearch :tablerowsfilter;let j=index;"> -->
+      <ion-row *ngFor="let itemGroup of rows; let i=index" class="p-0">
+        <ion-col class="p-0" *ngFor="let input_item of itemGroup.Level5;let i=index"
+          [hidden]="input_item.item_visible_flag!='T'">
+          <div *ngIf="input_item.item_type =='DISPLAY-COUNT'">
+            <app-items class="p-0" [item]="input_item" (emitPass)="itemClicked($event,j)"></app-items>
+          </div>
+        </ion-col>
+      </ion-row>
+    </div>
+    <!-- <app-display-count></app-display-count> -->
+  </div>
+</div>

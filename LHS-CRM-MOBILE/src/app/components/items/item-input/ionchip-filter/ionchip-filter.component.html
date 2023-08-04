@@ -1,0 +1,36 @@
+<div  *ngIf ="!itemData">
+<div class="smart-filter-section1 h-100">
+  <h5 class="m-0 d-inline-block">{{iFilter.prompt_name}}<sup>{{range}} of {{Vlength}}</sup></h5>
+  <ion-button class="float-right view-all-btn" color="primary" fill="clear" size="small"  (click)="clearall(dataSet)">Clear</ion-button>
+  <ion-segment scrollable>
+  <ion-chip outline color="active" *ngFor="let object of map | keyvalue;let i=index" [hidden]="i>=range" [ngClass]="object.isChecked?'class1':'class2'">
+    <ion-label  (click)="onButtonGroupClick($event,object,i)" >{{object.key}}</ion-label>
+  </ion-chip>
+ 
+  </ion-segment>
+
+</div>
+
+  <div>
+    <ion-button class="float-right view-all-btn" color="primary" fill="clear" size="small" [hidden] ="range >= Vlength" (click)="increaseRange(dataSet)">View more item</ion-button>
+  </div>
+</div>
+
+
+  <div class="smart-filter-section h-100" *ngIf ="itemData">
+    <div class="smart-filter-section__header d-block">
+    <h5 class="m-0 d-inline-block">{{iFilter.prompt_name}}<sup>{{range}} of {{Vlength}}</sup></h5>
+    <ion-button class="float-right view-all-btn" color="primary" fill="clear" size="small"  (click)="clearall(dataSet)">Clear</ion-button>
+  </div>
+    <ion-chip  class="active" outline  *ngFor="let object of itemDataArr;let i=index" [hidden]="i>=range">
+      <ion-label  (click)="onSelect($event,object,i)" [ngClass]="object.isChecked?'class1':'class2'"  >{{object.value}}</ion-label>
+    </ion-chip>
+    <div class="d-block">
+        <ion-button class="float-right view-all-btn" color="primary" fill="clear" size="small" [hidden] ="range >= Vlength"  (click)="increaseRange()">View more item</ion-button>
+      </div>
+  </div>
+  
+    
+  
+  
+    

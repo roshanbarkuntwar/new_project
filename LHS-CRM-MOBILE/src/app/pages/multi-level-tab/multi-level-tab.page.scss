@@ -1,0 +1,74 @@
+@import '../../mixins';
+.tab-container{
+
+    margin-bottom: 10px;
+    height: 39px;
+    margin-top: 10px;
+    overflow:visible;
+   ion-segment-button
+    {
+        min-height: 35px;
+        text-transform: capitalize;
+        min-width: 90px;
+        max-width: 360px;
+        border: none;
+        font-weight: 500;
+        overflow: visible;
+    }
+    .segment-button-checked
+    {
+        position: relative;
+        
+     &::after
+      {
+        @include before-after;
+       bottom:-1px;
+       width:100%;
+       height:2px;
+      
+      }
+    } 
+}
+.card-container{
+    ion-item{
+        --min-height: 25px;
+        font-size: 16px;
+        --padding-start:0px;
+        --border-color: #dcdcdc;
+        .label{
+            font-size: 13px;
+        
+        }
+    }
+    .label-name
+    {
+      
+        height:100%;
+        margin: 0;
+        background: #eeeeee;
+        padding:0px 5px;
+        margin-right:5px;
+    }
+    .label-name, .label
+    {
+        text-overflow: unset;
+        white-space: normal;
+        overflow: visible;
+    }
+    .label-name
+    {
+        font-size: 15px;
+    }
+    }
+.tomato_scss {
+    background-color:coral;
+    // padding:20px;
+    // font-family:Verdana;
+}
+
+ .sky_scss {
+   
+    background-color:lightblue;
+    // padding:20px;
+    // font-family:"Courier New";
+}

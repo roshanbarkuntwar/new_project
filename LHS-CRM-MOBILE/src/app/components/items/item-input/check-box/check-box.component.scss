@@ -1,0 +1,22 @@
+.propmt-name {
+    margin-right: 20px;
+}
+ion-item{
+    --min-height: 16px;
+    --border-color: transparent;
+    --background: transparent;
+    --inner-padding-end: 0px;
+    width: fit-content;
+}
+ion-checkbox{
+    margin-top: 0;
+    margin-bottom: 0;
+    margin: auto;
+}
+.checkbox-container{
+    display: flex;
+    align-items: center;
+    justify-content: left;
+    height: 56px;
+    border-bottom: 1px solid #ccc;
+}

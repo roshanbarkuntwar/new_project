@@ -1,0 +1,64 @@
+<!-- <div class="text-band  rounded" style="background: linear-gradient(to right,#13c5db,#5701c4);">
+      <div class="refresh-icon">
+        <ion-icon name="refresh-circle"></ion-icon>
+      </div>
+      <h4 class="mt-3">{{textband.value[0]}}</h4>
+      <h4>{{textband.value[1]}}</h4>
+    </div> -->
+    <div style="width: 100%; text-align: center;" *ngIf="globalObjects.toggleDevloperMode">
+    <ion-icon class="code-btn" name="information-circle-outline" color="primary" slot="end"
+     (click)="showDeveloperData()"></ion-icon>
+      </div>
+<div [title]="textband.tool_tip?textband.tool_tip:''"  class="text-band back rounded h-100" (click)="itemClick($event)" (contextmenu)="onRightClick($event)" [ngStyle]="textband.display_setting_str">
+  <div class="inner-textband">
+ <!--  <div class="refresh-icon">
+    <ion-icon name="refresh-circle"></ion-icon>
+  </div> -->
+  <ng-container *ngIf="val.length > 0 && val.length < 3" >
+    <h4>{{val[1]}}</h4>
+    <h5 class="mt-3">{{val[0]}}</h5>
+   
+  </ng-container>
+
+  <ng-container *ngIf="val.length >= 3 " >
+    <h5 style="margin-top: 10px;">{{val[0]}}</h5>
+    <h4 style="margin-top: 5px;">{{val[1]}}</h4>
+    <h5 class="m-0">{{val[2]}}</h5>
+  </ng-container>
+
+
+  <ng-container *ngIf="val.length <= 0 && textband.value">
+    <!-- <h4>{{val[1]}}</h4> -->
+    <h4>{{textband.value}}</h4>
+    <h5 class="mt-3">{{textband.prompt_name}}</h5>
+  </ng-container>
+
+  <ng-container *ngIf="!textband.value">
+    <h4>{{textband.prompt_name}}</h4>
+    <!-- <h5 class="mt-3">{{textband.prompt_name}}</h5> -->
+  </ng-container>
+</div>
+<i class="fa fa-refresh refresh-ic"></i>
+</div>
+
+
+<!-- <ion-row>
+    <ion-col size="6">
+      <div class="text-band  rounded" style="background: linear-gradient(to right,#13c5db,#5701c4);">
+        <div class="refresh-icon">
+          <ion-icon name="refresh-circle"></ion-icon>
+        </div>
+        <h4 class="mt-3">{{textband.value[0]}}</h4>
+        <h4>{{textband.value[1]}}</h4>
+      </div>
+    </ion-col>
+    <ion-col size="6">
+      <div class="text-band  rounded" style="background: linear-gradient(to right,#13c5db,#5701c4);">
+        <div class="refresh-icon">
+          <ion-icon name="refresh-circle"></ion-icon>
+        </div>
+        <h4 class="mt-3">{{textband.value[0]}}</h4>
+        <h4>{{textband.value[1]}}</h4>
+      </div>
+    </ion-col>
+  </ion-row> -->

@@ -1,0 +1,46 @@
+.bg-input {
+    background-color: #fff;
+    border-bottom: 1px solid #ccc !important;
+    border-left: 1px solid #4990e2 !important;
+    }
+
+.input-label{
+    text-align: right;
+    padding:0px 0px 0px 0px;
+    margin:0px;
+    font-weight: 400;
+
+}
+
+    .input-div-n{
+        width: 100%;
+        display: flex;
+        border-bottom: 1px solid gainsboro;
+        margin: 15px 0px 10px 0px;
+        .input-label{
+            text-align: right;
+            padding: 0px 0px 0px 0px;
+            margin: -30px 0px 0px 0px;
+            position: absolute;
+            z-index: 3;
+            font-size: 12px !important;
+            color: #7b7a7a;
+        }
+        //border:1px solid gray;
+        ion-input{
+            border: none;
+            --border: none;
+            border-radius: 0;
+            font-weight: 500 !important;
+            
+        }
+        ion-input[disabled]{
+            background: #ececec;
+        }
+        ion-button{
+            padding: 0px;
+            margin: 0px;
+            height: 30px;
+        }
+    }
+   

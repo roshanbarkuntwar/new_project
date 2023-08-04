@@ -1,0 +1,151 @@
+<div class="drag-drop-container">
+  <div class="single-box">
+
+    <ion-row class="row">
+      <ion-col size="3" class="main"  
+      cdkDropList
+      #todoList="cdkDropList"
+      [cdkDropListData]="itemList"
+      [cdkDropListConnectedTo]="[group1List, group2List, group3List]"
+      (cdkDropListDropped)="drop($event)">
+        <p class="column-text">Column Name</p>
+        <div class="container-drop">
+          
+          <div class="each-drop" *ngFor="let item of itemList" cdkDrag>
+            {{item}}
+          </div>
+
+        </div>
+      </ion-col>
+      <ion-col size="3" class="group1" 
+      cdkDropList
+      #group1List="cdkDropList"
+      [cdkDropListData]="group1"
+      [cdkDropListConnectedTo]="[todoList, group2List, group3List]"
+      (cdkDropListDropped)="drop($event)">
+        <p class="column-text">Group 1</p>
+        <div class="container-drop" >
+        
+          <div class="each-drop" *ngFor="let item of group1" cdkDrag>
+            {{item}}
+          </div>
+
+        </div>
+      </ion-col>
+      <ion-col size="3" class="group2" 
+      cdkDropList
+      #group2List="cdkDropList"
+      [cdkDropListData]="group2"
+      [cdkDropListConnectedTo]="[todoList,  group1List, group3List]"
+      (cdkDropListDropped)="drop($event)">
+        <p class="column-text">Group 2</p>
+        <div class="container-drop">
+        
+          <div class="each-drop" *ngFor="let item of group2" cdkDrag>
+            {{item}}
+          </div>
+
+        </div>
+      </ion-col>
+      <ion-col size="3" class="group3" 
+      cdkDropList
+      #group3List="cdkDropList"
+      [cdkDropListData]="group3"
+      [cdkDropListConnectedTo]="[todoList, group1List, group2List]"
+      (cdkDropListDropped)="drop($event)">
+        <p class="column-text">Group 3</p>
+        <div class="container-drop">
+        
+          <div class="each-drop" *ngFor="let item of group3" cdkDrag>
+            {{item}}
+          </div>
+
+        </div>
+      </ion-col> 
+    </ion-row>
+
+  </div>
+</div>
+<!-- <div class="drag-drop-container">
+  <div class="single-box">
+
+    <ion-row class="row">
+      <ion-col size="3" class="main">
+        <p class="column-text">Column Name</p>
+        <div class="container-drop">
+        <div class="each-drop">
+          lorem ipsum
+        </div>
+        <div class="each-drop">
+            lorem ipsum
+          </div>
+          <div class="each-drop">
+              lorem ipsum
+            </div> <div class="each-drop">
+                lorem ipsum
+              </div>
+            </div>
+      </ion-col>
+      <ion-col size="3" class="group1">
+          <p class="column-text">Group 1</p>
+          <div class="container-drop">
+              <div class="each-drop">
+                lorem ipsum
+              </div>
+              <div class="each-drop">
+                  lorem ipsum
+                </div>
+                <div class="each-drop">
+                    lorem ipsum
+                  </div> <div class="each-drop">
+                      lorem ipsum
+                    </div>
+                  </div>
+      </ion-col>
+      <ion-col size="3" class="group2">
+          <p class="column-text">Group 2</p>
+          <div class="container-drop">
+              <div class="each-drop">
+                lorem ipsum
+              </div>
+              <div class="each-drop">
+                  lorem ipsum
+                </div>
+                <div class="each-drop">
+                    lorem ipsum
+                  </div> <div class="each-drop">
+                      lorem ipsum
+                    </div>
+                  </div>
+      </ion-col>
+      <ion-col size="3" class="group3">
+          <p class="column-text">Group 3</p>
+          <div class="container-drop">
+              <div class="each-drop">
+                lorem ipsum
+              </div>
+              <div class="each-drop">
+                  lorem ipsum
+                </div>
+                <div class="each-drop">
+                    lorem ipsum
+                  </div> <div class="each-drop">
+                      lorem ipsum
+                    </div>
+                  </div>
+      </ion-col>
+    </ion-row>
+    <div class="box-footer">
+        <ion-row>
+          <ion-col size="6">
+            <ion-button color="secondary" expand="full">Reset</ion-button>
+          </ion-col>
+          <ion-col size="6">
+        
+            <ion-button color="primary" expand="full">Apply</ion-button>
+        
+          </ion-col>
+        </ion-row>
+        </div>
+  </div>
+</div> -->

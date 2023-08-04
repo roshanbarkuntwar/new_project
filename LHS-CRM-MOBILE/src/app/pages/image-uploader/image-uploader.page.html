@@ -1,0 +1,398 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <!-- <ion-buttons slot="start">
+            <ion-back-button></ion-back-button>
+          </ion-buttons> -->
+    <ion-button slot="start" (click)="closePage()" fill="clear" icon-only start>
+      <ion-icon name="arrow-back" color="light"></ion-icon>
+    </ion-button>
+    <ion-title class="title">Image Uploader</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content *ngIf="login">
+  <div>
+      <ion-toggle class="toggle-btn" slot="start" color="primary" [(ngModel)]="toggleView" (ionChange)="toggleStorage(toggleView)">
+        </ion-toggle>
+    <h6 class="head">{{connTitle}}</h6>
+  </div>
+  <div class="image-grid-container">
+    <ion-row>
+      <ion-col size="12">
+        <div class="text-right">
+          <ion-label *ngIf="downloadStatus" style="color: #30cf37">Downloading {{downloadItem}}...</ion-label>
+          <ion-button *ngIf="toggleView" [disabled]="downloadStatus" size="small" (click)="backupAllImages()">
+            <ion-icon slot="start" name="cloud-download"></ion-icon>
+            Backup All Images
+            <ion-spinner name="bubbles" *ngIf="downloadStatus"></ion-spinner>
+          </ion-button>
+          <span style="float: left; font-size: 20px;font-weight: 500;" *ngIf="loadingImages">Loading images...<ion-spinner name="bubbles" ></ion-spinner></span>
+          <ion-button size="small" (click)="toggleUpload()">
+            <ion-icon slot="start" name="add"></ion-icon>
+            Add Image
+          </ion-button>
+        </div>
+      </ion-col>
+    </ion-row>
+
+    <ng-container *ngIf="!hide">
+      <div class="single-image-box">
+        <img *ngIf="!displayBlue" src="../../../assets/imgs/default-thumbnail.jpg" alt="" srcset="">
+        <img *ngIf="displayBlue" [src]="displayBlue">
+        <div class="box-footer">
+          <ion-icon name="add" class="add-btn blue"></ion-icon>
+          <input type="file" #fileBlue accept="image/png,image/jpg,image/jpeg" (change)="selectFile('blue', $event.target.files[0])" />
+        </div>
+
+      </div>
+      <div class="single-image-box">
+        <img *ngIf="!displayGreen" src="../../../assets/imgs/default-thumbnail.jpg" alt="" srcset="">
+        <img *ngIf="displayGreen" [src]="displayGreen">
+        <div class="box-footer">
+          <ion-icon name="add" class="add-btn green"></ion-icon>
+          <input type="file" accept="image/png,image/jpg,image/jpeg" #fileGreen (change)="selectFile('green', $event.target.files[0])" />
+        </div>
+
+      </div>
+      <div class="single-image-box">
+        <img *ngIf="!displayDark" src="../../../assets/imgs/default-thumbnail.jpg" alt="" srcset="">
+        <img *ngIf="displayDark" [src]="displayDark">
+        <div class="box-footer">
+          <ion-icon name="add" class="add-btn dark"></ion-icon>
+
+          <input type="file" accept="image/png,image/jpg,image/jpeg" #fileDark (change)="selectFile('dark', $event.target.files[0])" />
+        </div>
+      </div>
+      <div class="single-image-box">
+        <img *ngIf="!displayMaroon" src="../../../assets/imgs/default-thumbnail.jpg" alt="" srcset="">
+        <img *ngIf="displayMaroon" [src]="displayMaroon">
+        <div class="box-footer">
+          <ion-icon name="add" class="add-btn maroon"></ion-icon>
+
+          <input type="file" accept="image/png,image/jpg,image/jpeg" #fileMaroon (change)="selectFile('maroon', $event.target.files[0])" />
+        </div>
+      </div>
+      <div class="single-image-box">
+        <img *ngIf="!displayGrey" src="../../../assets/imgs/default-thumbnail.jpg" alt="" srcset="">
+        <img *ngIf="displayGrey" [src]="displayGrey">
+        <div class="box-footer">
+          <ion-icon name="add" class="add-btn grey">
+          </ion-icon>
+
+          <input type="file" accept="image/png,image/jpg,image/jpeg" #fileGrey (change)="selectFile('grey', $event.target.files[0])" />
+        </div>
+      </div>
+      <div class="upload-btn">
+        <ion-button size="large" [disabled]="globlalobject.savingToOracle" *ngIf="!hide" (click)="uploadFiles()">
+          <ion-icon slot="start" name="cloud-upload"></ion-icon>
+          Click here to save all images
+          <ion-spinner name="bubbles" *ngIf="globlalobject.savingToCloud"></ion-spinner>
+        </ion-button>
+      </div>
+      <div class="upload-btn">
+        <ion-button size="large" [disabled]="globlalobject.savingToOracle" *ngIf="!hide && !toggleView" (click)="clearTableData()">
+          <ion-icon slot="start" name="close-circle"></ion-icon>
+          Clear data from lhswma_image_icon_mast
+        </ion-button>
+      </div>
+      <div class="upload-btn">
+          <ion-button size="large" [disabled]="globlalobject.savingToOracle" *ngIf="!hide && !toggleView" (click)="saveImagesToOracle()">
+            <ion-icon slot="start" name="save"></ion-icon>
+            Save all images from cloud to oracle
+            <ion-spinner name="bubbles" *ngIf="globlalobject.savingToOracle"></ion-spinner>
+          </ion-button>
+        </div>
+    </ng-container>
+  </div>
+  <div [style.display]="firebaseDisplay ? '' : 'none'">
+    <ion-row size="12">
+      <ion-input class="input-text" placeholder="Search Here..." [(ngModel)]="searchText" (ionChange)="filterTable()">
+      </ion-input>
+    </ion-row>
+    <div class="image-grid-container">
+      <!-- <ng-container *ngIf="images.length > 0"> -->
+      <!--<ion-row>
+        <ion-col size="12">
+          <div class="text-left">
+            <h6>Theme Blue</h6>
+          </div>
+        </ion-col>
+      </ion-row>-->
+      <div class="heading">
+        <h6>{{title[0]}}</h6>
+      </div>
+      <div class="heading">
+        <h6>{{title[1]}}</h6>
+      </div>
+      <div class="heading">
+        <h6>{{title[2]}}</h6>
+      </div>
+      <div class="heading">
+        <h6>{{title[3]}}</h6>
+      </div>
+      <div class="heading">
+        <h6>{{title[4]}}</h6>
+      </div>
+      
+      <ion-row *ngFor="let image of storedImages;">
+        <div class="single-image-box">
+          <img
+            src="https://firebasestorage.googleapis.com/v0/b/lhswma-image-icon-mast.appspot.com/o/theme-blue%2F{{image}}?alt=media"
+            onerror="this.onerror=null; this.src='../../../assets/imgs/default-thumbnail.jp';">
+          <div class="box-footer">
+            <ion-row>
+              <ion-col size="8">
+                <span>{{image}}</span>
+              </ion-col>
+              <ion-col size="4">
+                <div class="edit-div">
+                  <!-- <ion-icon name="add" color="primary"></ion-icon> -->
+                  <ion-icon name="trash" color="danger" (click)="deleteFile('theme-blue/'+image)"></ion-icon>
+                </div>
+              </ion-col>
+            </ion-row>
+          </div>
+        </div>
+
+        <div class="single-image-box">
+          <img
+            src="https://firebasestorage.googleapis.com/v0/b/lhswma-image-icon-mast.appspot.com/o/theme-green%2F{{image}}?alt=media"
+            onerror="this.onerror=null; this.src='../../../assets/imgs/default-thumbnail.jp';" alt="" srcset="">
+          <div class="box-footer">
+            <ion-row>
+              <ion-col size="8">
+                <span>{{image}}</span>
+              </ion-col>
+              <ion-col size="4">
+                <div class="edit-div">
+                  <!-- <ion-icon name="add" color="primary"></ion-icon> -->
+                  <ion-icon name="trash" color="danger" (click)="deleteFile('theme-green/'+image)"></ion-icon>
+                </div>
+              </ion-col>
+            </ion-row>
+          </div>
+        </div>
+        <div class="single-image-box">
+          <img
+            src="https://firebasestorage.googleapis.com/v0/b/lhswma-image-icon-mast.appspot.com/o/theme-dark%2F{{image}}?alt=media"
+            onerror="this.onerror=null; this.src='../../../assets/imgs/default-thumbnail.jp';" alt="" srcset="">
+          <div class="box-footer">
+            <ion-row>
+              <ion-col size="8">
+                <span>{{image}}</span>
+              </ion-col>
+              <ion-col size="4">
+                <div class="edit-div">
+                  <!-- <ion-icon name="add" color="primary"></ion-icon> -->
+                  <ion-icon name="trash" color="danger" (click)="deleteFile('theme-dark/'+image)"></ion-icon>
+                </div>
+              </ion-col>
+            </ion-row>
+          </div>
+        </div>
+        <div class="single-image-box">
+          <img
+            src="https://firebasestorage.googleapis.com/v0/b/lhswma-image-icon-mast.appspot.com/o/theme-maroon%2F{{image}}?alt=media"
+            onerror="this.onerror=null; this.src='../../../assets/imgs/default-thumbnail.jp';" alt="" srcset="">
+          <div class="box-footer">
+            <ion-row>
+              <ion-col size="8">
+                <span>{{image}}</span>
+              </ion-col>
+              <ion-col size="4">
+                <div class="edit-div">
+                  <!-- <ion-icon name="add" color="primary"></ion-icon> -->
+                  <ion-icon name="trash" color="danger" (click)="deleteFile('theme-maroon/'+image)"></ion-icon>
+                </div>
+              </ion-col>
+            </ion-row>
+          </div>
+        </div>
+        <div class="single-image-box">
+          <img
+            src="https://firebasestorage.googleapis.com/v0/b/lhswma-image-icon-mast.appspot.com/o/theme-grey%2F{{image}}?alt=media"
+            onerror="this.onerror=null; this.src='../../../assets/imgs/default-thumbnail.jp';" alt="" srcset="">
+          <div class="box-footer">
+            <ion-row>
+              <ion-col size="8">
+                <span>{{image}}</span>
+              </ion-col>
+              <ion-col size="4">
+                <div class="edit-div">
+                  <!-- <ion-icon name="add" color="primary"></ion-icon> -->
+                  <ion-icon name="trash" color="danger" (click)="deleteFile('theme-grey/'+image)"></ion-icon>
+                </div>
+              </ion-col>
+            </ion-row>
+          </div>
+        </div>
+      </ion-row>
+      <!-- </ng-container> -->
+    </div>
+  </div>
+
+<!-- Oracle Image Display List-->
+
+  <div [style.display]="oracleDisplay ? '' : 'none'">
+    <ion-row size="12">
+      <ion-input class="input-text" placeholder="Search Here..." [(ngModel)]="searchText" (ionChange)="filterOracleTable()">
+      </ion-input>
+    </ion-row>
+    <div class="image-grid-container">
+      <!-- <ng-container *ngIf="images.length > 0"> -->
+      <!--<ion-row>
+          <ion-col size="12">
+            <div class="text-left">
+              <h6>Theme Blue</h6>
+            </div>
+          </ion-col>
+        </ion-row>-->
+      <div class="heading">
+        <h6>{{title[0]}}</h6>
+      </div>
+      <div class="heading">
+        <h6>{{title[1]}}</h6>
+      </div>
+      <div class="heading">
+        <h6>{{title[2]}}</h6>
+      </div>
+      <div class="heading">
+        <h6>{{title[3]}}</h6>
+      </div>
+      <div class="heading">
+        <h6>{{title[4]}}</h6>
+      </div>
+      
+      <ion-row *ngFor="let images of oracleImages; let i=index">
+        <div class="single-image-box" *ngFor="let image of images">
+          <img
+            [src]="'data:image/jpeg;base64,'+image">
+          <div class="box-footer">
+            <ion-row>
+              <ion-col size="8">
+                <span>{{oracleImgName[i]}}</span>
+              </ion-col>
+              <ion-col size="4">
+                <div class="edit-div">
+                  <!-- <ion-icon name="add" color="primary"></ion-icon> -->
+                  <!-- <ion-icon name="trash" color="danger" (click)="deleteFile('theme-blue/'+image)"></ion-icon> -->
+                </div>
+              </ion-col>
+            </ion-row>
+          </div>
+        </div>
+      </ion-row>
+      <!-- </ng-container> -->
+    </div>
+  </div>
+  <!-- <div class="image-uploader-container">
+
+  <ion-row>
+    <ion-col size="4">
+      <div class="text-right" style="padding:60px 0;">
+      <ion-button size="small">
+        <ion-icon slot="start" name="add"></ion-icon>
+        Upload Image
+      </ion-button>
+      <div class="or">
+      <span stele="font-size: 15px;font-weight: 600;">OR</span>
+    </div>
+    </div>
+    </ion-col>
+    <ion-col size="4">
+        <div class="drag-drop-container">
+          <span>
+            Drag and Drop Image Here
+          </span>
+        </div>
+      </ion-col>
+      <ion-col size="4">
+          <div class="image-preview-div">
+          <img src="../../../assets/imgs/default-thumbnail.jpg" alt="" srcset="">
+        </div>
+        </ion-col>
+  </ion-row>
+</div> -->
+</ion-content>
+
+<!------------------------------------------ Login page  --------------------------------------------->
+<ion-content class="theme-blue" *ngIf="!login">
+  <ion-content class="login-ion-content page-login">
+    <ion-grid class="login-outer-padding">
+      <ion-row class="login-outer-padding">
+        <ion-col col-12 class="login-outer-padding">
+
+          <div  [style.height]="shouldHeight">
+            <!-- <ion-grid>
+              <ion-row>
+                <ion-col size="6" padding class="primaryTextColor cfl-logo" *ngIf="lhslogo">
+                  <img class="lhs-logo" src="assets/imgs/cfl-logo.png">
+                </ion-col>
+                <ion-col size="6" padding class="text-center">
+                  <h4 class="d-inline-block login">Login</h4>
+                </ion-col>
+                <ng-template #lhslogo>
+                  <ion-col size="6" padding class="primaryTextColor">
+                    <img class="lhs-logo" src="assets/imgs/lhs-logo.png">
+                  </ion-col>
+                  <ion-col size="6" padding style="display:none;">
+                    <h4 class="login">Login</h4>
+                  </ion-col>
+                </ng-template>
+
+              </ion-row>
+            </ion-grid> -->
+
+            <form class="loginForm" #form="ngForm">
+
+              <ion-list style="background: transparent;">
+
+                <ion-item>
+                  <ion-icon name="ios-person" item-start></ion-icon>
+                  <ion-input type="text" autocomplete='on' placeholder="Username"
+                    [(ngModel)]="loginCredentials.user_code" name="userCode" required></ion-input>
+                </ion-item>
+                <ion-item>
+                  <ion-icon name="ios-lock" item-start></ion-icon>
+                  <ion-input type="{{inputType}}" autocomplete="on" placeholder="Password"
+                    [(ngModel)]="loginCredentials.password" name="username" required></ion-input>
+                  <ion-icon name="{{iconName}}" item-end (click)="hideShowPassword()"></ion-icon>
+                </ion-item>
+              </ion-list>
+
+
+
+              <div class="login-btn-wrap text-center">
+                <ion-button icon-only round color="primary" expand="block" class="button-round button-round-md"
+                  slot="center" (click)="doLogin()">
+                  Login Now
+                </ion-button>
+              </div>
+             
+              <!-- <div class="social-media-login text-center mt-3">
+                 <p>Or Login With </p>
+                 <img  (click)="googleLogin();"  class="mr-3" src="./assets/imgs/search.png">
+                 <img src="./assets/imgs/facebook.png">
+              </div> -->
+              <!-- <div *ngIf="upd_flag == 'NOT_UPDATED'" class="login-btn-wrap"> -->
+                <!-- <ion-buttons>
+                  <button ion-button icon-only round class="login-btn"  routerLink="/update-app" routerDirection="root">
+                    Update App
+                  </button>
+                </ion-buttons> -->
+              <!-- </div> -->
+             
+              <hr />
+              <div>
+         
+              </div>
+
+            </form>
+
+          </div>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </ion-content>
+
+ </ion-content>

@@ -1,0 +1,64 @@
+<ion-header>
+    <ion-toolbar color="primary">
+        <ion-button slot="start"  fill="clear" icon-only>
+            <ion-icon name="arrow-back" color="light"></ion-icon>
+          </ion-button>
+        
+          <ion-title class="chat-dashboard-title text-left">
+            <img class="mr-1 rounded-circle align-text-bottom" src="/assets/imgs/defaultUser.png">John Due
+          </ion-title>
+          <ion-buttons slot="end" fill="clear" icon-only>
+              <ion-icon name="call"></ion-icon>
+        
+          </ion-buttons>
+        </ion-toolbar>
+      
+      </ion-header>
+
+      <div>
+        <app-chat-left></app-chat-left>
+      </div>
+       <div>
+        <app-chat-right></app-chat-right>
+       </div>
+
+       <div>
+        <app-chat-left></app-chat-left>
+       </div>
+       <div>
+        <app-chat-right></app-chat-right>
+       </div>
+
+       <div>
+        <app-chat-left></app-chat-left>
+       </div>
+       <div>
+        <app-chat-right></app-chat-right>
+       </div>
+      <ion-content>
+  
+
+      </ion-content>
+      <ion-footer class="chat-dashboard-footer position-fixed">
+          <ion-toolbar>
+              <div class="table-input-container chat-input-container">
+              <div class="input-group table-lov-input">
+                  <ion-textarea class="table-input chat-input" placeholder="Type a Message" required type="text" autofocus></ion-textarea>
+                  <div class="input-group-append">
+                    <button class="lov-btn" ion-button icon-only small>
+                        <ion-icon name="send"></ion-icon>
+                    </button>
+                  </div>
+                  <div class="input-group-append">
+                      <button class="lov-btn speaker-btn" ion-button icon-only small>
+                          <ion-icon name="mic"></ion-icon>
+                      </button>
+                    </div>
+                </div>
+                </div>
+          </ion-toolbar>
+
+
+         
+          
+        </ion-footer>

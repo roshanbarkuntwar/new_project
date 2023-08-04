@@ -1,0 +1,8 @@
+<div>
+<div id="chartContainer" width="100%" heigh="900px" *ngIf="funnelGraphFlag"></div>
+<div *ngIf="!funnelGraphFlag">
+    <div id="chartContainer" class="funnelGraph-4" *ngIf="funnelGraphValue==4"></div>
+    <div id="chartContainer" class="funnelGraph-6" *ngIf="funnelGraphValue==6"></div>
+    <div id="chartContainer" class="funnelGraph-12" *ngIf="funnelGraphValue==12"></div>
+</div>
+</div>

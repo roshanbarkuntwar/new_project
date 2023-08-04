@@ -1,0 +1,39 @@
+<div class="filters">
+    <div class="filter-icon-container position-relative">
+        <ion-icon class="position-relative" name="ios-funnel"></ion-icon>
+        <h6 class="d-inline-block mt-0">Filters</h6>
+    </div>
+    <!-- <app-frame-smart-filter-container></app-frame-smart-filter-container>
+    <app-frame-smart-filter-sliding-buttons></app-frame-smart-filter-sliding-buttons>
+    <app-frame-smart-filter-range></app-frame-smart-filter-range>
+    <app-frame-smart-filter-column></app-frame-smart-filter-column>
+    <app-frame-smart-filter-checklist></app-frame-smart-filter-checklist>  -->
+    <div class="filter-body p-1">
+        <ion-grid>
+            <!-- ---------------------------------------------------- -->
+            <ion-row *ngFor="let itemGroup of frame.Level4">
+                <ng-container *ngFor="let item of itemGroup.Level5;let i=index">
+                    <ng-container *ngIf="item.item_filter_flag">
+                        <ion-col class="p-0" [hidden]="item.item_filter_flag=='BT'">
+                            <app-items [item]="item" [wscp]="wscp" (emitPass)="itemClicked($event)"></app-items>
+                            <!-- [size]="itemGroup.groupCol[i]" -->
+                        </ion-col>
+                    </ng-container>
+                </ng-container>
+            </ion-row>
+            <!-- ---------------------------------------------------- -->
+        </ion-grid>
+
+        <!-- <ion-button expand="block" (click)="filerData()" >Show Filtered Data</ion-button> -->
+        <ion-row>
+            <ion-col col-12 text-center class="p-0" style="padding: 0;">
+                <ion-button  size="small" shape="round" class="mr-1 globe-btn" color="primary"
+                    (click)="filerDataWithoutAliases('closefilter')">Show
+                </ion-button>
+                <ion-button  size="small"  shape="round"  color="secondary" fill="outline" (click)="clearFilter('closefilter')">Clear
+                </ion-button>
+            </ion-col>
+        </ion-row>
+
+    </div>
+</div>

@@ -1,0 +1,20 @@
+
+.popover-page
+{
+    ion-toolbar {
+       
+        --min-height: 40px;
+    }
+    .popover-textarea
+    {
+        border: 1px solid #ccc;
+        width: 90%;
+        margin: 5px 10px;
+        height: 130px;
+       
+    }
+    textarea {
+            
+        height: 100%;
+    }
+}

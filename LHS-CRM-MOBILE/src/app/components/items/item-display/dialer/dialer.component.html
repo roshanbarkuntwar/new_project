@@ -1,0 +1,19 @@
+
+
+<ng-container  *ngIf="(frame_type !='TABLE' && frame_type != 'ENTRY_TABLE' && frame_type != 'FRAME_COLLAPSE' && frame_type != 'PLASTO_SUMMARY' && frame_type != 'APPROVAL-TAB' && frame_type != 'STRING' && dialer.item_sub_type != 'ALIGN-TEXT' ) ">
+  <ion-label  class="input-label">{{dialer.prompt_name}}:<a class="communication phone-communication" href="tel:{{dialer.value}}" (click)="itemClick($event)"><span class="communication-value">{{dialer.value}}</span></a>
+  
+  </ion-label>
+</ng-container>
+
+
+
+<ng-container  *ngIf="(frame_type =='TABLE' || frame_type == 'ENTRY_TABLE' || frame_type == 'FRAME_COLLAPSE' || frame_type == 'PLASTO_SUMMARY' || frame_type == 'APPROVAL-TAB' || frame_type == 'STRING' || dialer.item_sub_type == 'ALIGN-TEXT' ) ">
+  <ion-label  class="input-label"><a class="communication phone-communication" href="tel:{{dialer.value}}" (click)="itemClick($event)"><span class="communication-value">{{dialer.value}}</span></a>
+  
+  </ion-label>
+</ng-container>
+
+
+
+  <!-- <a class="communication phone-communication" href="tel:{{dialer.value}}" (click)="itemClick($event)"><ion-icon name="call" ></ion-icon><span class="communication-value">{{dialer.value}}</span></a> -->

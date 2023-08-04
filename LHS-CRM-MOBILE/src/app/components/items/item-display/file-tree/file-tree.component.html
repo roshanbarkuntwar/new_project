@@ -1,0 +1,45 @@
+<div class="tree">
+  <ul class="file-ul">
+    <li *ngFor="let item of model" [ngClass]="{'children-list':isChild}">
+      <div class="trees-items" (click)="toggleItem(item)">
+        <div class="file-ico">
+          <ion-icon name="document"   color="secondary" *ngIf="isFile"></ion-icon>
+          <ion-icon name="arrow-dropright" *ngIf="item.folders&&(item.toggle === 'off'||item.toggle === 'init')">
+          </ion-icon>
+          <ion-icon name="folder" *ngIf="!isFile&&item.folders&&(item.toggle === 'off'||item.toggle === 'init')">
+          </ion-icon>
+          <ion-icon name="arrow-dropdown" *ngIf="item.folders&&item.toggle === 'on'"></ion-icon>
+          <ion-icon name="folder-open" *ngIf="item.folders&&item.toggle === 'on'"></ion-icon>
+        </div>
+        <span *ngIf="!isFile">{{item.folderName}}</span>
+        <span *ngIf="isFile"  (click)="DownloadandOpenPdf(item.filePath,item.fileName)">{{item.fileName}}</span>
+      </div>
+      <div class="item-children" [@collapse]="item.toggle">
+        <app-file-tree *ngIf="!isFile && item.folders" [model]="item.folders" isChild="true"></app-file-tree>
+        <app-file-tree *ngIf="!isFile && item.files" [model]="item.files" [isFile]="true" isChild="true">
+        </app-file-tree>
+      </div>
+    </li>
+  </ul>
+</div>
+<!-- <ion-button expand="full" (click)="OpenPdf()">open PDF</ion-button> -->
+<!-- <div class="tree">
+  <ul>
+    <li *ngFor="let item of model" [ngClass]="{'children-list':isChild}">
+      <div class="trees-items" (click)="toggleItem(item)">
+        <div class="file-ico">
+          <ion-icon name="document" *ngIf="!item.children"></ion-icon>
+          <ion-icon name="arrow-dropright" *ngIf="item.children&&(item.toggle === 'off'||item.toggle === 'init')"></ion-icon>
+          <ion-icon name="folder" *ngIf="item.children&&(item.toggle === 'off'||item.toggle === 'init')"></ion-icon>
+          <ion-icon name="arrow-dropdown" *ngIf="item.children&&item.toggle === 'on'"></ion-icon>
+        
+          <ion-icon name="folder-open" *ngIf="item.children&&item.toggle === 'on'"></ion-icon>
+        </div>
+        <span>{{item.name}}</span>
+      </div>
+      <div class="item-children" [@collapse]="item.toggle">
+        <app-file-tree *ngIf="item.children" [model]="item.children" isChild="true"></app-file-tree>
+      </div>
+    </li>
+  </ul>
+</div> -->

@@ -1,0 +1,27 @@
+.text-band2
+{
+    border-radius: 5px;
+    .text-band2-text
+    {
+        width: calc(100% - 85px);
+    }
+    .text-band2-image
+    {
+        background-size: 100% 100%;
+        height: 50px;
+        border-radius: 0px 0px 7px 5px;
+        width: 83px;
+    }
+
+    h2
+    {
+     
+        font-size:19px;
+    }
+    h5
+    {
+       
+        font-size:16px;
+    }
+   
+}

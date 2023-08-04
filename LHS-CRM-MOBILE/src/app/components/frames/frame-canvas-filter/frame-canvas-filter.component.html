@@ -1,0 +1,84 @@
+ <!-- <ion-button  size="small" color="medium" slot="end" (click)="SkipFilter()">Skip Filter</ion-button>
+  
+
+ <app-frame-filter [frame]="filterFormData" ></app-frame-filter> -->
+<!-- 
+ <app-sliding-filter [framedata]="framedata"></app-sliding-filter>
+ <app-range-filter [framedata]="framedata"></app-range-filter>
+<app-ionchip-filter [framedata]="framedata"></app-ionchip-filter>
+<app-column-filter [framedata]="framedata"></app-column-filter>
+<app-checklist-filter [framedata]="framedata"></app-checklist-filter> -->
+
+
+
+<ng-container *ngIf="!apexFilter">
+<ion-button  size="small" color="medium" slot="end" (click)="clearAll()">Clear All</ion-button>
+
+
+ <ion-button  size="small" color="medium" slot="end" (click)="SkipFilter()">Skip Filter</ion-button>
+</ng-container>
+  
+ <div *ngIf="cFilter">
+ <app-frame-filter [frame]="frame" [wscp]="wscp_send_input" (emittoframeCanvasFilter)="datafromframeFilter($event)"></app-frame-filter>
+ </div>
+
+ <div *ngIf="jFilter">
+  <app-frame-dependent-filter [frame]='frame' (passdataToframeDepen)="datafromframeFilter($event)">
+  </app-frame-dependent-filter>
+</div>
+<div *ngIf="aFilter">
+  <app-frame-advance-filter [frame]='frame' (passdataToframeDepen)="datafromframeFilter($event)">
+  </app-frame-advance-filter>
+</div>
+<div *ngIf="dnDFilter">
+  <app-frame-drag-drop [frame]='frame'></app-frame-drag-drop>
+</div>
+<div *ngIf="apexFilter">
+  <app-frame-apexfilter  [theadData]="frame.apextheads" (fromapexFilter)="getdataFromcanvasApex($event)"
+  [frame]='frame'></app-frame-apexfilter>
+</div>
+
+
+
+
+
+
+
+
+
+<!-- <ion-row *ngIf="frame.apps_page_frame_name">
+  <ion-col col-12>
+    <h1 class="frame-name position-relative">{{frame.apps_page_frame_name}}</h1>
+  </ion-col>
+</ion-row>
+<div *ngIf="showFrame">
+ 
+
+    <div *ngFor="let framedata of frame.tableRows;let rowindex =index">
+      <ion-row *ngFor="let itemGroup of framedata">
+        
+        <ion-col *ngFor="let item of itemGroup.Level5;let i=index"
+          [hidden]="(current_page_parameter.MODE && !(item.item_visible_flag && (item.item_visible_flag.indexOf(current_page_parameter.MODE)>-1)) )||item.item_visible_flag=='F'"
+          [size]="itemGroup.groupCol[i]">
+          <app-items [item]="item" (emitPass)="itemClicked($event,rowindex)"
+            (LHSOnChange)="itemValueChange($event,rowindex)"></app-items>
+        </ion-col>
+      </ion-row>
+    </div>
+
+
+   
+</div>
+
+
+  <ion-col col-12 text-center>
+    <ion-button shape="round" class="mr-1 globe-btn" color="primary" (click)="filerDataWithoutAliases('closefilter')">Show
+    </ion-button>
+    <ion-button shape="round" color="medium globe-btn"  (click)="clearFilter('closefilter')">Clear</ion-button>
+  </ion-col> -->
+
+
+ 
+
+
+  

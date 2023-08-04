@@ -1,0 +1,7 @@
+{
+  "name": "LHS_ERP",
+  "integrations": {
+    "cordova": {}
+  },
+  "type": "angular"
+}

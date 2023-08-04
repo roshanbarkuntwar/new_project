@@ -1,0 +1,266 @@
+<div class="add-to-cart">
+  <ion-button slot="start" (click)="closePage()" fill="clear" icon-only start >
+    <ion-icon name="arrow-back" color="blue"></ion-icon>
+  </ion-button>
+<ion-card class="position-relative cart-summary pt-2 mb-3">
+  <div class="cart-summary-icon position-absolute">
+     <ion-icon name="paper"></ion-icon>
+  </div>
+  <ion-grid>
+      <ion-row>
+         <ion-col size="7">
+            <ion-label>Total Amout</ion-label>
+            <h1>Rs.{{totalAmount}} /-</h1>
+          </ion-col>
+          <ion-col size="5">
+             <label class="total-label d-inline-block">Total Qty </label> : <span class="min-qty-count">{{totalQty}}</span>
+              <div class="clearfix"></div>
+             <label class="total-label d-inline-block">Total Item </label> : <span class="min-qty-count">{{totalItems}}</span>
+          
+           </ion-col>
+       </ion-row>
+   </ion-grid>
+
+   <div  *ngFor="let parentGroup of summaryCard;let h = index">
+    <!-- <div *ngFor="let tablerows of parentGroup.items; let h = index"> -->
+      <div class="order-entry position-relative">
+      
+        <div class="order-entry-header">
+          <h4 class="card-header text-primary">{{parentGroup.parentName}}</h4>
+        </div>
+        <div class="card-body">
+          <ion-row justify-content-start align-items-center>
+            <ion-col size="3" class="p-0" className="ion-align-items-center">
+              <div class="order-image">
+                <!-- <app-item-image [displayPhoto]="parentGroup.image"
+                ></app-item-image> -->
+                 <app-items [item]="parentGroup.imageData"> </app-items> 
+                 <!-- <img class="rounded" src="../../../../assets/imgs/amul-taaza-milk-250x250.jpg"> -->
+
+
+              </div>
+            </ion-col>
+            <ion-col size="9" class="p-0">
+              <div class="table-responsive right-table">
+                <table class="entry-table">
+                  <thead>
+                    <tr>
+                      <ng-container *ngFor="let th of headings; let i = index">
+                        <th [ngStyle]="th.column_width">{{th.prompt_name}}</th>
+                        <!-- <th  [ngStyle]='{"width":"250px","min-width": "250px","max-width": "250px"}'>head 1</th>
+                    <th  [ngStyle]='{"width":"100px","min-width": "100px","max-width": "100px"}'>head 2</th>
+                    <th  [ngStyle]='{"width":"100px","min-width": "100px","max-width": "100px"}'>head 3</th> -->
+                      </ng-container>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr *ngFor="let tableData of parentGroup.items  ;let rowindex=index">
+                      <ng-container *ngFor="let itemGroup of tableData;">
+                        
+                        <td *ngFor="let input_item of itemGroup.Level5; let i = index"
+                          [hidden]="(current_page_parameter.MODE && !(input_item.item_visible_flag && (input_item.item_visible_flag.indexOf(current_page_parameter.MODE)>-1)) )||input_item.item_visible_flag=='F'">
+                          <!-- <app-items *ngIf="input_item.item_type !='DISPLAY_PHOTO'" [item]="input_item"
+                          [frame_type]="frame.apps_frame_type"   (emitPass)="itemClicked($event,rowindex)" (LHSOnChange)="itemValueChange($event,rowindex)">
+                        </app-items> -->
+                          <ng-container [ngSwitch]="input_item.item_type">
+
+                            <!-- <div *ngSwitchCase="'LBL'">
+                              <app-label [labelInput]="input_item" (emitPass)="itemValueChange($event,rowindex,h)">
+                              </app-label>
+                            </div>
+                            <div *ngSwitchCase="'N'">
+                              <app-number-input [frame_type]="cartdata.apps_frame_type" [numberinput]="input_item"
+                                (emitOnChange)="itemValueChange($event,rowindex,h)"></app-number-input>
+                            </div>
+
+                            <div *ngSwitchCase="'T'">
+                              <app-text-input [textinput]="input_item" [frame_type]="cartdata.apps_frame_type"
+                                (emitOnChange)="itemValueChange($event,rowindex,h)">
+                              </app-text-input>
+                              </div> -->
+
+                              <div *ngSwitchCase="'LBL'">
+                                <!--  <app-label [labelInput]="input_item"  (emitPass)="itemValueChange($event,rowindex,h)" ></app-label> -->
+                                <ion-label [ngStyle]="input_item.displysettingstr" class="input-label">
+                                  {{input_item.value}}</ion-label>
+                               
+                              </div>
+                              <div *ngSwitchCase="'N'">
+                                <!-- <app-number-input [frame_type]="frame.apps_frame_type" [numberinput]="input_item"
+                              (emitOnChange)="itemValueChange($event,rowindex,h)"></app-number-input> -->
+
+                                <ion-input type="number" [(ngModel)]="input_item.value"
+                                  [ngStyle]="input_item.displysettingstr"
+                                  (ionChange)="itemValueChange(input_item,rowindex,h)" ></ion-input>
+                              </div>
+
+                              <div *ngSwitchCase="'T'">
+                                <!-- <app-text-input [textinput]="input_item" [frame_type]="frame.apps_frame_type"
+                              (emitOnChange)="itemValueChange($event,rowindex,h)">
+                            </app-text-input> -->
+                                <input type="text" [(ngModel)]="input_item.value"
+                                  [ngStyle]="input_item.displysettingstr"
+                                  (change)="itemValueChange(input_item,rowindex,h)" />
+                              </div>
+                          </ng-container>
+                        </td>
+                      
+                      </ng-container>
+
+                    </tr>
+                  </tbody>
+
+                </table>
+              </div>
+
+            </ion-col>
+          </ion-row>
+
+        </div>
+      </div>
+    <!-- </div> -->
+
+   </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- </ion-card>
+<ng-container  >
+<ion-card class="position-relative">
+<ion-list lines="none" *ngFor="let item of parentGroup.items">
+  <ng-container *ngFor="let input_item of item">
+<ion-item  [hidden]="input_item.Level5[0].item_visible_flag=='F'">
+ 
+
+ <ion-thumbnail>
+   <img class="rounded" src="../../../../assets/imgs/amul-taaza-milk-250x250.jpg">
+ </ion-thumbnail>
+ <div class="ml-2 w-100">
+   <ion-label>
+     <div *ngIf="input_item.Level5[0].item_name == 'ITEM_NAME'">
+     <h2>{{input_item.Level5[0].value}}</h2>
+    </div>
+   </ion-label>
+   <div class="input-group">
+     <div *ngIf="input_item.Level5[0].item_name == 'QUANTITY'  &&  input_item.Level5[0].value">
+        {{input_item.Level5[0].item_name}}
+     <ion-input type="number" class="border-bottom-input" placeholder="Quantity" readonly> {{input_item.Level5[0].value}} </ion-input>
+    </div>
+     <div class="input-group-append" *ngIf="input_item.Level5[0].item_name == 'UM'">
+       <button class="border-bottom-lov-btn" ion-button icon-only small>
+         {{input_item.Level5[0].value}}
+       </button>
+     </div>
+
+   </div>
+ </div>
+</ion-item>
+</ng-container>
+
+<ion-item class="qty-description">
+   <ion-label>
+       <label>Min Order Qty : </label> <span class="min-qty-count">8</span>
+       <h5>Rate :  <span>{{10}}</span></h5>
+     </ion-label>
+</ion-item>
+
+</ion-list>
+<div class="total-qty position-absolute">
+1234
+</div>
+<div class="add-to-cart-btn position-absolute">
+ <ion-icon name="trash"></ion-icon>
+</div>
+
+</ion-card>
+</ng-container>
+</div> -->
+
+<!-- 
+<ion-item>
+  <ion-thumbnail>
+    <img class="rounded" src="../../../../assets/imgs/amul-taaza-milk-250x250.jpg">
+  </ion-thumbnail>
+  <div class="ml-2 w-100">
+    <ion-label>
+      <h2>Amul Taza Milk</h2>
+ 
+    </ion-label>
+    <div class="input-group">
+      <ion-input type="number" class="border-bottom-input" placeholder="Quantity" readonly> </ion-input>
+ 
+      <div class="input-group-append">
+        <button class="border-bottom-lov-btn" ion-button icon-only small>
+          Kg
+        </button>
+      </div>
+ 
+    </div>
+  </div>
+  -->

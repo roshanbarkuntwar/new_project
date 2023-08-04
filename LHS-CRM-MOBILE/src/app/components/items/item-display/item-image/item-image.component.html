@@ -1,0 +1,17 @@
+    <!-- <ion-icon class="edit-photo" name="camera"></ion-icon> -->
+  <ion-avatar class="zoom" slot="start" class="rounded-0" *ngIf="displayPhoto.item_sub_type!='ROUND' && frame_type != 'FRAME_COLLAPSE'"  (click)="photoview()" [ngStyle]="getParsedJson(displayPhoto.display_setting_str)">
+    <!-- <img src="/assets/imgs/no_image.png" *ngIf="!imgData"> -->
+    <img [src]="imgData"   *ngIf="imgData">
+  </ion-avatar>
+
+  <ion-avatar class="zoom " style="max-width:250px;width:fit-content;height:auto;" slot="start" class="rounded-0" *ngIf="displayPhoto.item_sub_type!='ROUND' && frame_type == 'FRAME_COLLAPSE'"  (click)="photoview()" [ngStyle]="getParsedJson(displayPhoto.display_setting_str)">
+    <!-- <img src="/assets/imgs/no_image.png" *ngIf="!imgData"> -->
+    <img [src]="imgData"   *ngIf="imgData">
+  </ion-avatar>
+
+  <ion-avatar class="zoom" slot="start" *ngIf="displayPhoto.item_sub_type=='ROUND' && frame_type != 'FRAME_COLLAPSE'" class="rounded-circle"  (click)="photoview()" [ngStyle]="getParsedJson(displayPhoto.display_setting_str)">
+    <!-- <img src="/assets/imgs/no_image.png" *ngIf="!imgData"> -->
+    <img [src]="imgData"  *ngIf="imgData">
+  </ion-avatar>
+
+   

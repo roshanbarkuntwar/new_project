@@ -1,0 +1,15 @@
+<ion-row>
+  <ion-col col-12>
+    <h1 class="frame-name position-relative">{{frame.apps_page_frame_name}}<span style="margin-left: 10px;" *ngIf="globalObjects.toggleDevloperMode">[{{frame.apps_page_frame_seqid}}]<ion-icon class="code-btn"  color="primary" name="information-circle-outline" *ngIf="developerModeData" (click)="showDeveloperData()"></ion-icon></span></h1>
+  </ion-col>
+</ion-row>
+
+<div *ngIf="showFrame">
+  <div *ngFor="let framedata of frame.tableRows;let rowindex =index">
+    <ion-row *ngFor="let itemGroup of framedata">
+      <ion-col *ngFor="let item of itemGroup.Level5;let i=index" [hidden]="item.item_visible_flag=='F'" size="12">
+        <app-items [item]="item" (emitPass)="itemClicked($event,rowindex)"></app-items>
+      </ion-col>
+    </ion-row>
+  </div>
+</div>

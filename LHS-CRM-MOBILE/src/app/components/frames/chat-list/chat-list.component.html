@@ -1,0 +1,86 @@
+<div class="input-group primary-search-section">
+
+    <ion-input class="input-text" placeholder="Search Here..." [(ngModel)]="tablerowsfilter"></ion-input>
+    <div class="input-group-append">
+      <button class="lov-btn" ion-button icon-only small (click)="openMike()">
+        <img src="/assets/imgs/google-speaker.png">
+      </button>
+    </div>
+    <div class="input-group-append">
+      <button class="lov-btn" ion-button icon-only small>
+        <ion-icon name="qr-scanner" (click)="openbarcodescanner()"></ion-icon>
+      </button>
+    </div>
+
+    <div class="input-group-append">
+      <button class="lov-btn" ion-button icon-only small (click)="filterToggle()">
+        <ion-icon name="ios-funnel"></ion-icon>
+      </button>
+    </div>
+  </div>
+
+<ng-container *ngFor="let rows of frame.tableRows |tableSearch :tablerowsfilter;let j=index;">
+
+  <ion-item class="chat-list" lines="none">
+
+    <ng-container *ngFor="let itemGroup of rows; let i=index">
+      <ng-container *ngFor="let input_item of itemGroup.Level5;let i=index">
+        <ion-avatar slot="start" *ngIf="input_item.item_type =='DISPLAY_PHOTO'">
+          <app-items [item]="input_item" (emitPass)="itemClicked($event,j)" (LHSOnChange)="itemValueChange($event,j)">
+          </app-items>
+        </ion-avatar>
+      </ng-container>
+    </ng-container>
+    <ion-label>
+      <ng-container *ngFor="let itemGroup of rows; let i=index">
+        <ng-container *ngFor="let input_item of itemGroup.Level5;let i=index">
+          <h2 class="user-name" *ngIf="input_item.item_type =='DISPLAY_NAME'">{{input_item.value}}</h2>
+          <span class="text-preview" *ngIf="input_item.item_type =='LAST_MESSAGE'">{{input_item.value}}</span>
+        </ng-container>
+      </ng-container>
+
+    </ion-label>
+
+    <ng-container *ngFor="let itemGroup of rows; let i=index">
+      <ng-container *ngFor="let input_item of itemGroup.Level5;let i=index">
+        <a href="tel:{{input_item.value}}" *ngIf="input_item.item_name =='MOBILE_NO'">
+          <ion-icon name="call" class="call" color="secondary"></ion-icon>
+        </a>
+      </ng-container>
+    </ng-container>
+    <ng-container *ngFor="let itemGroup of rows; let i=index">
+      <ng-container *ngFor="let input_item of itemGroup.Level5;let i=index">
+        
+        <span class="time" *ngIf="input_item.item_name =='LAST_MESSAGE_DT'">{{input_item.value}}</span>
+        <ion-badge color="success" *ngIf="input_item.item_name =='UNREAD_MSG_COUNT'">{{input_item.value}}</ion-badge>
+      </ng-container>
+    </ng-container>
+  </ion-item>
+
+</ng-container>
+<!-- <ion-fab vertical="end" horizontal="center" edge slot="fixed">
+    <ion-fab-button  size="small"><ion-icon name="add"></ion-icon></ion-fab-button>
+    <ion-fab-list side="top">
+      <ion-fab-button>
+        <ion-icon name="logo-facebook"></ion-icon>
+      </ion-fab-button>
+      <ion-fab-button>
+        <ion-icon name="logo-twitter"></ion-icon>
+      </ion-fab-button>
+      <ion-fab-button>
+        <ion-icon name="logo-youtube"></ion-icon>
+      </ion-fab-button>
+    </ion-fab-list> -->
+<!-- 
+  <ion-item class="chat-list" lines="none">
+    <ion-avatar slot="start"   >
+      <img src="../../../../../assets/imgs/images.jpg">
+    </ion-avatar>
+    <ion-label>
+      <h2 class="user-name" (click)="buttonClick($event)">Sukanya Marbade</h2>
+      <span class="text-preview">Hello Sir , kjdhx chbafhcsj adhjozxhdj kvhvjkvsfj....</span>
+      
+    </ion-label>
+    <span class="time">4.50 PM</span>
+    <ion-badge color="success">4</ion-badge>
+  </ion-item> -->

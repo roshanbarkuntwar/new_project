@@ -1,0 +1,15 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-button slot="start" (click)="closePage()" fill="clear" icon-only start>
+        <ion-icon name="arrow-back" color="light"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-title>
+     Tree Menu 
+    </ion-title>
+  </ion-toolbar>
+  <app-treeset [isMainFolder]="true"></app-treeset>
+</ion-header>
+
+

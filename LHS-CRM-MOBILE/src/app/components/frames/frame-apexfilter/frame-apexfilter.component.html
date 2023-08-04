@@ -1,0 +1,220 @@
+<ion-grid>
+  <div class="apex-dropdown">
+
+    <ion-row style="display: flex;align-items: center;">
+
+      <!-- <ion-col [size]="platformVal == 'mobile' ? 12 : 4">
+          <div class="dropdown" style="border: 1px solid #e6e3e0;height: 27px !important;">
+
+            <button (click)="myFunction1($event)" class="lov-btn dropbtn btnColor" color="primary">
+              <ion-icon name="arrow-dropdown"></ion-icon>
+              {{columnName.prompt_name}}
+            </button>
+            <div id="myDropdown" class="dropdown-content">
+              <ng-container *ngFor="let d of this.frame.apextheaders;let i=index">
+                <a (click)="getColname(i,d,$event)">
+                  <span>{{d.prompt_name}}</span></a>
+              </ng-container>
+            </div>
+          </div>
+
+
+          <div style="max-width:150px;display: inline-block;border: 1px solid #e6e3e0;height: 27px !important;">
+            <ion-input class="input-text" style="border-radius: 0px;" placeholder="Search Here..."
+              [(ngModel)]="searchText" (ionChange)="serchtextChange($event)"></ion-input>
+          </div>
+
+
+          <div style="display: inline-block;border: 1px solid #e6e3e0;height: 27px !important;">
+            <button class="lov-btn dropbtn" style="border-radius: 0px;" ion-button icon-only small
+              (click)="searchWithGO()">
+              Go
+            </button>
+          </div>
+        </ion-col> -->
+      <!-- <ion-col size="3" style="padding-top: 0px;">
+          <div class="dropdown" style="border: 1px solid #e6e3e0;height: 27px !important;cursor: pointer;">
+            <button (click)="myFunction($event)"  class="lov-btn dropbtn ml-150">
+              {{actionName}}
+              <ion-icon name="arrow-dropdown" ></ion-icon>
+              </button>
+            <div id="myDropdown" class="dropdown-content">
+              <ng-container *ngFor="let x of dataMode;let i=index">
+               
+                <a  (click)="getMode(i,x,$event)"> <ion-icon [name]="actionIcon[i]" ></ion-icon><span>{{x}}</span></a>
+              </ng-container>
+            </div>
+        </div>
+      </ion-col> -->
+
+
+      <ion-col size="12">
+        <div class="action-chips">
+          <ion-button size="small" shape="round" *ngFor="let x of dataMode;let i=index" (click)="getMode(i,x,$event)">
+            <ion-icon [name]="actionIcon[i]" slot="start" class="icon-chip"></ion-icon>{{x}}
+          </ion-button>
+          <!-- <ion-button size="small" color="primary" shape="round" fill="outline">
+              <ion-icon name="ios-funnel" slot="start" color="primary"></ion-icon>Column
+            </ion-button>
+            <ion-button size="small" color="primary" shape="round" fill="outline">
+              <ion-icon name="ios-funnel" slot="start" color="primary"></ion-icon>Arreange
+            </ion-button>
+            <ion-button size="small" color="primary" shape="round" fill="outline">
+              <ion-icon name="ios-funnel" slot="start" color="primary"></ion-icon>Group
+            </ion-button>
+            <ion-button size="small" color="primary" shape="round" fill="outline">
+              <ion-icon name="ios-funnel" slot="start" color="primary"></ion-icon>Filter
+            </ion-button> -->
+          <!-- <label class="active"><ion-icon name="ios-funnel"></ion-icon> Filter</label> -->
+          <!--  <ion-button *ngFor="let c of dataMode" size="small" color="primary" shape="round"><ion-icon name="ios-funnel" slot="start" class="icon-chip" ></ion-icon> {{c}}</ion-button> -->
+          <!-- <label><ion-icon name="ios-funnel"></ion-icon> Filter</label>-->
+
+
+        </div>
+
+        <div>
+          <ion-select multiple id="id2" [hidden]='showList' [(ngModel)]="frameheadsFreeze"
+            (ionChange)="dropdwnfreezeVl($event)" #mySelect>
+            <ion-select-option *ngFor="let d of frameheads" [value]="d">{{d}}
+            </ion-select-option>
+          </ion-select>
+        </div>
+      </ion-col>
+
+    </ion-row>
+
+
+    <ion-row>
+      <ion-col size="12">
+        <div class="chipsForPerformedAction">
+          <div class="d-flex">
+            <ion-button size="small" color="secondary" shape="round"
+              *ngIf="((frame.ctrlBrkCond && frame.ctrlBrkCond.length > 0) && (this.frame.funcArr && (this.frame.funcArr.length > 0))) || ( frame.filterAbleArr && frame.filterAbleArr.length > 0)"
+              (click)="clear(0,'All')">
+              Clear All
+            </ion-button>
+            <ng-container
+              *ngIf="((frame.ctrlBrkCond && frame.ctrlBrkCond.length > 0) && (this.frame.funcArr && (this.frame.funcArr.length > 0)))">
+              <ion-chip outline="" color="primary" *ngFor="let a of frame.ctrlBrkCond ; let i = index">
+                <ion-icon name="grid" role="img" class="ios hydrated" aria-label="pin" color="secondary"
+                  (click)="getMode(i,'Group By',$event)"></ion-icon>
+                <ion-label (click)="getMode(i,'Group By',$event)">{{a.coloumns.prompt_name}}</ion-label>
+                <ion-icon name="close-circle" role="img" class="ios hydrated" aria-label="close circle" color="primary"
+                  (click)="clear(i,'groupBy')"></ion-icon>
+              </ion-chip>
+            </ng-container>
+
+            <ion-chip outline="" color="primary" *ngFor="let a of frame.filterAbleArr ; let i = index">
+              <ion-icon name="ios-funnel" role="img" class="ios hydrated" aria-label="pin" color="secondary"
+                (click)="getMode(i,'Filter',$event)"></ion-icon>
+              <ion-label (click)="getMode(i,'Filter',$event)">{{a.coloumns.prompt_name}}</ion-label>
+              <ion-icon name="close-circle" role="img" class="ios hydrated" aria-label="close circle" color="primary"
+                (click)="clear(i,'filter')"></ion-icon>
+            </ion-chip>
+            <!-- <ion-chip outline="" color="primary">
+                  <ion-icon name="pin" role="img" class="ios hydrated" aria-label="pin" color="secondary"></ion-icon>
+                  <ion-label>Group</ion-label>
+                  <ion-icon name="close-circle" role="img" class="ios hydrated" aria-label="close circle"
+                    color="primary"></ion-icon>
+                </ion-chip>
+                <ion-chip outline="" color="primary">
+                  <ion-icon name="pin" role="img" class="ios hydrated" aria-label="pin" color="secondary"></ion-icon>
+                  <ion-label>Column</ion-label>
+                  <ion-icon name="close-circle" role="img" class="ios hydrated" aria-label="close circle"
+                    color="primary"></ion-icon>
+                </ion-chip>
+                <ion-chip outline="" color="primary">
+                  <ion-icon name="pin" role="img" class="ios hydrated" aria-label="pin" color="secondary"></ion-icon>
+                  <ion-label>Arrange By</ion-label>
+                  <ion-icon name="close-circle" role="img" class="ios hydrated" aria-label="close circle"
+                    color="primary"></ion-icon>
+                </ion-chip> -->
+          </div>
+        </div>
+
+      </ion-col>
+    </ion-row>
+
+    <!-- <ion-select [(ngModel)]="actionName" [value]="actionName" interface="popover" (ionChange)="drpActionValue($event)">
+            <ion-select-option *ngFor="let d of dataMode" [value]="d">{{d}}
+            </ion-select-option>
+          </ion-select> -->
+
+
+
+    <!--     </div> -->
+
+
+
+    <!--  <div class="input-group primary-search-section drop-border">
+        <div class="input-group-append"> -->
+
+    <!--  </div>
+      </div> -->
+
+    <!-- <div>
+          <ion-button *ngIf="actionName == 'Filter'" expand="full" color="secondary" (click)="dropdwnActionChng($event)">
+              open {{actionName}}</ion-button>
+     
+        </div> -->
+
+
+
+
+  </div>
+</ion-grid>
+<!-- <ion-grid>
+  <ion-row>
+    <ion-col>
+    </ion-col>
+    <ion-col>
+       
+        
+    </ion-col>
+  </ion-row>
+</ion-grid> -->
+<div class="drag-drop-container" *ngIf="actionName == 'Columns'">
+  <div class="single-box">
+
+    <ion-row class="row">
+      <ion-col size="6" class="main" cdkDropList #todoList="cdkDropList" [cdkDropListData]="dragarrayHeads"
+        [cdkDropListConnectedTo]="[group1List]" (cdkDropListDropped)="drop($event)">
+        <p class="column-text">Column Not To Display</p>
+        <div class="container-drop">
+
+          <div class="each-drop" *ngFor="let item of dragarrayHeads" cdkDrag>
+            {{item}}
+          </div>
+
+        </div>
+      </ion-col>
+      <ion-col size="6" class="group1" cdkDropList #group1List="cdkDropList" [cdkDropListData]="group1"
+        [cdkDropListConnectedTo]="[todoList]" (cdkDropListDropped)="drop($event)">
+        <p class="column-text">Column To Display</p>
+        <div class="container-drop">
+
+          <div class="each-drop" *ngFor="let item of group1" cdkDrag>
+            {{item}}
+          </div>
+
+        </div>
+
+      </ion-col>
+
+    </ion-row>
+    <ion-row>
+      <ion-col size="12" class="text-center">
+        <ion-button (click)="createTable()" color="primary">
+          <ion-icon name="create"></ion-icon>Create
+        </ion-button>
+        <ion-button (click)="closeDrag()" fill="">
+          <ion-icon name="close-circle-outline"></ion-icon>Cancel
+        </ion-button>
+      </ion-col>
+    </ion-row>
+  </div>
+
+
+
+
+</div>

@@ -1,0 +1,150 @@
+<div *ngIf="filter">
+  <app-frame-canvas-filter [frametable]="frame" (passdataToframetable)="getdataFromcanvasFilter($event)"
+    [frame]='frame'></app-frame-canvas-filter>
+</div>    
+
+
+
+<div class="summary-card-container" *ngIf = "!filter">
+<div class="single-summary-card">
+<div class="tophead-card">
+  <div class="title">
+      <h6 class="main-title">{{frame.apps_page_frame_name}}<span style="margin-left: 10px;" *ngIf="globalObjects.toggleDevloperMode">[{{frame.apps_page_frame_seqid}}]<ion-icon class="code-btn"  color="primary" name="information-circle-outline" *ngIf="developerModeData" (click)="showDeveloperData()"></ion-icon></span></h6>
+      <p>Updated 2 hours , 33 minutes ago  </p>
+  </div>
+
+</div>
+<div class="summary-box">
+  <h6>Across India </h6>
+
+  <div>
+      <div class="input-group primary-search-section" *ngIf="searchFlag  && !filter">
+    
+        <ion-input class="input-text" placeholder="Search Here..." [(ngModel)]="tablerowsfilter"></ion-input>
+        <div class="input-group-append">
+          <button class="lov-btn" ion-button icon-only small (click)="openMike()">
+            <img src="/assets/imgs/google-speaker.png">
+          </button>
+        </div>
+        <div class="input-group-append">
+          <button class="lov-btn" ion-button icon-only small>
+            <ion-icon name="qr-scanner" (click)="openbarcodescanner()"></ion-icon>
+          </button>
+        </div>
+    
+        <div class="input-group-append">
+          <button class="lov-btn" ion-button icon-only small (click)="filterToggle()">
+            <ion-icon name="ios-funnel"></ion-icon>
+          </button>
+        </div>
+      </div>
+    </div>
+    <div *ngIf="show_filter=='show' ">
+      <div *ngIf="toggleFilter">
+        <app-frame-canvas-filter [frame]="frame" [frametable]='frame' (passdataToframetable)="getdataFromcanvasFilter($event)" (emitFilter)="getFilterParameter($event)"></app-frame-canvas-filter>
+      </div>
+         
+    </div> 
+
+
+<div class="table-reponsive" > 
+<table>
+  <tbody>
+    <tr class="heading1">
+        <td *ngFor="let th of thead;let i=index" >{{th}}</td>
+      <!-- <td>Confirmed</td>
+      <td>Recovered</td>
+      <td>Deceased</td> -->
+    </tr>
+    <tr class="heading2" *ngFor="let tableData of frame.tableRows | tableSearch :tablerowsfilter;let rowindex=index">
+        <ng-container *ngFor="let itemGroup of tableData;">
+            <td *ngFor="let input_item of itemGroup;"
+              [hidden]="(current_page_parameter.MODE && !(input_item.item_visible_flag && (input_item.item_visible_flag.indexOf(current_page_parameter.MODE)>-1)) )||input_item.item_visible_flag=='F'">
+              <p class="rate {{input_item.css_class}}" (click)="itemClicked(input_item,tableData,rowindex)">{{input_item.value}}</p>
+            </td>
+          </ng-container>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+<div class="pagination-container" *ngIf="l_total_remain_pages > 1">
+  <ul class="paginator my-1">
+    <li class="pt-1">Total Records : {{this.l_total_rows}}</li>
+    <li>
+      <ion-icon class="paginator-btn" *ngIf="l_current_page !=1" name="skip-backward" (click)="paginate('1');">
+      </ion-icon>
+    </li>
+    <li>
+      <ion-icon class="paginator-btn" *ngIf="l_current_page !=1" name="arrow-round-back"
+        (click)='paginate(this.l_current_page-1);'></ion-icon>
+    </li>
+    <li class="pt-1"> Page {{(this.l_current_page)}} Of {{this.l_total_remain_pages}}</li>
+    <!-- {{(this.l_total_remain_pages>this.l_total_rows) ? this.l_total_rows : this.l_total_remain_pages}}</li> -->
+    <li>
+      <ion-icon class="paginator-btn next-btn" *ngIf="l_current_page !=l_total_remain_pages" name="arrow-round-forward"
+      (click)='goToLast(this.l_total_rows,this.l_total_remain_pages);'>
+      </ion-icon>
+    </li>
+    <li>
+      <ion-icon class="paginator-btn next-btn" *ngIf="l_current_page!=l_total_remain_pages" name="skip-forward"
+        (click)='paginate(this.l_total_remain_pages);'>
+      </ion-icon>
+
+    </li>
+  </ul>
+</div>
+<div *ngIf="!canvasfilter">
+  <ion-button *ngIf="pdfFlag"  size="small" color="medium" (click)="downloadPDF()">Pdf Download</ion-button>
+  <ion-button *ngIf="graphFlag" size="small" color="medium" (click)="opengraph()">Open Graph</ion-button>
+
+</div>
+
+<div *ngIf="flagforgraph==true">
+<app-frame-graph  [resfromTable]="resforgraph"></app-frame-graph>
+<!-- <app-frame-dashboard-graph  [resfromTable]="resforgraph"></app-frame-dashboard-graph> -->
+</div>
+
+
+</div>
+</div>
+</div>
+
+
+
+<!-- 
+<div class="summary-card-container">
+    <div class="single-summary-card">
+    <div class="tophead-card">
+      <div class="title">
+          <h6 class="main-title">COVID-19 Cases Overview</h6>
+          <p>Updated 2 hours , 33 minutes ago  </p>
+      </div>
+    
+    </div>
+    <div class="summary-box">
+      <h6>Across India </h6>
+    <div class="table-reponsive"> 
+    <table>
+      <tbody>
+        <tr class="heading1">  
+          <td>Confirmed</td>
+          <td>Recovered</td>
+          <td>Deceased</td>
+        </tr>
+        <tr class="heading2">
+            <td> <p class="rate rating-danger">14327</p></td>
+            <td> <p class="rate rating-green">1024</p></td>
+            <td> <p class="rate rating-black">467</p> </td>
+          </tr>
+          <tr class="heading2">
+              <td> <p class="rating-ratio rating-danger">600</p></td>
+              <td> <p class="rating-ratio  rating-green">300</p></td>
+              <td> <p class="rating-ratio rating-black">27</p> </td>
+            </tr>
+      </tbody>
+    </table>
+    </div>
+    </div>
+    </div>
+    </div> -->

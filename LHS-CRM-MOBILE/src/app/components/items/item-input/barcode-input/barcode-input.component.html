@@ -1,0 +1,67 @@
+<!-- <label>{{barcodeinput.prompt_name}}</label>
+<ion-input type="text" placeholder="{{barcodeinput.tool_tip}}" id="{{barcodeinput.item_name}}" (click)="barcodescanner()"  [(ngModel)]="barcodeinput.value"
+[maxlength]="barcodeinput.item_size" class="input-text" [required]="barcodeinput.data_required_flag=='T'"
+[readonly]="barcodeinput.item_enable_flag== 'R'" #textInputname="ngModel" value=""> </ion-input> -->
+
+<!-- ion-input-item-border position="stacked" -->
+<!-- ion-input-item-border position="stacked" -->
+<!-- ion-input-item-fixed  position="fixed"-->
+<!-- null position="floating"-->
+<!-- null position="stacked"-->
+
+<!-- <div class="icon-btn-container" *ngIf="isToggled==false " >
+  <ion-button shape="round" class="globe-btn icon-btn" (click)="notify()" expand="block">
+    Scan QR Code  <ion-icon class="ml-2" name="qr-scanner"></ion-icon>
+  </ion-button>
+</div> -->
+<!-- <div *ngIf="isToggled==true"> --><!-- position="{{barcodeinput.position}}" -->
+<ion-item  class="{{(barcodeinput.css_class == null) ? 'ion-input-item ion-input-item-border' : barcodeinput.css_class}}">
+  <ion-label  position="{{(barcodeinput.position == null) ? 'stacked': barcodeinput.position}}"  >{{barcodeinput.prompt_name}}</ion-label>
+  <ion-input type="text" id="{{barcodeinput.item_name ? barcodeinput.item_name : 'abc'}}" [(ngModel)]="barcodeinput.value"
+    [maxlength]="barcodeinput.item_size" [required]="(current_page_parameter.MODE && (barcodeinput.data_required_flag && 
+    (barcodeinput.data_required_flag.indexOf(current_page_parameter.MODE)>-1)) )
+    ||barcodeinput.data_required_flag=='T'  
+    ||(barcodeinput.prompt_name && barcodeinput.prompt_name[barcodeinput.prompt_name.length -1] =='*')"
+    #barcodeInputname="ngModel" (ngInit)="barcodeinput.isValid=barcodeInputname.valid"
+    (ionBlur)="onChange('ionChange');barcodeinput.isValid=barcodeInputname.valid">
+  </ion-input>
+
+  <div class="input-buttons-container">
+    <button class="input-btn float-right" ion-button icon-only small>
+      <ion-icon (click)="barcodescanner()" name="qr-scanner"></ion-icon>
+    </button>
+    <button *ngIf="barcodeinput.value" class="input-btn float-right" ion-button icon-only small (click)="cleardata()">
+      <ion-icon name="close"></ion-icon>
+    </button>
+
+  </div>
+
+</ion-item>
+<div class="error" *ngIf="barcodeInputname.hasError('required') && barcodeinput.touched"> Please Enter
+  {{lovinput.prompt_name}}
+</div>
+
+<!-- </div> -->
+
+<!-- 
+<label>{{barcodeinput.prompt_name}}</label>
+<div class="input-group non-lov-input-group">
+  <ion-input type="text" placeholder="{{barcodeinput.tool_tip}}" id="{{barcodeinput.item_name}}"
+    (click)="barcodescanner()" [(ngModel)]="barcodeinput.value" [maxlength]="barcodeinput.item_size"
+    class="input-text lov-input" [required]="(current_page_parameter.MODE && (barcodeinput.data_required_flag && 
+    (barcodeinput.data_required_flag.indexOf(current_page_parameter.MODE)>-1)) )
+    ||barcodeinput.data_required_flag=='T' 
+    ||barcodeinput.prompt_name[barcodeinput.prompt_name.length -1] =='*'" 
+   
+    [readonly]="true" #barcodeInputname="ngModel"
+    (ngInit)="barcodeinput.isValid=barcodeInputname.valid" (ionChange)="barcodeinput.isValid=barcodeInputname.valid">
+  </ion-input>
+  <div *ngIf="barcodeinput.value" class="input-group-append">
+    <button class="lov-btn border-left-0 border-right-0" ion-button icon-only small (click)="cleardata()">
+      <ion-icon name="close"></ion-icon>
+    </button>
+  </div>
+  <div class="error" *ngIf="barcodeInputname.hasError('required') && barcodeinput.touched"> Please Enter
+    {{lovinput.prompt_name}}
+  </div>
+</div> -->

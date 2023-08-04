@@ -1,0 +1,161 @@
+<div *ngIf="filter">
+  <app-frame-canvas-filter [frametable]="frame" (passdataToframetable)="getdataFromcanvasFilter($event)"
+    [frame]='frame'></app-frame-canvas-filter>
+</div>    
+
+
+<div class="detail-table-container" *ngIf="!filter">
+  <!-- Single table starts here-->
+<div class="table-box"> 
+<h6 *ngIf="frame.apps_page_frame_name" class="main-heading">{{frame.apps_page_frame_name}}<span style="margin-left: 10px;" *ngIf="globalObjects.toggleDevloperMode">[{{frame.apps_page_frame_seqid}}]</span></h6>
+<div class="table-responsive">
+
+    <div>
+        <div class="input-group primary-search-section" *ngIf="searchFlag  && !filter">
+      
+          <ion-input class="input-text" placeholder="Search Here..." [(ngModel)]="tablerowsfilter"></ion-input>
+          <div class="input-group-append">
+            <button class="lov-btn" ion-button icon-only small (click)="openMike()">
+              <img src="/assets/imgs/google-speaker.png">
+            </button>
+          </div>
+          <div class="input-group-append">
+            <button class="lov-btn" ion-button icon-only small>
+              <ion-icon name="qr-scanner" (click)="openbarcodescanner()"></ion-icon>
+            </button>
+          </div>
+      
+          <div class="input-group-append">
+            <button class="lov-btn" ion-button icon-only small (click)="filterToggle()">
+              <ion-icon name="ios-funnel"></ion-icon>
+            </button>
+          </div>
+        </div>
+      </div>
+      <div *ngIf="show_filter=='show' ">
+        <div *ngIf="toggleFilter">
+          <app-frame-canvas-filter [frame]="frame" [frametable]='frame' (passdataToframetable)="getdataFromcanvasFilter($event)" (emitFilter)="getFilterParameter($event)"></app-frame-canvas-filter>
+        </div>
+           
+      </div> 
+  
+
+<table>
+  <thead>
+    <tr >
+      <th class="w-40" *ngFor="let th of thead;let i=index"><p class="heading {{th.css_class}}">{{th.prompt_name}}</p></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let tableData of frame.tableRows |tableSearch :tablerowsfilter;let rowindex=index">
+        <ng-container *ngFor="let itemGroup of tableData;">
+            <td *ngFor="let input_item of itemGroup;"
+              [hidden]="(current_page_parameter.MODE && !(input_item.item_visible_flag && (input_item.item_visible_flag.indexOf(current_page_parameter.MODE)>-1)) )||input_item.item_visible_flag=='F'"
+              [ngStyle]="getParsedJson(input_item.display_setting_str)">
+              <!-- <app-items [item]="input_item" [frame_type]="frame.apps_frame_type"
+                (emitPass)="itemClicked($event,tableData,rowindex)" (LHSOnChange)="itemValueChange($event,rowindex)">
+              </app-items> -->
+              <p class="heading text-center {{input_item.css_class}}" (click)="itemClicked(input_item,tableData,rowindex)">{{input_item.value}}</p>
+            </td>
+          </ng-container>
+      <!-- <td class="w-40"><p class="heading text-dark">Maharashtra</p></td>
+      <td><p class="heading text-center text-red">320</p></td>
+      <td><p class="heading text-center text-green">50</p></td>
+      <td><p class="heading text-center text-dark">11</p></td> -->
+    </tr>
+
+  </tbody>
+</table>
+</div>
+</div>
+
+
+
+<div class="pagination-container" *ngIf="l_total_remain_pages > 1">
+  <ul class="paginator my-1">
+    <li class="pt-1">Total Records : {{this.l_total_rows}}</li>
+    <li>
+      <ion-icon class="paginator-btn" *ngIf="l_current_page !=1" name="skip-backward" (click)="paginate('1');">
+      </ion-icon>
+    </li>
+    <li>
+      <ion-icon class="paginator-btn" *ngIf="l_current_page !=1" name="arrow-round-back"
+        (click)='paginate(this.l_current_page-1);'></ion-icon>
+    </li>
+    <li class="pt-1"> Page {{(this.l_current_page)}} Of {{this.l_total_remain_pages}}</li>
+    <!-- {{(this.l_total_remain_pages>this.l_total_rows) ? this.l_total_rows : this.l_total_remain_pages}}</li> -->
+    <li>
+      <ion-icon class="paginator-btn next-btn" *ngIf="l_current_page !=l_total_remain_pages" name="arrow-round-forward"
+        (click)='paginate(this.l_current_page+1);'>
+      </ion-icon>
+    </li>
+    <li>
+      <ion-icon class="paginator-btn next-btn" *ngIf="l_current_page!=l_total_remain_pages" name="skip-forward"
+        (click)='goToLast(this.l_total_rows,this.l_total_remain_pages);'>
+      </ion-icon>
+
+    </li>
+  </ul>
+</div>
+<div>
+  <ion-button *ngIf="pdfFlag"  size="small" color="medium" (click)="downloadPDF()">Pdf Download</ion-button>
+  <ion-button *ngIf="graphFlag" size="small" color="medium" (click)="opengraph()">Open Graph</ion-button>
+
+</div>
+
+<div *ngIf="flagforgraph==true">
+<app-frame-graph  [resfromTable]="resforgraph"></app-frame-graph>
+<!-- <app-frame-dashboard-graph  [resfromTable]="resforgraph"></app-frame-dashboard-graph> -->
+</div>
+</div> 
+<!-- 
+<div class="detail-table-container">
+  <div class="table-box"> 
+      <h6  class="main-heading">Summery Table</h6>
+    <div class="table-responsive">
+<table>
+    <thead>
+      <tr>
+        <th class="w-40"><p class="heading text-dark">Location</p></th>
+        <th><p class="heading text-center text-red">Confirmed</p></th>
+        <th><p class="heading text-center text-green">Recovered</p></th>
+        <th><p class="heading text-center text-dark">Deceased</p></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="w-40"><p class="heading text-dark">Maharashtra</p></td>
+        <td><p class="heading text-center text-red">320</p></td>
+        <td><p class="heading text-center text-green">50</p></td>
+        <td><p class="heading text-center text-dark">11</p></td>
+      </tr>
+      <tr>
+          <td class="w-40"><p class="heading text-dark">Maharashtra</p></td>
+          <td><p class="heading text-center text-red">320</p></td>
+          <td><p class="heading text-center text-green">50</p></td>
+          <td><p class="heading text-center text-dark">11</p></td>
+        </tr>
+        <tr>
+            <td class="w-40"><p class="heading text-dark">Maharashtra</p></td>
+            <td><p class="heading text-center text-red">320</p></td>
+            <td><p class="heading text-center text-green">50</p></td>
+            <td><p class="heading text-center text-dark">11</p></td>
+          </tr>
+          <tr>
+              <td class="w-40"><p class="heading text-dark">Maharashtra</p></td>
+              <td><p class="heading text-center text-red">320</p></td>
+              <td><p class="heading text-center text-green">50</p></td>
+              <td><p class="heading text-center text-dark">11</p></td>
+            </tr>
+            <tr>
+                <td class="w-40"><p class="heading text-dark">Maharashtra</p></td>
+                <td><p class="heading text-center text-red">320</p></td>
+                <td><p class="heading text-center text-green">50</p></td>
+                <td><p class="heading text-center text-dark">11</p></td>
+              </tr>
+    </tbody>
+  </table>
+</div>
+</div>
+</div>
+  -->

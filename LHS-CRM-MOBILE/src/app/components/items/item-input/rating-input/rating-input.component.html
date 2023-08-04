@@ -1,0 +1,23 @@
+<!-- <label>{{ratinginput.prompt_name}}</label>
+<div class="rating-input" >
+    <ion-icon class="filled-star" name="star"></ion-icon>
+    <ion-icon class="filled-star" name="star"></ion-icon>
+    <ion-icon class="filled-star" name="star"></ion-icon>
+    <ion-icon class="outline-star" ios="ios-star-outline" md="md-star-outline"></ion-icon>
+    <ion-icon class="outline-star" ios="ios-star-outline" md="md-star-outline"></ion-icon>
+</div> -->
+
+
+<ion-label class="form-label">{{ratinginput.prompt_name}}
+    <ion-badge color="danger">{{ratingValue}}</ion-badge>
+</ion-label>
+<div class="rating-input" *ngIf="ratinginput.item_enable_flag == 'T' && stars.length>0">
+    <ion-col *ngFor="let star of stars; let i = index" tappable (click)="setRating(i+1,ratinginput.itemDbName)">
+        <ion-icon [name]="star" class="filled-star"></ion-icon>
+    </ion-col>
+</div>
+<div class="rating-input" *ngIf="ratinginput.item_enable_flag == 'F' && stars.length>0">
+    <ion-col *ngFor="let star of stars; let i = index">
+        <ion-icon [name]="star" class="filled-star"></ion-icon>
+    </ion-col>
+</div>

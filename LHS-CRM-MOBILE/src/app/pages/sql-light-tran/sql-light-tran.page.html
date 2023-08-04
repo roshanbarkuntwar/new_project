@@ -1,0 +1,153 @@
+<!--<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-title class="pl-0">Sql Lite Entries</ion-title>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+  <div class="sql-tran-light">
+    <ion-tabs>
+      <ion-tab-bar slot="top">
+        <ion-tab-button (click)="navigatePage('PENDING-TAB')" size="medium" class="active">
+          <ion-label>Pending</ion-label>
+          <ion-badge>{{pendingCount}}</ion-badge>
+        </ion-tab-button>
+
+        <ion-tab-button (click)="navigatePage('EXECUTED-TAB')">
+          <ion-label>Executed</ion-label>
+          <ion-badge size="medium">6</ion-badge>
+        </ion-tab-button>
+      </ion-tab-bar>
+    </ion-tabs>
+    <div class="search-div">
+      <ion-input placeholder="Search"></ion-input>
+    </div>
+    <div class="individual-card">
+      <ion-item>
+        <ion-label>My Item</ion-label>
+        <ion-badge slot="end">22</ion-badge>
+      </ion-item>
+    </div>
+
+
+    <div class="offline-entry-card-container" *ngFor="let object of pendingData; let i= index;">
+      <div class="offline-entry-card" *ngFor="let cardData of object | keyvalue">
+        <p>{{cardData.key}} : {{cardData.value}}</p>
+      </div>
+      <div class="offline-entry-card-footer">
+        <ion-grid>
+          <ion-row>
+            <ion-col class="p-0" size="6">
+              <ion-button color="secondary" expand="full" size="small" (click)="updateCard(i)">
+                Edit
+              </ion-button>
+            </ion-col>
+            <ion-col class="p-0" size="6">
+              <ion-button color="secondary" expand="full" size="small" (click)="deleteCard(object, i)">
+                Delete
+              </ion-button>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+      </div>
+    </div>
+
+
+    <div *ngIf="activeTab === 'PENDING-TAB'">
+      <app-pending-tab></app-pending-tab>
+    </div>
+    <div *ngIf="activeTab === 'EXECUTED-TAB'">
+      <app-executed-tab></app-executed-tab>
+    </div>
+  </div>
+</ion-content> 
+
+<super-tabs>
+  <super-tabs-toolbar slot="top" class="super-tabs-toolbar ">
+    <super-tab-button class="super-tab-button">
+      <ion-badge color="secondary">11</ion-badge>
+      <ion-label>Pending</ion-label>
+
+    </super-tab-button>
+    <super-tab-button class="super-tab-button">
+      <ion-badge color="secondary">2</ion-badge>
+      <ion-label>Executed</ion-label>
+
+    </super-tab-button>
+
+  </super-tabs-toolbar>
+
+  <super-tabs-container>
+    <super-tab>
+      <ion-content>
+        <ion-nav [root]="pendingTab"></ion-nav>
+      </ion-content>
+    </super-tab>
+    <super-tab>
+      <ion-content>
+        <ion-nav [root]="executedTab"></ion-nav>
+      </ion-content>
+    </super-tab>
+  </super-tabs-container>
+</super-tabs>-->
+
+
+
+<ion-header>
+  <!-- <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-button slot="start" (click)="closePage()" fill="clear" icon-only start>
+        <ion-icon name="arrow-back" color="light"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-title class="pl-0">Sql Lite Entries</ion-title>
+  </ion-toolbar> -->
+  <ion-toolbar color="primary"  class="ion-toolbar iosheight"  *ngIf="platform.is('ios')">
+    <ion-buttons slot="start">
+      <ion-button slot="start" (click)="closePage()" fill="clear" icon-only start>
+        <ion-icon name="arrow-back" color="light"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-title class="pl-0">Sql Lite Entries</ion-title>
+</ion-toolbar>
+
+<ion-toolbar color="primary"  class="ion-toolbar" *ngIf="!platform.is('ios')">
+  <ion-buttons slot="start">
+    <ion-button slot="start" (click)="closePage()" fill="clear" icon-only start>
+      <ion-icon name="arrow-back" color="light"></ion-icon>
+    </ion-button>
+  </ion-buttons>
+  <ion-title class="pl-0">Sql Lite Entries</ion-title>
+</ion-toolbar>
+</ion-header>
+
+<super-tabs>
+  <super-tabs-toolbar slot="top" class="super-tabs-toolbar ">
+    <super-tab-button class="super-tab-button">
+      <ion-badge color="secondary">11</ion-badge>
+      <ion-label>Pending</ion-label>
+
+    </super-tab-button>
+    <super-tab-button class="super-tab-button">
+      <ion-badge color="secondary">2</ion-badge>
+      <ion-label>Executed</ion-label>
+
+    </super-tab-button>
+
+  </super-tabs-toolbar>
+
+  <super-tabs-container>
+    <super-tab>
+      <ion-content>
+        <ion-nav [root]="pendingTab"></ion-nav>
+      </ion-content>
+    </super-tab>
+    <super-tab>
+      <ion-content>
+        <ion-nav [root]="executedTab"></ion-nav>
+      </ion-content>
+    </super-tab>
+  </super-tabs-container>
+</super-tabs>

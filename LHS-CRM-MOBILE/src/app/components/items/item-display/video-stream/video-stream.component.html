@@ -1,0 +1,9 @@
+<div class="capture-img-container">
+    <ion-label class="form-label">{{streamEvent.prompt_name}}</ion-label>
+    <div style="position: relative;" class="video-container">
+        <video [id]="rndInt" *ngIf="platformValue" [ngStyle]="getParsedJson(streamEvent.display_setting_str)" controls>
+        </video>
+        <video [id]="rndInt" *ngIf="(platform.is('ios') || platform.is('android'))" style="width: 100%; height: 100%;" controls>
+        </video>
+    </div>
+</div>

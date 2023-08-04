@@ -1,0 +1,233 @@
+.drag-drop-container{
+    .column-text {
+        color: #fff;
+        margin-top: 0;
+        margin-bottom: 5px;
+    }
+    .container-drop {
+        
+        padding: 2px 5px;
+    }    
+        
+.main {
+      padding: 8px;
+}
+.group1{
+    
+    padding: 8px; 
+}
+.group2{
+    
+    padding: 8px; 
+}
+.group3{
+    
+    padding: 8px; 
+}
+.each-drop {
+  background: rgb(132 132 132);
+  color: #ffffff;
+  /* text-align: center; */
+  font-size: 15px;
+  padding: 2px;
+  margin: 5px 0;
+  cursor: pointer;
+  font-weight: bold;
+  padding-left: 12px;
+}
+}
+
+// .drop-border{
+//   border:1px solid #bcbcbc;
+// }
+.apex-dropdown{
+    .primary-search-section.drop-border {
+        border: 1px solid #ccc;
+        height: 25px;
+        padding: 0;
+        width: 40px;
+        display: inline-flex;
+    }
+}
+:host {
+    ion-select{
+        --padding-top: 0px;
+        --padding-end: 0;
+        --padding-bottom: 0px;
+        --padding-start: 0;
+        height: 25px;
+        width: 100px;
+        border: 1px solid #ccc;
+        max-width: 130px;
+    }
+    ion-item{
+        --border-width:0;
+        --border-style: none;
+    }
+}
+.main-ip{
+    padding-top: 4px !important; 
+}
+
+.text-right{
+    text-align: right;
+}
+.apex-dropdown {
+    border: 1px solid #ccc;
+    /* background: #ccc; */
+    border-radius: 10px;
+}
+
+
+
+
+// newdropdown
+ul, #myUL {
+    list-style-type: none;
+  }
+  
+  #myUL {
+    margin: 0;
+    padding: 0;
+  }
+  
+  .caret {
+    cursor: pointer;
+    -webkit-user-select: none; /* Safari 3.1+ */
+    -moz-user-select: none; /* Firefox 2+ */
+    -ms-user-select: none; /* IE 10+ */
+    user-select: none;
+    border:2px solid black;
+  }
+  
+  .caret::before {
+    content: "\25B6";
+    color: black;
+    display: inline-block;
+    margin-right: 6px;
+  }
+  
+  .caret-down::before {
+    // -ms-transform: rotate(90deg); /* IE 9 */
+    // -webkit-transform: rotate(90deg); /* Safari */'
+    transform: rotate(90deg);  
+  }
+  
+  .nested {
+    display: none;
+  }
+  
+  .active {
+    display: block;
+  }
+
+
+
+
+
+  /////////new buttton////////
+
+  .dropbtn {
+    background-color:#ffffff;
+    color: rgba(16,15,14,.8);
+    height: 100%;
+    border: 1px solid #cecbc8;
+    font-size: 14px;
+    border: none;
+    cursor: pointer;
+    border-radius: 0px;
+    white-space: nowrap;
+  }
+  
+  .dropbtn:hover, .dropbtn:focus {
+    background-color: #e0e0e0;
+    color: #383838;
+  }
+  
+  .dropdown {
+    position: relative;
+    display: inline-block;
+  }
+  
+  .dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #ffffff;
+    min-width: 170px;
+    overflow: auto;
+    box-shadow: -1px 1px 6px 0px rgb(0 0 0 / 20%);
+    z-index: 999999999999;
+    border: 1px solid #bfbaba;
+  }
+  
+  .dropdown-content a {
+    color: black;
+    padding: 8px 12px;
+    text-decoration: none;
+    display: block;
+    ion-icon{
+      color: #383838;
+      font-size: 14px;
+      margin-top: 5px;
+      margin-right: 9px;
+    }
+    span{
+      font-size: 13px;
+    }
+  }
+  
+  .dropdown a:hover {background-color: #ddd;}
+  
+  .show {display: block;}
+
+  .input-text .native-input {
+    height: 30px;
+    border-radius: 0px !important;
+}
+
+
+
+@media only screen and  (min-width: 356px) and (max-width: 410px){
+  .ml-150{
+    margin-left: 247px;
+    margin-top: 9px;
+  }
+}
+@media only screen and  (min-width: 320px) and (max-width: 355px){
+  .ml-150{
+    margin-left: 154px;
+    margin-top: 0px;
+  }
+}
+
+.text-center{
+ text-align: center; 
+}
+.action-chips{
+  overflow-x: auto;
+  display: flex;
+  label{
+    border: 1px dashed #848484;
+    padding: 3px 10px;
+    border-radius: 18px;
+    font-size: 15px;
+    color: #5e656d;
+    background: #5e656d1a;
+    margin-right: 10px;
+    display: inline-flex;
+    align-items: center;
+    white-space: nowrap;
+  }
+  ion-icon{
+    font-size: 15px;
+    margin: 0px 2px;
+    color:#ffffff;
+  }
+}
+.chipsForPerformedAction{
+  overflow-x: auto;
+  display: flex;
+}
+.d-flex{
+  display: flex;;
+}

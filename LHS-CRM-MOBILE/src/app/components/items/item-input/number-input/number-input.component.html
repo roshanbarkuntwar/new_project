@@ -1,0 +1,290 @@
+<!-- ion-input-item-border position="stacked" -->
+<!-- ion-input-item-fixed  position="fixed"-->
+<!-- null position="floating"-->
+<!-- null position="stacked"-->
+
+<!-- <ion-item class="ion-input-item">
+    <ion-label position="floating">Number</ion-label>
+    <ion-input type="number"></ion-input>
+    <div class="input-buttons-container"   *ngIf="numberinput.value">
+  
+        <button class="input-btn float-right"  ion-button icon-only small
+        (click)="cleardata()">
+            <ion-icon name="close"></ion-icon>
+        </button>
+    </div>
+  </ion-item> -->
+<div *ngIf="numberinput.item_sub_type !='N_TABLE' && numberinput.item_sub_type !='N_BROWSER'">
+    <ion-item
+        class="{{(numberinput.css_class == null) ? 'ion-input-item ion-input-item-border': numberinput.css_class}}">
+        <ion-label position="{{(numberinput.position) == null ? 'stacked' : numberinput.position}}"
+            [hidden]="frame_type=='TABLE' || frame_type == 'ENTRY_TABLE' || frame_type == 'FRAME_COLLAPSE'">
+            {{numberinput.prompt_name}}</ion-label>
+        <ion-input type="number" [customMin]="numberinput.from_value" class="text-right"
+            [customMax]="numberinput.to_value" maxlength="{{numberinput.item_size}}" id="{{numberinput.item_name ? numberinput.item_name : numberinput.apps_item_seqid}}"
+            pattern="{{numberinput.input_pattern}}" [(ngModel)]="numberinput.value"
+            [ngStyle]="getParsedJson(numberinput.display_setting_str)"
+            [readonly]="numberinput.item_enable_flag && (!(numberinput.item_enable_flag.indexOf(current_page_parameter.MODE)>-1)||(numberinput.item_enable_flag=='F'))"
+            [required]="(current_page_parameter.MODE && (numberinput.data_required_flag && 
+        (numberinput.data_required_flag.indexOf(current_page_parameter.MODE)>-1)) )
+        ||numberinput.data_required_flag=='T' 
+        ||(numberinput.prompt_name && numberinput.prompt_name[numberinput.prompt_name.length -1] =='*')" #numberInputname="ngModel"
+            name="{{numberinput.item_name ? numberinput.item_name : numberinput.apps_item_seqid}}"
+            (ionChange)="numberinput.isValid=numberInputname.valid; numberinput.touched=true;onChange(numberinput)"
+            (ionBlur)="numberinput.touched=true;onBlur('ionChange',numberInputname)"
+            title="{{numberinput.tool_tip}}"></ion-input>
+        <div class="input-buttons-container" style="width: auto;"
+            *ngIf="numberinput.value && (!(numberinput.item_enable_flag && (!(numberinput.item_enable_flag.indexOf(current_page_parameter.MODE)>-1)||(numberinput.item_enable_flag=='F')))) ">
+
+            <button class="input-btn float-right" ion-button icon-only small (click)="cleardata()">
+                <ion-icon name="close"></ion-icon>
+            </button>
+        </div>
+
+
+    </ion-item>
+
+
+    <div class="error">{{numberinput.blurError}}</div>
+
+    <div class="error" *ngIf="numberInputname.hasError('maxlength')"> {{numberinput.prompt_name}} max
+        {{numberinput.item_size}} digit</div>
+
+    <div class="error" *ngIf="numberInputname.hasError('customMin')"> {{numberinput.prompt_name}} should not be less
+        {{numberinput.from_value}}
+    </div>
+
+    <div class="error" *ngIf="numberInputname.hasError('customMax')"> {{numberinput.prompt_name}} should not be above
+        {{numberinput.to_value}}</div>
+
+    <div class="error" *ngIf="numberInputname.hasError('required') && numberinput.touched"> Please Enter
+        {{numberinput.prompt_name}}
+    </div>
+
+    <div class="error" *ngIf="numberInputname.hasError('pattern')">Invalid Number or Invalid
+        Decimal Place</div>
+
+
+</div>
+
+<div *ngIf="numberinput.item_sub_type =='N_BROWSER'"  class="new-input-item-type">
+    <!-- <ion-item class="{{(numberinput.css_class == null) ? 'ion-input-item ion-input-item-border': numberinput.css_class}}">
+        <ion-label  position="{{(numberinput.position) == null ? 'stacked' : numberinput.position}}" [hidden]="frame_type=='TABLE' || frame_type == 'ENTRY_TABLE' || frame_type == 'FRAME_COLLAPSE'">
+            {{numberinput.prompt_name}}</ion-label>
+        <ion-input type="number" [customMin]="numberinput.from_value" class="text-right"
+            [customMax]="numberinput.to_value" maxlength="{{numberinput.item_size}}" id="{{numberinput.item_name}}"
+            pattern="{{numberinput.input_pattern}}" [(ngModel)]="numberinput.value" [ngStyle]="getParsedJson(numberinput.display_setting_str)"
+            [readonly]="numberinput.item_enable_flag && (!(numberinput.item_enable_flag.indexOf(current_page_parameter.MODE)>-1)||(numberinput.item_enable_flag=='F'))"
+            [required]="(current_page_parameter.MODE && (numberinput.data_required_flag && 
+        (numberinput.data_required_flag.indexOf(current_page_parameter.MODE)>-1)) )
+        ||numberinput.data_required_flag=='T' 
+        ||numberinput.prompt_name[numberinput.prompt_name.length -1] =='*'" #numberInputname="ngModel"
+            name="{{numberinput.item_name}}"
+            (ionChange)="numberinput.isValid=numberInputname.valid; numberinput.touched=true;onChange(numberinput)"
+            (ionBlur)="numberinput.touched=true;onBlur('ionChange',numberInputname)"
+            (ngInit)="numberinput.isValid=numberInputname.valid" title="{{numberinput.tool_tip}}"></ion-input>
+        <div class="input-buttons-container" style="width: auto;"
+            *ngIf="numberinput.value && (!(numberinput.item_enable_flag && (!(numberinput.item_enable_flag.indexOf(current_page_parameter.MODE)>-1)||(numberinput.item_enable_flag=='F')))) ">
+
+            <button class="input-btn float-right" ion-button icon-only small (click)="cleardata()">
+                <ion-icon name="close"></ion-icon>
+            </button>
+        </div>
+        
+    </ion-item> -->
+
+    <ion-row *ngIf="numberinput.position != 'floating'">
+        <ion-col size="3" class="text-left">
+            <span>{{numberinput.prompt_name}}</span>
+        </ion-col>
+        <!-- <ion-label position="{{(numberinput.position == null) ? 'stacked' : numberinput.position}}">
+            {{numberinput.prompt_name}}</ion-label> -->
+        <ion-col size="9">
+            <div class="input-group input-group-sm">
+                <ion-input type="number" [customMin]="numberinput.from_value" class="text-right form-control form-control-sm" 
+                    [customMax]="numberinput.to_value" maxlength="{{numberinput.item_size}}"
+                    id="{{numberinput.item_name ? numberinput.item_name : numberinput.apps_item_seqid}}" pattern="{{numberinput.input_pattern}}"
+                    [(ngModel)]="numberinput.value" [ngStyle]="getParsedJson(numberinput.display_setting_str)"
+                    [readonly]="numberinput.item_enable_flag && (!(numberinput.item_enable_flag.indexOf(current_page_parameter.MODE)>-1)||(numberinput.item_enable_flag=='F'))"
+                    [required]="(current_page_parameter.MODE && (numberinput.data_required_flag && 
+                            (numberinput.data_required_flag.indexOf(current_page_parameter.MODE)>-1)) )
+                            ||numberinput.data_required_flag=='T' 
+                            ||(numberinput.prompt_name && numberinput.prompt_name[numberinput.prompt_name.length -1] =='*')" #numberInputname="ngModel"
+                    name="{{numberinput.item_name ? numberinput.item_name : numberinput.apps_item_seqid}}"
+                    (ionChange)="numberinput.isValid=numberInputname.valid; numberinput.touched=true;onChange(numberinput)"
+                    (ionBlur)="numberinput.touched=true;onBlur('ionChange',numberInputname)"
+                     title="{{numberinput.tool_tip}}"></ion-input>
+
+                <button *ngIf="numberinput.value && (!(numberinput.item_enable_flag && (!(numberinput.item_enable_flag.indexOf(current_page_parameter.MODE)>-1)||(numberinput.item_enable_flag=='F')))) " 
+                    class="btn btn-secondary" type="button" ion-button (click)="cleardata()">
+                    <i class="fa fa-close" aria-hidden="true"></i>
+                </button>
+            </div>
+
+            <div class="error">{{numberinput.blurError}}</div>
+
+            <div class="error" *ngIf="numberInputname.hasError('maxlength')"> {{numberinput.prompt_name}} max
+                {{numberinput.item_size}} digit</div>
+
+            <div class="error" *ngIf="numberInputname.hasError('customMin')"> {{numberinput.prompt_name}} should not be
+                less
+                {{numberinput.from_value}}
+            </div>
+
+            <div class="error" *ngIf="numberInputname.hasError('customMax')"> {{numberinput.prompt_name}} should not be
+                above
+                {{numberinput.to_value}}</div>
+
+            <div class="error" *ngIf="numberInputname.hasError('required') && numberinput.touched"> Please Enter
+                {{numberinput.prompt_name}}
+            </div>
+
+            <div class="error" *ngIf="numberInputname.hasError('pattern')">Invalid Number or Invalid
+                Decimal Place</div>
+        </ion-col>
+    </ion-row>
+
+    <ion-row *ngIf="numberinput.position == 'floating'">
+     
+        <!-- <ion-label position="{{(numberinput.position == null) ? 'stacked' : numberinput.position}}">
+            {{numberinput.prompt_name}}</ion-label> -->
+        <ion-col size="12">
+            <div class="form-floating">
+                <input id="floatingInput" type="number" [customMin]="numberinput.from_value" class="form-control form-control-sm" 
+                    [customMax]="numberinput.to_value" maxlength="{{numberinput.item_size}}"
+                    id="{{numberinput.item_name ? numberinput.item_name : numberinput.apps_item_seqid}}" pattern="{{numberinput.input_pattern}}"
+                    [(ngModel)]="numberinput.value" [ngStyle]="getParsedJson(numberinput.display_setting_str)"
+                    [readonly]="numberinput.item_enable_flag && (!(numberinput.item_enable_flag.indexOf(current_page_parameter.MODE)>-1)||(numberinput.item_enable_flag=='F'))"
+                    [required]="(current_page_parameter.MODE && (numberinput.data_required_flag && 
+        (numberinput.data_required_flag.indexOf(current_page_parameter.MODE)>-1)) )
+        ||numberinput.data_required_flag=='T' 
+        ||(numberinput.prompt_name && numberinput.prompt_name[numberinput.prompt_name.length -1] =='*')" #numberInputname="ngModel"
+                    name="{{numberinput.item_name ? numberinput.item_name : numberinput.apps_item_seqid}}"
+                    (change)="numberinput.isValid=numberInputname.valid; numberinput.touched=true;onChange(numberinput)"
+                    (blur)="numberinput.touched=true;onBlur('ionChange',numberInputname)"
+                    (ngInit)="numberinput.isValid=numberInputname.valid" title="{{numberinput.tool_tip}}"/>
+
+                    <label for="floatingInput">{{numberinput.prompt_name}}</label>
+
+                <!-- <button *ngIf="numberinput.value && (!(numberinput.item_enable_flag && (!(numberinput.item_enable_flag.indexOf(current_page_parameter.MODE)>-1)||(numberinput.item_enable_flag=='F')))) " 
+                    class="btn btn-secondary" type="button" ion-button (click)="cleardata()">
+                    <i class="fa fa-close" aria-hidden="true"></i>
+                </button> -->
+            </div>
+
+            <!-- <div class="error">{{numberinput.blurError}}</div>
+
+            <div class="error" *ngIf="numberInputname.hasError('maxlength')"> {{numberinput.prompt_name}} max
+                {{numberinput.item_size}} digit</div>
+
+            <div class="error" *ngIf="numberInputname.hasError('customMin')"> {{numberinput.prompt_name}} should not be
+                less
+                {{numberinput.from_value}}
+            </div>
+
+            <div class="error" *ngIf="numberInputname.hasError('customMax')"> {{numberinput.prompt_name}} should not be
+                above
+                {{numberinput.to_value}}</div>
+
+            <div class="error" *ngIf="numberInputname.hasError('required') && numberinput.touched"> Please Enter
+                {{numberinput.prompt_name}}
+            </div>
+
+            <div class="error" *ngIf="numberInputname.hasError('pattern')">Invalid Number or Invalid
+                Decimal Place</div> -->
+        </ion-col>
+    </ion-row>
+
+</div>
+
+<div class="table-input-container" *ngIf="numberinput.item_sub_type=='N_TABLE'">
+    <ion-input class="table-input text-right" type="Number" [customMin]="numberinput.from_value"
+        [customMax]="numberinput.to_value" [maxlength]="numberinput.item_size" id="{{numberinput.item_name ? numberinput.item_name : numberinput.apps_item_seqid}}"
+        pattern="{{numberinput.input_pattern}}" [(ngModel)]="numberinput.value"
+        [readonly]="numberinput.item_enable_flag && (!(numberinput.item_enable_flag.indexOf(current_page_parameter.MODE)>-1)||(numberinput.item_enable_flag=='F'))"
+        [required]="(current_page_parameter.MODE && (numberinput.data_required_flag && 
+        (numberinput.data_required_flag.indexOf(current_page_parameter.MODE)>-1)) )
+        ||numberinput.data_required_flag=='T' 
+        ||(numberinput.prompt_name && numberinput.prompt_name[numberinput.prompt_name.length -1] =='*')" #numberInputname="ngModel"
+        name="{{numberinput.item_name ? numberinput.item_name : numberinput.apps_item_seqid}}" pattern="[A-Za-z]{20}"
+        (ionChange)="numberinput.isValid=numberInputname.valid; numberinput.touched=true;onChange(numberinput)"
+        (ionBlur)="numberinput.touched=true;onBlur('ionChange',numberInputname)"
+         title="{{numberinput.tool_tip}}"></ion-input>
+         <!-- (ngInit)="numberinput.isValid=numberInputname.valid" -->
+
+         <div class="error" *ngIf="numberInputname.hasError('required') && numberinput.touched">Please Enter
+            {{numberinput.prompt_name}}
+        </div>
+        <div class="error" *ngIf="numberInputname.hasError('pattern') && numberinput.touched">
+            {{numberinput.tool_tip}}
+        </div>
+        <div class="error" *ngIf="numberInputname.hasError('maxlength')">{{numberinput.prompt_name}} max
+            {{numberinput.item_size}}
+            Character</div>
+            
+        <div class="error">{{numberinput.blurError}}</div>
+
+        
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- <label>{{numberinput.prompt_name}}</label>
+<div class="input-group non-lov-input-group" (ngInit)="numberinput.isValid=numberInputname.valid">
+    <ion-input type="number" [customMin]="numberinput.from_value" [customMax]="numberinput.to_value"
+        maxlength="{{numberinput.item_size}}" placeholder="{{numberinput.tool_tip}}" id="{{numberinput.item_name}}"
+        [(ngModel)]="numberinput.value"
+        [readonly]="numberinput.item_enable_flag && (!(numberinput.item_enable_flag.indexOf(current_page_parameter.MODE)>-1)||(numberinput.item_enable_flag=='F'))"
+        [required]="(current_page_parameter.MODE && (numberinput.data_required_flag && 
+        (numberinput.data_required_flag.indexOf(current_page_parameter.MODE)>-1)) )
+        ||numberinput.data_required_flag=='T' 
+        ||numberinput.prompt_name[numberinput.prompt_name.length -1] =='*'" class="input-text lov-input input-number"
+        #numberInputname="ngModel" name="{{numberinput.item_name}}"
+        (ionChange)="onChange('ionChange',numberInputname);numberinput.isValid=numberInputname.valid; numberinput.touched=true;"
+        (ionBlur)="numberinput.touched=true"></ion-input>
+    <div *ngIf="numberinput.value" class="input-group-append">
+        <button class="lov-btn border-left-0 border-right-0" ion-button icon-only small (click)="cleardata()">
+            <ion-icon name="close"></ion-icon>
+        </button>
+    </div>
+</div>
+<div class="error" *ngIf="numberInputname.hasError('maxlength')"> {{numberinput.prompt_name}} max
+    {{numberinput.item_size}} digit</div>
+<div class="error" *ngIf="numberInputname.hasError('customMin')"> {{numberinput.prompt_name}} should not be less
+    {{numberinput.from_value}}
+</div>
+<div class="error" *ngIf="numberInputname.hasError('customMax')"> {{numberinput.prompt_name}} should not be above
+    {{numberinput.to_value}}</div>
+<div class="error" *ngIf="numberInputname.hasError('required') && numberinput.touched"> Please Enter
+    {{numberinput.prompt_name}}
+</div>  -->
+
+
+<!-- <label>{{numberinput.prompt_name}}</label>
+<div>
+    <ion-input type="number" [customMin]="numberinput.from_value" [customMax]="numberinput.to_value"
+        maxlength="{{numberinput.item_size}}" placeholder="{{numberinput.tool_tip}}" id="{{numberinput.item_name}}"
+        [(ngModel)]="numberinput.value" [readonly]="numberinput.item_enable_flag=='R'"
+        [required]="numberinput.data_required_flag=='T' " class="input-text input-number" #numberInputname="ngModel"
+        name="{{numberinput.item_name}}" (ionChange)="onChange('ionChange')"></ion-input>
+
+    <div class="error" *ngIf="numberInputname.hasError('maxlength')"> {{numberinput.prompt_name}} max
+        {{numberinput.item_size}} digit</div>
+    <div class="error" *ngIf="numberInputname.hasError('customMin')"> {{numberinput.prompt_name}} should not be less
+        {{numberinput.from_value}}
+    </div>
+    <div class="error" *ngIf="numberInputname.hasError('customMax')"> {{numberinput.prompt_name}} should not be above
+        {{numberinput.to_value}}</div>
+    <div class="error" *ngIf="numberInputname.hasError('required') && numberInputname.touched"> Please Enter
+        {{numberinput.prompt_name}}
+    </div>
+</div> -->

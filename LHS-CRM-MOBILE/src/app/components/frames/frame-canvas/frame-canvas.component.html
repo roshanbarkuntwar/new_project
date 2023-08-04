@@ -1,0 +1,118 @@
+
+<ion-row *ngIf="frame.apps_page_frame_name" class="align-center" >
+  <ion-col col-12 style="padding-bottom: 0;">
+
+
+    <h1 class="frame-name position-relative">{{frame.apps_page_frame_name}}<span style="margin-left: 10px;" *ngIf="globalObjects.toggleDevloperMode">[{{frame.apps_page_frame_seqid}}][{{frame.frame_alias}}]<ion-icon class="code-btn"  color="primary" name="information-circle-outline"  (click)="showDeveloperData()"></ion-icon></span></h1>
+
+    <!-- <div class="action-import-cont">
+        <ion-input type="file" ></ion-input>
+        <ion-icon name="attach"></ion-icon>
+      
+   
+          <ion-icon name="image" (click)="openMods()"></ion-icon>
+
+        <ion-input type="file" accept="video/*"></ion-input>
+          <ion-icon name="videocam"></ion-icon>
+    </div>
+    <div class="attach-document">
+      <p>MIS Report 16062021.xlsx <ion-icon name="close"></ion-icon> </p>
+     </div>
+     <div class="col-12 rmpm dropzone" appDragDrop (files)="filesDropped($event)">
+      <div class="text-wrapper">
+        <div class="centered">Drop your file here!</div>
+      </div>
+    </div>
+    <div *ngFor="let file of files">
+      <img [src]="file.url" width="100px" height="100px">
+      
+    </div> -->
+
+
+  </ion-col>
+</ion-row>
+<div *ngIf="showFrame">
+  <!-- <form #form="ngForm" name="form" (ngSubmit)="onSubmit(form)"> -->
+    <ng-container *ngIf= "frame.apps_frame_type == 'CANVAS' && frame.checkCardItem === 'F'" >
+      
+    <div class="input-group non-lov-input-group" *ngIf="searchFlag">
+
+        <ion-input type="text" id="search" placeholder="Search" [(ngModel)]="searchText" autofocus="true" class="input-text lov-input" #autofocus></ion-input>
+        <div class="input-group-append">
+            <button *ngIf="platform.is('ios') || platform.is('android')" class="lov-btn" ion-button icon-only small (click)="openMike()">
+                <img src="./assets/imgs/google-speaker.png">
+            </button>
+            <button  *ngIf="!platform.is('ios') && !platform.is('android')" class="lov-btn" ion-button icon-only small (click)="sppeak()">
+                <img src="./assets/imgs/google-speaker.png">
+            </button>
+        </div>
+
+        <div class="input-group-append" *ngIf="searchText">
+            <button class="lov-btn border-left-0 border-right-0" ion-button icon-only small (click)="searchText=''">
+                <ion-icon name="close"></ion-icon>
+            </button>
+        </div>
+    </div>
+
+    <div *ngFor="let framedata of frame.tableRows;let rowindex =index">
+      <ion-row *ngFor="let itemGroup of framedata | canvasItemSearch :searchText;"  focusDir>
+        <!-- [hidden]="item.item_visible_flag=='F'"   -->
+        <ion-col *ngFor="let item of itemGroup.Level5;let i=index" style="padding-top: 2px;padding-bottom: 2px;"
+          [hidden]="(current_page_parameter.MODE && !(item.item_visible_flag && (item.item_visible_flag.indexOf(current_page_parameter.MODE)>-1)) )||item.item_visible_flag=='F'"
+          [size]="itemGroup.groupCol ? itemGroup.groupCol[i] : ''"  style="padding: 2px;">
+          <app-items [item]="item" [wscp]="wscp" (emitPass)="itemClicked($event,rowindex)"
+            (LHSOnChange)="itemValueChange($event,rowindex)"></app-items>
+        </ion-col>
+      </ion-row>
+    </div>
+  </ng-container>
+
+  <ng-container *ngIf= "frame.apps_frame_type == 'CANVAS' && frame.checkCardItem === 'T'" focusDir>
+    <!-- <div *ngFor="let framedata of frame.tableRows;let rowindex =index"> -->
+      <ion-row *ngFor="let itemGroup of frame.tableRows[0]" class="align-center">
+        <!-- [hidden]="item.item_visible_flag=='F'"   -->
+        <ion-col *ngFor="let item of itemGroup.Level5;let i=index"
+          [hidden]="(current_page_parameter.MODE && !(item.item_visible_flag && 
+          (item.item_visible_flag.indexOf(current_page_parameter.MODE)>-1)))||item.item_visible_flag=='F'"
+          [size]="itemGroup.groupCol[i]">
+          <app-items [item]="item" [wscp]="wscp" (emitPass)="itemClicked($event,0)" 
+            (LHSOnChange)="itemValueChange($event,rowindex)"></app-items>
+        </ion-col>
+      </ion-row>
+    <!-- </div> -->
+  </ng-container>
+
+  <ng-container *ngIf= "frame.apps_frame_type == 'CANVAS-KPI'">
+      <div *ngFor="let itemGroup of frame.tableRows;let rowindex =index">
+          <ion-row  class="align-center">
+            <!-- [hidden]="item.item_visible_flag=='F'"   -->
+            <ion-col *ngFor="let item of itemGroup.Level5;let i=index"
+              [hidden]="(current_page_parameter.MODE && !(item.item_visible_flag && (item.item_visible_flag.indexOf(current_page_parameter.MODE)>-1)) )||item.item_visible_flag=='F'"
+              [size]="itemGroup.groupCol[i]">
+              <app-items [item]="item" [wscp]="wscp" (emitPass)="itemClickedKpi($event,rowindex,i)" 
+                (LHSOnChange)="itemValueChange($event,rowindex)"></app-items>
+            </ion-col>
+          </ion-row>
+        </div>
+
+  </ng-container>
+    <!-- <ion-button type="submit">submit </ion-button> -->
+  <!-- </form> -->
+</div>
+<div id="myModal" class="modal" cdkDrag>
+  
+  <div class="modal-content" >
+    <span class="close" (click)="closeMods()">&times;</span>
+    <div class="col-12 rmpm dropzone" appDragDrop (files)="filesDropped($event)">
+      <div class="text-wrapper">
+        <div class="centered">Drop your file here!</div>
+      </div>
+      <div *ngFor="let file of files">
+        <img [src]="file.url" width="100px" height="100px">
+        
+      </div>
+    </div>
+    
+  </div>
+
+</div>
